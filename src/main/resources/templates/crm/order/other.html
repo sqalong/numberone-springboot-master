@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<th:block th:include="include :: header('确认')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal " id="form-order-edit" th:object="${order}">
+            <input id="orderId" name="orderId" th:field="*{orderId}"  type="hidden">
+			<input id="code" name="code" th:value="${code}"  type="hidden">
+			<div class="form-group">	
+				<label class="col-sm-2 control-label" th:text="${title}"></label>
+				<div class="col-sm-9">
+					<textarea name="remark" autocomplete="off" maxlength="500" class="form-control" rows="7" th:text="${order.remark}"></textarea>
+				</div>
+			</div>
+		</form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "crm/order";
+		$("#form-order-edit").validate({
+			rules:{
+				remark:{
+					required:true,
+				},
+			},
+			focusCleanup: true
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+				var code = '[[${code}]]';
+				if(code == "fk"){
+					$.operate.save(prefix + "/confirmFk", $('#form-order-edit').serialize());
+				}else if(code == "hk"){
+					$.operate.save(prefix + "/confirmHk", $('#form-order-edit').serialize());
+				}
+	        }
+	    }
+	</script>
+</body>
+</html>

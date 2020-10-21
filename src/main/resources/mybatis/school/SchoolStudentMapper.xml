@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.numberone.project.student.mapper.SchoolStudentMapper">
+    
+    <resultMap type="SchoolStudent" id="SchoolStudentResult">
+        <result property="id"    column="id"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="name"    column="name"    />
+        <result property="age"    column="age"    />
+        <result property="sex"    column="sex"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="parentName" column="parent_name" />
+    </resultMap>
+
+    <sql id="selectSchoolStudentVo">
+        select id, create_by, create_time, update_by, update_time, remark, name, age, sex, parent_id from school_student
+    </sql>
+
+    <select id="selectSchoolStudentList" parameterType="SchoolStudent" resultMap="SchoolStudentResult">
+        <include refid="selectSchoolStudentVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="age != null "> and age = #{age}</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+        </where>
+        order by parent_id
+    </select>
+    
+    <select id="selectSchoolStudentById" parameterType="Long" resultMap="SchoolStudentResult">
+        select t.id, t.create_by, t.create_time, t.update_by, t.update_time, t.remark, t.name, t.age, t.sex, t.parent_id, p.name as parent_name
+        from school_student t
+        left join school_student p on p.id = t.parent_id
+        where t.id = #{id}
+    </select>
+        
+    <insert id="insertSchoolStudent" parameterType="SchoolStudent" useGeneratedKeys="true" keyProperty="id">
+        insert into school_student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="name != null  and name != ''">name,</if>
+            <if test="age != null ">age,</if>
+            <if test="sex != null  and sex != ''">sex,</if>
+            <if test="parentId != null ">parent_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="age != null ">#{age},</if>
+            <if test="sex != null  and sex != ''">#{sex},</if>
+            <if test="parentId != null ">#{parentId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSchoolStudent" parameterType="SchoolStudent">
+        update school_student
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="age != null ">age = #{age},</if>
+            <if test="sex != null  and sex != ''">sex = #{sex},</if>
+            <if test="parentId != null ">parent_id = #{parentId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSchoolStudentById" parameterType="Long">
+        delete from school_student where id = #{id}
+    </delete>
+
+    <delete id="deleteSchoolStudentByIds" parameterType="String">
+        delete from school_student where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.numberone.project.crm.customer.mapper.CustomerMapper">
+    
+    <resultMap type="Customer" id="CustomerResult">
+        <result property="customerId"    column="customer_id"    />
+        <result property="name"    column="name"    />
+        <result property="phone"    column="phone"    />
+        <result property="email"    column="email"    />
+        <result property="sex"    column="sex"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="idCard"    column="id_card"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="qualification"    column="qualification"    />
+        <result property="province"    column="province"    />
+        <result property="city"    column="city"    />
+        <result property="marriage"    column="marriage"    />
+        <result property="address"    column="address"    />
+        <result property="type"    column="type"    />
+        <result property="level"    column="level"    />
+        <result property="source"    column="source"    />
+        <result property="managerId"    column="manager_id"    />
+        <result property="managerName"    column="manager_name"    />
+        <result property="hwyId"    column="hwy_id"    />
+        <result property="hwyName"    column="hwy_name"    />
+        <result property="moneyRequire"    column="money_require"    />
+        <result property="moneyUse"    column="money_use"    />
+        <result property="nextFollowDate"    column="next_follow_date"    />
+        <result property="status2"    column="status2"    />
+        <result property="fc"    column="fc"    />
+        <result property="car"    column="car"    />
+        <result property="bx"    column="bx"    />
+        <result property="creditCard"    column="credit_card"    />
+        <result property="fz"    column="fz"    />
+        <result property="contact"    column="contact"    />
+        <result property="follow"    column="follow"    />
+        <result property="contract"    column="contract"    />
+        <result property="sk"    column="sk"    />
+        <result property="followTime"    column="follow_time"    />
+        <result property="deptId"    column="dept_id"    />
+    </resultMap>
+	
+	<sql id="selectCustomerVo">
+        select c.customer_id, c.name, c.phone, c.email, c.sex, c.status, c.create_by, c.create_time, c.update_by, c.update_time, c.remark, c.id_card, c.birthday, c.qualification, c.province, c.city, c.marriage, c.address, c.type, c.level, c.source, c.manager_id, c.manager_name, c.hwy_id, c.hwy_name, c.money_require, c.money_use, c.next_follow_date, c.status2, c.fc, c.car, c.bx, c.credit_card, c.fz, c.contact, c.follow, c.contract, c.sk, c.follow_time
+        from dk_customer c
+        left join sys_dept d on c.dept_id = d.dept_id
+    </sql>
+	
+    <select id="selectCustomerList" parameterType="Customer" resultMap="CustomerResult">
+        <include refid="selectCustomerVo"/>
+        <where>
+            1=1
+            <if test="customerId != null "> and customer_id = #{customerId}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="phone != null  and phone != '' "> and phone = #{phone}</if>
+             <if test="email != null  and email != '' "> and email = #{email}</if>
+             <if test="sex != null  and sex != '' "> and sex = #{sex}</if>
+             <if test="status != null  and status != '' "> and status = #{status}</if>
+             <if test="createBy != null  and createBy != '' "> and create_by = #{createBy}</if>
+             <if test="createTime != null "> and create_time = #{createTime}</if>
+             <if test="updateBy != null  and updateBy != '' "> and update_by = #{updateBy}</if>
+             <if test="updateTime != null "> and update_time = #{updateTime}</if>
+             <if test="remark != null  and remark != '' "> and remark = #{remark}</if>
+             <if test="idCard != null  and idCard != '' "> and id_card = #{idCard}</if>
+             <if test="birthday != null "> and birthday = #{birthday}</if>
+             <if test="qualification != null  and qualification != '' "> and qualification = #{qualification}</if>
+             <if test="province != null  and province != '' "> and province = #{province}</if>
+             <if test="city != null  and city != '' "> and city = #{city}</if>
+             <if test="marriage != null  and marriage != '' "> and marriage = #{marriage}</if>
+             <if test="address != null  and address != '' "> and address = #{address}</if>
+             <if test="type != null  and type != '' "> and type = #{type}</if>
+             <if test="level != null  and level != '' "> and level = #{level}</if>
+             <if test="source != null  and source != '' "> and source = #{source}</if>
+             <if test="managerId != null "> and manager_id = #{managerId}</if>
+             <if test="managerName != null  and managerName != '' "> and manager_name = #{managerName}</if>
+             <if test="hwyId != null "> and hwy_id = #{hwyId}</if>
+             <if test="hwyName != null  and hwyName != '' "> and hwy_name = #{hwyName}</if>
+             <if test="moneyRequire != null "> and money_require = #{moneyRequire}</if>
+             <if test="moneyUse != null  and moneyUse != '' "> and money_use = #{moneyUse}</if>
+             <if test="nextFollowDate != null "> and next_follow_date = #{nextFollowDate}</if>
+             <if test="status2 != null  and status2 != '' "> and status2 = #{status2}</if>
+             <if test="fc != null  and fc != '' "> and fc = #{fc}</if>
+             <if test="car != null  and car != '' "> and car = #{car}</if>
+             <if test="bx != null  and bx != '' "> and bx = #{bx}</if>
+             <if test="creditCard != null  and creditCard != '' "> and credit_card = #{creditCard}</if>
+             <if test="fz != null  and fz != '' "> and fz = #{fz}</if>
+             <if test="contact != null  and contact != '' "> and contact = #{contact}</if>
+             <if test="follow != null  and follow != '' "> and follow = #{follow}</if>
+             <if test="contract != null  and contract != '' "> and contract = #{contract}</if>
+             <if test="sk != null  and sk != '' "> and sk = #{sk}</if>
+             <if test="followTime != null "> and follow_time = #{followTime}</if>
+             <if test="customerSql != null and customerSql != ''"> and ${customerSql} != ''</if>
+             <if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
+                AND date_format(follow_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+             </if>
+             <if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+                AND date_format(follow_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+             </if>
+         </where>
+        ${params.dataScope}
+    </select>
+    
+    <select id="selectCustomerById" parameterType="Long" resultMap="CustomerResult">
+        <include refid="selectCustomerVo"/>
+        where customer_id = #{customerId}
+    </select>
+        
+    <insert id="insertCustomer" parameterType="Customer" useGeneratedKeys="true" keyProperty="customerId">
+        insert into dk_customer
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="phone != null  and phone != ''  ">phone,</if>
+			<if test="email != null  and email != ''  ">email,</if>
+			<if test="sex != null  and sex != ''  ">sex,</if>
+			<if test="status != null  and status != ''  ">status,</if>
+			<if test="createBy != null  and createBy != ''  ">create_by,</if>
+			<if test="updateBy != null  and updateBy != ''  ">update_by,</if>
+			<if test="updateTime != null  ">update_time,</if>
+			<if test="remark != null  and remark != ''  ">remark,</if>
+			<if test="idCard != null  and idCard != ''  ">id_card,</if>
+			<if test="birthday != null  ">birthday,</if>
+			<if test="qualification != null  and qualification != ''  ">qualification,</if>
+			<if test="province != null  and province != ''  ">province,</if>
+			<if test="city != null  and city != ''  ">city,</if>
+			<if test="marriage != null  and marriage != ''  ">marriage,</if>
+			<if test="address != null  and address != ''  ">address,</if>
+			<if test="type != null  and type != ''  ">type,</if>
+			<if test="level != null  and level != ''  ">level,</if>
+			<if test="source != null  and source != ''  ">source,</if>
+			<if test="managerId != null  ">manager_id,</if>
+			<if test="managerName != null  and managerName != ''  ">manager_name,</if>
+			<if test="hwyId != null  ">hwy_id,</if>
+			<if test="hwyName != null  and hwyName != ''  ">hwy_name,</if>
+			<if test="moneyRequire != null  ">money_require,</if>
+			<if test="moneyUse != null  and moneyUse != ''  ">money_use,</if>
+			<if test="nextFollowDate != null  ">next_follow_date,</if>
+			<if test="status2 != null  and status2 != ''  ">status2,</if>
+			<if test="fc != null  and fc != ''  ">fc,</if>
+			<if test="car != null  and car != ''  ">car,</if>
+			<if test="bx != null  and bx != ''  ">bx,</if>
+			<if test="creditCard != null  and creditCard != ''  ">credit_card,</if>
+			<if test="fz != null  and fz != ''  ">fz,</if>
+			<if test="contact != null  and contact != ''  ">contact,</if>
+			<if test="follow != null  and follow != ''  ">follow,</if>
+			<if test="contract != null  and contract != ''  ">contract,</if>
+			<if test="sk != null  and sk != ''  ">sk,</if>
+            <if test="followTime != null "> follow_time,</if>
+            <if test="deptId != null and deptId != ''  "> dept_id,</if>
+            create_time
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="phone != null  and phone != ''  ">#{phone},</if>
+			<if test="email != null  and email != ''  ">#{email},</if>
+			<if test="sex != null  and sex != ''  ">#{sex},</if>
+			<if test="status != null  and status != ''  ">#{status},</if>
+			<if test="createBy != null  and createBy != ''  ">#{createBy},</if>
+			<if test="updateBy != null  and updateBy != ''  ">#{updateBy},</if>
+			<if test="updateTime != null  ">#{updateTime},</if>
+			<if test="remark != null  and remark != ''  ">#{remark},</if>
+			<if test="idCard != null  and idCard != ''  ">#{idCard},</if>
+			<if test="birthday != null  ">#{birthday},</if>
+			<if test="qualification != null  and qualification != ''  ">#{qualification},</if>
+			<if test="province != null  and province != ''  ">#{province},</if>
+			<if test="city != null  and city != ''  ">#{city},</if>
+			<if test="marriage != null  and marriage != ''  ">#{marriage},</if>
+			<if test="address != null  and address != ''  ">#{address},</if>
+			<if test="type != null  and type != ''  ">#{type},</if>
+			<if test="level != null  and level != ''  ">#{level},</if>
+			<if test="source != null  and source != ''  ">#{source},</if>
+			<if test="managerId != null  ">#{managerId},</if>
+			<if test="managerName != null  and managerName != ''  ">#{managerName},</if>
+			<if test="hwyId != null  ">#{hwyId},</if>
+			<if test="hwyName != null  and hwyName != ''  ">#{hwyName},</if>
+			<if test="moneyRequire != null  ">#{moneyRequire},</if>
+			<if test="moneyUse != null  and moneyUse != ''  ">#{moneyUse},</if>
+			<if test="nextFollowDate != null  ">#{nextFollowDate},</if>
+			<if test="status2 != null  and status2 != ''  ">#{status2},</if>
+			<if test="fc != null  and fc != ''  ">#{fc},</if>
+			<if test="car != null  and car != ''  ">#{car},</if>
+			<if test="bx != null  and bx != ''  ">#{bx},</if>
+			<if test="creditCard != null  and creditCard != ''  ">#{creditCard},</if>
+			<if test="fz != null  and fz != ''  ">#{fz},</if>
+			<if test="contact != null  and contact != ''  ">#{contact},</if>
+			<if test="follow != null  and follow != ''  ">#{follow},</if>
+			<if test="contract != null  and contract != ''  ">#{contract},</if>
+			<if test="sk != null  and sk != ''  ">#{sk},</if>
+            <if test="followTime != null "> #{followTime},</if>
+            <if test="deptId != null and deptId != ''  "> #{deptId},</if>
+            sysdate()
+         </trim>
+    </insert>
+	 
+    <update id="updateCustomer" parameterType="Customer">
+        update dk_customer
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="phone != null  and phone != ''  ">phone = #{phone},</if>
+            <if test="email != null  and email != ''  ">email = #{email},</if>
+            <if test="sex != null  and sex != ''  ">sex = #{sex},</if>
+            <if test="status != null  and status != ''  ">status = #{status},</if>
+            <if test="updateBy != null  and updateBy != ''  ">update_by = #{updateBy},</if>
+            <if test="remark != null  and remark != ''  ">remark = #{remark},</if>
+            <if test="idCard != null  and idCard != ''  ">id_card = #{idCard},</if>
+            <if test="birthday != null  ">birthday = #{birthday},</if>
+            <if test="qualification != null  and qualification != ''  ">qualification = #{qualification},</if>
+            <if test="province != null  and province != ''  ">province = #{province},</if>
+            <if test="city != null  and city != ''  ">city = #{city},</if>
+            <if test="marriage != null  and marriage != ''  ">marriage = #{marriage},</if>
+            <if test="address != null  and address != ''  ">address = #{address},</if>
+            <if test="type != null  and type != ''  ">type = #{type},</if>
+            <if test="level != null  and level != ''  ">level = #{level},</if>
+            <if test="source != null  and source != ''  ">source = #{source},</if>
+            <if test="managerId != null  ">manager_id = #{managerId},</if>
+            <if test="managerName != null  and managerName != ''  ">manager_name = #{managerName},</if>
+            <if test="hwyId != null  ">hwy_id = #{hwyId},</if>
+            <if test="hwyName != null  and hwyName != ''  ">hwy_name = #{hwyName},</if>
+            <if test="moneyRequire != null  ">money_require = #{moneyRequire},</if>
+            <if test="moneyUse != null  and moneyUse != ''  ">money_use = #{moneyUse},</if>
+            <if test="nextFollowDate != null  ">next_follow_date = #{nextFollowDate},</if>
+            <if test="status2 != null  and status2 != ''  ">status2 = #{status2},</if>
+            <if test="fc != null  and fc != ''  ">fc = #{fc},</if>
+            <if test="car != null  and car != ''  ">car = #{car},</if>
+            <if test="bx != null  and bx != ''  ">bx = #{bx},</if>
+            <if test="creditCard != null  and creditCard != ''  ">credit_card = #{creditCard},</if>
+            <if test="fz != null  and fz != ''  ">fz = #{fz},</if>
+            <if test="contact != null  and contact != ''  ">contact = #{contact},</if>
+            <if test="follow != null  and follow != ''  ">follow = #{follow},</if>
+            <if test="contract != null  and contract != ''  ">contract = #{contract},</if>
+            <if test="sk != null  and sk != ''  ">sk = #{sk},</if>
+            <if test="followTime != null  "> follow_time = #{followTime},</if>
+            update_time = sysdate()
+        </trim>
+        where customer_id = #{customerId}
+    </update>
+
+	<delete id="deleteCustomerById" parameterType="Long">
+        delete from dk_customer where customer_id = #{customerId}
+    </delete>
+	
+    <delete id="deleteCustomerByIds" parameterType="String">
+        delete from dk_customer where customer_id in 
+        <foreach item="customerId" collection="array" open="(" separator="," close=")">
+            #{customerId}
+        </foreach>
+    </delete>
+
+
+    <update id="transferCustomerByIds" parameterType="String">
+        update dk_customer set create_by = #{userName},update_by = #{userId} where customer_id in
+        <foreach item="customerId" collection="customerIds" open="(" separator="," close=")">
+            #{customerId}
+        </foreach>
+    </update>
+    
+</mapper>

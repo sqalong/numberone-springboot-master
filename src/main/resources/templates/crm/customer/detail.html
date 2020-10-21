@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<th:block th:include="include :: header('修改客户')" />
+	<link th:href="@{/ajax/libs/detail/my-ui.css}" rel="stylesheet"/>
+</head>
+<body class="white-bg">
+	<ul id="myTab" class="nav nav-tabs" style="margin:20px;">
+		<li class="active">
+			<a href="#home" data-toggle="tab">
+				概要
+			</a>
+		</li>
+		<li><a href="#follow" data-toggle="tab">跟进</a></li>
+		<li><a href="#fc" data-toggle="tab">房产</a></li>
+		<li><a href="#car" data-toggle="tab">车产</a></li>
+		<li><a href="#creditCard" data-toggle="tab">公积金</a></li>
+		<li><a href="#bx" data-toggle="tab">保单</a></li>
+	</ul>
+	<div id="myTabContent" class="tab-content">
+		<div class="tab-pane fade in active" id="home">
+			<form id="form1" style="background-color:#fff" th:object="${customer}">
+				<div style="margin-top: 10px; margin-left: 10px; margin-right: 10px;" class="gridPanel">
+					<div class="tabContent" style="padding-top: 20px; margin-right: 30px; display: block;">
+						<div class="price-box">
+							<div id="print" style="padding-bottom:50px;">
+								<div class="price-title">
+									客户资料表
+								</div>
+								<div class="price-subtitle">
+									<div class="fleft">客户经理：<span id="customerEmp" th:text="*{managerName}"></span></div><div style="float:right; width:50%; text-align:right;"><p>创建时间：<span id="customerCreDt" th:text="${#dates.format(customer.createTime,'yyyy-MM-dd HH:mm:ss')}"></span></p></div>
+									<div class="clearBoth"></div>
+								</div>
+								<div class="price-info">
+									<table class="form">
+										<tbody><tr>
+											<th class="formTitle red"><b>基本信息</b></th>
+											<td class="formValue"></td>
+											<th class="formTitle">  </th>
+											<td class="formValue">  </td>
+										</tr>
+										<tr>
+											<th class="formTitle">姓&nbsp;&nbsp;&nbsp;&nbsp;名：</th>
+											<td class="formValue" style="padding-right: 20px;">
+												<input type="text" th:field="*{name}" class="form-control" id="Customer" readonly="readonly" style="background-color:#fff">
+											</td>
+											<th class="formTitle">性&nbsp;&nbsp;&nbsp;&nbsp;别：</th>
+											<td class="formValue">
+												<input type="text" th:value="${sex}"  class="form-control " id="sex" readonly="readonly" style="background-color:#fff">
+											</td>
+
+										</tr>
+										<tr>
+											<th class="formTitle">电&nbsp;&nbsp;&nbsp;&nbsp;话：</th>
+											<td class="formValue" style="padding-right: 20px;">
+												<input type="text" th:field="*{phone}" class="form-control " id="tel" readonly="readonly" style="background-color:#fff">
+											</td>
+											<th class="formTitle">身&nbsp;份&nbsp;证：</th>
+											<td class="formValue">
+												<input type="text" th:field="*{idCard}" class="form-control" id="IDCard" readonly="readonly" style="background-color:#fff">
+											</td>
+										</tr>
+										<tr>
+											<th class="formTitle">学&nbsp;&nbsp;&nbsp;&nbsp;历：</th>
+											<td class="formValue" style="padding-right: 20px;">
+												<input type="text" th:value="${qualification}" class="form-control" id="Education" readonly="readonly" style="background-color:#fff">
+											</td>
+											<th class="formTitle">婚姻状态：</th>
+											<td class="formValue">
+												<input type="text" th:value="${marriage}" class="form-control " id="Marriage" readonly="readonly" style="background-color:#fff">
+											</td>
+										</tr>
+										<tr>
+											<th class="formTitle">客户来源：</th>
+											<td class="formValue" style="padding-right: 20px;">
+												<input type="text" th:value="${customerSource}" class="form-control " id="CustomerSource" readonly="readonly" style="background-color:#fff">
+											</td>
+											<th class="formTitle">客户状态：</th>
+											<td class="formValue">
+												<input type="text" th:value="${customerType2}" class="form-control " id="CustomerType" readonly="readonly" style="background-color:#fff">
+											</td>
+										</tr>
+										<tr>
+											<th class="formTitle">客户类型：</th>
+											<td class="formValue" style="padding-right: 20px;">
+												<input type="text" th:value="${customerType}" class="form-control " id="CustomerSource" readonly="readonly" style="background-color:#fff">
+											</td>
+											<th class="formTitle">客户级别：</th>
+											<td class="formValue">
+												<input type="text" th:value="${customerLevel}" class="form-control " id="CustomerType" readonly="readonly" style="background-color:#fff">
+											</td>
+										</tr>
+										<tr>
+											<th class="formTitle">位&nbsp;&nbsp;&nbsp;&nbsp;置：</th>
+											<td class="formValue" style="padding-right: 20px;">
+												<input type="text" th:value="${customer.province + '  ' + customer.city}" class="form-control " id="CustomerSource" readonly="readonly" style="background-color:#fff">
+											</td>
+											<th class="formTitle">出生日期：</th>
+											<td class="formValue">
+												<input type="text" th:value="${#dates.format(customer.birthday,'yyyy-MM-dd')}" class="form-control " id="birthday" readonly="readonly" style="background-color:#fff">
+											</td>
+										</tr>
+										<tr>
+											<th class="formTitle">话&nbsp;务&nbsp;员：</th>
+											<td class="formValue" style="padding-right: 20px;">
+												<input type="text" th:field="*{hwyName}" class="form-control " id="hwyName" readonly="readonly" style="background-color:#fff">
+											</td>
+											<th class="formTitle">资金需求：</th>
+											<td class="formValue">
+												<input type="text" th:value="${customer.moneyRequire + '万'}" class="form-control " id="hwyName" readonly="readonly" style="background-color:#fff">
+											</td>
+										</tr>
+										<tr>
+											<th class="formTitle">家庭住址：</th>
+											<td class="formValue" style="padding-right: 20px;">
+												<input type="text" th:field="*{address}" class="form-control " id="hwyName" readonly="readonly" style="background-color:#fff">
+											</td>
+											<th class="formTitle">资金用途：</th>
+											<td class="formValue">
+												<input type="text" th:field="*{moneyUse}" class="form-control " id="hwyName" readonly="readonly" style="background-color:#fff">
+											</td>
+										</tr>
+										<tr>
+											<th class="formTitle red"><b></b></th>
+											<td class="formValue"></td>
+											<th class="formTitle">  </th>
+											<td class="formValue">  </td>
+										</tr>
+										<tr>
+											<th class="formTitle red"><b>其他</b></th>
+											<td class="formValue"></td>
+											<th class="formTitle">  </th>
+											<td class="formValue">  </td>
+										</tr>
+
+										<tr>
+											<th class="formTitle">备注</th>
+											<td class="formValue">
+												<input id="remark" th:field="*{remark}" name="remark" type="text" class="form-control" readonly="readonly" style="background-color:#fff">
+											</td>
+
+										</tr>
+
+										</tbody></table>
+								</div>
+
+
+							</div>
+						</div>
+
+					</div>
+
+
+				</div>
+
+			</form>
+		</div>
+		<div class="tab-pane fade" id="follow">
+			<p style="padding-top: 30px;padding-left: 100px;" th:text="${customer.follow}"></p>
+		</div>
+		<div class="tab-pane fade" id="fc">
+			<p style="padding-top: 30px;padding-left: 100px;" th:text="${customer.fc}"></p>
+		</div>
+		<div class="tab-pane fade" id="car">
+			<p style="padding-top: 30px;padding-left: 100px;" th:text="${customer.car}"></p>
+		</div>
+		<div class="tab-pane fade" id="creditCard">
+			<p style="padding-top: 30px;padding-left: 100px;" th:text="${customer.creditCard}"></p>
+		</div>
+		<div class="tab-pane fade" id="bx">
+			<p style="padding-top: 30px;padding-left: 100px;" th:text="${customer.bx}"></p>
+		</div>
+	</div>
+    <div th:include="include::footer"></div>
+	<script th:src="@{/ajax/libs/detail/my-ui.js}"></script>
+    <script type="text/javascript">
+		var prefix = ctx + "crm/customer";
+		$(function(){
+
+		});
+	</script>
+</body>
+</html>

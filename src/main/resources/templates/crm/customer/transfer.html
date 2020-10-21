@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<th:block th:include="include :: header('迁移客户')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal " id="form-customer-edit" >
+            <input id="ids" name="ids" th:value="${ids}"  type="hidden">
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label">销售人员：</label>
+				<div class="col-sm-8">
+					<div class="input-group">
+						<input name="userId"  id="treeUserId" type="hidden" >
+						<input name="userName" onclick="selectUserTree()" id="treeUserName" type="text" placeholder="请选择销售人员" class="form-control" required autocomplete="off">
+						<span class="input-group-addon"><i class="fa fa-search"></i></span>
+					</div>
+				</div>
+			</div>
+		</form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "crm/customer";
+		$("#form-customer-edit").validate({
+			rules:{
+				managerName:{
+					required:true,
+				},
+			},
+			focusCleanup: true
+		});
+
+		/*选择用户树*/
+		function selectUserTree() {
+			var treeId = $("#treeId").val();
+			var url = ctx + "system/user/selectUserTree";
+			var options = {
+				title: '选择用户',
+				width: "310",
+				height: "380",
+				url: url,
+				callBack: doUserSubmit
+			};
+			$.modal.openOptions(options);
+		}
+
+		function doUserSubmit(index, layero){
+			var tree = layero.find("iframe")[0].contentWindow.$._tree;
+			var body = layer.getChildFrame('body', index);
+			$("#treeUserId").val(body.find('#treeId').val());
+			$("#treeUserName").val(body.find('#treeName').val());
+			layer.close(index);
+		}
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/transfer", $('#form-customer-edit').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

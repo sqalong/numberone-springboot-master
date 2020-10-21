@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.numberone.project.system.student.mapper.StudentMapper">
+    
+    <resultMap type="Student" id="StudentResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="sex"    column="sex"    />
+        <result property="address"    column="address"    />
+    </resultMap>
+
+    <sql id="selectStudentVo">
+        select id, name, sex, address from student
+    </sql>
+
+    <select id="selectStudentList" parameterType="Student" resultMap="StudentResult">
+        <include refid="selectStudentVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+        </where>
+    </select>
+    
+    <select id="selectStudentById" parameterType="Long" resultMap="StudentResult">
+        <include refid="selectStudentVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertStudent" parameterType="Student" useGeneratedKeys="true" keyProperty="id">
+        insert into student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">name,</if>
+            <if test="sex != null  and sex != ''">sex,</if>
+            <if test="address != null  and address != ''">address,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="sex != null  and sex != ''">#{sex},</if>
+            <if test="address != null  and address != ''">#{address},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStudent" parameterType="Student">
+        update student
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="sex != null  and sex != ''">sex = #{sex},</if>
+            <if test="address != null  and address != ''">address = #{address},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteStudentById" parameterType="Long">
+        delete from student where id = #{id}
+    </delete>
+
+    <delete id="deleteStudentByIds" parameterType="String">
+        delete from student where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

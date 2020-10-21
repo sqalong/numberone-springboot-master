@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<th:block th:include="include :: header('客户列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 search-collapse">
+				<form id="formId">
+					<div class="select-list">
+						<ul>
+							<li>
+								姓名：<input type="text" name="name"/>
+							</li>
+
+							<li>
+								手机号：<input type="text" name="phone"/>
+							</li>
+
+
+							<li>
+								客户类型：<select name="type" th:with="type=${@dict.getType('customerType')}">
+								<option value="">所有</option>
+								<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
+							</li>
+
+							<li>
+								级别：
+								<select name="level" th:with="type=${@dict.getType('customerLevel')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
+							</li>
+
+							<li>
+								来源：
+								<select name="source" th:with="type=${@dict.getType('customerSource')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
+							</li>
+
+							<!--<li>
+								客户经理ID：<input type="text" name="managerId"/>
+							</li>
+
+
+
+							<li>
+								话务员ID：<input type="text" name="hwyId"/>
+							</li>
+-->
+
+							<li class="select-time">
+								<label>跟进时间： </label>
+								<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTime]"/>
+								<span>-</span>
+								<input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endTime]"/>
+							</li>
+
+							<li>
+								客户状态：
+								<select name="source" th:with="type=${@dict.getType('customerType2')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
+							</li>
+
+							<li>
+								<input id="searchOption" name="searchOption"  type="hidden">
+								<div class="btn-group" id="btnGroup">
+									<button type="button" class="btn btn-default " style="width:50px;" data-value="0" onclick="searchBtnClick(this)">有房</button>
+									<button type="button" class="btn btn-default " style="width:50px;" data-value="1" onclick="searchBtnClick(this)">有车</button>
+									<button type="button" class="btn btn-default " style="width:100px;" data-value="2" onclick="searchBtnClick(this)">有公积金</button>
+									<button type="button" class="btn btn-default " style="width:70px;" data-value="3" onclick="searchBtnClick(this)">有保单</button>
+									<button type="button" class="btn btn-default " style="width:50px;" data-value="4" onclick="searchBtnClick(this)">全部</button>
+								</div>
+							</li>
+
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+			
+	        <div class="btn-group-sm" id="toolbar" role="group">
+				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:customer:add">
+					<i class="fa fa-plus"></i> 添加
+				</a>
+				<a class="btn btn-primary btn-edit single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:customer:edit">
+					<i class="fa fa-edit"></i> 修改
+				</a>
+				<a class="btn btn-danger btn-del btn-del multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:customer:remove">
+					<i class="fa fa-remove"></i> 删除
+				</a>
+				<a class="btn btn-info" onclick="$.table.importExcel()" shiro:hasPermission="system:customer:import">
+					<i class="fa fa-upload"></i> 导入
+				</a>
+				<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:customer:export">
+						<i class="fa fa-download"></i> 导出
+				 </a>
+
+				<a class="btn btn-primary btn-edit single disabled" onclick="addOrder()" shiro:hasPermission="system:customer:order">
+					<i class="fa fa-edit"></i> 签单
+				</a>
+				<a class="btn btn-primary btn-del btn-del single disabled" onclick="transfer()" shiro:hasPermission="system:customer:transfer">
+					<i class="fa fa-edit"></i> 迁移
+				</a>
+				<a class="btn btn-primary btn-edit single disabled" onclick="updateZc('follow')" shiro:hasPermission="system:customer:edit">
+					<i class="fa fa-edit"></i> 跟进
+				</a>
+				<a class="btn btn-primary btn-edit single disabled" onclick="updateZc('fc')" shiro:hasPermission="system:customer:edit">
+					<i class="fa fa-edit"></i> 房产
+				</a>
+				<a class="btn btn-primary btn-edit single disabled" onclick="updateZc('cc')" shiro:hasPermission="system:customer:edit">
+					<i class="fa fa-edit"></i> 车产
+				</a>
+				<a class="btn btn-primary btn-edit single disabled" onclick="updateZc('gjj')" shiro:hasPermission="system:customer:edit">
+					<i class="fa fa-edit"></i> 公积金
+				</a>
+				<a class="btn btn-primary btn-edit single disabled" onclick="updateZc('bd')" shiro:hasPermission="system:customer:edit">
+					<i class="fa fa-edit"></i> 保单
+				</a>
+			</div>
+			<div class="col-sm-12 select-table table-striped" style="white-space: nowrap;" >
+				<table id="bootstrap-table" data-mobile-responsive="true" style="table-layout:fixed"></table>
+			</div>
+		</div>
+	</div>
+    <div th:include="include :: footer"></div>
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('system:customer:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:customer:remove')}]];
+        var prefix = ctx + "crm/customer";
+		// 获取数据字典数据
+		var datasSex = [[${@dict.getType('sys_user_sex')}]];
+		var datasQualification = [[${@dict.getType('qualification')}]];
+		var datasMarriage = [[${@dict.getType('marriage')}]];
+		var datasCustomerType = [[${@dict.getType('customerType')}]];
+		var datasCustomerLevel = [[${@dict.getType('customerLevel')}]];
+		var datasCustomerType2 = [[${@dict.getType('customerType2')}]];
+		var datasCustomerSource = [[${@dict.getType('customerSource')}]];
+		var isOwn = [[${isOwn}]];
+        $(function() {
+            var options = {
+                url: prefix + "/list?isOwn="+isOwn,
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+				exportUrl: prefix + "/export",
+				importUrl: prefix + "/importData",
+				importTemplateUrl: prefix + "/importTemplate",
+                modalName: "客户",
+		        showExport: true,
+				uniqueId:'customerId',
+                columns: [{
+		            checkbox: true
+		        },{
+					field : 'customerId',
+					title : 'ID',
+					visible: false,
+					align: 'center'
+				},
+				{
+					title: '详情',
+					align: 'center',
+					width:60,
+					formatter: function(value, row, index) {
+						var actions = [];
+						actions.push('<a  href="javascript:void(0)" onclick="goDetail(\'' + row.customerId + '\')"><i class="fa fa-search-plus green hand"></i></a> ');
+						return actions.join('');
+					}
+				},
+				{
+					field : 'name', 
+					title : '姓名',
+					width:100,
+					align: 'center'
+				},
+				{
+					field : 'phone', 
+					title : '手机号',
+					width:100,
+					align: 'center'
+				},
+				{
+					field : 'sex', 
+					title : '性别',
+					align: 'center',
+					width:50,
+					formatter: function (value, row, index) {
+						return $.table.selectDictLabel(datasSex, value);
+					}
+				},
+				{
+					field : 'createBy', 
+					title : '创建者',
+					align: 'center',
+					width:70
+				},
+				{
+					field : 'createTime', 
+					title : '创建时间',
+					sortable: true,
+					align: 'center',
+					width:150
+				}/*,
+				{
+					field : 'idCard',
+					title : '身份证号',
+					align: 'center',
+					width:170
+				},
+				{
+					field : 'birthday',
+					title : '出生日期',
+					sortable: true,
+					align: 'center',
+					width:130,
+					formatter: function (value, row, index) {
+						//只显示日期
+						if($.common.isNotEmpty(value)){
+							return value.substring(0,10);
+						}else{
+							return "无";
+						}
+					}
+				},
+				{
+					field : 'qualification', 
+					title : '学历',
+					align: 'center',
+					width:100,
+					formatter: function (value, row, index) {
+						return $.table.selectDictLabel(datasQualification, value);
+					}
+				},
+				{
+					field : 'province', 
+					title : '省份',
+					align: 'center',
+					width:130
+				},
+				{
+					field : 'city',
+					title : '城市',
+					align: 'center',
+					width:130
+				},
+				/!*{
+						field : 'address',
+						title : '家庭住址',
+						sortable: true,
+						align: 'center',
+						width:200
+				},*!/
+				{
+					field : 'marriage', 
+					title : '婚姻状态',
+					align: 'center',
+					width:100,
+					formatter: function (value, row, index) {
+						return $.table.selectDictLabel(datasMarriage, value);
+					}
+				}*/,
+				{
+					field : 'type', 
+					title : '客户类型',
+					align: 'center',
+					width:100,
+					formatter: function (value, row, index) {
+						return $.table.selectDictLabel(datasCustomerType, value);
+					}
+				},
+				{
+					field : 'level', 
+					title : '级别',
+					align: 'center',
+					width:100,
+					formatter: function (value, row, index) {
+						return $.table.selectDictLabel(datasCustomerLevel, value);
+					}
+				},
+				{
+					field : 'source', 
+					title : '来源',
+					align: 'center',
+					width:100,
+					formatter: function (value, row, index) {
+						return $.table.selectDictLabel(datasCustomerSource, value);
+					}
+				},
+				{
+					field : 'managerName', 
+					title : '客户经理',
+					align: 'center',
+					width:100
+				},
+				{
+					field : 'hwyName', 
+					title : '话务员',
+					align: 'center',
+					width:100
+				},
+				{
+					field : 'moneyRequire', 
+					title : '资金需求',
+					align: 'center',
+					width:130,
+					formatter: function (value, row, index) {
+						return value + "万";
+					}
+				},
+				{
+					field : 'moneyUse', 
+					title : '资金用途',
+					align: 'center',
+					width:130
+				},
+				{
+					field : 'followTime',
+					title : '上次跟进时间',
+					sortable: true,
+					align: 'center',
+					width:130
+				},
+				{
+					field : 'nextFollowDate', 
+					title : '下次跟进时间',
+					sortable: true,
+					align: 'center',
+					width:130,
+					formatter: function (value, row, index) {
+						//只显示日期
+						if($.common.isNotEmpty(value)){
+							return value.substring(0,10);
+						}else{
+							return "无";
+						}
+					}
+				},
+				{
+					field : 'status2',
+					title : '客户状态',
+					align: 'center',
+					width:130,
+					formatter: function (value, row, index) {
+						return $.table.selectDictLabel(datasCustomerType2, value);
+					}
+				},
+				/*{
+					field : 'remark',
+					title : '备注',
+					sortable: true,
+					align: 'center',
+					width:130
+				},*/
+		        {
+		            title: '操作',
+					align: 'center',
+					width:200,
+		            formatter: function(value, row, index) {
+		            	var actions = [];
+		            	actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.customerId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="toGh(\'' + row.customerId + '\')"><i class="fa fa-remove"></i>公海删除</a>');
+						return actions.join('');
+		            }
+		        }]
+            };
+            $.table.init(options);
+        });
+
+        function updateZc(code){
+			var row = $('#bootstrap-table').bootstrapTable('getSelections')[0];
+			if ($.common.isEmpty(row)) {
+				$.modal.alertWarning("请至少选择一条记录");
+				return;
+			}
+			var id = row.customerId;
+			var url = prefix + "/updateZc?customerId="+id+"&code="+code;
+			var title = "";
+			if(code == "fc"){
+				title = "修改房产";
+			}else if(code == "cc"){
+				title = "修改车产";
+			}else if(code == "gjj"){
+				title = "修改公积金";
+			}else if(code == "bd"){
+				title = "修改保单";
+			}else if(code == "follow"){
+				title = "跟进";
+			}
+			$.modal.open(title, url, "800", "300");
+		}
+
+		//按钮组点击事件
+		function searchBtnClick(btn){
+			$("#searchOption").val(btn.getAttribute("data-value"));
+		}
+
+		function goDetail(id){
+			var url = prefix + "/detail/" + id;
+			$.modal.openTab("客户详情", url);
+		}
+
+		function toGh(id){
+			$.modal.confirm("确定删除该客户到公海吗？", function() {
+				var url = prefix + "/toGh";
+				/*if($.table._option.type == table_type.bootstrapTreeTable) {
+					$.operate.get(url);
+				} else {
+					var data = { "ids": id };
+					$.operate.submit(url, "post", "json", data);
+				}*/
+				var data = { "id": id };
+				$.operate.submit(url, "post", "json", data);
+			});
+		}
+
+		//签单
+		function addOrder(){
+			var row = $('#bootstrap-table').bootstrapTable('getSelections')[0];
+			if ($.common.isEmpty(row)) {
+				$.modal.alertWarning("请至少选择一条记录");
+				return;
+			}
+			var id = row.customerId;
+			var url = ctx + "crm/order" + "/add?customerId="+id;
+			$.modal.open("签单", url);
+		}
+
+		//迁移客户
+		function transfer() {
+			var rows = $('#bootstrap-table').bootstrapTable('getSelections');
+			if (rows.length == 0) {
+				$.modal.alertWarning("请至少选择一条记录");
+				return;
+			}
+			var ids = "";
+			for(i = 0; i < rows.length; i++){
+				if(ids == ""){
+					ids = rows[i].customerId;
+				}else{
+					ids = ids + "," + rows[i].customerId;
+				}
+			}
+			//ids = ids.substring(0,ids.length);
+			$.modal.confirm("确认要迁移选中的" + rows.length + "条数据吗?", function() {
+				var url = prefix + "/goTransfer?ids="+ids;
+				$.modal.open("迁移客户", url, "600", "600");
+			});
+		}
+    </script>
+</body>
+<form id="importForm" enctype="multipart/form-data" class="mt20 mb10" style="display: none;">
+	<div class="col-xs-offset-1">
+		<input type="file" id="file" name="file"/>
+		<div class="mt10 pt5">
+			请使用模板导入数据
+			&nbsp;	<a onclick="$.table.importTemplate()" class="btn btn-default btn-xs"><i class="fa fa-file-excel-o"></i> 下载模板</a>
+		</div>
+		<font color="red" class="pull-left mt10">
+			提示：仅允许导入“xls”或“xlsx”格式文件！
+		</font>
+	</div>
+</form>
+</html>

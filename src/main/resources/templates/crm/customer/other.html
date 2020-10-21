@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<th:block th:include="include :: header('修改客户')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal " id="form-customer-edit" th:object="${customer}">
+            <input id="customerId" name="customerId" th:field="*{customerId}"  type="hidden">
+			<input id="code" name="code" th:value="${code}"  type="hidden">
+			<div class="form-group">	
+				<label class="col-sm-2 control-label" th:text="${title}"></label>
+				<div class="col-sm-9">
+					<textarea name="content" autocomplete="off" maxlength="500" class="form-control" rows="7" th:text="${content}"></textarea>
+				</div>
+			</div>
+		</form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "crm/customer";
+		$("#form-customer-edit").validate({
+			rules:{
+				content:{
+					required:true,
+				},
+			},
+			focusCleanup: true
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/doUpdateZc", $('#form-customer-edit').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>
