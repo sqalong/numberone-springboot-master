@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.numberone.project.system.day.mapper.DayMapper">
+    
+    <resultMap type="Day" id="DayResult">
+        <result property="name"    column="name"    />
+        <result property="sex"    column="sex"    />
+        <result property="address"    column="address"    />
+        <result property="classname"    column="className"    />
+    </resultMap>
+
+    <sql id="selectDayVo">
+        select name, sex, address, className from day
+    </sql>
+
+    <select id="selectDayList" parameterType="Day" resultMap="DayResult">
+        <include refid="selectDayVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="classname != null  and classname != ''"> and className like concat('%', #{classname}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectDayById" parameterType="String" resultMap="DayResult">
+        <include refid="selectDayVo"/>
+        where name = #{name}
+    </select>
+        
+    <insert id="insertDay" parameterType="Day">
+        insert into day
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">name,</if>
+            <if test="sex != null  and sex != ''">sex,</if>
+            <if test="address != null  and address != ''">address,</if>
+            <if test="classname != null  and classname != ''">className,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="sex != null  and sex != ''">#{sex},</if>
+            <if test="address != null  and address != ''">#{address},</if>
+            <if test="classname != null  and classname != ''">#{classname},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDay" parameterType="Day">
+        update day
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sex != null  and sex != ''">sex = #{sex},</if>
+            <if test="address != null  and address != ''">address = #{address},</if>
+            <if test="classname != null  and classname != ''">className = #{classname},</if>
+        </trim>
+        where name = #{name}
+    </update>
+
+    <delete id="deleteDayById" parameterType="String">
+        delete from day where name = #{name}
+    </delete>
+
+    <delete id="deleteDayByIds" parameterType="String">
+        delete from day where name in 
+        <foreach item="name" collection="array" open="(" separator="," close=")">
+            #{name}
+        </foreach>
+    </delete>
+    
+</mapper>
