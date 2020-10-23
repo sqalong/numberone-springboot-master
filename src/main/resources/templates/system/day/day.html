@@ -16,6 +16,10 @@
                             </li>
                             <li>
                                 <p>性别：</p>
+
+                                <!--@dict  对应后台Service层framework/web/service/DictService.java的.getType   要注意的是@后的服务名 要跟@service中一致-->
+                                <!--mybaits对应Mapper:        resources\mybatis\system\DictDataMapper.xml-->
+
                                 <select name="sex" th:with="type=${@dict.getType('')}">
                                     <option value="">所有</option>
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
@@ -56,9 +60,12 @@
                 <table id="bootstrap-table"></table>
             </div>
         </div>
-    </div>
+    </div>     <!--include为上述公共部分的文件名,include为模板名,footer相当于模板中ID为footer的-->
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
+
+        //用permission访问后台地址获取数据
+
         var editFlag = [[${@permission.hasPermi('system:day:edit')}]];
         var removeFlag = [[${@permission.hasPermi('system:day:remove')}]];
         var prefix = ctx + "system/day";
@@ -75,29 +82,33 @@
                     checkbox: true
                 },
                 {
-                    field : 'name', 
+                    field : 'name',
                     title : '姓名'
                 },
                 {
-                    field : 'sex', 
+                    field : 'sex',
                     title : '性别'
                 },
                 {
-                    field : 'address', 
+                    field : 'address',
                     title : '地址'
                 },
                 {
-                    field : 'classname', 
+                    field : 'classname',
                     title : '班级'
                 },
                 {
                     title: '操作',
                     align: 'center',
+                    // value：表示当前单元格中的值
+                    // row：表示当前行
+                    // index：表示当前行的下标
                     formatter: function(value, row, index) {
                         var actions = [];
                         actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.name + '\')"><i class="fa fa-edit"></i>编辑</a> ');
                         actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.name + '\')"><i class="fa fa-remove"></i>删除</a>');
                         return actions.join('');
+                    //使用return返回想要的数据显示在单元格中
                     }
                 }]
             };

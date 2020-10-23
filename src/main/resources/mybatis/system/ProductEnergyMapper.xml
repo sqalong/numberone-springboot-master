@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.numberone.project.system.energy.mapper.ProductEnergyMapper">
+    
+    <resultMap type="ProductEnergy" id="ProductEnergyResult">
+        <result property="productId"    column="
+product_id"    />
+        <result property="energyUnits"    column="energy_units"    />
+        <result property="productName"    column="product_name"    />
+        <result property="energyConsumptionType"    column="energy_consumption_type"    />
+        <result property="energyConsumptionItemized"    column="energy_consumption_itemized"    />
+        <result property="time"    column="time"    />
+        <result property="theMonthPrice"    column="the_month_price"    />
+        <result property="capacity"    column="capacity"    />
+        <result property="unitProductEnergy"    column="unit_product_energy"    />
+        <result property="yAgoProduction"    column="y_ago_production"    />
+        <result property="producEnergyCost"    column="produc_energy_cost"    />
+        <result property="unitProductEnergyCost"    column="unit_product_energy_cost"    />
+        <result property="yAgoValue"    column="y_ago_value"    />
+        <result property="unitProductEnergyYAgo"    column="unit_product_energy_y_ago"    />
+        <result property="producEnergyCostYAgo"    column="produc_energy_cost_y_ago"    />
+        <result property="unitProductEnergyCostYAgo"    column="unit_product_energy_cost_y_ago"    />
+    </resultMap>
+
+    <sql id="selectProductEnergyVo">
+        select 
+product_id, energy_units, product_name, energy_consumption_type, energy_consumption_itemized, time, the_month_price, capacity, unit_product_energy, y_ago_production, produc_energy_cost, unit_product_energy_cost, y_ago_value, unit_product_energy_y_ago, produc_energy_cost_y_ago, unit_product_energy_cost_y_ago from product_energy
+    </sql>
+
+    <select id="selectProductEnergyList" parameterType="ProductEnergy" resultMap="ProductEnergyResult">
+        <include refid="selectProductEnergyVo"/>
+        <where>  
+        </where>
+    </select>
+    
+    <select id="selectProductEnergyById" parameterType="Long" resultMap="ProductEnergyResult">
+        <include refid="selectProductEnergyVo"/>
+        where 
+product_id = #{productId}
+    </select>
+        
+    <insert id="insertProductEnergy" parameterType="ProductEnergy" useGeneratedKeys="true" keyProperty="productId">
+        insert into product_energy
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="energyUnits != null  and energyUnits != ''">energy_units,</if>
+            <if test="productName != null  and productName != ''">product_name,</if>
+            <if test="energyConsumptionType != null  and energyConsumptionType != ''">energy_consumption_type,</if>
+            <if test="energyConsumptionItemized != null  and energyConsumptionItemized != ''">energy_consumption_itemized,</if>
+            <if test="time != null ">time,</if>
+            <if test="theMonthPrice != null  and theMonthPrice != ''">the_month_price,</if>
+            <if test="capacity != null  and capacity != ''">capacity,</if>
+            <if test="unitProductEnergy != null  and unitProductEnergy != ''">unit_product_energy,</if>
+            <if test="yAgoProduction != null  and yAgoProduction != ''">y_ago_production,</if>
+            <if test="producEnergyCost != null  and producEnergyCost != ''">produc_energy_cost,</if>
+            <if test="unitProductEnergyCost != null  and unitProductEnergyCost != ''">unit_product_energy_cost,</if>
+            <if test="yAgoValue != null  and yAgoValue != ''">y_ago_value,</if>
+            <if test="unitProductEnergyYAgo != null  and unitProductEnergyYAgo != ''">unit_product_energy_y_ago,</if>
+            <if test="producEnergyCostYAgo != null  and producEnergyCostYAgo != ''">produc_energy_cost_y_ago,</if>
+            <if test="unitProductEnergyCostYAgo != null  and unitProductEnergyCostYAgo != ''">unit_product_energy_cost_y_ago,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="energyUnits != null  and energyUnits != ''">#{energyUnits},</if>
+            <if test="productName != null  and productName != ''">#{productName},</if>
+            <if test="energyConsumptionType != null  and energyConsumptionType != ''">#{energyConsumptionType},</if>
+            <if test="energyConsumptionItemized != null  and energyConsumptionItemized != ''">#{energyConsumptionItemized},</if>
+            <if test="time != null ">#{time},</if>
+            <if test="theMonthPrice != null  and theMonthPrice != ''">#{theMonthPrice},</if>
+            <if test="capacity != null  and capacity != ''">#{capacity},</if>
+            <if test="unitProductEnergy != null  and unitProductEnergy != ''">#{unitProductEnergy},</if>
+            <if test="yAgoProduction != null  and yAgoProduction != ''">#{yAgoProduction},</if>
+            <if test="producEnergyCost != null  and producEnergyCost != ''">#{producEnergyCost},</if>
+            <if test="unitProductEnergyCost != null  and unitProductEnergyCost != ''">#{unitProductEnergyCost},</if>
+            <if test="yAgoValue != null  and yAgoValue != ''">#{yAgoValue},</if>
+            <if test="unitProductEnergyYAgo != null  and unitProductEnergyYAgo != ''">#{unitProductEnergyYAgo},</if>
+            <if test="producEnergyCostYAgo != null  and producEnergyCostYAgo != ''">#{producEnergyCostYAgo},</if>
+            <if test="unitProductEnergyCostYAgo != null  and unitProductEnergyCostYAgo != ''">#{unitProductEnergyCostYAgo},</if>
+         </trim>
+    </insert>
+
+    <update id="updateProductEnergy" parameterType="ProductEnergy">
+        update product_energy
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="energyUnits != null  and energyUnits != ''">energy_units = #{energyUnits},</if>
+            <if test="productName != null  and productName != ''">product_name = #{productName},</if>
+            <if test="energyConsumptionType != null  and energyConsumptionType != ''">energy_consumption_type = #{energyConsumptionType},</if>
+            <if test="energyConsumptionItemized != null  and energyConsumptionItemized != ''">energy_consumption_itemized = #{energyConsumptionItemized},</if>
+            <if test="time != null ">time = #{time},</if>
+            <if test="theMonthPrice != null  and theMonthPrice != ''">the_month_price = #{theMonthPrice},</if>
+            <if test="capacity != null  and capacity != ''">capacity = #{capacity},</if>
+            <if test="unitProductEnergy != null  and unitProductEnergy != ''">unit_product_energy = #{unitProductEnergy},</if>
+            <if test="yAgoProduction != null  and yAgoProduction != ''">y_ago_production = #{yAgoProduction},</if>
+            <if test="producEnergyCost != null  and producEnergyCost != ''">produc_energy_cost = #{producEnergyCost},</if>
+            <if test="unitProductEnergyCost != null  and unitProductEnergyCost != ''">unit_product_energy_cost = #{unitProductEnergyCost},</if>
+            <if test="yAgoValue != null  and yAgoValue != ''">y_ago_value = #{yAgoValue},</if>
+            <if test="unitProductEnergyYAgo != null  and unitProductEnergyYAgo != ''">unit_product_energy_y_ago = #{unitProductEnergyYAgo},</if>
+            <if test="producEnergyCostYAgo != null  and producEnergyCostYAgo != ''">produc_energy_cost_y_ago = #{producEnergyCostYAgo},</if>
+            <if test="unitProductEnergyCostYAgo != null  and unitProductEnergyCostYAgo != ''">unit_product_energy_cost_y_ago = #{unitProductEnergyCostYAgo},</if>
+        </trim>
+        where 
+product_id = #{productId}
+    </update>
+
+    <delete id="deleteProductEnergyById" parameterType="Long">
+        delete from product_energy where 
+product_id = #{productId}
+    </delete>
+
+    <delete id="deleteProductEnergyByIds" parameterType="String">
+        delete from product_energy where 
+product_id in 
+        <foreach item="productId" collection="array" open="(" separator="," close=")">
+            #{productId}
+        </foreach>
+    </delete>
+    
+</mapper>
