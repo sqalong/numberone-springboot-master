@@ -2,6 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <th:block th:include="include :: header('VIEW列表')" />
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts.min.js" th:src="@{/js/echarts.min.js}"></script>
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -56,12 +57,16 @@
                     <i class="fa fa-download"></i> 导出
                  </a>
             </div>
+
             <div class="col-sm-12 select-table table-striped">
                 <table id="bootstrap-table"></table>
+                <div id="main" style="width: 800px;height: 400px;"></div>
             </div>
         </div>
     </div>     <!--include为上述公共部分的文件名,include为模板名,footer相当于模板中ID为footer的-->
     <th:block th:include="include :: footer" />
+     <!--<script src="../../../static/js/jquery.min.js"></script>
+     <script src="../../../static/js/echarts.min.js"></script>-->
     <script th:inline="javascript">
 
         //用permission访问后台地址获取数据
@@ -113,6 +118,27 @@
                 }]
             };
             $.table.init(options);
+
+            var myChart = echarts.init(document.getElementById('main'));
+            var option1 = {
+                title: {
+                    text: 'ECharts 入门示例'
+                },
+                tooltip: {},
+                legend: {
+                    data:['销量']
+                },
+                xAxis: {
+                    data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+                },
+                yAxis: {},
+                series: [{
+                    name: '销量',
+                    type: 'bar',
+                    data: [5, 20, 36, 10, 10, 20]
+                }]
+            };
+            myChart.setOption(option1);
         });
     </script>
 </body>

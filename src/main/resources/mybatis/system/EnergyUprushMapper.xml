@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.numberone.project.system.uprush.mapper.EnergyUprushMapper">
+    
+    <resultMap type="EnergyUprush" id="EnergyUprushResult">
+        <result property="id"    column="id"    />
+        <result property="diagnoseContent"    column="diagnose_content"    />
+        <result property="diagnoseDate"    column="diagnose_date"    />
+        <result property="abnormal"    column="abnormal"    />
+    </resultMap>
+
+    <sql id="selectEnergyUprushVo">
+        select id, diagnose_content, diagnose_date, abnormal from energy_uprush
+    </sql>
+
+    <select id="selectEnergyUprushList" parameterType="EnergyUprush" resultMap="EnergyUprushResult">
+        <include refid="selectEnergyUprushVo"/>
+        <where>  
+            <if test="params.beginDiagnoseDate != null and params.beginDiagnoseDate != '' and params.endDiagnoseDate != null and params.endDiagnoseDate != ''"> and diagnose_date between #{params.beginDiagnoseDate} and #{params.endDiagnoseDate}</if>
+            <if test="abnormal != null  and abnormal != ''"> and abnormal = #{abnormal}</if>
+        </where>
+    </select>
+    
+    <select id="selectEnergyUprushById" parameterType="Long" resultMap="EnergyUprushResult">
+        <include refid="selectEnergyUprushVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertEnergyUprush" parameterType="EnergyUprush" useGeneratedKeys="true" keyProperty="id">
+        insert into energy_uprush
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="diagnoseContent != null  and diagnoseContent != ''">diagnose_content,</if>
+            <if test="diagnoseDate != null ">diagnose_date,</if>
+            <if test="abnormal != null  and abnormal != ''">abnormal,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="diagnoseContent != null  and diagnoseContent != ''">#{diagnoseContent},</if>
+            <if test="diagnoseDate != null ">#{diagnoseDate},</if>
+            <if test="abnormal != null  and abnormal != ''">#{abnormal},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEnergyUprush" parameterType="EnergyUprush">
+        update energy_uprush
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="diagnoseContent != null  and diagnoseContent != ''">diagnose_content = #{diagnoseContent},</if>
+            <if test="diagnoseDate != null ">diagnose_date = #{diagnoseDate},</if>
+            <if test="abnormal != null  and abnormal != ''">abnormal = #{abnormal},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEnergyUprushById" parameterType="Long">
+        delete from energy_uprush where id = #{id}
+    </delete>
+
+    <delete id="deleteEnergyUprushByIds" parameterType="String">
+        delete from energy_uprush where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
