@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>目录树</title>
+</head>
+<body>
+<div id="dialogRoleAuthority">
+    <form id="dlg_Add_Hospital" target="submitFrame">
+        <%--存放树形结构的div--%>
+        <div id="menuTree" style="height: 400px;overflow:auto"></div>
+        <input type="hidden" value="" id="rid">
+        <div>
+            <input type="hidden" id="inna">
+            <input type="hidden" id="inmes">
+        </div>
+    </form>
+</div>
+<script th:inline="javascript">
+    var editRoleAuthModal = function (id) {
+        $("#rid").val(id);
+        $.ajaxSetup({cache: false});
+        $.ajax({
+            url: contextPath + "/rolePower/power/" + id,
+            type: 'get',
+            dataType: 'json',
+            success: function (result) {
+                console.log(result);
+                var check = result.checkNodeIds.toString();
+                var checkNodeIds = check.split(",");//需要选中的节点ID，为数组
+                $('#inmes').val(checkNodeIds);
+                $("#menuTree").bind('loaded.jstree', function (e, data) {
+                    $("#menuTree").jstree("open_all");
+                    $("#menuTree").find("li").each(function () {
+                        if (checkNodeIds != null) {
+                            for (var i = 0; i < checkNodeIds.length; i++) {
+                                if ($(this).attr("id") == checkNodeIds[i]) { //如果节点的ID等于checkNodeIds[i]，表示要选中//alert($(this).attr(“id”));
+                                    $("#menuTree").jstree("check_node", $(this));
+                                    break;
+                                }
+                            }
+                        }
+                    });
+                }).jstree({
+                    core: {
+                        'data': result.data,
+                    },
+                    plugins: ["themes", "json_data", "ui", "checkbox"],
+                })
+            }
+        });
+    }
+    //提交树形的方法
+    var getMenuIds = function () {
+        var id = $("#rid").val();
+        //获取所有默认选中的id
+        var menus = $('#menuTree').jstree().get_checked();
+        var menuss = "";
+        var menu;
+        if (menus == null || menus == "" || menus.length == 0) {
+            menu = "null";
+        } else {
+            for (var i = 0; i < menus.length; i++) {
+                //根据选中的菜单id获取上级id,如果上级id是#,说明是一级菜单,
+                // 如果不是那么把选中菜单id的上级id也加入到数组中
+                if ($('#menuTree').jstree().get_parent(menus[i]) == "#") {
+                    menuss += menus[i] + ",";
+                } else {
+                    menuss += $('#menuTree').jstree().get_parent(menus[i]) + ",";
+                }
+            }
+            if (menuss != null) {
+                menuss = menuss + menus.toString();
+                menu = menuss.split(",")
+                for (var j = 0; j < menu.length; j++) {
+                    if (menu[j] == '#') {
+                        menu.splice(j, j + 1);
+                    }
+                }
+                menu = unique(menu);//数组去重
+            }
+            ;
+        }
+        console.log(id + "的顺丰到付" + menu);
+        if (menu.length != 0) {
+            $.ajax({
+                type: 'get',
+                dataType: 'json',
+                url: contextPath + "/rolePower/menus/" + id + "/mes/" + menu,
+                success: function (result) {
+                    if (result == 'success') {
+                        $.extMessager.popup("S", "修改成功");
+                    } else {
+                        $.extMessager.popup("E", "修改失败");
+                    }
+                    //重点:提交成功之后,需要删除树形结构,
+                    $('#menuTree').jstree().destroy();
+                    kg = false;
+                    dialogRoleAuthority.dialog("close");
+                }
+            });
+        }
+    }
+
+    //数组去重复
+    function unique(arr) {
+        var result = [], hash = {};
+        for (var i = 0, elem; (elem = arr[i]) != null; i++) {
+            if (!hash[elem]) {
+                result.push(elem);
+                hash[elem] = true;
+            }
+        }
+        return result;
+    }
+</script>
+</body>
+</html>
