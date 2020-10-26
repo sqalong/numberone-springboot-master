@@ -2,6 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <th:block th:include="include :: header('实时遥测曲线列表')"/>
+    <th:block th:include="include :: ztree-css" />
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts.min.js"
             th:src="@{/js/echarts.min.js}"></script>
 </head>
@@ -30,19 +31,26 @@
 </div>
 
 
+<div class="ui-layout-center">
+        <div class="row">
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+                <div  id="totalFlowRate" style="height:300px;"></div>
+            </div>
+        </div>
+</div>
 
-<div class="container-div">
+<!--<div class="container-div">
     <div class="row">
-
         <div class="col-sm-9 select-table table-striped">
             <table id="bootstrap-table"></table>
             <div class="col-sm-12" id="totalFlowRate" style="height:300px;"></div>
-
         </div>
-
     </div>
-</div>
-<th:block th:include="include :: footer"/>
+</div>-->
+<th:block th:include="include :: footer" />
+<th:block th:include="include :: layout-latest-js" />
+<th:block th:include="include :: ztree-js" />
 <script th:inline="javascript">
     var editFlag = [[${@permission.hasPermi('system:real:edit')}]];
     var removeFlag = [[${@permission.hasPermi('system:real:remove')}]];
@@ -94,6 +102,39 @@
                 }]
         };
         $.table.init(options);
+    });
+
+    function queryDeptTree()
+    {
+        var url = ctx + "system/dept/treeData";
+        var options = {
+            url: url,
+            expandLevel: 2,
+            onClick : zOnClick
+        };
+        $.tree.init(options);
+
+        function zOnClick(event, treeId, treeNode) {
+            $("#deptId").val(treeNode.id);
+            $("#parentId").val(treeNode.pId);
+            $.table.search();
+        }
+    }
+
+    $('#btnExpand').click(function() {
+        $._tree.expandAll(true);
+        $(this).hide();
+        $('#btnCollapse').show();
+    });
+
+    $('#btnCollapse').click(function() {
+        $._tree.expandAll(false);
+        $(this).hide();
+        $('#btnExpand').show();
+    });
+
+    $('#btnRefresh').click(function() {
+        queryDeptTree();
     });
 </script>
 
