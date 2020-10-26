@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.numberone.project.system.real.mapper.RealMapper">
+    
+    <resultMap type="Real" id="RealResult">
+        <result property="id"    column="id"    />
+        <result property="groupsname"    column="groupsName"    />
+        <result property="measurename"    column="measureName"    />
+        <result property="signname"    column="signName"    />
+        <result property="meanehiletime"    column="meanehileTime"    />
+        <result property="insidevalue"    column="insideValue"    />
+        <result property="regulationvalue"    column="regulationValue"    />
+        <result property="indication"    column="indication"    />
+        <result property="unit"    column="unit"    />
+    </resultMap>
+
+    <sql id="selectRealVo">
+        select id, groupsName, measureName, signName, meanehileTime, insideValue, regulationValue, indication, unit from `real`
+
+    </sql>
+
+    <select id="selectRealList" parameterType="Real" resultMap="RealResult">
+        <include refid="selectRealVo"/>
+        <where>  
+        </where>
+    </select>
+    
+    <select id="selectRealById" parameterType="Long" resultMap="RealResult">
+        <include refid="selectRealVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertReal" parameterType="Real" useGeneratedKeys="true" keyProperty="id">
+        insert into real
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="groupsname != null  and groupsname != ''">groupsName,</if>
+            <if test="measurename != null  and measurename != ''">measureName,</if>
+            <if test="signname != null  and signname != ''">signName,</if>
+            <if test="meanehiletime != null ">meanehileTime,</if>
+            <if test="insidevalue != null  and insidevalue != ''">insideValue,</if>
+            <if test="regulationvalue != null  and regulationvalue != ''">regulationValue,</if>
+            <if test="indication != null  and indication != ''">indication,</if>
+            <if test="unit != null  and unit != ''">unit,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="groupsname != null  and groupsname != ''">#{groupsname},</if>
+            <if test="measurename != null  and measurename != ''">#{measurename},</if>
+            <if test="signname != null  and signname != ''">#{signname},</if>
+            <if test="meanehiletime != null ">#{meanehiletime},</if>
+            <if test="insidevalue != null  and insidevalue != ''">#{insidevalue},</if>
+            <if test="regulationvalue != null  and regulationvalue != ''">#{regulationvalue},</if>
+            <if test="indication != null  and indication != ''">#{indication},</if>
+            <if test="unit != null  and unit != ''">#{unit},</if>
+         </trim>
+    </insert>
+
+    <update id="updateReal" parameterType="Real">
+        update real
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="groupsname != null  and groupsname != ''">groupsName = #{groupsname},</if>
+            <if test="measurename != null  and measurename != ''">measureName = #{measurename},</if>
+            <if test="signname != null  and signname != ''">signName = #{signname},</if>
+            <if test="meanehiletime != null ">meanehileTime = #{meanehiletime},</if>
+            <if test="insidevalue != null  and insidevalue != ''">insideValue = #{insidevalue},</if>
+            <if test="regulationvalue != null  and regulationvalue != ''">regulationValue = #{regulationvalue},</if>
+            <if test="indication != null  and indication != ''">indication = #{indication},</if>
+            <if test="unit != null  and unit != ''">unit = #{unit},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRealById" parameterType="Long">
+        delete from real where id = #{id}
+    </delete>
+
+    <delete id="deleteRealByIds" parameterType="String">
+        delete from real where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

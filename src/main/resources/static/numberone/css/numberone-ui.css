@@ -809,9 +809,7 @@ label {
 }
 
 /** 表格查询数据 **/
-.table-striped {
-	min-height: 75%;
-}
+
 
 .table-striped .bootstrap-table {
 	border: 0px!important;
