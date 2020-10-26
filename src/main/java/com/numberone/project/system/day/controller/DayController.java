@@ -119,7 +119,7 @@ public class DayController extends BaseController
     @Log(title = "VIEW", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
-    public AjaxResult remove(String ids)
+    public  AjaxResult remove(String ids)
     {
         return toAjax(dayService.deleteDayByIds(ids));
     }
