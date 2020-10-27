@@ -79,10 +79,10 @@
     var totalFlowRate = echarts.init(document.getElementById('totalFlowRate'));
     var xAxisData = [];   //时间戳
     var yAxisData = [];   //数据
-    for (var i = 500; i > 0; i--) {
-        xAxisData.push(i + "秒前");
+    for (var i = 200; i > 0; i--) {
+        xAxisData.push("10:"+i);
     }
-    for (i = 1; i < 501; i++) {
+    for (i = 1; i < 201; i++) {
         yAxisData.push(null);
     }
     var totalFlowRateOption = {
@@ -135,7 +135,7 @@
             yAxisData.shift();
         }
         totalFlowRate.setOption(totalFlowRateOption);
-    }, 30);
+    }, 100);
 </script>
 </body>
 </html>
