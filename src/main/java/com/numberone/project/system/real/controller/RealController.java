@@ -34,6 +34,15 @@ public class RealController extends BaseController
     @Autowired
     private IRealService realService;
 
+
+    @RequestMapping("lists")
+    @ResponseBody
+    public List<Real> lists(){
+        Real r = new Real();
+        List<Real> list = realService.selectRealList(r);
+        return list;
+    }
+
     @RequiresPermissions("system:real:view")
     @GetMapping()
     public String real()

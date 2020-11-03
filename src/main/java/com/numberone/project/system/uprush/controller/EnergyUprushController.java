@@ -34,21 +34,20 @@ public class EnergyUprushController extends BaseController
 
     @Autowired
     private IEnergyUprushService energyUprushService;
+    @RequestMapping("lists")
+    @ResponseBody
+    public List<EnergyUprush> list(){
+        EnergyUprush e = new EnergyUprush();
+        List<EnergyUprush> list = energyUprushService.selectEnergyUprushList(e);
+        return list;
+
+    }
 
     @RequiresPermissions("system:uprush:view")
     @GetMapping()
     public String uprush()
     {
         return prefix + "/uprush";
-    }
-    @RequestMapping("ll")
-    public String list(Model model) {
-    	EnergyUprush s = new EnergyUprush();
-        List<EnergyUprush> list = energyUprushService.selectEnergyUprushList(s);
-
-        model.addAttribute("aa",list);
-        return "dd";
-
     }
 
     /**
