@@ -2,10 +2,15 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <th:block th:include="include :: header('实时遥测曲线列表')"/>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts.min.js"
-            th:src="@{/js/echarts.min.js}"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"
-            th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts.min.js" th:src="@{/js/echarts.min.js}"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+
+ <script type="text/javascript" src="${pageContext.request.contextPath}/ajax/libs/layui/layui.js" th:src="@{/ajax/libs/layui/layui.js}"></script>
+<!--    <link rel="stylesheet" href="https://layui.hcwl520.com.cn/layui-v2.5.4/css/layui.css" media="all">-->
+<!--    <script src="https://layui.hcwl520.com.cn/layui-v2.5.4/layui.js"></script>-->
+
+<!--    <link href="../../../static/ajax/libs/layui/css/modules/laydate/default/laydate.css" th:href="@{/ajax/libs/layui/css/modules/laydate/default/laydate.css}" rel="stylesheet"/>-->
+    <link rel="stylesheet" href="../../../static/ajax/libs/layui/css/layui.css" th:href="@{/ajax/libs/layui/css/layui.css}">
 
 
 </head>
@@ -15,13 +20,15 @@
     <div class="row">
         <div class="col-sm-2">
             目录树
+            <div id="test1"></div>
+
 
 
         </div>
 
         <div class="col-sm-10  table-striped" style="box-shadow: #666 0px 0px 20px; background: #eee;">
             <div class="col-sm-12" id="totalFlowRate" style="height:300px; top: 16px; left: -18px"></div>
-            <table id="bootstrap-table"></table>
+            <table  id="bootstrap-table" style="border: 1px solid #3a4459"></table>
 
         </div>
 
@@ -30,6 +37,39 @@
 </div>
 <th:block th:include="include :: footer"/>
 <script th:inline="javascript">
+
+    layui.use('tree', function(){
+        var tree = layui.tree;
+
+        //渲染
+        var inst1 = tree.render({
+            elem: '#test1'  //绑定元素
+            ,data: [{
+                title: '江西' //一级菜单
+                ,children: [{
+                    title: '南昌' //二级菜单
+                    ,children: [{
+                        title: '高新区' //三级菜单
+                        //…… //以此类推，可无限层级
+                    }]
+                }]
+            },{
+                title: '陕西' //一级菜单
+                ,children: [{
+                    title: '西安' //二级菜单
+                }]
+            }]
+        });
+    });
+
+
+
+
+
+
+
+
+
     var editFlag = [[${@permission.hasPermi('system:real:edit')}]];
     var removeFlag = [[${@permission.hasPermi('system:real:remove')}]];
     var prefix = ctx + "system/real";
@@ -38,6 +78,9 @@
         var options = {
             url: prefix + "/list",
             modalName: "实时遥测曲线",
+            striped: true,
+            search: true,
+            showRefresh: true,
             columns: [{
                 checkbox: true
             },
@@ -45,6 +88,7 @@
                     field: 'id',
                     title: '序号',
                     visible: false
+
                 },
                 {
                     field: 'groupsname',
@@ -78,6 +122,7 @@
                     field: 'unit',
                     title: '单位'
                 }]
+
         };
         $.table.init(options);
     });

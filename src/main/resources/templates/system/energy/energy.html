@@ -19,7 +19,7 @@
             </form>
         </div>
         <div class="col-sm-12 select-table table-striped">
-            <table id="bootstrap-table"></table>
+            <table id="bootstrap-table" style="table-layout:fixed;"></table>
         </div>
         <div id="totalFlowRate" style="height:300px;"></div>
 
@@ -36,6 +36,10 @@
             url: prefix + "/list",
 
             modalName: "单位用能Manager",
+            striped: true,
+            search: true,
+            showRefresh: true,
+
             columns: [{
                 checkbox: true
             },
