@@ -19,9 +19,10 @@
 
         </div>
 
-        <div class="col-sm-10  table-striped">
+        <div class="col-sm-10  table-striped" style="box-shadow: #666 0px 0px 20px; background: #eee;">
+            <div class="col-sm-12" id="totalFlowRate" style="height:300px; top: 16px; left: -18px"></div>
             <table id="bootstrap-table"></table>
-            <div class="col-sm-12" id="totalFlowRate" style="height:300px;"></div>
+
         </div>
 
 
@@ -84,7 +85,7 @@
     var xAxisData = [];
     var yAxisData = [];
     $.ajax({
-        type: "GET",
+        type: "post",
         url: "/system/real/lists",
         dataType: "json",
         async: false,
@@ -120,7 +121,7 @@
             right: 15 /*"15px"*/
         },
         legend: {
-            data: ['当前流量'],
+            data: ['总功率因数'],
             x: 'left'
         },
         xAxis: {
@@ -137,7 +138,7 @@
         series: {
             //symbol: "none",
             /*去掉小圆点*/
-            name: '当前流量',
+            name: '总功率因数',
             type: 'line',
             data: yAxisData,
             //smooth: true   //显示为平滑的曲线
