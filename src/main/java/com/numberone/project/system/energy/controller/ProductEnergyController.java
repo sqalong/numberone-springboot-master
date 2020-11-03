@@ -4,6 +4,7 @@ import java.util.List;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,8 @@ import com.numberone.framework.web.controller.BaseController;
 import com.numberone.framework.web.domain.AjaxResult;
 import com.numberone.common.utils.poi.ExcelUtil;
 import com.numberone.framework.web.page.TableDataInfo;
+
+
 
 /**
  * 单位用能ManagerController
@@ -34,6 +37,22 @@ public class ProductEnergyController extends BaseController
     @Autowired
     private IProductEnergyService productEnergyService;
 
+    @RequestMapping("l")
+    @ResponseBody
+    public List<ProductEnergy> wori(Model model) {
+    	ProductEnergy p = new ProductEnergy();
+        List<ProductEnergy> list = productEnergyService.selectProductEnergyList(p);
+        for(ProductEnergy q : list) {
+        	System.out.println("弟弟"+q.getCapacity()+"山东省"+q.getProducEnergyCost());
+        }
+    	return list;
+    }
+    @RequestMapping("lll")
+    public String ss(){
+    	return "dd";
+    }
+    
+    
     @RequiresPermissions("system:energy:view")
     @GetMapping()
     public String energy()

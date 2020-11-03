@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+ <script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts.min.js" th:src="@{/js/echarts.min.js}"></script>
+ <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+ 
+            
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="main" style="width: 100%; height: 600px"></div>
+
+	<script th:inline="javascript">
+		var myChart = echarts.init(document.getElementById('main'));
+	
+		// 新建productName与nums数组来接受数据，因为我们
+	    var productName = [];
+	    var nums = [];
+	
+		//AJAX接收数据主体
+	    $.ajax({
+	        type:"GET",
+	        url:"/system/energy/l",
+	        dataType:"json",
+	        async:false,
+	        success:function (result) {
+	
+	            for (var i = 0; i < result.length; i++){
+	                productName.push(result[i].theMonthPrice);
+	                nums.push(result[i].capacity);
+	            }
+	
+	        },
+	        error :function(errorMsg) {
+	            alert("获取后台数据失败！");
+	        }
+	    });
+	
+	    // 指定图表的配置项和数据
+	    var option = {
+	        title: {
+	            text: 'ECharts 入门示例'
+	        },
+	        tooltip: {},
+	        legend: {
+	            data:['销量']
+	        },
+	        xAxis: {
+	        	//结合
+	            data: productName
+	        },
+	
+	        yAxis: {},
+	        series: [{
+	            name: '销量',
+	            type: 'bar',
+	            //结合
+	            data: nums
+	        }]
+	    };
+	
+	    // 使用刚指定的配置项和数据显示图表。
+	    myChart.setOption(option);
+	</script>
+
+</body>
+</html>

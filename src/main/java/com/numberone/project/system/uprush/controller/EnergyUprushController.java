@@ -4,6 +4,7 @@ import java.util.List;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +40,15 @@ public class EnergyUprushController extends BaseController
     public String uprush()
     {
         return prefix + "/uprush";
+    }
+    @RequestMapping("ll")
+    public String list(Model model) {
+    	EnergyUprush s = new EnergyUprush();
+        List<EnergyUprush> list = energyUprushService.selectEnergyUprushList(s);
+
+        model.addAttribute("aa",list);
+        return "dd";
+
     }
 
     /**

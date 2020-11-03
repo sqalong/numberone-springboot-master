@@ -5,6 +5,9 @@
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <div th:object="${day}">
+            <p th:text="*{name}"></p>
+        </div>
         <form class="form-horizontal m" id="form-day-edit" th:object="${day}">
             <input name="name" th:field="*{name}" type="hidden">
             <div class="form-group">    

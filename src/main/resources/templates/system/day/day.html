@@ -12,6 +12,9 @@
                     <div class="select-list">
                         <ul>
                             <li>
+                     <p th:text="#{rspData.list.name}" ></p>
+                       </li>
+                            <li>
                                 <p>姓名：</p>
                                 <input type="text" name="name"/>
                             </li>
@@ -67,7 +70,8 @@
     <th:block th:include="include :: footer" />
      <!--<script src="../../../static/js/jquery.min.js"></script>
      <script src="../../../static/js/echarts.min.js"></script>-->
-    <script th:inline="javascript">
+    
+    <script >
 
         //用permission访问后台地址获取数据
 

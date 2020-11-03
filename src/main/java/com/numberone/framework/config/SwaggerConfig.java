@@ -54,9 +54,9 @@ public class SwaggerConfig
         // 用ApiInfoBuilder进行定制
         return new ApiInfoBuilder()
                 // 设置标题
-                .title("标题：NumberOne管理系统_接口文档")
+                .title("中国邮政能源管理大数据平台-接口文档")
                 // 描述
-                .description("描述：用于管理集团旗下公司的人员信息,具体包括XXX,XXX模块...")
+                .description("描述：用于管理集团旗下各公司的能耗信息,具体包括XXX,XXX模块...")
                 // 作者信息
                 .contact(new Contact(numberOneConfig.getName(), null, null))
                 // 版本

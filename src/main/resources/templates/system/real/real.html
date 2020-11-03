@@ -4,12 +4,16 @@
     <th:block th:include="include :: header('实时遥测曲线列表')"/>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts.min.js"
             th:src="@{/js/echarts.min.js}"></script>
+            <script src="../../../static/js/jquery.min.js"></script>
 </head>
 <body class="gray-bg">
+
 <div class="container-div">
     <div class="row">
-        <div class="col-sm-2" >
+        <div class="col-sm-2">
             目录树
+
+
         </div>
 
         <div class="col-sm-10  table-striped">
@@ -80,7 +84,7 @@
     var xAxisData = [];   //时间戳
     var yAxisData = [];   //数据
     for (var i = 200; i > 0; i--) {
-        xAxisData.push("10:"+i);
+        xAxisData.push("10:" + i);
     }
     for (i = 1; i < 201; i++) {
         yAxisData.push(null);
@@ -89,7 +93,7 @@
         animation: false,
         title: {
             text: '总功率因数实时曲线',
-            x:'center'
+            x: 'center'
 
 
             /*,
@@ -107,7 +111,7 @@
         },
         legend: {
             data: ['当前流量'],
-            x:'left'
+            x: 'left'
         },
         xAxis: {
             boundaryGap: false,
@@ -137,5 +141,6 @@
         totalFlowRate.setOption(totalFlowRateOption);
     }, 100);
 </script>
+
 </body>
 </html>
