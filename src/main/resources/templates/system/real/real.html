@@ -5,12 +5,12 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts.min.js" th:src="@{/js/echarts.min.js}"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
 
- <script type="text/javascript" src="${pageContext.request.contextPath}/ajax/libs/layui/layui.js" th:src="@{/ajax/libs/layui/layui.js}"></script>
-<!--    <link rel="stylesheet" href="https://layui.hcwl520.com.cn/layui-v2.5.4/css/layui.css" media="all">-->
-<!--    <script src="https://layui.hcwl520.com.cn/layui-v2.5.4/layui.js"></script>-->
+<!--    <script type="text/javascript" src="${pageContext.request.contextPath}/ajax/libs/layui/layui.js" th:src="@{/ajax/libs/layui/layui.js}"></script>-->
+<!--    <link rel="stylesheet" href="../../../static/ajax/libs/layui/css/layui.css" th:href="@{/ajax/libs/layui/css/layui.css}">-->
 
-<!--    <link href="../../../static/ajax/libs/layui/css/modules/laydate/default/laydate.css" th:href="@{/ajax/libs/layui/css/modules/laydate/default/laydate.css}" rel="stylesheet"/>-->
-    <link rel="stylesheet" href="../../../static/ajax/libs/layui/css/layui.css" th:href="@{/ajax/libs/layui/css/layui.css}">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/layui/layui.js" th:src="@{/layui/layui.js}"></script>
+    <link rel="stylesheet" href="../../../static/layui/css/layui.css" th:href="@{/layui/css/layui.css}">
+
 
 
 </head>
@@ -19,7 +19,7 @@
 <div class="container-div">
     <div class="row">
         <div class="col-sm-2">
-            目录树
+            <h3>表计名称</h3>
             <div id="test1"></div>
 
 
@@ -38,6 +38,8 @@
 <th:block th:include="include :: footer"/>
 <script th:inline="javascript">
 
+
+    //目录树
     layui.use('tree', function(){
         var tree = layui.tree;
 
@@ -45,9 +47,9 @@
         var inst1 = tree.render({
             elem: '#test1'  //绑定元素
             ,data: [{
-                title: '江西' //一级菜单
+                title: 'B1表箱2' //一级菜单
                 ,children: [{
-                    title: '南昌' //二级菜单
+                    title: 'A' //二级菜单
                     ,children: [{
                         title: '高新区' //三级菜单
                         //…… //以此类推，可无限层级
