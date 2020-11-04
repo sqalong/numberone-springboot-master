@@ -2,16 +2,94 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <th:block th:include="include :: header('实时遥测曲线列表')"/>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts.min.js" th:src="@{/js/echarts.min.js}"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts.min.js"
+            th:src="@{/js/echarts.min.js}"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"
+            th:src="@{/js/jquery.min.js}"></script>
 
-<!--    <script type="text/javascript" src="${pageContext.request.contextPath}/ajax/libs/layui/layui.js" th:src="@{/ajax/libs/layui/layui.js}"></script>-->
-<!--    <link rel="stylesheet" href="../../../static/ajax/libs/layui/css/layui.css" th:href="@{/ajax/libs/layui/css/layui.css}">-->
+    <script type="text/javascript" src="${pageContext.request.contextPath}/ajax/libs/layui/layui.js"
+            th:src="@{/ajax/libs/layui/layui.js}"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/ajax/libs/layui/layui.js"
+            th:src="@{/ajax/libs/layui/layui.js}"></script>
+    <link rel="stylesheet" href="../../../static/ajax/libs/layui/css/layui.css"
+          th:href="@{/ajax/libs/layui/css/layui.css}">
+    <link rel="stylesheet" href="../../../static/ajax/libs/layui/css/layui.css"
+          th:href="@{/ajax/libs/layui/css/layui.css}">
+    <link rel="stylesheet" href="../../../static/ajax/libs/dtree/layui_ext/dtree/dtree.css"
+          th:href="@{/ajax/libs/dtree/layui_ext/dtree/dtree.css}">
+    <link rel="stylesheet" href="../../../static/ajax/libs/dtree/layui_ext/dtree/font/dtreefont.css"
+          th:href="@{/ajax/libs/dtree/layui_ext/dtree/font/dtreefont.css}">
 
-    <script type="text/javascript" src="${pageContext.request.contextPath}/layui/layui.js" th:src="@{/layui/layui.js}"></script>
-    <link rel="stylesheet" href="../../../static/layui/css/layui.css" th:href="@{/layui/css/layui.css}">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/ajax/libs/dtree/layui_ext/dtree/dtree.js"
+            th:src="@{/ajax/libs/dtree/layui_ext/dtree/dtree.js}"></script>
+    <style>
+        /*左侧导航 使用方法：skin: 'sidebar' */
 
+        .layui-tree-skin-sidebar li i{
+            color: rgba(255,255,255,.7);
 
+            display: none;
+
+        }
+
+        .layui-tree-skin-sidebar li a cite{
+            color: rgba(255,255,255,.7)
+
+        }
+
+        .layui-tree-skin-sidebar li .layui-tree-spread{
+            display: block;
+
+            position: absolute;
+
+            right: 30px;
+
+        }
+
+        .layui-tree-skin-sidebar li{
+            line-height: 45px;
+
+            position: relative;
+
+        }
+
+        .layui-tree-skin-sidebar li ul{
+            margin-left: 0;
+
+            background: rgba(0,0,0,.3);
+
+        }
+
+        .layui-tree-skin-sidebar li ul a{
+            padding-left: 20px;
+
+        }
+
+        .layui-tree-skin-sidebar li a{
+            height: 45px;
+
+            border-left: 5px solid transparent;
+
+            box-sizing: border-box;
+
+            width: 100%;
+
+        }
+
+        .layui-tree-skin-sidebar li a:hover{
+            background: #4E5465;
+
+            color: #fff;
+
+            border-left: 5px solid #009688;
+
+        }
+
+        .layui-tree-skin-sidebar li a.active{
+            background: #009688;
+
+        }
+    </style>
 
 </head>
 <body class="gray-bg">
@@ -20,15 +98,15 @@
     <div class="row">
         <div class="col-sm-2">
             <h3>表计名称</h3>
-            <div id="test1"></div>
 
+            <div id="test12" class="demo-tree-more" ></div>
 
 
         </div>
 
         <div class="col-sm-10  table-striped" style="box-shadow: #666 0px 0px 20px; background: #eee;">
             <div class="col-sm-12" id="totalFlowRate" style="height:300px; top: 16px; left: -18px"></div>
-            <table  id="bootstrap-table" style="border: 1px solid #3a4459"></table>
+            <table id="bootstrap-table" style="border: 1px solid #3a4459"></table>
 
         </div>
 
@@ -37,39 +115,192 @@
 </div>
 <th:block th:include="include :: footer"/>
 <script th:inline="javascript">
-
-
     //目录树
-    layui.use('tree', function(){
-        var tree = layui.tree;
+    layui.use('tree', function () {
+        var tree = layui.tree
+            ,layer = layui.layer
+            //模拟数据
+            ,data = [{
+                title: '电表'
+                ,id: 1
+                ,field: 'name1'
+                ,checked: true
+                ,spread: true
+                ,children: [{
+                    title: 'B1电箱1,可跳转'
+                    ,id: 3
+                    ,field: 'name11'
+                    ,href: 'https://www.layui.com/'
+                    ,children: [{
+                        title: 'A箱总功率因数'
+                        ,id: 23
+                        ,field: ''
+
+                    },{
+                        title: 'A箱电压'
+                        ,id: 7
+                        ,field: ''
+                    },{
+                        title: 'B箱电流'
+                        ,id: 8
+                        ,field: ''
+
+                    },{
+                        title: 'B总功率因数'
+                        ,id: 8
+                        ,field: ''
+
+                    },{
+                        title: 'C箱电流'
+                        ,id: 8
+                        ,field: ''
+
+                    },{
+                        title: 'C箱总功率因数'
+                        ,id: 8
+                        ,field: ''
+
+                    },{
+                        title: 'C箱电压频率'
+                        ,id: 8
+                        ,field: ''
+
+                    }]
+                },{
+                    title: '一层C电箱西南角'
+                    ,id: 4
+                    ,spread: true
+                    ,children: [{
+                        title: 'A箱总功率因数'
+                        ,id: 23
+                        ,field: ''
+
+                    },{
+                        title: 'A箱电压'
+                        ,id: 7
+                        ,field: ''
+                    },{
+                        title: 'B箱电流'
+                        ,id: 8
+                        ,field: ''
+
+                    },{
+                        title: 'B总功率因数'
+                        ,id: 8
+                        ,field: ''
+
+                    },{
+                        title: 'C箱电流'
+                        ,id: 8
+                        ,field: ''
+
+                    },{
+                        title: 'C箱总功率因数'
+                        ,id: 8
+                        ,field: ''
+
+                    },{
+                        title: 'C箱电压频率'
+                        ,id: 8
+                        ,field: ''
+
+                    }]
+                },{
+                    title: '三层A电箱'
+                    ,id: 20
+                    ,field: ''
+                    ,children: [{
+                        title: 'A箱总功率因数'
+                        ,id: 23
+                        ,field: ''
+
+                    },{
+                        title: 'A箱电压'
+                        ,id: 7
+                        ,field: ''
+                    },{
+                        title: 'B箱电流'
+                        ,id: 8
+                        ,field: ''
+
+                    },{
+                        title: 'B总功率因数'
+                        ,id: 8
+                        ,field: ''
+
+                    },{
+                        title: 'C箱电流'
+                        ,id: 8
+                        ,field: ''
+
+                    },{
+                        title: 'C箱总功率因数'
+                        ,id: 8
+                        ,field: ''
+
+                    },{
+                        title: 'C箱电压频率'
+                        ,id: 8
+                        ,field: ''
+
+                    }]
+                }]
+            },
+            ]
+
+                //基本演示
+                tree.render({
+                    elem: '#test12'
+                    ,data: data
+                    ,showCheckbox: false  //是否显示复选框
+                    ,id: 'demoId1'
+                    ,isJump: true //是否允许点击节点时弹出新窗口跳转
+                    ,click: function(obj){
+                        var data = obj.data;  //获取当前点击的节点数据
+                        layer.msg('状态：'+ obj.state + '<br>节点数据：' + JSON.stringify(data));
+                    }
+                });
+
+                //按钮事件
+                util.event('lay-demo', {
+                    getChecked: function(othis){
+                        var checkedData = tree.getChecked('demoId1'); //获取选中节点的数据
+
+                        layer.alert(JSON.stringify(checkedData), {shade:0});
+                        console.log(checkedData);
+                    }
+                    ,setChecked: function(){
+                        tree.setChecked('demoId1', [12, 16]); //勾选指定节点
+                    }
+                    ,reload: function(){
+                        //重载实例
+                        tree.reload('demoId1', {
+
+                        });
+
+                    }
+                });
 
         //渲染
         var inst1 = tree.render({
             elem: '#test1'  //绑定元素
-            ,data: [{
+            , data: [{
                 title: 'B1表箱2' //一级菜单
-                ,children: [{
+                , children: [{
                     title: 'A' //二级菜单
-                    ,children: [{
+                    , children: [{
                         title: '高新区' //三级菜单
                         //…… //以此类推，可无限层级
                     }]
                 }]
-            },{
+            }, {
                 title: '陕西' //一级菜单
-                ,children: [{
+                , children: [{
                     title: '西安' //二级菜单
                 }]
             }]
         });
     });
-
-
-
-
-
-
-
 
 
     var editFlag = [[${@permission.hasPermi('system:real:edit')}]];
@@ -174,7 +405,7 @@
         xAxis: {
             boundaryGap: false,
             data: xAxisData,
-            axisLabel:{
+            axisLabel: {
                 //X轴刻度配置
                 interval: 1 //0：表示全部显示不间隔；auto:表示自动根据刻度个数和宽度自动设置间隔个数
             }
