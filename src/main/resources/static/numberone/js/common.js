@@ -3,7 +3,8 @@
  * Copyright (c) 2019 numberone
  */
 $(function() {
-	
+	//增加哀悼活动主题
+
 	//  layer扩展皮肤
 	if (window.layer !== undefined) {
 		layer.config({

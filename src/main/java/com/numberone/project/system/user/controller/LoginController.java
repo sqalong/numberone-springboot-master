@@ -2,6 +2,8 @@ package com.numberone.project.system.user.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -14,6 +16,8 @@ import com.numberone.common.utils.ServletUtils;
 import com.numberone.common.utils.StringUtils;
 import com.numberone.framework.web.controller.BaseController;
 import com.numberone.framework.web.domain.AjaxResult;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
  * 登录验证
@@ -44,6 +48,10 @@ public class LoginController extends BaseController
         try
         {
             subject.login(token);
+            HttpServletRequest request =((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+            HttpSession session=request.getSession();//创建session对象
+            session.setAttribute("name",username);
+            session.setAttribute("pwd",password);
             return success();
         }
         catch (AuthenticationException e)
