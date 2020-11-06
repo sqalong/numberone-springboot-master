@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>能源数据大屏展示</title>
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts.min.js"
+            th:src="@{/js/echarts.min.js}"></script>
+</head>
+<body>
+<div class="row">
+    <div class="col-sm-3" style="border:solid 3px #ff0000; height: 700px">
+        <div style="border:solid 2px #ffd500;height: 348px">用能汇总</div>
+        <div style="border:solid 2px #e50f0f;height: 348px">用能占比</div>
+    </div>
+    <div class="col-sm-6" style="border:solid 3px #44ff00; height: 700px">
+        <div style="border:solid 1px #0022ff; height: 80px">标题</div>
+        <div style="border:solid 1px #a0a2b8; height: 615px">地图</div>
+
+    </div>
+    <div class="col-sm-3" style="border:solid 3px #f00; height: 700px">
+        <div style="border:solid 1px #1ed428; height: 138px">基本情况</div>
+        <div style="border:solid 1px #360303; height: 278px">减少排放污染物</div>
+        <div style="border:solid 1px #d000ff; height: 278px">减少二氧化碳排放</div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-3" style="border:solid 1px #1e30d4; height: 380px"></div>
+    <div class="col-sm-6" style="border:solid 1px #ee0808; height: 380px">
+
+    </div>
+    <div class="col-sm-3" style="border:solid 1px #1e4bd4; height: 380px"></div>
+</div>
+</body>
+</html>
