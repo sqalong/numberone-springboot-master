@@ -9,6 +9,8 @@
             th:src="@{/js/echarts.min.js}"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts-liquidfill.js"
             th:src="@{/js/echarts-liquidfill.js}"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"
+            th:src="@{/js/jquery.min.js}"></script>
 
 </head>
 <body>
@@ -54,15 +56,14 @@
         </div>
         <div class="col-sm-6" style="border:solid 1px #ee0808; height: 380px">
             <div class="row">
-                <div class="col-sm-9"><h4>用能对比曲线</h4></div>
-                <div class="btn-group col-sm-3">
+                <div class="col-sm-10"><h4>用能对比曲线</h4></div>
+                <div class="btn-group col-sm-2">
                     <button type="button" class="btn btn-link" style="color: #fff;">水</button>
                     <button type="button" class="btn btn-link" style="color: #fff;">电</button>
                     <button type="button" class="btn btn-link" style="color: #fff;">气</button>
                 </div>
             </div>
-                <div id="xzhong" style="width: 980px;height: 362px"></div>
-
+            <div id="xzhong" style="width: 980px;height: 362px"></div>
         </div>
         <div class="col-sm-3" style="border:solid 1px #1e4bd4; height: 380px">
             减少煤使用（吨）
@@ -75,72 +76,124 @@
 </body>
 <script type="text/javascript">
     //用能排名图表
+
+
     var myChart = echarts.init(document.getElementById('xzuo'));
+    var xAxisData = [];
+    var yAxisData = [];
+    $.ajax({
+        type: "post",
+        url: "/system/water/list",
+        dataType: "json",
+        async: false,
+        success: function (result) {
+
+            for (var i = 0; i < result.length; i++) {
+                xAxisData.push(result[i].name);
+                yAxisData.push(result[i].value);
+            }
+
+        },
+        error: function (errorMsg) {
+            alert("获取后台数据失败！");
+        }
+    })
     var option = {
-        grid: {  //设置图标距离
+
+        tooltip: {
+            trigger: 'axis',
+            backgroundColor: 'rgba(255,255,255,0.8)',
+            extraCssText: 'box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);',
+            textStyle: {
+                color: '#6a717b',
+            },
+
+        },
+        grid: {
+            //设置图标距离
             top: "-0",
-            left: "170",
-            right: "10",
+            left: "200",
+            right: "20",
             bottom: "20"
         },
-        tooltip: {},
-        legend: {
-            data: ['销量']
-        },
-        xAxis: {
-            show: false
-
-        },
-
-        yAxis: {
-            data: ['天桥大院', '航空邮件处理中心', '永安路大院', '新顺邮件处理中心', '北京站邮件处理中心', '北京国际邮件处理中心', '北京西站邮件处理中心', '北京综合邮件处理中心'],
-            axisLine: {
-                //隐藏y轴线
-                show: false
-            },
+        yAxis: [{
+            type: 'category',
+            data: xAxisData,
+            inverse: true,
             axisTick: {
-                //y轴刻度线
+                alignWithLabel: true,
                 show: false
+
+
             },
             axisLabel: {
+                margin: 10,
                 textStyle: {
-                    //文字样式
-                    color: "#FFFFFF",
-                    fontSize: "15"
+                    fontSize: 18,
+                    color: 'white',
+                    show: false,
                 }
             },
-        },
-        itemStyle: {
-            emphasis: {
-                barBorderRadius: 7
+            axisLine: {
+                lineStyle: {
+                    color: '#2548ac'
+                }
             },
-            normal: {
-                barBorderRadius: 7,
-                color: new echarts.graphic.LinearGradient(
-                    0, 0, 1, 0,
-                    [
-                        {offset: 0, color: '#3977E6'},
-                        {offset: 1, color: '#37BBF8'}
-                    ]
-                )
+
+        }],
+        xAxis: [{
+            type: 'value',
+            axisLabel: {
+                margin: 10,
+                interval: 1, //横轴信息全部显示
+                rotate: -15, //-15度角倾斜显示
+                textStyle: {
+                    fontSize: 18,
+                    color: 'white',
+                }
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#192469'
+                }
+            },
+            splitLine: {
+                lineStyle: {
+                    color: '#17367c'
+                }
             }
-        },
-
+        }],
         series: [{
-
+            name: '用电',
             type: 'bar',
-            data: [51, 40, 36, 40, 43, 50, 49, 54],
-            itemStyle: {
+            barWidth: 20,
+            data: yAxisData,
+            label: {
                 normal: {
-                    color: "rgb(47,161,47)",//柱状图的背景颜色
-                    barBorderRadius: 19
-
+                    show: true,
+                    position: 'insideRight',
+                    textStyle: {
+                        color: 'blue', //color of value
+                        fontSize: 18,
+                    }
                 }
             },
-            barWidth: 20,  //柱状图宽度
-            //barGap: '10%'  //设置同一类中两个柱状图的距
+            itemStyle: {
 
-
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                        offset: 0,
+                        color: '#0590eb' // 0% 处的颜色
+                    }, {
+                        offset: 1,
+                        color: '#08e3f1' // 100% 处的颜色
+                    }], false),
+                    barBorderRadius: [15, 15, 15, 15],
+                    shadowColor: 'rgba(0,0,0,0.1)',
+                    shadowBlur: 3,
+                    shadowOffsetY: 3
+                }
+            }
         }]
     };
     myChart.setOption(option);
@@ -148,124 +201,99 @@
 
     /*下中间曲线图*/
     var xz = echarts.init(document.getElementById('xzhong'));
-    var colors = ['#ff3c3c', '#ffe53d', '#19ff00'];
-    option1 = {
-        color: colors, //默认值
 
+    option1 = {
+
+        legend: {
+            data: ['天桥大院', '航空邮件处理中心', '永安路大院', '新顺邮件处理中心', '北京站邮件处理中心', '北京国际邮件处理中心', '北京西站邮件处理中心', '北京综合邮件处理中心'],
+            x: 'center',
+            // y 设置垂直安放位置，默认全图顶端，可选值：'top' ¦ 'bottom' ¦ 'center' ¦ {number}（y坐标，单位px）
+            y: 'top',
+            textStyle: {
+                color: '#fff',  // 图例文字颜色
+                fontSize: 14,
+            },
+        },
         tooltip: {
             trigger: 'axis',
             axisPointer: {
-                type: 'cross'
+                type: 'cross',
+                label: {
+                    backgroundColor: '#6a7985'
+                }
             }
-        },
-        legend: {
-            y: '0%',
-            textStyle: {
-                fontSize: 14,//字体大小
-                color: '#ffffff'//字体颜色
-            },
-            data: ['天桥大院', '航空邮件处理中心', '永安路大院', '新顺邮件处理中心', '北京站邮件处理中心', '北京国际邮件处理中心', '北京西站邮件处理中心', '北京综合邮件处理中心']
         },
         grid: {
-            top: 80,
+            top: 25,
             bottom: 50,
             left: "40",
-            right: "20",
+            right: "40",
         },
-        xAxis: [
-            {
-                type: 'category',
-                axisLine: {
-                    onZero: false,
-                    lineStyle: {
-                        color: "#00"
-                    }
-                },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            axisLine: {
+                onZero: false,
+                lineStyle: {
+                    color: "#fff"
+                }
+            },
 
-                data: ['2016-1', '2016-2', '2016-3', '2016-4', '2016-5', '2016-6', '2016-7', '2016-8', '2016-9', '2016-10', '2016-11', '2016-12']
-            },
-            {
-                type: 'category',
-                axisLine: {
-                    lineStyle: {
-                        color: "#000"
-                    }
-                },
-                data: []
-            },
-            {
-                type: 'category',
-                axisLine: {
-                    onZero: false,
-                    lineStyle: {
-                        color: "#000"
-                    }
-                },
 
-                data: []
-            }
-        ],
-        yAxis: [
-            {
-                type: 'value',
-                axisLine: {
-                    onZero: false,
-                    lineStyle: {
-                        color: "#fff"
-                    }
-                },
-                splitLine:{
-                    show: false
-                },//去除网格线
-            }
-        ],
-        series: [
-            {
-                name: '北京综合邮件处理中心',
-                type: 'line',
-                xAxisIndex: 2,
-                smooth: true,
-                data: [20.9, 1.9, 7.0, 22.4, 121.7, 160.7, 75.6, 82.2, 38.7, 12.8, 6.0, 172.3]
+            data: ['2016-1', '2016-2', '2016-3', '2016-4', '2016-5', '2016-6', '2016-7', '2016-8', '2016-9', '2016-10', '2016-11', '2016-12']
+        },
+        yAxis: {
+            type: 'value',
+            axisLine: {
+                onZero: false,
+                lineStyle: {
+                    color: "#fff"
+                }
             },
+            splitLine:{
+                show: false
+            },//去除网格线
+
+        },
+        series: [  {
+            name: '北京综合邮件处理中心',
+            type: 'line',
+            smooth: true,
+            data: [20.9, 1.9, 7.0, 22.4, 121.7, 160.7, 75.6, 82.2, 38.7, 12.8, 6.0, 172.3]
+        },
             {
                 name: '北京西站邮件处理中心',
                 type: 'line',
-                xAxisIndex: 2,
                 smooth: true,
                 data: [60.9, 1.9, 7.0, 22.4, 21.7, 60.7, 75.6, 82.2, 38.7, 12.8, 6.0, 72.3]
             },
             {
                 name: '北京国际邮件处理中心',
                 type: 'line',
-                xAxisIndex: 2,
                 smooth: true,
                 data: [90.9, 1.9, 7.0, 122.4, 21.7, 160.7, 75.6, 82.2, 38.7, 12.8, 6.0, 72.3]
             },
             {
                 name: '北京站邮件处理中心',
                 type: 'line',
-                xAxisIndex: 2,
                 smooth: true,
                 data: [30.9, 100.9, 170.0, 22.4, 121.7, 60.7, 75.6, 92.2, 38.7, 12.8, 130.0, 72.3]
             },
             {
                 name: '新顺邮件处理中心',
                 type: 'line',
-                xAxisIndex: 2,
                 smooth: true,
-                data: [60.9, 11.9, 125.0, 22.4, 61.7, 90.7, 25.6, 82.2, 38.7, 120.8, 6.0, 72.3]
+                data: [160.9, 11.9, 125.0, 22.4, 61.7, 90.7, 25.6, 82.2, 38.7, 120.8, 6.0, 72.3]
             },
             {
                 name: '永安路大院',
                 type: 'line',
-                xAxisIndex: 2,
                 smooth: true,
                 data: [180.9, 1.9, 78.0, 22.4, 123.7, 60.7, 25.6, 82.2, 38.7, 12.8, 89.0, 72.3]
             },
             {
                 name: '天桥大院',
                 type: 'line',
-                xAxisIndex: 1,
                 smooth: true,
                 data: [100.6, 100.9, 20.0, 76.4, 48.7, 20.7, 75.6, 142.2, 78.7, 180.8, 16.0, 92.3]
             },
@@ -274,8 +302,9 @@
                 type: 'line',
                 smooth: true,
                 data: [0.9, 20.9, 40.1, 10.7, 30.3, 60.2, 90.6, 60.6, 80.4, 70.4, 20.3, 30.7]
-            }
-        ]
+            },
+        ],
+        color:['#0379FF', '#FEA501', '#13E1E1']
     };
     xz.setOption(option1)
 
