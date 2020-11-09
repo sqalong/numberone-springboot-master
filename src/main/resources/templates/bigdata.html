@@ -39,20 +39,32 @@
 
     <div class="row">
         <div class="col-sm-3" style="border:solid 1px #1e30d4; height: 380px">
-            <div>
-                <!--            <h4>用能排名</h4>-->
-                <div class="btn-group btn-group-sm" align="left">
-                        <button type="button" class="btn btn-default">水</button>
-                        <button type="button" class="btn btn-default">电</button>
-                        <button type="button" class="btn btn-default">气</button>
+            <div class="row">
+                <div class="col-sm-8"><h4>用能排名</h4></div>
+
+                <div class="btn-group col-sm-4">
+                    <button type="button" class="btn btn-link" style="color: #fff;">水</button>
+                    <button type="button" class="btn btn-link" style="color: #fff;">电</button>
+                    <button type="button" class="btn btn-link" style="color: #fff;">气</button>
                 </div>
             </div>
-            <div id="xzuo" style="width: 480px;height: 355px"></div>
+            <div id="xzuo" style="width: 480px;height: 355px">
+
+            </div>
         </div>
         <div class="col-sm-6" style="border:solid 1px #ee0808; height: 380px">
-            <div id="xzhong" style="width: 980px;height: 380px"></div>
+            <div class="row">
+                <div class="col-sm-9"><h4>用能对比曲线</h4></div>
+                <div class="btn-group col-sm-3">
+                    <button type="button" class="btn btn-link" style="color: #fff;">水</button>
+                    <button type="button" class="btn btn-link" style="color: #fff;">电</button>
+                    <button type="button" class="btn btn-link" style="color: #fff;">气</button>
+                </div>
+            </div>
+                <div id="xzhong" style="width: 980px;height: 362px"></div>
+
         </div>
-        <div class="col-sm-3"  style="border:solid 1px #1e4bd4; height: 380px">
+        <div class="col-sm-3" style="border:solid 1px #1e4bd4; height: 380px">
             减少煤使用（吨）
             <div id="one" style="width: 480px;height: 360px;"></div>
         </div>
@@ -73,7 +85,7 @@
         },
         tooltip: {},
         legend: {
-            data:['销量']
+            data: ['销量']
         },
         xAxis: {
             show: false
@@ -81,7 +93,7 @@
         },
 
         yAxis: {
-            data: ['天桥大院', '航空邮件处理中心', '永安路大院', '新顺邮件处理中心','北京站邮件处理中心','北京国际邮件处理中心','北京西站邮件处理中心','北京综合邮件处理中心'],
+            data: ['天桥大院', '航空邮件处理中心', '永安路大院', '新顺邮件处理中心', '北京站邮件处理中心', '北京国际邮件处理中心', '北京西站邮件处理中心', '北京综合邮件处理中心'],
             axisLine: {
                 //隐藏y轴线
                 show: false
@@ -117,10 +129,10 @@
         series: [{
 
             type: 'bar',
-            data: [51, 40, 36, 40, 43, 50,49,54],
+            data: [51, 40, 36, 40, 43, 50, 49, 54],
             itemStyle: {
                 normal: {
-                    color: "rgb(47,161,47)" ,//柱状图的背景颜色
+                    color: "rgb(47,161,47)",//柱状图的背景颜色
                     barBorderRadius: 19
 
                 }
@@ -136,91 +148,75 @@
 
     /*下中间曲线图*/
     var xz = echarts.init(document.getElementById('xzhong'));
-    var colors = ['#5793f3', '#d14a61', '#675bba'];
+    var colors = ['#ff3c3c', '#ffe53d', '#19ff00'];
     option1 = {
         color: colors, //默认值
 
         tooltip: {
-            trigger: 'none', //表示没有触发器
+            trigger: 'axis',
             axisPointer: {
                 type: 'cross'
             }
         },
         legend: {
-            data:['天桥大院', '航空邮件处理中心', '永安路大院', '新顺邮件处理中心','北京站邮件处理中心','北京国际邮件处理中心','北京西站邮件处理中心','北京综合邮件处理中心']
+            y: '0%',
+            textStyle: {
+                fontSize: 14,//字体大小
+                color: '#ffffff'//字体颜色
+            },
+            data: ['天桥大院', '航空邮件处理中心', '永安路大院', '新顺邮件处理中心', '北京站邮件处理中心', '北京国际邮件处理中心', '北京西站邮件处理中心', '北京综合邮件处理中心']
         },
         grid: {
-            top: 70,
-            bottom: 50
+            top: 80,
+            bottom: 50,
+            left: "40",
+            right: "20",
         },
         xAxis: [
             {
                 type: 'category',
-                axisTick: {
-                    alignWithLabel: true
-                },
                 axisLine: {
                     onZero: false,
                     lineStyle: {
-                        color: colors[2]
+                        color: "#00"
                     }
                 },
-                axisPointer: {
-                    label: {
-                        formatter: function (params) {
-                            return '降水量  ' + params.value
-                                + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
-                        }
-                    }
-                },
+
                 data: ['2016-1', '2016-2', '2016-3', '2016-4', '2016-5', '2016-6', '2016-7', '2016-8', '2016-9', '2016-10', '2016-11', '2016-12']
             },
             {
                 type: 'category',
-                axisTick: {
-                    alignWithLabel: true
-                },
                 axisLine: {
-                    onZero: false,
                     lineStyle: {
-                        color: colors[1]
+                        color: "#000"
                     }
                 },
-                axisPointer: {
-                    label: {
-                        formatter: function (params) {
-                            return '降水量  ' + params.value
-                                + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
-                        }
-                    }
-                },
-                data: ['2016-1', '2016-2', '2016-3', '2016-4', '2016-5', '2016-6', '2016-7', '2016-8', '2016-9', '2016-10', '2016-11', '2016-12']
+                data: []
             },
             {
                 type: 'category',
-                axisTick: {
-                    alignWithLabel: true
-                },
                 axisLine: {
                     onZero: false,
                     lineStyle: {
-                        color: colors[0]
+                        color: "#000"
                     }
                 },
-                axisPointer: {
-                    label: {
-                        formatter: function (params) {
-                            return '降水量  ' + params.value
-                                + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
-                        }
-                    }
-                },
-                data: ['2015-1', '2015-2', '2015-3', '2015-4', '2015-5', '2015-6', '2015-7', '2015-8', '2015-9', '2015-10', '2015-11', '2015-12']
+
+                data: []
             }
         ],
         yAxis: [
             {
-                type: 'value'
+                type: 'value',
+                axisLine: {
+                    onZero: false,
+                    lineStyle: {
+                        color: "#fff"
+                    }
+                },
+                splitLine:{
+                    show: false
+                },//去除网格线
             }
         ],
         series: [
@@ -284,15 +280,14 @@
     xz.setOption(option1)
 
 
-
     //减少煤使用图表
-    var myChart=echarts.init(document.getElementById('one'));
-    var option={
+    var myChart = echarts.init(document.getElementById('one'));
+    var option = {
         xAxis: {
             type: 'category',
-            axisLine:{
-                lineStyle:{
-                    color:'#FFF'
+            axisLine: {
+                lineStyle: {
+                    color: '#FFF'
                 }
             },
             data: ['天桥大院', '航空邮件处理中心', '永安路大院', '新顺邮件处理中心', '北京站邮件处理中心',
@@ -330,7 +325,6 @@
     myChart.setOption(option);
 
 
-
     //减少二氧化碳排放图表
     var myChart = echarts.init(document.getElementById('globe'));
     var option = {
@@ -349,7 +343,7 @@
             type: 'liquidFill',
             radius: '80px',
             data: [0.66],
-            center:['55%','20%'],
+            center: ['55%', '20%'],
             color: ['#87CEFA'], // 水波颜色
             label: {
                 show: false //百分号
@@ -365,11 +359,11 @@
             backgroundStyle: {
                 color: '#fff' // 球内背景色
             }
-        },{
+        }, {
             type: 'liquidFill',
             radius: '80px',
             data: [0.36],
-            center:['10%','20%'],
+            center: ['10%', '20%'],
             color: ['#87CEFA'], // 水波颜色
             label: {
                 show: false //百分号
@@ -385,11 +379,11 @@
             backgroundStyle: {
                 color: '#fff' // 球内背景色
             }
-        },{
+        }, {
             type: 'liquidFill',
             radius: '80px',
             data: [0.12],
-            center:['25%','20%'],
+            center: ['25%', '20%'],
             color: ['#87CEFA'], // 水波颜色
             label: {
                 show: false //百分号
@@ -405,11 +399,11 @@
             backgroundStyle: {
                 color: '#fff' // 球内背景色
             }
-        },{
+        }, {
             type: 'liquidFill',
             radius: '80px',
             data: [0.53],
-            center:['40%','20%'],
+            center: ['40%', '20%'],
             color: ['#87CEFA'], // 水波颜色
             label: {
                 show: false //百分号
@@ -425,11 +419,11 @@
             backgroundStyle: {
                 color: '#fff' // 球内背景色
             }
-        },{
+        }, {
             type: 'liquidFill',
             radius: '80px',
             data: [0.53],
-            center:['10%','45%'],
+            center: ['10%', '45%'],
             color: ['#87CEFA'], // 水波颜色
             label: {
                 show: false //百分号
@@ -445,11 +439,11 @@
             backgroundStyle: {
                 color: '#fff' // 球内背景色
             }
-        },{
+        }, {
             type: 'liquidFill',
             radius: '80px',
             data: [0.53],
-            center:['25%','45%'],
+            center: ['25%', '45%'],
             color: ['#87CEFA'], // 水波颜色
             label: {
                 show: false //百分号
@@ -465,11 +459,11 @@
             backgroundStyle: {
                 color: '#fff' // 球内背景色
             }
-        },{
+        }, {
             type: 'liquidFill',
             radius: '80px',
             data: [0.53],
-            center:['40%','45%'],
+            center: ['40%', '45%'],
             color: ['#87CEFA'], // 水波颜色
             label: {
                 show: false //百分号
@@ -485,11 +479,11 @@
             backgroundStyle: {
                 color: '#fff' // 球内背景色
             }
-        },{
+        }, {
             type: 'liquidFill',
             radius: '80px',
             data: [0.53],
-            center:['55%','45%'],
+            center: ['55%', '45%'],
             color: ['#87CEFA'], // 水波颜色
             label: {
                 show: false //百分号
@@ -510,8 +504,6 @@
     myChart.setOption(option);
 
 
-
-
     //用能占比图表
     var myChart = echarts.init(document.getElementById('main'));
     option = {
@@ -525,7 +517,7 @@
                 name: '访问来源',
                 type: 'pie',
                 radius: ['40%', '50%'],
-                center: [200,170],
+                center: [200, 170],
                 data: [
                     {value: 335, name: '天桥大院'},
                     {value: 310, name: '航空邮件处理中心'},
