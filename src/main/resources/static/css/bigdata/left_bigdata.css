@@ -1,0 +1,67 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+}
+.image{
+    list-style: none;
+}
+.box{
+    width: 900px;
+    height: 605px;
+    position: relative;
+    margin: 0px auto;
+}
+.image li{
+    width: 100%;
+    height: 454px;
+    float: left;
+    position: absolute;
+    display: none;
+}
+.num{
+    position: absolute;
+    list-style: none;
+    cursor: pointer;
+    bottom: 20px;
+    left: 430px;
+}
+.num li{
+    float: left;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: gray;
+    margin: 0 4px;
+    text-align: center;
+    line-height: 20px;
+}
+.num .current{
+    background-color: red;
+}
+.arrow{
+    height: 60px;
+    width: 30px;
+    position: absolute;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    opacity: 0.5;
+    font-size: 20px;
+    text-align: center;
+    line-height: 60px;
+    top: 197px;
+    display: none;
+}
+.left{
+    left: 0;
+}
+.right{
+    right: 0;
+}
+img{
+    width: 100%;
+    height: 580px;
+}
