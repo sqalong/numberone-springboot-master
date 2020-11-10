@@ -13,7 +13,7 @@
 
 
     <select id="selectWaterList" parameterType="Water" resultMap="WaterResult">
-        select id, name, value from water
+        select id, name, value from water ORDER BY value DESC
     </select>
 
 

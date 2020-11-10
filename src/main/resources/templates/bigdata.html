@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../static/css/bigdata/left_bigdata.css" th:href="@{/css/bigdata/left_bigdata.css}" />
 
 </head>
-<body>
+<body onload="utr()">
 <div style="background-image: url('/back1.png'); color: #f5f5f5" th:src="@{/back1.png}">
 
     <!--整个页面布局-->
@@ -83,9 +83,9 @@
                 <div class="col-sm-8"><h4>用能排名</h4></div>
 
                 <div class="btn-group col-sm-4">
-                    <button type="button" class="btn btn-link" style="color: #fff;">水</button>
-                    <button type="button" class="btn btn-link" style="color: #fff;">电</button>
-                    <button type="button" class="btn btn-link" style="color: #fff;">气</button>
+                    <button type="button" class="btn btn-link" style="color: #fff;" onclick="utr('water')">水</button>
+                    <button type="button" class="btn btn-link" style="color: #fff;" onclick="utr('electric')">电</button>
+                    <button type="button" class="btn btn-link" style="color: #fff;" onclick="utr('gas')">气</button>
                 </div>
             </div>
             <div id="xzuo" style="width: 480px;height: 355px">
@@ -113,135 +113,141 @@
 
 </body>
 <script type="text/javascript">
+
     //用能排名图表
 
-
-
-    var myChart = echarts.init(document.getElementById('xzuo'));
-    var price = "/system/water";
-    var xAxisData = [];
-    var yAxisData = [];
-    $.ajax({
-        type: "post",
-        url: price+"/list",
-        dataType: "json",
-        async: false,
-        success: function (result) {
-
-            for (var i = 0; i < result.length; i++) {
-                xAxisData.push(result[i].name);
-                yAxisData.push(result[i].value);
-            }
-
-        },
-        error: function (errorMsg) {
-            alert("获取后台数据失败！");
+    function utr(ss){
+        var myChart = echarts.init(document.getElementById('xzuo'));
+        var va = "water";
+        if(ss){
+             va = ss;
         }
-    })
-    var option = {
+        var price = "/system/"+va+"/list";
+        var xAxisData = [];
+        var yAxisData = [];
+        $.ajax({
+            type: "post",
+            url: price,
+            dataType: "json",
+            async: false,
+            success: function (result) {
 
-        tooltip: {
-            trigger: 'axis',
-            backgroundColor: 'rgba(255,255,255,0.8)',
-            extraCssText: 'box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);',
-            textStyle: {
-                color: '#6a717b',
-            },
-
-        },
-        grid: {
-            //设置图标距离
-            top: "-0",
-            left: "200",
-            right: "20",
-            bottom: "20"
-        },
-        yAxis: [{
-            type: 'category',
-            data: xAxisData,
-            inverse: true,
-            axisTick: {
-                alignWithLabel: true,
-                show: false
-
+                for (var i = 0; i < result.length; i++) {
+                    xAxisData.push(result[i].name);
+                    yAxisData.push(result[i].value);
+                }
 
             },
-            axisLabel: {
-                margin: 10,
-                textStyle: {
-                    fontSize: 18,
-                    color: 'white',
-                    show: false,
-                }
-            },
-            axisLine: {
-                lineStyle: {
-                    color: '#2548ac'
-                }
-            },
-
-        }],
-        xAxis: [{
-            type: 'value',
-            axisLabel: {
-                margin: 10,
-                interval: 1, //横轴信息全部显示
-                rotate: -15, //-15度角倾斜显示
-                textStyle: {
-                    fontSize: 18,
-                    color: 'white',
-                }
-            },
-            axisLine: {
-                lineStyle: {
-                    color: '#192469'
-                }
-            },
-            splitLine: {
-                lineStyle: {
-                    color: '#17367c'
-                }
+            error: function (errorMsg) {
+                alert("获取后台数据失败！");
             }
-        }],
-        series: [{
-            name: '用电',
-            type: 'bar',
-            barWidth: 20,
-            data: yAxisData,
-            label: {
-                normal: {
-                    show: true,
-                    position: 'insideRight',
+        })
+        var option = {
+
+            tooltip: {
+                trigger: 'axis',
+                backgroundColor: 'rgba(255,255,255,0.8)',
+                extraCssText: 'box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);',
+                textStyle: {
+                    color: '#6a717b',
+                },
+
+            },
+            grid: {
+                //设置图标距离
+                top: "-0",
+                left: "200",
+                right: "20",
+                bottom: "20"
+            },
+            yAxis: [{
+                type: 'category',
+                data: xAxisData,
+                inverse: true,
+                axisTick: {
+                    alignWithLabel: true,
+                    show: false
+
+
+                },
+                axisLabel: {
+                    margin: 10,
                     textStyle: {
-                        color: 'blue', //color of value
                         fontSize: 18,
+                        color: 'white',
+                        show: false,
+                    }
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#2548ac'
+                    }
+                },
+
+            }],
+            xAxis: [{
+                type: 'value',
+                axisLabel: {
+                    margin: 10,
+                    interval: 1, //横轴信息全部显示
+                    rotate: -15, //-15度角倾斜显示
+                    textStyle: {
+                        fontSize: 18,
+                        color: 'white',
+                    }
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#192469'
+                    }
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: '#17367c'
                     }
                 }
-            },
-            itemStyle: {
+            }],
+            series: [{
+                name: '用电',
+                type: 'bar',
+                barWidth: 20,
+                data: yAxisData,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'insideRight',
+                        textStyle: {
+                            color: 'blue', //color of value
+                            fontSize: 18,
+                        }
+                    }
+                },
+                itemStyle: {
 
-                normal: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
-                        offset: 0,
-                        color: '#0590eb' // 0% 处的颜色
-                    }, {
-                        offset: 1,
-                        color: '#08e3f1' // 100% 处的颜色
-                    }], false),
-                    barBorderRadius: [15, 15, 15, 15],
-                    shadowColor: 'rgba(0,0,0,0.1)',
-                    shadowBlur: 3,
-                    shadowOffsetY: 3
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                            offset: 0,
+                            color: '#0590eb' // 0% 处的颜色
+                        }, {
+                            offset: 1,
+                            color: '#08e3f1' // 100% 处的颜色
+                        }], false),
+                        barBorderRadius: [15, 15, 15, 15],
+                        shadowColor: 'rgba(0,0,0,0.1)',
+                        shadowBlur: 3,
+                        shadowOffsetY: 3
+                    }
                 }
-            }
-        }]
-    };
-    myChart.setOption(option);
+            }]
+        };
+        myChart.setOption(option);
+
+    }
+
 
 
     /*下中间曲线图*/
     var xz = echarts.init(document.getElementById('xzhong'));
-
     option1 = {
 
         legend: {
@@ -605,7 +611,9 @@
                     }
                 }
             }
-        ]
+        ],
+        color: ['rgb(153, 93, 129)','rgb(248, 171, 157)','rgb(235, 130, 88)','rgb(216, 220, 106)','rgb(102, 137, 161)','rgb(92, 175, 178)','rgb(246, 0, 22)','rgb(38, 206, 214)']
+
     };
     myChart.setOption(option);
 

@@ -13,7 +13,7 @@
 
 
     <select id="selectGasList" parameterType="Gas" resultMap="GasResult">
-        select id, name, value from gas
+        select id, name, value from gas ORDER BY value DESC
     </select>
 
 

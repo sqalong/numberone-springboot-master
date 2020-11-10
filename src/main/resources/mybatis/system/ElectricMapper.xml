@@ -13,7 +13,7 @@
 
 
     <select id="selectElectricList" parameterType="Electric" resultMap="ElectricResult">
-        select id, name, value from electric
+        select id, name, value from electric ORDER BY value DESC
     </select>
 
 
