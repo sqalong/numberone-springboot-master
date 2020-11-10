@@ -11,6 +11,7 @@
             th:src="@{/js/echarts-liquidfill.js}"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"
             th:src="@{/js/jquery.min.js}"></script>
+    <link rel="stylesheet" href="../static/css/bigdata/left_bigdata.css" th:href="@{/css/bigdata/left_bigdata.css}" />
 
 </head>
 <body>
@@ -26,7 +27,22 @@
         </div>
         <div class="col-sm-6" style="border:solid 3px #44ff00; height: 700px">
             <div style="border:solid 1px #0022ff; height: 80px">标题</div>
-            <div style="border:solid 1px #a0a2b8; height: 615px">地图</div>
+            <div style="border:solid 1px #a0a2b8; height: 615px">
+                <div class="box">
+                    <ul class="image">
+                        <li><img src="../static/img/img2.jpg" th:src="@{/img/img2.jpg}"/></li>
+                        <li><img src="../static/img/img1.jpg" th:src="@{/img/img1.jpg}"/></li>
+                        <li><img src="../static/img/img3.jpg" th:src="@{/img/img3.jpg}"/></li>
+                    </ul>
+                    <ul class="num">
+                        <li class='current'>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                    </ul>
+                    <div class="left arrow"><</div>
+                    <div class="right arrow">></div>
+                </div>
+            </div>
 
         </div>
         <div class="col-sm-3" style="border:solid 3px #f00; height: 700px">
@@ -568,6 +584,73 @@
         ]
     };
     myChart.setOption(option);
+
+
+    //地图轮播事件
+    var i=0,timer;
+    var sum = $(".image li").length;
+    $(function(){
+        $(".image li").eq(0).show();//图片li显示
+        $(".box").hover(function(){//鼠标在按钮上事件
+            $(".arrow").show();//切换按钮显示
+            clearInterval(timer);//停止计时器
+        },function(){
+            $(".arrow").hide();//切换按钮隐藏
+            iLunbo();//自动播放事件
+        })
+        iLunbo();
+
+        $(".arrow").hover(function(){//鼠标在按钮上事件
+            clearInterval(timer);
+        });
+        /*左箭头控制轮播*/
+        $(".left").click(function(){
+            clearInterval(timer);
+            if(i==0){
+                i=sum;
+            }
+            i--;
+            startLunbo();
+            iLunbo();
+        });
+
+        /*右箭头控制轮播*/
+        $(".right").click(function(){
+            clearInterval(timer);
+            if(i==sum-1){
+                i=-1;
+            }
+            i++;
+            startLunbo();
+            iLunbo();
+        });
+
+        /*提示信息变换*/
+        $(".num>li").hover(function(){
+            clearInterval(timer);
+            i=$(this).index();
+            console.log(i);
+            startLunbo();
+        });
+    });
+    /*自动轮播*/
+    function iLunbo(){
+        timer = setInterval(function(){
+            i++;
+            if(i==sum-1){
+                i=-1;
+            }
+            startLunbo();
+        },5000)
+    }
+    /*图片轮播和提示信息*/
+    function startLunbo(){
+        if(i==$(".num li").length){
+            i=0;
+        }
+        $(".image>li").eq(i).fadeIn().siblings().fadeOut();
+        $(".num>li").eq(i).addClass("current").siblings().removeClass("current");
+    }
 
 </script>
 </html>
