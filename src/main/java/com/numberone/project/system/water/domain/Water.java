@@ -30,6 +30,9 @@ public class Water
 
     private String value;
 
+    private String timeid;
+
+
     public int getId() {
         return id;
     }
@@ -54,12 +57,22 @@ public class Water
         this.value = value;
     }
 
-    public Water() {
+    public String getTimeid() {
+        return timeid;
     }
 
-    public Water(int id, String name, String value) {
+    public void setTimeid(String timeid) {
+        this.timeid = timeid;
+    }
+
+
+    public Water(int id, String name, String value, String timeid) {
         this.id = id;
         this.name = name;
         this.value = value;
+        this.timeid = timeid;
+    }
+
+    public Water() {
     }
 }

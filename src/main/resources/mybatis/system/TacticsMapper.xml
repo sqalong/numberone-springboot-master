@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.numberone.project.system.tactics.mapper.TacticsMapper">
+    
+    <resultMap type="Tactics" id="TacticsResult">
+        <result property="id"    column="id"    />
+        <result property="value"    column="value"    />
+    </resultMap>
+
+    <sql id="selectTacticsVo">
+        select id, value from tactics
+    </sql>
+
+    <select id="selectTacticsList" parameterType="Tactics" resultMap="TacticsResult">
+        <include refid="selectTacticsVo"/>
+        <where>  
+            <if test="value != null  and value != ''"> and value = #{value}</if>
+        </where>
+    </select>
+    
+    <select id="selectTacticsById" parameterType="Long" resultMap="TacticsResult">
+        <include refid="selectTacticsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTactics" parameterType="Tactics" useGeneratedKeys="true" keyProperty="id">
+        insert into tactics
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="value != null  and value != ''">value,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="value != null  and value != ''">#{value},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTactics" parameterType="Tactics">
+        update tactics
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="value != null  and value != ''">value = #{value},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTacticsById" parameterType="Long">
+        delete from tactics where id = #{id}
+    </delete>
+
+    <delete id="deleteTacticsByIds" parameterType="String">
+        delete from tactics where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

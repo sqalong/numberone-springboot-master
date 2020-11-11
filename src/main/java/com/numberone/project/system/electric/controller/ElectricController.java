@@ -30,9 +30,9 @@ public class ElectricController extends BaseController
     @ResponseBody
     public List<Electric> list() {
         List<Electric> list = ws.selectElectricList();
-        for(Electric w: list){
-            System.out.println("值:"+w.getValue()+"名:"+w.getName()+"id"+w.getId());
-        }
+//        for(Electric w: list){
+//            System.out.println("值:"+w.getValue()+"名:"+w.getName()+"id"+w.getId());
+//        }
 
         return list;
     }

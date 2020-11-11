@@ -11,101 +11,113 @@
             th:src="@{/js/echarts-liquidfill.js}"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"
             th:src="@{/js/jquery.min.js}"></script>
-    <link rel="stylesheet" href="../static/css/bigdata/left_bigdata.css" th:href="@{/css/bigdata/left_bigdata.css}" />
+    <link rel="stylesheet" href="../static/css/bigdata/left_bigdata.css" th:href="@{/css/bigdata/left_bigdata.css}"/>
 
 </head>
-<body onload="utr()">
+<body onload="utr(),proprotion()">
 <div style="background-image: url('/back1.png'); color: #f5f5f5" th:src="@{/back1.png}">
 
     <!--整个页面布局-->
-    <div class="row">
+    <div class="row" style="margin: 0px;padding: 10px 0px 5px 0px; ">
 
         <!--上左,,,用能汇总,用能占比-->
-        <div class="col-sm-3" style="border:solid 3px #ff0000; height: 700px">
+        <div class="col-sm-3" style="height: 700px ;padding-right: 0px">
 
             <!--用能汇总-->
-            <div style="border:solid 2px #ffd500;height: 348px">用能汇总</div>
+            <div style="border:solid 2px #FFFFFF;height: 348px ;margin-bottom: 10px">用能汇总</div>
 
             <!--用能占比-->
-            <div style="border:solid 2px #e50f0f;height: 348px">
-                用能占比
-                <div id="main" style="width: 600px;height: 400px;"></div>
+            <div style="height: 348px">
+                <div class="row" style="border:solid 2px #FFFFFF;margin: 0px;padding: 0px; height: 345px">
+                    <div class="col-sm-8"><h4>用能占比</h4></div>
+                    <div class="btn-group col-sm-4">
+                        <button type="button" class="btn btn-link" style="color: #fff;" onclick="proprotion('water')">水</button>
+                        <button type="button" class="btn btn-link" style="color: #fff;" onclick="proprotion('electric')">电</button>
+                        <button type="button" class="btn btn-link" style="color: #fff;" onclick="proprotion('gas')">气</button>
+                    </div>
+                    <div id="main" style="width: 430px;height: 310px;"></div>
+                </div>
+
             </div>
         </div>
 
         <!--上中,,,标题,地图-->
-        <div class="col-sm-6" style="border:solid 3px #44ff00; height: 700px">
+        <div class="col-sm-6" style=" height: 700px">
 
             <!--标题-->
-            <div style="border:solid 1px #0022ff; height: 80px">标题</div>
+            <div style="border:solid 2px #FFFFFF; height: 80px">标题</div>
 
             <!--地图-->
-            <div style="border:solid 1px #a0a2b8; height: 615px">
+            <div style="border:solid 2px #FFFFFF; height: 615px;margin-top: 10px">
 
                 <div id="map" style="width: 100%;height:600px;"></div>
-<!--                <div class="box">-->
-<!--                    <ul class="image">-->
-<!--                        <li><img src="../static/img/img2.jpg" th:src="@{/img/img2.jpg}"/></li>-->
-<!--                        <li><img src="../static/img/img1.jpg" th:src="@{/img/img1.jpg}"/></li>-->
-<!--                        <li><img src="../static/img/img3.jpg" th:src="@{/img/img3.jpg}"/></li>-->
-<!--                    </ul>-->
-<!--                    <ul class="num">-->
-<!--                        <li class='current'>1</li>-->
-<!--                        <li>2</li>-->
-<!--                        <li>3</li>-->
-<!--                    </ul>-->
-<!--                    <div class="left arrow"><</div>-->
-<!--                    <div class="right arrow">></div>-->
-<!--                </div>-->
+                <!--                <div class="box">-->
+                <!--                    <ul class="image">-->
+                <!--                        <li><img src="../static/img/img2.jpg" th:src="@{/img/img2.jpg}"/></li>-->
+                <!--                        <li><img src="../static/img/img1.jpg" th:src="@{/img/img1.jpg}"/></li>-->
+                <!--                        <li><img src="../static/img/img3.jpg" th:src="@{/img/img3.jpg}"/></li>-->
+                <!--                    </ul>-->
+                <!--                    <ul class="num">-->
+                <!--                        <li class='current'>1</li>-->
+                <!--                        <li>2</li>-->
+                <!--                        <li>3</li>-->
+                <!--                    </ul>-->
+                <!--                    <div class="left arrow"><</div>-->
+                <!--                    <div class="right arrow">></div>-->
+                <!--                </div>-->
             </div>
         </div>
 
         <!--上右,,,基本情况,减少排放污染物,减少二氧化碳排放-->
-        <div class="col-sm-3" style="border:solid 3px #f00; height: 700px">
+        <div class="col-sm-3" style="padding-left: 0px">
 
             <!--基本情况-->
-            <div style="border:solid 1px #1ed428; height: 138px">基本情况</div>
+            <div style="border:solid 2px #FFFFFF; height: 136px; margin-bottom: 10px">基本情况</div>
 
             <!--减少排放污染物-->
-            <div style="border:solid 1px #360303; height: 278px">减少排放污染物</div>
+            <div style="border:solid 2px #FFFFFF; height: 274px; margin-bottom: 10px">减少排放污染物</div>
 
             <!--减少二氧化碳排放-->
-            <div style="border:solid 1px #d000ff; height: 278px">
+            <div style="border:solid 2px #FFFFFF; height: 275px">
                 减少二氧化碳排放
-                <div id="globe" style="width: 600px;height: 400px;"></div>
+                <div id="globe" style="width: 430px;height: 250px;"></div>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-sm-3" style="border:solid 1px #1e30d4; height: 380px">
-            <div class="row">
-                <div class="col-sm-8"><h4>用能排名</h4></div>
-
-                <div class="btn-group col-sm-4">
-                    <button type="button" class="btn btn-link" style="color: #fff;" onclick="utr('water')">水</button>
-                    <button type="button" class="btn btn-link" style="color: #fff;" onclick="utr('electric')">电</button>
-                    <button type="button" class="btn btn-link" style="color: #fff;" onclick="utr('gas')">气</button>
+    <div class="row" style="margin: 10px 0px 10px 0px;padding-bottom: 15px;">
+        <div class="col-sm-3" style="padding-right: 0px">
+            <div style="border:solid 2px #FFFFFF;">
+                <div class="row">
+                    <div class="col-sm-8"><h4>用能排名</h4></div>
+                    <div class="btn-group col-sm-4">
+                        <button type="button" class="btn btn-link" style="color: #fff;" onclick="utr('water')">水</button>
+                        <button type="button" class="btn btn-link" style="color: #fff;" onclick="utr('electric')">电</button>
+                        <button type="button" class="btn btn-link" style="color: #fff;" onclick="utr('gas')">气</button>
+                    </div>
                 </div>
-            </div>
-            <div id="xzuo" style="width: 480px;height: 355px">
-
+                <div id="xzuo" style=" height: 300px"></div>
             </div>
         </div>
-        <div class="col-sm-6" style="border:solid 1px #ee0808; height: 380px">
-            <div class="row">
-                <div class="col-sm-10"><h4>用能对比曲线</h4></div>
-                <div class="btn-group col-sm-2">
-                    <button type="button" class="btn btn-link" style="color: #fff;">水</button>
-                    <button type="button" class="btn btn-link" style="color: #fff;">电</button>
-                    <button type="button" class="btn btn-link" style="color: #fff;">气</button>
+        <div class="col-sm-6">
+            <div style="border:solid 2px #FFFFFF;">
+                <div class="row">
+                    <div class="col-sm-10"><h4>用能对比曲线</h4></div>
+                    <div class="btn-group col-sm-2">
+                        <button type="button" class="btn btn-link" style="color: #fff;">水</button>
+                        <button type="button" class="btn btn-link" style="color: #fff;">电</button>
+                        <button type="button" class="btn btn-link" style="color: #fff;">气</button>
+                    </div>
                 </div>
+                <div id="xzhong" style="height: 300px"></div>
             </div>
-            <div id="xzhong" style="width: 980px;height: 362px"></div>
         </div>
-        <div class="col-sm-3" style="border:solid 1px #1e4bd4; height: 380px">
-            减少煤使用（吨）
-            <div id="one" style="width: 480px;height: 360px;"></div>
+        <div class="col-sm-3" style="padding-left: 0px">
+            <div style="border:solid 2px #FFFFFF; ">
+                <div><h4>减少煤使用（吨）</h4></div>
+                <div id="one" style="height: 300px;"></div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -115,14 +127,13 @@
 <script type="text/javascript">
 
     //用能排名图表
-
-    function utr(ss){
+    function utr(ss) {
         var myChart = echarts.init(document.getElementById('xzuo'));
         var va = "water";
-        if(ss){
-             va = ss;
+        if (ss) {
+            va = ss;
         }
-        var price = "/system/"+va+"/list";
+        var price = "/system/" + va + "/list";
         var xAxisData = [];
         var yAxisData = [];
         $.ajax({
@@ -167,8 +178,6 @@
                 axisTick: {
                     alignWithLabel: true,
                     show: false
-
-
                 },
                 axisLabel: {
                     margin: 10,
@@ -179,32 +188,23 @@
                     }
                 },
                 axisLine: {
-                    lineStyle: {
-                        color: '#2548ac'
-                    }
+                    show: false,
+
                 },
+
+
 
             }],
             xAxis: [{
                 type: 'value',
-                axisLabel: {
-                    margin: 10,
-                    interval: 1, //横轴信息全部显示
-                    rotate: -15, //-15度角倾斜显示
-                    textStyle: {
-                        fontSize: 18,
-                        color: 'white',
-                    }
+                axisLabel: {     //值的显示
+                    show: false
                 },
-                axisLine: {
-                    lineStyle: {
-                        color: '#192469'
-                    }
+                axisLine: {    //x轴是否显示
+                    show: false
                 },
-                splitLine: {
-                    lineStyle: {
-                        color: '#17367c'
-                    }
+                splitLine: {   //X轴网格线是否显示
+                    show: false
                 }
             }],
             series: [{
@@ -217,8 +217,8 @@
                         show: true,
                         position: 'insideRight',
                         textStyle: {
-                            color: 'blue', //color of value
-                            fontSize: 18,
+                            color: 'blue', //color of value字体颜色
+                            fontSize: 18,    //柱状图上的值大小
                         }
                     }
                 },
@@ -243,7 +243,6 @@
         myChart.setOption(option);
 
     }
-
 
 
     /*下中间曲线图*/
@@ -296,12 +295,12 @@
                     color: "#fff"
                 }
             },
-            splitLine:{
+            splitLine: {
                 show: false
             },//去除网格线
 
         },
-        series: [  {
+        series: [{
             name: '北京综合邮件处理中心',
             type: 'line',
             smooth: true,
@@ -350,7 +349,7 @@
                 data: [0.9, 20.9, 40.1, 10.7, 30.3, 60.2, 90.6, 60.6, 80.4, 70.4, 20.3, 30.7]
             },
         ],
-        color:['#0379FF', '#FEA501', '#13E1E1']
+        color: ['#0379FF', '#FEA501', '#13E1E1']
     };
     xz.setOption(option1)
 
@@ -358,6 +357,34 @@
     //减少煤使用图表
     var myChart = echarts.init(document.getElementById('one'));
     var option = {
+        tooltip: {
+            trigger: 'axis',	//tooltip触发条件 坐标轴
+            axisPointer: {
+                lineStyle: {
+                    color: '#57617B'	//显示竖线颜色
+                }
+            },
+            backgroundColor:'#05042C',	//tooltip背景色
+            borderColor:'#2BEDF6',		//tooltip边框颜色
+            borderWidth:2,
+            formatter: function (param) {	//自定义tooltip内容
+                var text = '';
+                text += '<div style="display:flex;flex-direction:row;">'+
+                    '<div style="background-color:#03D16D;height:auto;width:10px;margin-right:5px;"></div>'+
+                    '<div style="display:flex;flex-direction:column;">'+
+                    '<span>'+ param[0].value+'</span>'+
+                    '<span>'+ param[0].axisValue+'</span>'
+                '</div>'
+                '</div>'
+                return text;
+            }
+        },
+        grid: {
+            left: '0%',
+            right: '5%',
+            bottom: '1%',
+            containLabel: true
+        },
         xAxis: {
             type: 'category',
             axisLine: {
@@ -384,6 +411,15 @@
                     barBorderRadius: 30
                 },
                 normal: {
+                    label:{
+                        show:true,
+                        position:'top',
+                        textStyle:{
+                            color:'#ffffff',
+                            fontSize:16,
+                            rotate:30
+                        }
+                    },
                     barBorderRadius: 30,
                     color: new echarts.graphic.LinearGradient(
                         0, 0, 0, 1,
@@ -403,288 +439,302 @@
     //减少二氧化碳排放图表
     var myChart = echarts.init(document.getElementById('globe'));
     var option = {
-        title: {
-            textStyle: {
-                color: 'rgba(0, 0, 0, 0.45)',
-                fontWeight: 'normal',
-                fontSize: 10
-            },
-            subtextStyle: {
-                color: 'rgba(0, 0, 0, 0.85)',
-                fontSize: 20,
-            }
+        tooltip: {
+            trigger: 'item',
+            formatter: '{b}: {c} '
         },
         series: [{
-            type: 'liquidFill',
-            radius: '80px',
-            data: [0.66],
-            center: ['55%', '20%'],
-            color: ['#87CEFA'], // 水波颜色
+            type: 'pie',
+            radius: 65,
+            center: ['57%', '52%'],
+            avoidLabelOverlap: false,
             label: {
-                show: false //百分号
+                show: true,
+                position: 'center',
+                color: '#FFFFFF',
+                fontSize: 25
+
             },
-            outline: {
-                show: true,//边框是否显示
-                borderDistance: 1,//内边框间距
-                itemStyle: {
-                    borderColor: '#1890FF',//边框颜色
-                    borderWidth: 2//边框半径
-                }
+            labelLine: {
+                show: false
             },
-            backgroundStyle: {
-                color: '#fff' // 球内背景色
+            data: [{
+                value: 335,
+                name: '天桥大院'
+            }, ]
+        },
+            {
+                type: 'pie',
+                radius: [35],
+                center: ['15%', '30%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: true,
+                    position: 'center',
+                    color: '#FFFFFF',
+                    fontSize: 12
+                },
+                labelLine: {
+                    show: false
+                },
+
+                data: [{
+                    value: 335,
+                    name: '北京站邮政\n处理中心'
+                }, ]
+            },
+            {
+                type: 'pie',
+                radius: [33],
+                center: ['45%', '28%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: true,
+                    position: 'center',
+                    color: '#FFFFFF',
+                    fontSize: 10
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [{
+                    value: 310,
+                    name: '新顺邮件\n处理中心'
+                }, ]
+            }, {
+                type: 'pie',
+                radius: ['0%', '35%'],
+                center: ['75%', '28%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: true,
+                    position: 'center',
+                    color: '#FFFFFF',
+                    fontSize: 15
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [{
+                    value: 335,
+                    name: '航空邮件\n处理中心'
+                }, ]
+            }, {
+                type: 'pie',
+                radius: ['0%', '30%'],
+                center: ['29%', '55%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: true,
+                    position: 'center',
+                    color: '#FFFFFF',
+                    fontSize: 13
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [{
+                    value: 335,
+                    name: '永安路大院'
+                }, ]
+            }, {
+                type: 'pie',
+                radius: [45],
+                center: ['87%', '49%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: true,
+                    position: 'center',
+                    color: '#FFFFFF',
+                    fontSize: 15
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [{
+                    value: 234,
+                    name: '北京国际邮\n件处理中心'
+                }, ]
+            }, {
+                type: 'pie',
+                radius: ['0%', '25%'],
+                center: ['45%', '75%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: true,
+                    position: 'center',
+                    color: '#FFFFFF',
+                    fontSize: 10
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [{
+                    value: 135,
+                    name: '北京综合邮件\n处理中心'
+                }, ]
+            }, {
+                type: 'pie',
+                radius: ['0%', '23%'],
+                center: ['76%', '72%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: true,
+                    position: 'center',
+                    color: '#FFFFFF',
+                    fontSize: 10
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [{
+                    value: 335,
+                    name: '北京西站邮\n件处理中心'
+                }, ]
             }
-        }, {
-            type: 'liquidFill',
-            radius: '80px',
-            data: [0.36],
-            center: ['10%', '20%'],
-            color: ['#87CEFA'], // 水波颜色
-            label: {
-                show: false //百分号
-            },
-            outline: {
-                show: true,//边框是否显示
-                borderDistance: 1,//内边框间距
-                itemStyle: {
-                    borderColor: '#1890FF',//边框颜色
-                    borderWidth: 2//边框半径
-                }
-            },
-            backgroundStyle: {
-                color: '#fff' // 球内背景色
-            }
-        }, {
-            type: 'liquidFill',
-            radius: '80px',
-            data: [0.12],
-            center: ['25%', '20%'],
-            color: ['#87CEFA'], // 水波颜色
-            label: {
-                show: false //百分号
-            },
-            outline: {
-                show: true,//边框是否显示
-                borderDistance: 1,//内边框间距
-                itemStyle: {
-                    borderColor: '#1890FF',//边框颜色
-                    borderWidth: 2//边框半径
-                }
-            },
-            backgroundStyle: {
-                color: '#fff' // 球内背景色
-            }
-        }, {
-            type: 'liquidFill',
-            radius: '80px',
-            data: [0.53],
-            center: ['40%', '20%'],
-            color: ['#87CEFA'], // 水波颜色
-            label: {
-                show: false //百分号
-            },
-            outline: {
-                show: true,//边框是否显示
-                borderDistance: 1,//内边框间距
-                itemStyle: {
-                    borderColor: '#1890FF',//边框颜色
-                    borderWidth: 2//边框半径
-                }
-            },
-            backgroundStyle: {
-                color: '#fff' // 球内背景色
-            }
-        }, {
-            type: 'liquidFill',
-            radius: '80px',
-            data: [0.53],
-            center: ['10%', '45%'],
-            color: ['#87CEFA'], // 水波颜色
-            label: {
-                show: false //百分号
-            },
-            outline: {
-                show: true,//边框是否显示
-                borderDistance: 1,//内边框间距
-                itemStyle: {
-                    borderColor: '#1890FF',//边框颜色
-                    borderWidth: 2//边框半径
-                }
-            },
-            backgroundStyle: {
-                color: '#fff' // 球内背景色
-            }
-        }, {
-            type: 'liquidFill',
-            radius: '80px',
-            data: [0.53],
-            center: ['25%', '45%'],
-            color: ['#87CEFA'], // 水波颜色
-            label: {
-                show: false //百分号
-            },
-            outline: {
-                show: true,//边框是否显示
-                borderDistance: 1,//内边框间距
-                itemStyle: {
-                    borderColor: '#1890FF',//边框颜色
-                    borderWidth: 2//边框半径
-                }
-            },
-            backgroundStyle: {
-                color: '#fff' // 球内背景色
-            }
-        }, {
-            type: 'liquidFill',
-            radius: '80px',
-            data: [0.53],
-            center: ['40%', '45%'],
-            color: ['#87CEFA'], // 水波颜色
-            label: {
-                show: false //百分号
-            },
-            outline: {
-                show: true,//边框是否显示
-                borderDistance: 1,//内边框间距
-                itemStyle: {
-                    borderColor: '#1890FF',//边框颜色
-                    borderWidth: 2//边框半径
-                }
-            },
-            backgroundStyle: {
-                color: '#fff' // 球内背景色
-            }
-        }, {
-            type: 'liquidFill',
-            radius: '80px',
-            data: [0.53],
-            center: ['55%', '45%'],
-            color: ['#87CEFA'], // 水波颜色
-            label: {
-                show: false //百分号
-            },
-            outline: {
-                show: true,//边框是否显示
-                borderDistance: 1,//内边框间距
-                itemStyle: {
-                    borderColor: '#1890FF',//边框颜色
-                    borderWidth: 2//边框半径
-                }
-            },
-            backgroundStyle: {
-                color: '#fff' // 球内背景色
-            }
-        }]
+        ],
+        color: ['rgb(153, 93, 129)','rgb(248, 171, 157)','rgb(235, 130, 88)','rgb(216, 220, 106)','rgb(102, 137, 161)','rgb(92, 175, 178)','rgb(246, 0, 22)','rgb(38, 206, 214)']
     };
     myChart.setOption(option);
 
 
     //用能占比图表
-    var myChart = echarts.init(document.getElementById('main'));
-    option = {
-        tooltip: {
-            trigger: 'item',
-            formatter: '{a} <br/>{b} : {c} ({d}%)'
-        },
+    function proprotion(q) {
+        var myChart = echarts.init(document.getElementById('main'));
+        var va = "water";
+        if (q) {
+            va = q;
+        }
+        var price = "/system/" + va + "/list";
 
-        series: [
-            {
-                name: '访问来源',
-                type: 'pie',
-                radius: ['40%', '50%'],
-                center: [200, 170],
-                data: [
-                    {value: 335, name: '天桥大院'},
-                    {value: 310, name: '航空邮件处理中心'},
-                    {value: 234, name: '永安路大院'},
-                    {value: 135, name: '新顺邮件处理中心'},
-                    {value: 248, name: '北京站邮件处理中心'},
-                    {value: 948, name: '北京国际邮件中心'},
-                    {value: 448, name: '北京西站邮件处理中心'},
-                    {value: 152, name: '北京综合邮件处理中心'}
-                ],
-                emphasis: {
+        var datas = [];
+        $.ajax({
+            type: "post",
+            url: price,
+            dataType: "json",
+            async: false,
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    var m = {};
+                    m["value"] = result[i].value;
+                    m["name"] = result[i].name;
+                    datas.push(m);
+
+                }
+                // alert(datas);
+            },
+
+            error: function (errorMsg) {
+                alert("获取后台数据失败！");
+            }
+        })
+
+        option = {
+            tooltip: {
+                trigger: 'item',
+                formatter: '{b} : {c} ({d}%)'
+            },
+
+            series: [
+                {
+
+                    type: 'pie',
+                    radius: ['40%', '50%'],
+                    center: [200, 170],
+                    data: datas,
                     itemStyle: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        normal: {
+                            label: {
+                                textStyle: {
+                                    color: '#FFFFFF',
+                                    fontSize: 14,
+                                    fontWeight: 'bolder'
+                                }
+                            },
+                        }
+                    },
+
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
                     }
                 }
-            }
-        ],
-        color: ['rgb(153, 93, 129)','rgb(248, 171, 157)','rgb(235, 130, 88)','rgb(216, 220, 106)','rgb(102, 137, 161)','rgb(92, 175, 178)','rgb(246, 0, 22)','rgb(38, 206, 214)']
+            ],
+            color: ['rgb(153, 93, 129)', 'rgb(248, 171, 157)', 'rgb(235, 130, 88)', 'rgb(216, 220, 106)', 'rgb(102, 137, 161)', 'rgb(92, 175, 178)', 'rgb(246, 0, 22)', 'rgb(38, 206, 214)']
 
-    };
-    myChart.setOption(option);
+        };
+        myChart.setOption(option);
+    }
 
 
     //地图轮播事件
-    var i=0,timer;
-    var sum = $(".image li").length;
-    $(function(){
-        $(".image li").eq(0).show();//图片li显示
-        $(".box").hover(function(){//鼠标在按钮上事件
-            $(".arrow").show();//切换按钮显示
-            clearInterval(timer);//停止计时器
-        },function(){
-            $(".arrow").hide();//切换按钮隐藏
-            iLunbo();//自动播放事件
-        })
-        iLunbo();
-
-        $(".arrow").hover(function(){//鼠标在按钮上事件
-            clearInterval(timer);
-        });
-        /*左箭头控制轮播*/
-        $(".left").click(function(){
-            clearInterval(timer);
-            if(i==0){
-                i=sum;
-            }
-            i--;
-            startLunbo();
-            iLunbo();
-        });
-
-        /*右箭头控制轮播*/
-        $(".right").click(function(){
-            clearInterval(timer);
-            if(i==sum-1){
-                i=-1;
-            }
-            i++;
-            startLunbo();
-            iLunbo();
-        });
-
-        /*提示信息变换*/
-        $(".num>li").hover(function(){
-            clearInterval(timer);
-            i=$(this).index();
-            console.log(i);
-            startLunbo();
-        });
-    });
-    /*自动轮播*/
-    function iLunbo(){
-        timer = setInterval(function(){
-            i++;
-            if(i==sum-1){
-                i=-1;
-            }
-            startLunbo();
-        },5000)
-    }
-    /*图片轮播和提示信息*/
-    function startLunbo(){
-        if(i==$(".num li").length){
-            i=0;
-        }
-        $(".image>li").eq(i).fadeIn().siblings().fadeOut();
-        $(".num>li").eq(i).addClass("current").siblings().removeClass("current");
-    }
-
-
+    // var i=0,timer;
+    // var sum = $(".image li").length;
+    // $(function(){
+    //     $(".image li").eq(0).show();//图片li显示
+    //     $(".box").hover(function(){//鼠标在按钮上事件
+    //         $(".arrow").show();//切换按钮显示
+    //         clearInterval(timer);//停止计时器
+    //     },function(){
+    //         $(".arrow").hide();//切换按钮隐藏
+    //         iLunbo();//自动播放事件
+    //     })
+    //     iLunbo();
+    //
+    //     $(".arrow").hover(function(){//鼠标在按钮上事件
+    //         clearInterval(timer);
+    //     });
+    //     /*左箭头控制轮播*/
+    //     $(".left").click(function(){
+    //         clearInterval(timer);
+    //         if(i==0){
+    //             i=sum;
+    //         }
+    //         i--;
+    //         startLunbo();
+    //         iLunbo();
+    //     });
+    //
+    //     /*右箭头控制轮播*/
+    //     $(".right").click(function(){
+    //         clearInterval(timer);
+    //         if(i==sum-1){
+    //             i=-1;
+    //         }
+    //         i++;
+    //         startLunbo();
+    //         iLunbo();
+    //     });
+    //
+    //     /*提示信息变换*/
+    //     $(".num>li").hover(function(){
+    //         clearInterval(timer);
+    //         i=$(this).index();
+    //         console.log(i);
+    //         startLunbo();
+    //     });
+    // });
+    // /*自动轮播*/
+    // function iLunbo(){
+    //     timer = setInterval(function(){
+    //         i++;
+    //         if(i==sum-1){
+    //             i=-1;
+    //         }
+    //         startLunbo();
+    //     },5000)
+    // }
+    // /*图片轮播和提示信息*/
+    // function startLunbo(){
+    //     if(i==$(".num li").length){
+    //         i=0;
+    //     }
+    //     $(".image>li").eq(i).fadeIn().siblings().fadeOut();
+    //     $(".num>li").eq(i).addClass("current").siblings().removeClass("current");
+    // }
 
 
     //地图
@@ -698,6 +748,7 @@
         'color': '#0394d9',
         'latitude': 39.902506,
         'longitude': 116.32025
+
     },
         {
             'latitude': 39.818668,
@@ -729,20 +780,15 @@
         }
     ]
 
-    $.get(uploadedDataURL, function(geoJson) {
+    $.get(uploadedDataURL, function (geoJson) {
 
         echarts.registerMap(name, geoJson);
 
         myChart.setOption(option = {
             //地图配置
-            title: {
-                text: '北京',
-                link: 'http://echarts.baidu.com/',
-                subtext: '各区、县地图'
-            },
             tooltip: {
                 trigger: 'item',
-                formatter: function(params) {
+                formatter: function (params) {
                     var res = '';
                     res += params['data'].name + '</br>';
                     res += '用户数' + ' : ' + params['data'].value + '</br>';
@@ -751,9 +797,10 @@
                 //formatter: '{b}<br/>{c}'
             },
             geo: {
+                center:[116.32025,39.902506],
                 type: 'map',
                 roam: true,
-                zoom: 1.2,
+                zoom: 2,
                 label: {
                     normal: { //静态的时候展示样式
                         show: true, //是否显示地图省份得名称
@@ -786,11 +833,11 @@
                 rippleEffect: {
                     brushType: 'stroke' //波纹的绘制方式，可选 'stroke' 和 'fill'。
                 },
-                symbolSize: function(val, params) { //其中第一个参数 value 为 data 中的数据值。第二个参数params 是其它的数据项参数。
+                symbolSize: function (val, params) { //其中第一个参数 value 为 data 中的数据值。第二个参数params 是其它的数据项参数。
                     //标记的大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示宽和高，例如 [20, 10] 表示标记宽为20，高为10。
                     return 20;
                 },
-                data: mapData.map(function(itemOpt) {
+                data: mapData.map(function (itemOpt) {
                     return {
                         name: itemOpt.name,
                         value: [
@@ -817,8 +864,9 @@
         });
     });
     // 地图点击
-    myChart.on('click', function(e) {console.log(e)
-        if(e.name == 4) {
+    myChart.on('click', function (e) {
+        console.log(e)
+        if (e.name == 4) {
             parent.markClick();
         }
     })

@@ -21,6 +21,19 @@ public class Electric
 
     private String value;
 
+    private String timeid;
+
+
+    public Electric() {
+    }
+
+    public Electric(int id, String name, String value, String timeid) {
+        this.id = id;
+        this.name = name;
+        this.value = value;
+        this.timeid = timeid;
+    }
+
     public int getId() {
         return id;
     }
@@ -45,12 +58,11 @@ public class Electric
         this.value = value;
     }
 
-    public Electric() {
+    public String getTimeid() {
+        return timeid;
     }
 
-    public Electric(int id, String name, String value) {
-        this.id = id;
-        this.name = name;
-        this.value = value;
+    public void setTimeid(String timeid) {
+        this.timeid = timeid;
     }
 }

@@ -30,9 +30,9 @@ public class GasController extends BaseController
     @ResponseBody
     public List<Gas> list() {
         List<Gas> list = gas.selectGasList();
-        for(Gas w: list){
-            System.out.println("值:"+w.getValue()+"名:"+w.getName()+"id:"+w.getId());
-        }
+//        for(Gas w: list){
+//            System.out.println("值:"+w.getValue()+"名:"+w.getName()+"id:"+w.getId());
+//        }
 
         return list;
     }

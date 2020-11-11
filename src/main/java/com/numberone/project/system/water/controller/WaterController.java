@@ -32,9 +32,9 @@ public class WaterController extends BaseController
     public List<Water> list() {
         System.out.println("11111111111111111111111111111111111");
         List<Water> list = ws.selectWaterList();
-        for(Water w: list){
-            System.out.println(w.getValue());
-        }
+//        for(Water w: list){
+//            System.out.println(w.getValue());
+//        }
 
         return list;
     }

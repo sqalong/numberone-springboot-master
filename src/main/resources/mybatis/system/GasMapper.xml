@@ -13,7 +13,7 @@
 
 
     <select id="selectGasList" parameterType="Gas" resultMap="GasResult">
-        select id, name, value from gas ORDER BY value DESC
+       select `name`,SUM(`value`) as value from gas GROUP BY `name` ORDER BY value DESC
     </select>
 
 
