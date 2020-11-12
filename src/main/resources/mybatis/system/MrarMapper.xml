@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.numberone.project.system.mrar.mapper.MrarMapper">
+    
+    <resultMap type="Mrar" id="MrarResult">
+        <result property="id"    column="id"    />
+        <result property="coding"    column="coding"    />
+        <result property="name"    column="name"    />
+        <result property="number"    column="number"    />
+        <result property="period"    column="period"    />
+        <result property="badname"    column="badname"    />
+        <result property="time"    column="time"    />
+        <result property="lastreading"    column="lastreading"    />
+        <result property="reading"    column="reading"    />
+        <result property="unit"    column="unit"    />
+        <result property="state"    column="state"    />
+    </resultMap>
+
+    <sql id="selectMrarVo">
+        select id, coding, name, number, period, badname, time, lastreading, reading, unit, state from mrar
+    </sql>
+
+
+    <insert id="addMran" parameterType="Mrar" useGeneratedKeys="true" keyProperty="id">
+        insert into mrar
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="coding != null  and coding != ''">coding,</if>
+            <if test="name != null  and name != ''">name,</if>
+            <if test="number != null  and number != ''">number,</if>
+            <if test="period != null  and period != ''">period,</if>
+            <if test="badname != null  and badname != ''">badname,</if>
+            <if test="time != null ">time,</if>
+            <if test="lastreading != null  and lastreading != ''">lastreading,</if>
+            <if test="reading != null  and reading != ''">reading,</if>
+            <if test="unit != null  and unit != ''">unit,</if>
+            <if test="state != null  and state != ''">state,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="coding != null  and coding != ''">#{coding},</if>
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="number != null  and number != ''">#{number},</if>
+            <if test="period != null  and period != ''">#{period},</if>
+            <if test="badname != null  and badname != ''">#{badname},</if>
+            <if test="time != null ">#{time},</if>
+            <if test="lastreading != null  and lastreading != ''">#{lastreading},</if>
+            <if test="reading != null  and reading != ''">#{reading},</if>
+            <if test="unit != null  and unit != ''">#{unit},</if>
+            <if test="state != null  and state != ''">#{state},</if>
+        </trim>
+    </insert>
+
+    <select id="selectMrarList" parameterType="Mrar" resultMap="MrarResult">
+        <include refid="selectMrarVo"/>
+        <where>  
+            <if test="coding != null  and coding != ''"> and coding = #{coding}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="number != null  and number != ''"> and number = #{number}</if>
+            <if test="period != null  and period != ''"> and period = #{period}</if>
+            <if test="badname != null  and badname != ''"> and badname like concat('%', #{badname}, '%')</if>
+            <if test="time != null "> and time = #{time}</if>
+            <if test="lastreading != null  and lastreading != ''"> and lastreading = #{lastreading}</if>
+            <if test="reading != null  and reading != ''"> and reading = #{reading}</if>
+            <if test="unit != null  and unit != ''"> and unit = #{unit}</if>
+            <if test="state != null  and state != ''"> and state = #{state}</if>
+        </where>
+    </select>
+    
+    <select id="selectMrarById" parameterType="Integer" resultMap="MrarResult">
+        <include refid="selectMrarVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertMrar" parameterType="Mrar" useGeneratedKeys="true" keyProperty="id">
+        insert into mrar
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="coding != null  and coding != ''">coding,</if>
+            <if test="name != null  and name != ''">name,</if>
+            <if test="number != null  and number != ''">number,</if>
+            <if test="period != null  and period != ''">period,</if>
+            <if test="badname != null  and badname != ''">badname,</if>
+            <if test="time != null ">time,</if>
+            <if test="lastreading != null  and lastreading != ''">lastreading,</if>
+            <if test="reading != null  and reading != ''">reading,</if>
+            <if test="unit != null  and unit != ''">unit,</if>
+            <if test="state != null  and state != ''">state,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="coding != null  and coding != ''">#{coding},</if>
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="number != null  and number != ''">#{number},</if>
+            <if test="period != null  and period != ''">#{period},</if>
+            <if test="badname != null  and badname != ''">#{badname},</if>
+            <if test="time != null ">#{time},</if>
+            <if test="lastreading != null  and lastreading != ''">#{lastreading},</if>
+            <if test="reading != null  and reading != ''">#{reading},</if>
+            <if test="unit != null  and unit != ''">#{unit},</if>
+            <if test="state != null  and state != ''">#{state},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMrar" parameterType="Mrar">
+        update mrar
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="coding != null  and coding != ''">coding = #{coding},</if>
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="number != null  and number != ''">number = #{number},</if>
+            <if test="period != null  and period != ''">period = #{period},</if>
+            <if test="badname != null  and badname != ''">badname = #{badname},</if>
+            <if test="time != null ">time = #{time},</if>
+            <if test="lastreading != null  and lastreading != ''">lastreading = #{lastreading},</if>
+            <if test="reading != null  and reading != ''">reading = #{reading},</if>
+            <if test="unit != null  and unit != ''">unit = #{unit},</if>
+            <if test="state != null  and state != ''">state = #{state},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteMrarById" parameterType="Integer">
+        delete from mrar where id = #{id}
+    </delete>
+
+    <delete id="deleteMrarByIds" parameterType="String">
+        delete from mrar where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
