@@ -3,6 +3,7 @@ package com.numberone;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.cache.annotation.EnableCaching;
 
 /**
  * 启动程序
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
  * @author numberone
  */
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
+@EnableCaching
 public class NumberOneApplication
 {
     public static void main(String[] args)

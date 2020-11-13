@@ -34,7 +34,7 @@
             	</a>
             	<li>
             		<div class="user-panel">
-            			<a class="menuItem" title="个人中心" th:href="@{/system/user/profile}"> 
+            			<a class="menuItem" title="个人中心" th:href="@{/templates/system/user/profile}">
             				<div class="hide" th:text="个人中心"></div>
 					        <div class="pull-left image">
 		                    	<img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{${user.avatar}}" class="img-circle" alt="User Image">
@@ -124,7 +124,7 @@
                             <ul class="nav nav-third-level">
 								<li><a class="menuItem" th:href="@{/demo/modal/dialog}">模态窗口</a></li>
 								<li><a class="menuItem" th:href="@{/demo/modal/layer}">弹层组件</a></li>
-								<li><a class="menuItem" th:href="@{/demo/modal/table}">弹层表格</a></li>
+								<li><a class="menuItem" th:href="@{/templates/demo/modal/table}">弹层表格</a></li>
 							</ul>
                         </li>
                         <li> <a>操作<span class="fa arrow"></span></a>
@@ -181,6 +181,9 @@
                     </a>
                 </div>
                 <ul class="nav navbar-top-links navbar-right welcome-message">
+					<li th:text="${session.name}"></li>
+					<li th:text="${session.pwd}"></li>
+					<li th:text="${session.Boolean}"></li>
 	                <li><a title="全屏显示" href="javascript:void(0)" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>
 					<li><a title="配电室" href="http://101.201.68.156:8808/data/perspective/client/ZLDL/settree" target="_blank"><i class="fa fa-calendar-minus-o"></i> 配电室</a></li>
 					<li><a title="大屏展示" href="/system/bigdata/bigdata" target="_blank" ><i class="fa fa-television"></i> 大屏展示</a></li>
@@ -192,7 +195,7 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li class="mt5">
-								<a th:href="@{/system/user/profile}" class="menuItem">
+								<a th:href="@{/templates/system/user/profile}" class="menuItem">
 								<i class="fa fa-user"></i> 个人中心</a>
 							</li>
 							<li>
