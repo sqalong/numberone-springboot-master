@@ -13,11 +13,8 @@
 
 
     <select id="selectWaterList" parameterType="Water" resultMap="WaterResult">
-       select `name`,SUM(`value`) as value from water GROUP BY `name` ORDER BY value DESC
-    </select>
+       select `name`,SUM(`value`)as value,a.wsum from water b,(select sum(`value`) as wsum from water) a GROUP BY `name` ORDER BY value DESC
 
-    <select id="wsum" parameterType="Water" resultMap="WaterResult">
-      SELECT SUM(`value`) as wsum FROM water
     </select>
 
 

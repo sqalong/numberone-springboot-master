@@ -15,7 +15,7 @@
 
 </head>
 <body onload="utr(),proprotion()">
-<div style="background-image: url('/back1.png'); color: #f5f5f5" th:src="@{/back1.png}">
+<div style="background-image: url('/back1.png'); color: #ffffff;background-repeat: no-repeat;background-size: 100% 100%; " th:src="@{/back.jpg}">
 
     <!--整个页面布局-->
     <div class="row" style="margin: 0px;padding: 10px 0px 5px 0px; ">
@@ -47,7 +47,7 @@
                         <button type="button" class="btn btn-link" style="color: #fff;" onclick="proprotion('electric')">电</button>
                         <button type="button" class="btn btn-link" style="color: #fff;" onclick="proprotion('gas')">气</button>
                     </div>
-                    <div id="main" style="width: 430px;height: 310px;"></div>
+                    <div id="main" style="width: 430px;height: 390px;"></div>
                 </div>
 
             </div>
@@ -89,7 +89,7 @@
                 <div class="row"style="margin: 0px;padding: 0px">
                     <div class="col-md-4">
                         <div style="background-color: #867e70; height: 85px;border-radius: 10px;width: 130px;text-align: center;">
-                            <p><span style="font-size: 37px;">2567</span></p>
+                            <p><span id="wsum" style="font-size: 37px;">2567</span></p>
                         <span>累计节能量（tce）</span>
                         </div>
                     </div>
@@ -162,6 +162,30 @@
 </body>
 <script type="text/javascript">
 
+    // $(function (){
+    //     var wsum;
+    //
+    //     $.ajax({
+    //         type: "post",
+    //         url: "/system/water/wsum",
+    //         dataType: "json",
+    //         async: false,
+    //         success: function (result) {
+    //
+    //             for (var i = 0; i < result.length; i++) {
+    //                 xAxisData.push(result[i].name);
+    //                 yAxisData.push(result[i].value);
+    //             }
+    //
+    //         },
+    //         error: function (errorMsg) {
+    //             alert("获取后台数据失败！");
+    //         }
+    //     })
+    //
+    // });
+
+
     //用能排名图表
     function utr(ss) {
         var myChart = echarts.init(document.getElementById('xzuo'));
@@ -170,6 +194,7 @@
             va = ss;
         }
         var price = "/system/" + va + "/list";
+        var wsum = [];
         var xAxisData = [];
         var yAxisData = [];
         $.ajax({
@@ -182,9 +207,11 @@
                 for (var i = 0; i < result.length; i++) {
                     xAxisData.push(result[i].name);
                     yAxisData.push(result[i].value);
+                    wsum.push(result[i].wsum);
                 }
-
+                document.getElementById("wsum").innerHTML=(parseInt(wsum[0]));
             },
+
             error: function (errorMsg) {
                 alert("获取后台数据失败！");
             }
@@ -390,7 +417,7 @@
     xz.setOption(option1)
 
 
-
+    //减少煤使用
     $(function () {
         //减少煤使用图表
         var myChart = echarts.init(document.getElementById('one'));
@@ -494,7 +521,7 @@
     });
 
 
-
+    //减少二氧化碳
     $(function (){
         var myChart = echarts.init(document.getElementById('globe'));
         var price = "/system/reduce/lists";
@@ -546,7 +573,7 @@
             },
                 {
                     type: 'pie',
-                    radius: [35],
+                    radius: 35,
                     center: ['15%', '30%'],
                     avoidLabelOverlap: false,
                     label: {
@@ -568,7 +595,7 @@
                 },
                 {
                     type: 'pie',
-                    radius: [33],
+                    radius: 33,
                     center: ['45%', '28%'],
                     avoidLabelOverlap: false,
                     label: {
@@ -628,7 +655,7 @@
                     }, ]
                 }, {
                     type: 'pie',
-                    radius: [45],
+                    radius: 45,
                     center: ['87%', '49%'],
                     avoidLabelOverlap: false,
                     label: {
@@ -736,8 +763,8 @@
                 {
 
                     type: 'pie',
-                    radius: ['40%', '50%'],
-                    center: [200, 170],
+                    radius: ['35%', '50%'],
+                    center: [215, 220],
                     data: datas,
                     itemStyle: {
                         normal: {
@@ -842,7 +869,7 @@
     // 标注数据
     var mapData = [{
         'name': '北京西站邮件处理中心',
-        'color': '#0394d9',
+        'color': '#ff69fc',
         'latitude': 39.902506,
         'longitude': 116.32025
 
@@ -852,28 +879,28 @@
             'longitude': 116.541167,
             'name': '北京综合邮件处理中心',
             'value': 41558260,
-            'color': '#0394d9'
+            'color': '#24d251'
         },
         {
             'latitude': 39.911907,
             'longitude': 116.431918,
             'name': '北京站邮件处理中心',
             'value': 26458260,
-            'color': '#0394d9'
+            'color': '#f80404'
         },
         {
             'latitude': 39.923751,
             'longitude': 116.431528,
             'name': '天桥大院',
             'value': 15258260,
-            'color': '#0394d9'
+            'color': '#eafa04'
         },
         {
             'latitude': 39.959530,
             'longitude': 116.417991,
             'name': '永安路大院',
             'value': 49858260,
-            'color': '#0394d9'
+            'color': '#890fe0'
         }
     ]
 
@@ -882,7 +909,7 @@
         echarts.registerMap(name, geoJson);
 
         myChart.setOption(option = {
-            backgroundColor:'#e558ce',
+            backgroundColor:'RGB(14,44,129)',
             //地图配置
             tooltip: {
                 trigger: 'item',
@@ -897,6 +924,10 @@
             geo: {
                 center:[116.32025,39.902506],
                 type: 'map',
+                scaleLimit: {  //缩放级别限制
+                    min: 1,
+                    max: 10
+                },
                 roam: true,
                 zoom: 2,
                 label: {
@@ -904,22 +935,22 @@
                         show: true, //是否显示地图省份得名称
                         textStyle: {
                             color: "#fff",
-                            fontSize: 10,
+                            fontSize: 12,
                             fontFamily: "Arial"
                         }
                     },
                     emphasis: { //动态展示的样式
-                        color: '#43d0d6',
+                        color: '#ffffff',
                     },
                 },
                 itemStyle: {
                     normal: {
-                        borderColor: '#0394d9', //区域边框颜色
-                        areaColor: '#161331', //区域背景颜色
+                        borderColor: '#ffffff', //区域边框颜色
+                        areaColor: 'RGB(3,49,177)', //区域背景颜色
                     },
                     emphasis: {
-                        areaColor: '#389BB7', //鼠标浮动颜色
-                        borderWidth: 2 //鼠标浮动边框大小
+                        areaColor: 'RGB(81,155,212)', //鼠标浮动颜色
+                        borderWidth: 2//鼠标浮动边框大小
                     }
                 },
 
@@ -929,11 +960,11 @@
                 coordinateSystem: 'geo', //使用地理坐标系，通过 geoIndex 指定相应的地理坐标系组件。
                 //animation: true,
                 rippleEffect: {
-                    brushType: 'stroke' //波纹的绘制方式，可选 'stroke' 和 'fill'。
+                    brushType: 'fill' //波纹的绘制方式，可选 'stroke' 和 'fill'。
                 },
                 symbolSize: function (val, params) { //其中第一个参数 value 为 data 中的数据值。第二个参数params 是其它的数据项参数。
                     //标记的大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示宽和高，例如 [20, 10] 表示标记宽为20，高为10。
-                    return 20;
+                    return 15;
                 },
                 data: mapData.map(function (itemOpt) {
                     return {
