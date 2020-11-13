@@ -24,18 +24,30 @@
         <div class="col-sm-3" style="height: 700px ;padding-right: 0px">
 
             <!--用能汇总-->
-            <div style="border:solid 2px #FFFFFF;height: 348px ;margin-bottom: 10px">用能汇总</div>
+            <div style="border:solid 2px #FFFFFF;height: 300px ;margin-bottom: 10px">
+                <div><h4>用能汇总</h4></div>
+                <div>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-5" style=" height: 110px; background-color: #c3b722fa;margin-left: 25px;">总耗能</div>
+                        <div class="col-sm-5" style=" height: 110px;background-color: #de2406fa;margin-left: 30px;">用电</div>
+                    </div>
+                    <div class="row" style="margin-top: 15px">
+                        <div class="col-sm-5" style="height: 110px;background-color: #b844e8fa;margin-left: 25px;">用水</div>
+                        <div class="col-sm-5" style="height: 110px;background-color: #16d1effa;margin-left: 30px;">用燃气</div>
+                    </div>
+                </div>
+            </div>
 
             <!--用能占比-->
             <div style="height: 348px">
-                <div class="row" style="border:solid 2px #FFFFFF;margin: 0px;padding: 0px; height: 345px">
+                <div class="row" style="border:solid 2px #FFFFFF;margin: 0px;padding: 0px; height: 395px">
                     <div class="col-sm-8"><h4>用能占比</h4></div>
                     <div class="btn-group col-sm-4">
                         <button type="button" class="btn btn-link" style="color: #fff;" onclick="proprotion('water')">水</button>
                         <button type="button" class="btn btn-link" style="color: #fff;" onclick="proprotion('electric')">电</button>
                         <button type="button" class="btn btn-link" style="color: #fff;" onclick="proprotion('gas')">气</button>
                     </div>
-                    <div id="main" style="width: 430px;height: 310px;margin-top:30px; "></div>
+                    <div id="main" style="width: 430px;height: 310px;"></div>
                 </div>
 
             </div>
@@ -50,7 +62,7 @@
             <!--地图-->
             <div style="border:solid 2px #FFFFFF; height: 615px;margin-top: 10px">
 
-                <div id="map" style="width: 100%;height:600px;"></div>
+                <div id="map" style="width: 100%;height:610px;"></div>
                 <!--                <div class="box">-->
                 <!--                    <ul class="image">-->
                 <!--                        <li><img src="../static/img/img2.jpg" th:src="@{/img/img2.jpg}"/></li>-->
@@ -72,7 +84,31 @@
         <div class="col-sm-3" style="padding-left: 0px">
 
             <!--基本情况-->
-            <div style="border:solid 2px #FFFFFF; height: 136px; margin-bottom: 10px">基本情况</div>
+            <div style="border:solid 2px #ffffff; height: 136px; margin-bottom: 10px">
+                <div><h4>基本情况</h4></div>
+                <div class="row"style="margin: 0px;padding: 0px">
+                    <div class="col-md-4">
+                        <div style="background-color: #867e70; height: 85px;border-radius: 10px;width: 130px;text-align: center;">
+                            <p><span style="font-size: 37px;">2567</span></p>
+                        <span>累计节能量（tce）</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4" >
+                        <div style="background-color: #10e7ca; height: 85px;border-radius: 10px;width: 130px;text-align: center;">
+                            <p><span style="font-size: 37px;">2247</span></p>
+                            <span>节省金额（万元）</span>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4" >
+                        <div style="background-color: #25f18b; height: 85px;border-radius: 10px;width: 130px;text-align: center;">
+                            <p><span style="font-size: 37px;">25</span></p>
+                            <span >节能率（%）</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
 
             <!--减少排放污染物-->
             <div style="border:solid 2px #FFFFFF; height: 274px; margin-bottom: 10px">减少排放污染物</div>
@@ -354,248 +390,309 @@
     xz.setOption(option1)
 
 
-    //减少煤使用图表
-    var myChart = echarts.init(document.getElementById('one'));
-    var option = {
-        tooltip: {
-            trigger: 'axis',	//tooltip触发条件 坐标轴
-            axisPointer: {
-                lineStyle: {
-                    color: '#57617B'	//显示竖线颜色
-                }
-            },
-            backgroundColor:'#05042C',	//tooltip背景色
-            borderColor:'#2BEDF6',		//tooltip边框颜色
-            borderWidth:2,
-            formatter: function (param) {	//自定义tooltip内容
-                var text = '';
-                text += '<div style="display:flex;flex-direction:row;">'+
-                    '<div style="background-color:#03D16D;height:auto;width:10px;margin-right:5px;"></div>'+
-                    '<div style="display:flex;flex-direction:column;">'+
-                    '<span>'+ param[0].value+'</span>'+
-                    '<span>'+ param[0].axisValue+'</span>'
-                '</div>'
-                '</div>'
-                return text;
-            }
-        },
-        grid: {
-            left: '0%',
-            right: '5%',
-            bottom: '1%',
-            containLabel: true
-        },
-        xAxis: {
-            type: 'category',
-            axisLine: {
-                lineStyle: {
-                    color: '#FFF'
-                }
-            },
-            data: ['天桥大院', '航空邮件处理中心', '永安路大院', '新顺邮件处理中心', '北京站邮件处理中心',
-                '北京国际邮件中心', '北京西站邮件处理中心'],
-            axisLabel: {
-                rotate: 20 // 角度
-            }
-        },
-        yAxis: {
-            show: false
-        },
 
-        series: [{
-            data: [120, 200, 150, 80, 70, 110, 130],
-            type: 'bar',
-            barWidth: 30,
-            itemStyle: {
-                emphasis: {
-                    barBorderRadius: 30
+    $(function () {
+        //减少煤使用图表
+        var myChart = echarts.init(document.getElementById('one'));
+        var price = "/system/reduce/lists";
+        var xAxisData = [];
+        var yAxisData = [];
+        $.ajax({
+            type: "post",
+            url: price,
+            dataType: "json",
+            async: false,
+            success: function (result) {
+
+                for (var i = 0; i < result.length; i++) {
+                    xAxisData.push(result[i].name);
+                    yAxisData.push(result[i].reduceCoal);
+                }
+
+            },
+            error: function (errorMsg) {
+                alert("获取后台数据失败！");
+            }
+        })
+        var option = {
+            tooltip: {
+                trigger: 'axis',	//tooltip触发条件 坐标轴
+                axisPointer: {
+                    lineStyle: {
+                        color: '#57617B'	//显示竖线颜色
+                    }
                 },
-                normal: {
-                    label:{
-                        show:true,
-                        position:'top',
-                        textStyle:{
-                            color:'#ffffff',
-                            fontSize:16,
-                            rotate:30
-                        }
-                    },
-                    barBorderRadius: 30,
-                    color: new echarts.graphic.LinearGradient(
-                        0, 0, 0, 1,
-                        [
-                            {offset: 0, color: '#76EEC6'},
-                            {offset: 1, color: '#CDCD00'}
-
-                        ]
-                    )
+                backgroundColor:'#05042C',	//tooltip背景色
+                borderColor:'#2BEDF6',		//tooltip边框颜色
+                borderWidth:2,
+                formatter: function (param) {	//自定义tooltip内容
+                    var text = '';
+                    text += '<div style="display:flex;flex-direction:row;">'+
+                        '<div style="background-color:#03D16D;height:auto;width:10px;margin-right:5px;"></div>'+
+                        '<div style="display:flex;flex-direction:column;">'+
+                        '<span>'+ param[0].value+'</span>'+
+                        '<span>'+ param[0].axisValue+'</span>'
+                    '</div>'
+                    '</div>'
+                    return text;
                 }
-            }
-        }]
-    };
-    myChart.setOption(option);
-
-
-    //减少二氧化碳排放图表
-    var myChart = echarts.init(document.getElementById('globe'));
-    var option = {
-        tooltip: {
-            trigger: 'item',
-            formatter: '{b}: {c} '
-        },
-        series: [{
-            type: 'pie',
-            radius: 65,
-            center: ['57%', '52%'],
-            avoidLabelOverlap: false,
-            label: {
-                show: true,
-                position: 'center',
-                color: '#FFFFFF',
-                fontSize: 25
-
             },
-            labelLine: {
+            grid: {
+                left: '0%',
+                right: '5%',
+                bottom: '1%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                axisLine: {
+                    lineStyle: {
+                        color: '#FFF'
+                    }
+                },
+                data: xAxisData,
+                axisLabel: {
+                    rotate: 20 // 角度
+                }
+            },
+            yAxis: {
                 show: false
             },
-            data: [{
-                value: 335,
-                name: '天桥大院'
-            }, ]
-        },
-            {
+
+            series: [{
+                data: yAxisData,
+                type: 'bar',
+                barWidth: 30,
+                itemStyle: {
+                    emphasis: {
+                        barBorderRadius: 30
+                    },
+                    normal: {
+                        label:{
+                            show:true,
+                            position:'top',
+                            textStyle:{
+                                color:'#ffffff',
+                                fontSize:16,
+                                rotate:30
+                            }
+                        },
+                        barBorderRadius: 30,
+                        color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 0, color: '#76EEC6'},
+                                {offset: 1, color: '#CDCD00'}
+
+                            ]
+                        )
+                    }
+                }
+            }]
+        };
+        myChart.setOption(option);
+    });
+
+
+
+    $(function (){
+        var myChart = echarts.init(document.getElementById('globe'));
+        var price = "/system/reduce/lists";
+        var xAxisData = [];
+        var yAxisData = [];
+        $.ajax({
+            type: "post",
+            url: price,
+            dataType: "json",
+            async: false,
+            success: function (result) {
+
+                for (var i = 0; i < result.length; i++) {
+                    xAxisData.push(result[i].name);
+                    yAxisData.push(result[i].reduceCo2);
+                }
+
+            },
+            error: function (errorMsg) {
+                alert("获取后台数据失败！");
+            }
+        })
+        var option = {
+            tooltip: {
+                trigger: 'item',
+                formatter: '{b}: {c} '
+            },
+            series: [{
                 type: 'pie',
-                radius: [35],
-                center: ['15%', '30%'],
+                radius: 65,
+                center: ['57%', '52%'],
                 avoidLabelOverlap: false,
                 label: {
                     show: true,
+                    formatter:function(val){   //让series 中的文字进行换行
+                        return val.name.split("件").join("\n");},
                     position: 'center',
                     color: '#FFFFFF',
-                    fontSize: 12
+                    fontSize: 25
+
                 },
                 labelLine: {
                     show: false
                 },
-
                 data: [{
-                    value: 335,
-                    name: '北京站邮政\n处理中心'
+                    value: yAxisData[0],
+                    name: xAxisData[0]
                 }, ]
             },
-            {
-                type: 'pie',
-                radius: [33],
-                center: ['45%', '28%'],
-                avoidLabelOverlap: false,
-                label: {
-                    show: true,
-                    position: 'center',
-                    color: '#FFFFFF',
-                    fontSize: 10
+                {
+                    type: 'pie',
+                    radius: [35],
+                    center: ['15%', '30%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        show: true,
+                        formatter:function(val){   //让series 中的文字进行换行
+                            return val.name.split("件").join("\n");},
+                        position: 'center',
+                        color: '#FFFFFF',
+                        fontSize: 12
+                    },
+                    labelLine: {
+                        show: false
+                    },
+
+                    data: [{
+                        value: yAxisData[4],
+                        name: xAxisData[4]
+                    }, ]
                 },
-                labelLine: {
-                    show: false
-                },
-                data: [{
-                    value: 310,
-                    name: '新顺邮件\n处理中心'
-                }, ]
-            }, {
-                type: 'pie',
-                radius: ['0%', '35%'],
-                center: ['75%', '28%'],
-                avoidLabelOverlap: false,
-                label: {
-                    show: true,
-                    position: 'center',
-                    color: '#FFFFFF',
-                    fontSize: 15
-                },
-                labelLine: {
-                    show: false
-                },
-                data: [{
-                    value: 335,
-                    name: '航空邮件\n处理中心'
-                }, ]
-            }, {
-                type: 'pie',
-                radius: ['0%', '30%'],
-                center: ['29%', '55%'],
-                avoidLabelOverlap: false,
-                label: {
-                    show: true,
-                    position: 'center',
-                    color: '#FFFFFF',
-                    fontSize: 13
-                },
-                labelLine: {
-                    show: false
-                },
-                data: [{
-                    value: 335,
-                    name: '永安路大院'
-                }, ]
-            }, {
-                type: 'pie',
-                radius: [45],
-                center: ['87%', '49%'],
-                avoidLabelOverlap: false,
-                label: {
-                    show: true,
-                    position: 'center',
-                    color: '#FFFFFF',
-                    fontSize: 15
-                },
-                labelLine: {
-                    show: false
-                },
-                data: [{
-                    value: 234,
-                    name: '北京国际邮\n件处理中心'
-                }, ]
-            }, {
-                type: 'pie',
-                radius: ['0%', '25%'],
-                center: ['45%', '75%'],
-                avoidLabelOverlap: false,
-                label: {
-                    show: true,
-                    position: 'center',
-                    color: '#FFFFFF',
-                    fontSize: 10
-                },
-                labelLine: {
-                    show: false
-                },
-                data: [{
-                    value: 135,
-                    name: '北京综合邮件\n处理中心'
-                }, ]
-            }, {
-                type: 'pie',
-                radius: ['0%', '23%'],
-                center: ['76%', '72%'],
-                avoidLabelOverlap: false,
-                label: {
-                    show: true,
-                    position: 'center',
-                    color: '#FFFFFF',
-                    fontSize: 10
-                },
-                labelLine: {
-                    show: false
-                },
-                data: [{
-                    value: 335,
-                    name: '北京西站邮\n件处理中心'
-                }, ]
-            }
-        ],
-        color: ['rgb(153, 93, 129)','rgb(248, 171, 157)','rgb(235, 130, 88)','rgb(216, 220, 106)','rgb(102, 137, 161)','rgb(92, 175, 178)','rgb(246, 0, 22)','rgb(38, 206, 214)']
-    };
-    myChart.setOption(option);
+                {
+                    type: 'pie',
+                    radius: [33],
+                    center: ['45%', '28%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        show: true,
+                        formatter:function(val){   //让series 中的文字进行换行
+                            return val.name.split("件").join("\n");},
+                        position: 'center',
+                        color: '#FFFFFF',
+                        fontSize: 10
+                    },
+                    labelLine: {
+                        show: false
+                    },
+                    data: [{
+                        value: yAxisData[5],
+                        name: xAxisData[5]
+                    }, ]
+                }, {
+                    type: 'pie',
+                    radius: ['0%', '35%'],
+                    center: ['75%', '28%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        show: true,
+                        formatter:function(val){   //让series 中的文字进行换行
+                            return val.name.split("件").join("\n");},
+                        position: 'center',
+                        color: '#FFFFFF',
+                        fontSize: 15
+                    },
+                    labelLine: {
+                        show: false
+                    },
+                    data: [{
+                        value: yAxisData[6],
+                        name: xAxisData[6]
+                    }, ]
+                }, {
+                    type: 'pie',
+                    radius: ['0%', '30%'],
+                    center: ['29%', '55%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        show: true,
+                        formatter:function(val){   //让series 中的文字进行换行
+                            return val.name.split("件").join("\n");},
+                        position: 'center',
+                        color: '#FFFFFF',
+                        fontSize: 13
+                    },
+                    labelLine: {
+                        show: false
+                    },
+                    data: [{
+                        value: 335,
+                        name: '北京综合邮件处理中心'
+                    }, ]
+                }, {
+                    type: 'pie',
+                    radius: [45],
+                    center: ['87%', '49%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        show: true,
+                        formatter:function(val){   //让series 中的文字进行换行
+                            return val.name.split("件").join("\n");},
+                        position: 'center',
+                        color: '#FFFFFF',
+                        fontSize: 15
+                    },
+                    labelLine: {
+                        show: false
+                    },
+                    data: [{
+                        value: yAxisData[1],
+                        name: xAxisData[1]
+                    }, ]
+                }, {
+                    type: 'pie',
+                    radius: ['0%', '25%'],
+                    center: ['45%', '75%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        show: true,
+                        formatter:function(val){   //让series 中的文字进行换行
+                            return val.name.split("件").join("\n");},
+                        position: 'center',
+                        color: '#FFFFFF',
+                        fontSize: 10
+                    },
+                    labelLine: {
+                        show: false
+                    },
+                    data: [{
+                        value: yAxisData[2],
+                        name: xAxisData[2]
+                    }, ]
+                }, {
+                    type: 'pie',
+                    radius: ['0%', '23%'],
+                    center: ['76%', '72%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        show: true,
+                        formatter:function(val){   //让series 中的文字进行换行
+                            return val.name.split("件").join("\n");},
+                        position: 'center',
+                        color: '#FFFFFF',
+                        fontSize: 10
+                    },
+                    labelLine: {
+                        show: false
+                    },
+                    data: [{
+                        value: yAxisData[3],
+                        name: xAxisData[3]
+                    }, ]
+                }
+            ],
+            color: ['rgb(153, 93, 129)','rgb(248, 171, 157)','rgb(235, 130, 88)','rgb(216, 220, 106)','rgb(102, 137, 161)','rgb(92, 175, 178)','rgb(246, 0, 22)','rgb(38, 206, 214)']
+        };
+        myChart.setOption(option);
+    })
+
 
 
     //用能占比图表
@@ -640,7 +737,7 @@
 
                     type: 'pie',
                     radius: ['40%', '50%'],
-                    center: [230, 170],
+                    center: [200, 170],
                     data: datas,
                     itemStyle: {
                         normal: {
@@ -785,6 +882,7 @@
         echarts.registerMap(name, geoJson);
 
         myChart.setOption(option = {
+            backgroundColor:'#e558ce',
             //地图配置
             tooltip: {
                 trigger: 'item',

@@ -47,11 +47,13 @@ public class LoginController extends BaseController
         Subject subject = SecurityUtils.getSubject();
         try
         {
+            //登录，校验失败就会抛出异常
             subject.login(token);
             HttpServletRequest request =((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
             HttpSession session=request.getSession();//创建session对象
             session.setAttribute("name",username);
             session.setAttribute("pwd",password);
+            session.setAttribute("Boolean",rememberMe);
             return success();
         }
         catch (AuthenticationException e)
