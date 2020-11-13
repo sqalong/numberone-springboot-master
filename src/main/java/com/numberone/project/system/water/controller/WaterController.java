@@ -8,7 +8,9 @@ import com.numberone.project.system.water.service.WaterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -34,8 +36,14 @@ public class WaterController extends BaseController
 //        for(Water w: list){
 //            System.out.println(w.getValue());
 //        }
-
         return list;
+    }
+    @RequestMapping("/wsum")
+    @ResponseBody
+    public Water wsum(Model model){
+        Water w = ws.wsum();
+        model.addAttribute("wsum",w);
+        return w;
     }
 
 }

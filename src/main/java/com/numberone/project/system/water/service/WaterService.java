@@ -10,7 +10,8 @@ import java.util.Set;
 public interface WaterService
 {
 
-    public List<Water> selectWaterList();
+    List<Water> selectWaterList();
 
 
+    Water wsum();
 }

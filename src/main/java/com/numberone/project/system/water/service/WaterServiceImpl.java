@@ -22,7 +22,11 @@ public class WaterServiceImpl implements WaterService
 
     @Override
     public List<Water> selectWaterList() {
-        System.out.println("22222222222222222222222");
         return w.selectWaterList();
+    }
+
+    @Override
+    public Water wsum() {
+        return w.wsum();
     }
 }

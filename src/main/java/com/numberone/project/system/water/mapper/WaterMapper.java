@@ -10,4 +10,5 @@ public interface WaterMapper
 
     public List<Water> selectWaterList();
 
+    Water wsum();
 }

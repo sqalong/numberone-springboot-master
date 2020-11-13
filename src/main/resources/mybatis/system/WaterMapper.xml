@@ -16,5 +16,9 @@
        select `name`,SUM(`value`) as value from water GROUP BY `name` ORDER BY value DESC
     </select>
 
+    <select id="wsum" parameterType="Water" resultMap="WaterResult">
+      SELECT SUM(`value`) as wsum FROM water
+    </select>
+
 
 </mapper>

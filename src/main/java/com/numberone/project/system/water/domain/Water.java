@@ -32,6 +32,15 @@ public class Water
 
     private String timeid;
 
+    private String wsum;
+
+    public String getWsum() {
+        return wsum;
+    }
+
+    public void setWsum(String wsum) {
+        this.wsum = wsum;
+    }
 
     public int getId() {
         return id;
