@@ -89,13 +89,13 @@
                 <div class="row"style="margin: 0px;padding: 0px">
                     <div class="col-md-4">
                         <div style="background-color: #867e70; height: 85px;border-radius: 10px;width: 130px;text-align: center;">
-                            <p><span id="wsum" style="font-size: 37px;">2567</span></p>
+                            <p><span id="wsum" style="font-size: 37px;"></span></p>
                         <span>累计节能量（tce）</span>
                         </div>
                     </div>
                     <div class="col-md-4" >
                         <div style="background-color: #10e7ca; height: 85px;border-radius: 10px;width: 130px;text-align: center;">
-                            <p><span style="font-size: 37px;">2247</span></p>
+                            <p><span id="" style="font-size: 37px;">2247</span></p>
                             <span>节省金额（万元）</span>
                         </div>
 
@@ -162,28 +162,39 @@
 </body>
 <script type="text/javascript">
 
-    // $(function (){
-    //     var wsum;
-    //
-    //     $.ajax({
-    //         type: "post",
-    //         url: "/system/water/wsum",
-    //         dataType: "json",
-    //         async: false,
-    //         success: function (result) {
-    //
-    //             for (var i = 0; i < result.length; i++) {
-    //                 xAxisData.push(result[i].name);
-    //                 yAxisData.push(result[i].value);
-    //             }
-    //
-    //         },
-    //         error: function (errorMsg) {
-    //             alert("获取后台数据失败！");
-    //         }
-    //     })
-    //
-    // });
+    $(function(){
+        $("#wsum").numberRock({
+            lastNumber:666,		//终止数字
+            duration:800,
+            easing:'swing',  	//慢快慢
+        });
+    });
+
+    (function($){
+        $.fn.numberRock=function(options){
+            var defaults={
+                lastNumber:100,
+                duration:2000,
+                easing:'swing'  //swing(默认 : 缓冲 : 慢快慢)  linear(匀速的)
+            };
+            var opts=$.extend({}, defaults, options);
+
+            $(this).animate({
+                num : "numberRock",
+            },{
+                duration : opts.duration,
+                easing : opts.easing,
+                complete : function(){
+                    console.log("success");
+                },
+                step : function(a,b){  //可以检测我们定时器的每一次变化
+                    $(this).html(parseInt(b.pos * opts.lastNumber));
+                }
+            });
+        }
+
+    })(jQuery);
+
 
 
     //用能排名图表
