@@ -28,12 +28,23 @@
                 <div><h4>用能汇总</h4></div>
                 <div>
                     <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-5" style=" height: 110px; background-color: #c3b722fa;margin-left: 25px;">总耗能</div>
-                        <div class="col-sm-5" style=" height: 110px;background-color: #de2406fa;margin-left: 30px;">用电</div>
+                        <div class="col-sm-5" style=" height: 110px; background-color: #c3b722fa;margin-left: 25px;">
+                            <h4>总耗能</h4>
+                            <div><i class="glyphicon-facetime-video"></i></div>
+                        </div>
+                        <div class="col-sm-5" style=" height: 110px;background-color: #de2406fa;margin-left: 30px;">
+                            <h4>用电</h4>
+                        </div>
                     </div>
                     <div class="row" style="margin-top: 15px">
-                        <div class="col-sm-5" style="height: 110px;background-color: #b844e8fa;margin-left: 25px;">用水</div>
-                        <div class="col-sm-5" style="height: 110px;background-color: #16d1effa;margin-left: 30px;">用燃气</div>
+                        <div class="col-sm-5" style="height: 110px;background-color: #b844e8fa;margin-left: 25px;">
+                            <h4>用水</h4>
+
+                        </div>
+                        <div class="col-sm-5" style="height: 110px;background-color: #16d1effa;margin-left: 30px;">
+                            <h4>用燃气</h4>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -47,7 +58,7 @@
                         <button type="button" class="btn btn-link" style="color: #fff;" onclick="proprotion('electric')">电</button>
                         <button type="button" class="btn btn-link" style="color: #fff;" onclick="proprotion('gas')">气</button>
                     </div>
-                    <div id="main" style="width: 430px;height: 390px;"></div>
+                    <div id="main" style="width: 430px;height: 390px; margin-top: 35px"></div>
                 </div>
 
             </div>
@@ -162,38 +173,7 @@
 </body>
 <script type="text/javascript">
 
-    $(function(){
-        $("#wsum").numberRock({
-            lastNumber:666,		//终止数字
-            duration:800,
-            easing:'swing',  	//慢快慢
-        });
-    });
 
-    (function($){
-        $.fn.numberRock=function(options){
-            var defaults={
-                lastNumber:100,
-                duration:2000,
-                easing:'swing'  //swing(默认 : 缓冲 : 慢快慢)  linear(匀速的)
-            };
-            var opts=$.extend({}, defaults, options);
-
-            $(this).animate({
-                num : "numberRock",
-            },{
-                duration : opts.duration,
-                easing : opts.easing,
-                complete : function(){
-                    console.log("success");
-                },
-                step : function(a,b){  //可以检测我们定时器的每一次变化
-                    $(this).html(parseInt(b.pos * opts.lastNumber));
-                }
-            });
-        }
-
-    })(jQuery);
 
 
 
@@ -221,6 +201,11 @@
                     wsum.push(result[i].wsum);
                 }
                 document.getElementById("wsum").innerHTML=(parseInt(wsum[0]));
+                $("#wsum").numberRock({
+                    lastNumber:$("#wsum").text(),		//终止数字
+                    duration:800,
+                    easing:'swing',  	//慢快慢
+                });
             },
 
             error: function (errorMsg) {
@@ -775,7 +760,7 @@
 
                     type: 'pie',
                     radius: ['35%', '50%'],
-                    center: [215, 220],
+                    center: [215, 180],
                     data: datas,
                     itemStyle: {
                         normal: {
@@ -1011,6 +996,35 @@
         }
     })
 
+
+    $(function(){
+
+    });
+
+    (function($){
+        $.fn.numberRock=function(options){
+            var defaults={
+                lastNumber:100,
+                duration:2000,
+                easing:'swing'  //swing(默认 : 缓冲 : 慢快慢)  linear(匀速的)
+            };
+            var opts=$.extend({}, defaults, options);
+
+            $(this).animate({
+                num : "numberRock",
+            },{
+                duration : opts.duration,
+                easing : opts.easing,
+                complete : function(){
+                    console.log("success");
+                },
+                step : function(a,b){  //可以检测我们定时器的每一次变化
+                    $(this).html(parseInt(b.pos * opts.lastNumber));
+                }
+            });
+        }
+
+    })(jQuery);
 
 </script>
 </html>
