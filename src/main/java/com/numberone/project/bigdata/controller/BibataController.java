@@ -7,8 +7,9 @@ import com.numberone.framework.aspectj.lang.enums.BusinessType;
 import com.numberone.framework.web.controller.BaseController;
 import com.numberone.framework.web.domain.AjaxResult;
 import com.numberone.framework.web.page.TableDataInfo;
-import com.numberone.project.bigdata.domain.Bigdata;
+import com.numberone.project.bigdata.domain.Zsum;
 import com.numberone.project.bigdata.service.IBigdataService;
+import com.numberone.project.system.water.domain.Water;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,12 +28,20 @@ import java.util.List;
 @RequestMapping("/system/bigdata")
 public class BibataController extends BaseController
 {
+    @Autowired
+    private IBigdataService bs;
     private String prefix = "system/bigdata";
 
     @RequestMapping("bigdata")
     public String bigdata()
     {
         return "bigdata";
+    }
+
+    @RequestMapping("/zongsum")
+    @ResponseBody
+    public List<Zsum> zongsum(){
+        return bs.zsum();
     }
 
 
