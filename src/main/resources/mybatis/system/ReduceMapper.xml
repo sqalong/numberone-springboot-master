@@ -5,7 +5,7 @@
 <mapper namespace="com.numberone.project.system.reduce.mapper.ReduceMapper">
 
     <select id="selectAll" resultType="Reduce">
-       select * from reduce
+       select * from reduce ORDER BY reduce_co2 DESC
     </select>
 
 

@@ -34,14 +34,14 @@
                                 <i class="glyphicon glyphicon-leaf col-md-4" style="font-size: 33px;margin-top: 20px"></i>
                                 <h4 class="col-md-8" style="margin-top: 30px;padding-left: 55px">总耗能</h4>
                             </div>
-                            <div style="text-align: right;font-family: 'Antique Olive';"><h3>178036 tce</h3></div>
+                            <div style="text-align: right;font-family: 'Antique Olive';"><h3 id="sum">178036 tce</h3></div>
                         </div>
                         <div class="col-sm-5" style=" height: 110px;background-color: #de2406fa;margin-left: 30px;">
                             <div class="row">
                                 <i class="glyphicon glyphicon-flash col-md-4" style="font-size: 33px;margin-top: 20px"></i>
                                 <h4 class="col-md-8" style="margin-top: 30px;padding-left: 55px">用电</h4>
                             </div>
-                            <div style="text-align: right;font-family: 'Antique Olive';"><h3>10958427 kWh</h3></div>
+                            <div style="text-align: right;font-family: 'Antique Olive';"><h3><span id="esum"></span> <span>kWh</span></h3></div>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 15px">
@@ -50,14 +50,14 @@
                                 <i class="glyphicon glyphicon-tint col-md-4" style="font-size: 33px;margin-top: 20px"></i>
                                 <h4 class="col-md-8" style="margin-top: 30px;padding-left: 55px">用水</h4>
                             </div>
-                            <div style="text-align: right;font-family: 'Antique Olive';"><h3>133996 t</h3></div>
+                            <div style="text-align: right;font-family: 'Antique Olive';"><h3><span id="wsum"></span> <span>tce</span></h3></div>
                         </div>
                         <div class="col-sm-5" style="height: 110px;background-color: #16d1effa;margin-left: 30px;">
                             <div class="row">
                                 <i class="glyphicon glyphicon-fire col-md-4" style="font-size: 33px;margin-top: 20px"></i>
                                 <h4 class="col-md-8" style="margin-top: 30px;padding-left: 55px">用燃气</h4>
                             </div>
-                            <div style="text-align: right;font-family: 'Antique Olive';"><h3>178036 m³</h3></div>
+                            <div style="text-align: right;font-family: 'Antique Olive';"><h3><span id="gsum"></span> <span>m³</span></h3></div>
                         </div>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
         <div class="col-sm-6" style=" height: 700px">
 
             <!--标题-->
-            <div style="border:solid 2px #FFFFFF; height: 80px">标题</div>
+            <div style="height: 80px;line-height: 95px;text-align: center;font-size: 32px">北京邮政能源管理数据大平台</div>
 
             <!--地图-->
             <div style="border:solid 2px #FFFFFF; height: 615px;margin-top: 10px">
@@ -114,8 +114,9 @@
                 <div class="row"style="margin: 0px;padding: 0px">
                     <div class="col-md-4">
                         <div style="background-color: #867e70; height: 85px;border-radius: 10px;width: 130px;text-align: center;">
-                            <p><span id="wsum" style="font-size: 37px;"></span></p>
+                            <p><span id="wwsum" style="font-size: 37px;">4566</span></p>
                         <span>累计节能量（tce）</span>
+
                         </div>
                     </div>
                     <div class="col-md-4" >
@@ -139,20 +140,36 @@
             <div  style="border:solid 2px #FFFFFF; height: 274px; margin-bottom: 10px">
 
                 <h4>减少排放污染物</h4>
-                <div class="row" style=" margin: 0px;padding-bottom: 8px">
+                <div class="row" style=" margin: 0px;padding-bottom: 8px;text-align: center">
                     <div class="col-sm-5" style=" height: 50px;">
-                        <div style="background-color: RGB(196,136,28);height: 100%;width: 210px;border-radius: 10px;">co2267吨</div></div>
+                        <div style="background-color: RGB(196,136,28);height: 100%;width: 210px;border-radius: 10px;">
+                            <span class="glyphicon glyphicon-ok" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 40px">267</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
+                        </div>
+                    </div>
                     <div class="col-sm-5" style="height: 50px;margin-left: 31px">
-                        <div style="background-color: RGB(19,121,224);height: 100%;width: 210px;border-radius: 10px;">co2267吨</div></div>
+                        <div style="background-color: RGB(19,121,224);height: 100%;width: 210px;border-radius: 10px;">
+                            <span class="glyphicon glyphicon-ok" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 40px">267</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="row"style=" margin: 0px;padding-bottom: 8px">
+                <div class="row"style=" margin: 0px;padding-bottom: 8px;text-align: center">
                     <div class="col-sm-5" style="height: 50px;">
-                        <div style="background-color: RGB(19,197,146);height: 100%;width: 210px; border-radius: 10px;">co2267吨</div></div>
+                        <div style="background-color: RGB(19,197,146);height: 100%;width: 210px; border-radius: 10px;">
+                            <span class="glyphicon glyphicon-ok" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 40px">267</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
+                        </div>
+                    </div>
                     <div class="col-sm-5" style="height: 50px; margin-left: 31px">
-                        <div style="background-color: RGB(8,171,204);height: 100%;width: 210px;border-radius: 10px;">co2267吨</div></div>
+                        <div style="background-color: RGB(8,171,204);height: 100%;width: 210px;border-radius: 10px;">
+                            <span class="glyphicon glyphicon-ok" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 40px">267</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
+                        </div>
+                    </div>
                 </div>
-                <div style="background-color: RGB(16,163,146);height: 50px;width: 434px;margin-left: 15px; border-radius: 10px;margin-bottom: 8px;">累计用电9863万</div>
-                <div style="background-color: RGB(14,122,156);height: 50px;width: 434px;margin-left: 15px; border-radius: 10px;margin-bottom: 8px;">减少永梅3985吨</div>
+                <div style="background-color: RGB(16,163,146);height: 50px;width: 434px;margin-left: 15px; border-radius: 10px;margin-bottom: 8px;;text-align: center;line-height: 50px">
+                    <span class="glyphicon glyphicon-flash" style="font-size: 40px"></span><span style="font-size: 20px">累计用电</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 45px;margin-right: 15px">9863</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">万千瓦时</span>
+                </div>
+                <div style="background-color: RGB(14,122,156);height: 50px;width: 434px;margin-left: 15px; border-radius: 10px;margin-bottom: 8px;;text-align: center;line-height: 50px">
+                    <span class="fa  fa-sitemap" style="font-size: 40px"></span><span style="font-size: 20px">减少用煤</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 45px;margin-right: 75px ">3985</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
+                </div>
             </div>
 
             <!--减少二氧化碳排放-->
@@ -204,6 +221,54 @@
 </body>
 <script type="text/javascript">
 
+    //用能汇总,水电气总
+    $(function () {
+        //水
+        var wsum = [];
+        //电
+        var esum = [];
+        //气
+        var gsum = [];
+        $.ajax({
+            type: "post",
+            url: "/system/bigdata/zongsum",
+            dataType: "json",
+            async: false,
+            success: function (result) {
+
+                for (var i = 0; i < result.length; i++) {
+                    wsum.push(result[i].wsum);
+                    esum.push(result[i].esum);
+                    gsum.push(result[i].gsum);
+
+                }
+                document.getElementById("wsum").innerHTML=parseInt(wsum[0]);
+                document.getElementById("esum").innerHTML= (parseInt(esum[0]));
+                document.getElementById("gsum").innerHTML=(parseInt(gsum[0]));
+
+                $("#wsum").numberRock({
+                    lastNumber:$("#wsum").text(),		//终止数字
+                    duration:800,
+                    easing:'swing',  	//慢快慢
+                });
+                $("#esum").numberRock({
+                    lastNumber:$("#esum").text(),		//终止数字
+                    duration:800,
+                    easing:'swing',  	//慢快慢
+                });
+                $("#gsum").numberRock({
+                    lastNumber:$("#gsum").text(),		//终止数字
+                    duration:800,
+                    easing:'swing',  	//慢快慢
+                });
+            },
+
+            error: function (errorMsg) {
+                alert("获取后台数据失败！");
+            }
+        })
+    });
+
 
 
 
@@ -216,7 +281,6 @@
             va = ss;
         }
         var price = "/system/" + va + "/list";
-        var wsum = [];
         var xAxisData = [];
         var yAxisData = [];
         $.ajax({
@@ -229,14 +293,8 @@
                 for (var i = 0; i < result.length; i++) {
                     xAxisData.push(result[i].name);
                     yAxisData.push(result[i].value);
-                    wsum.push(result[i].wsum);
                 }
-                document.getElementById("wsum").innerHTML=(parseInt(wsum[0]));
-                $("#wsum").numberRock({
-                    lastNumber:$("#wsum").text(),		//终止数字
-                    duration:800,
-                    easing:'swing',  	//慢快慢
-                });
+
             },
 
             error: function (errorMsg) {
