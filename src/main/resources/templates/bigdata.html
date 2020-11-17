@@ -2,7 +2,6 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>能源数据大屏展示</title>
     <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts.min.js"
@@ -16,7 +15,8 @@
 
 </head>
 <body onload="utr(),proprotion()">
-<div style="background-image: url('/back1.png'); color: #ffffff;background-repeat: no-repeat;background-size: 100% 100%; " th:src="@{/back.jpg}">
+<div style="background-image: url('/back1.png'); color: #ffffff;background-repeat: no-repeat;background-size: 100% 100%; "
+     th:src="@{/back.jpg}">
 
     <!--整个页面布局-->
     <div class="row" style="margin: 0px;padding: 10px 0px 5px 0px; ">
@@ -31,33 +31,41 @@
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-5" style=" height: 110px; background-color: #c3b722fa;margin-left: 25px;">
                             <div class="row">
-                                <i class="glyphicon glyphicon-leaf col-md-4" style="font-size: 33px;margin-top: 20px"></i>
+                                <i class="glyphicon glyphicon-leaf col-md-4"
+                                   style="font-size: 33px;margin-top: 20px"></i>
                                 <h4 class="col-md-8" style="margin-top: 30px;padding-left: 55px">总耗能</h4>
                             </div>
-                            <div style="text-align: right;font-family: 'Antique Olive';"><h3 id="sum">178036 tce</h3></div>
+                            <div style="text-align: right;font-family: 'Antique Olive';"><h3><span id="yuez"></span>
+                                <span>tce</span></h3></div>
                         </div>
                         <div class="col-sm-5" style=" height: 110px;background-color: #de2406fa;margin-left: 30px;">
                             <div class="row">
-                                <i class="glyphicon glyphicon-flash col-md-4" style="font-size: 33px;margin-top: 20px"></i>
+                                <i class="glyphicon glyphicon-flash col-md-4"
+                                   style="font-size: 33px;margin-top: 20px"></i>
                                 <h4 class="col-md-8" style="margin-top: 30px;padding-left: 55px">用电</h4>
                             </div>
-                            <div style="text-align: right;font-family: 'Antique Olive';"><h3><span id="esum"></span> <span>kWh</span></h3></div>
+                            <div style="text-align: right;font-family: 'Antique Olive';"><h3><span id="esum"></span>
+                                <span>kWh</span></h3></div>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 15px">
                         <div class="col-sm-5" style="height: 110px;background-color: #b844e8fa;margin-left: 25px;">
                             <div class="row">
-                                <i class="glyphicon glyphicon-tint col-md-4" style="font-size: 33px;margin-top: 20px"></i>
+                                <i class="glyphicon glyphicon-tint col-md-4"
+                                   style="font-size: 33px;margin-top: 20px"></i>
                                 <h4 class="col-md-8" style="margin-top: 30px;padding-left: 55px">用水</h4>
                             </div>
-                            <div style="text-align: right;font-family: 'Antique Olive';"><h3><span id="wsum"></span> <span>tce</span></h3></div>
+                            <div style="text-align: right;font-family: 'Antique Olive';"><h3><span id="wsum"></span>
+                                <span>t</span></h3></div>
                         </div>
                         <div class="col-sm-5" style="height: 110px;background-color: #16d1effa;margin-left: 30px;">
                             <div class="row">
-                                <i class="glyphicon glyphicon-fire col-md-4" style="font-size: 33px;margin-top: 20px"></i>
+                                <i class="glyphicon glyphicon-fire col-md-4"
+                                   style="font-size: 33px;margin-top: 20px"></i>
                                 <h4 class="col-md-8" style="margin-top: 30px;padding-left: 55px">用燃气</h4>
                             </div>
-                            <div style="text-align: right;font-family: 'Antique Olive';"><h3><span id="gsum"></span> <span>m³</span></h3></div>
+                            <div style="text-align: right;font-family: 'Antique Olive';"><h3><span id="gsum"></span>
+                                <span>m³</span></h3></div>
                         </div>
                     </div>
                 </div>
@@ -68,9 +76,14 @@
                 <div class="row" style="border:solid 2px #FFFFFF;margin: 0px;padding: 0px; height: 395px">
                     <div class="col-sm-8"><h4>用能占比</h4></div>
                     <div class="btn-group col-sm-4">
-                        <button type="button" class="btn btn-link" style="color: #fff;" onclick="proprotion('water')">水</button>
-                        <button type="button" class="btn btn-link" style="color: #fff;" onclick="proprotion('electric')">电</button>
-                        <button type="button" class="btn btn-link" style="color: #fff;" onclick="proprotion('gas')">气</button>
+                        <button type="button" class="btn btn-link" style="color: #fff;" onclick="proprotion('water')">
+                            水
+                        </button>
+                        <button type="button" class="btn btn-link" style="color: #fff;"
+                                onclick="proprotion('electric')">电
+                        </button>
+                        <button type="button" class="btn btn-link" style="color: #fff;" onclick="proprotion('gas')">气
+                        </button>
                     </div>
                     <div id="main" style="width: 430px;height: 390px; margin-top: 35px"></div>
                 </div>
@@ -111,25 +124,25 @@
             <!--基本情况-->
             <div style="border:solid 2px #ffffff; height: 136px; margin-bottom: 10px">
                 <div><h4>基本情况</h4></div>
-                <div class="row"style="margin: 0px;padding: 0px">
+                <div class="row" style="margin: 0px;padding: 0px">
                     <div class="col-md-4">
                         <div style="background-color: #867e70; height: 85px;border-radius: 10px;width: 130px;text-align: center;">
-                            <p><span id="wwsum" style="font-size: 37px;">4566</span></p>
-                        <span>累计节能量（tce）</span>
+                            <p><span id="ljjnl" style="font-size: 37px;"></span></p>
+                            <span>累计节能量（tce）</span>
 
                         </div>
                     </div>
-                    <div class="col-md-4" >
+                    <div class="col-md-4">
                         <div style="background-color: #10e7ca; height: 85px;border-radius: 10px;width: 130px;text-align: center;">
-                            <p><span id="" style="font-size: 37px;">2247</span></p>
+                            <p><span id="jsje" style="font-size: 37px;"></span></p>
                             <span>节省金额（万元）</span>
                         </div>
 
                     </div>
-                    <div class="col-md-4" >
+                    <div class="col-md-4">
                         <div style="background-color: #25f18b; height: 85px;border-radius: 10px;width: 130px;text-align: center;">
-                            <p><span style="font-size: 37px;">25</span></p>
-                            <span >节能率（%）</span>
+                            <p><span id="jnl" style="font-size: 37px;"></span></p>
+                            <span>节能率（%）</span>
                         </div>
 
                     </div>
@@ -137,38 +150,49 @@
             </div>
 
             <!--减少排放污染物-->
-            <div  style="border:solid 2px #FFFFFF; height: 274px; margin-bottom: 10px">
+            <div style="border:solid 2px #FFFFFF; height: 274px; margin-bottom: 10px">
 
                 <h4>减少排放污染物</h4>
                 <div class="row" style=" margin: 0px;padding-bottom: 8px;text-align: center">
                     <div class="col-sm-5" style=" height: 50px;">
                         <div style="background-color: RGB(196,136,28);height: 100%;width: 210px;border-radius: 10px;">
-                            <span class="glyphicon glyphicon-ok" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 40px">267</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
+                            <span class="glyphicon  glyphicon-cloud" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span id="cot" style="font-size: 40px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
                         </div>
                     </div>
                     <div class="col-sm-5" style="height: 50px;margin-left: 31px">
                         <div style="background-color: RGB(19,121,224);height: 100%;width: 210px;border-radius: 10px;">
-                            <span class="glyphicon glyphicon-ok" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 40px">267</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
+                            <span class="glyphicon  glyphicon-asterisk" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                id="sot" style="font-size: 40px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
                         </div>
                     </div>
                 </div>
-                <div class="row"style=" margin: 0px;padding-bottom: 8px;text-align: center">
+
+                <div class="row" style=" margin: 0px;padding-bottom: 8px;text-align: center">
                     <div class="col-sm-5" style="height: 50px;">
                         <div style="background-color: RGB(19,197,146);height: 100%;width: 210px; border-radius: 10px;">
-                            <span class="glyphicon glyphicon-ok" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 40px">267</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
+                            <span class="glyphicon glyphicon glyphicon-fire" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+                               id="xuet" style="font-size: 40px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
                         </div>
                     </div>
                     <div class="col-sm-5" style="height: 50px; margin-left: 31px">
                         <div style="background-color: RGB(8,171,204);height: 100%;width: 210px;border-radius: 10px;">
-                            <span class="glyphicon glyphicon-ok" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 40px">267</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
+                            <span class="glyphicon glyphicon glyphicon-tint" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+                               id="not" style="font-size: 40px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
                         </div>
                     </div>
                 </div>
                 <div style="background-color: RGB(16,163,146);height: 50px;width: 434px;margin-left: 15px; border-radius: 10px;margin-bottom: 8px;;text-align: center;line-height: 50px">
-                    <span class="glyphicon glyphicon-flash" style="font-size: 40px"></span><span style="font-size: 20px">累计用电</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 45px;margin-right: 15px">9863</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">万千瓦时</span>
+                    <span class="glyphicon glyphicon-flash" style="font-size: 40px"></span><span
+                        style="font-size: 20px">累计用电</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+                       id="ljyd" style="font-size: 45px;margin-right: 15px"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                        style="font-size: 20px">万千瓦时</span>
                 </div>
                 <div style="background-color: RGB(14,122,156);height: 50px;width: 434px;margin-left: 15px; border-radius: 10px;margin-bottom: 8px;;text-align: center;line-height: 50px">
-                    <span class="fa  fa-sitemap" style="font-size: 40px"></span><span style="font-size: 20px">减少用煤</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 45px;margin-right: 75px ">3985</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
+                    <span class="fa  fa-sitemap" style="font-size: 40px"></span><span
+                        style="font-size: 20px">减少用煤</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+                      id="jsym"  style="font-size: 45px;margin-right: 75px "></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                        style="font-size: 20px">吨</span>
                 </div>
             </div>
 
@@ -186,8 +210,10 @@
                 <div class="row">
                     <div class="col-sm-8"><h4>用能排名</h4></div>
                     <div class="btn-group col-sm-4">
-                        <button type="button" class="btn btn-link" style="color: #fff;" onclick="utr('water')">水</button>
-                        <button type="button" class="btn btn-link" style="color: #fff;" onclick="utr('electric')">电</button>
+                        <button type="button" class="btn btn-link" style="color: #fff;" onclick="utr('water')">水
+                        </button>
+                        <button type="button" class="btn btn-link" style="color: #fff;" onclick="utr('electric')">电
+                        </button>
                         <button type="button" class="btn btn-link" style="color: #fff;" onclick="utr('gas')">气</button>
                     </div>
                 </div>
@@ -221,6 +247,179 @@
 </body>
 <script type="text/javascript">
 
+    $(function () {
+        //总耗能
+        var yuez = [];
+        //累计节能量
+        var ljjnl = [];
+        //节省金额
+        var jsje = [];
+        //节能率
+        var jnl = [];
+        //co
+        var cot = [];
+        //so
+        var sot = [];
+        //累计用电
+        var ljyd = [];
+        //no
+        var not = [];
+        //xue
+        var xuet = [];
+        //减少用煤
+        var jsym = [];
+        $.ajax({
+            type: "post",
+            url: "/system/za/list",
+            dataType: "json",
+            async: false,
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    yuez.push(result[i].yuez);
+                    ljjnl.push(result[i].ljjnl);
+                    jsje.push(result[i].jsje);
+                    jnl.push(result[i].jnl);
+                    cot.push(result[i].cot);
+                    sot.push(result[i].sot);
+                    ljyd.push(result[i].ljyd);
+                    not.push(result[i].not);
+                    xuet.push(result[i].xuet);
+                    jsym.push(result[i].jsym);
+                }
+                document.getElementById("yuez").innerHTML = (parseInt(yuez[0]));
+                document.getElementById("ljjnl").innerHTML = (parseInt(ljjnl[0]));
+                document.getElementById("jsje").innerHTML = (parseInt(jsje[0]));
+                document.getElementById("jnl").innerHTML = (parseInt(jnl[0]));
+                document.getElementById("cot").innerHTML = (parseInt(cot[0]));
+                document.getElementById("sot").innerHTML = (parseInt(sot[0]));
+                document.getElementById("ljyd").innerHTML = (parseInt(ljyd[0]));
+                document.getElementById("not").innerHTML = (parseInt(not[0]));
+                document.getElementById("xuet").innerHTML = (parseInt(xuet[0]));
+                document.getElementById("jsym").innerHTML = (parseInt(jsym[0]));
+
+
+                $("#yuez").numberRock({
+                    lastNumber: $("#yuez").text(),		//终止数字
+                    duration: 800,
+                    easing: 'swing',  	//慢快慢
+                });
+                $("#ljjnl").numberRock({
+                    lastNumber: $("#ljjnl").text(),		//终止数字
+                    duration: 800,
+                    easing: 'swing',  	//慢快慢
+                });
+                $("#jsje").numberRock({
+                    lastNumber: $("#jsje").text(),		//终止数字
+                    duration: 800,
+                    easing: 'swing',  	//慢快慢
+                });
+                $("#jnl").numberRock({
+                    lastNumber: $("#jnl").text(),		//终止数字
+                    duration: 800,
+                    easing: 'swing',  	//慢快慢
+                });
+                $("#cot").numberRock({
+                    lastNumber: $("#cot").text(),		//终止数字
+                    duration: 800,
+                    easing: 'swing',  	//慢快慢
+                });
+                $("#sot").numberRock({
+                    lastNumber: $("#sot").text(),		//终止数字
+                    duration: 800,
+                    easing: 'swing',  	//慢快慢
+                });
+                $("#ljyd").numberRock({
+                    lastNumber: $("#ljyd").text(),		//终止数字
+                    duration: 800,
+                    easing: 'swing',  	//慢快慢
+                });
+                $("#not").numberRock({
+                    lastNumber: $("#not").text(),		//终止数字
+                    duration: 800,
+                    easing: 'swing',  	//慢快慢
+                });
+                $("#xuet").numberRock({
+                    lastNumber: $("#xuet").text(),		//终止数字
+                    duration: 800,
+                    easing: 'swing',  	//慢快慢
+                });
+                $("#jsym").numberRock({
+                    lastNumber: $("#jsym").text(),		//终止数字
+                    duration: 800,
+                    easing: 'swing',  	//慢快慢
+                });
+
+            },
+            error: function (errorMsg) {
+                alert("获取后台数据失败！");
+            }
+        })
+    });
+
+
+    // //磨磨唧唧
+    // $(function(){
+    //     var yuez = [];
+    //     var ljjnl = [];
+    //     var jsje = [];
+    //     var jnl = [];
+    //     var cot = [];
+    //     var sot = [];
+    //     var ljyd = [];
+    //     var not = [];
+    //     var xuet = [];
+    //     var jsym = [];
+    //     $.ajax({
+    //         type: "post",
+    //         url: "/system/za/list",
+    //         dataType: "json",
+    //         async: false,
+    //         success: function(resulf){
+    //
+    //             for (var i = 0; i < resulf.length; i++) {
+    //                 yuez.push(resulf[i].yuez);
+    //                  ljjnl = [].push(resulf[i].ljjnl);
+    //                 jsje = [].push(resulf[i].jsje);
+    //                 jnl = [].push(resulf[i].jnl);
+    //                 cot = [].push(resulf[i].cot);
+    //                 sot = [].push(resulf[i].sot);
+    //                 ljyd= [].push(resulf[i].ljyd);
+    //                 not = [].push(resulf[i].not);
+    //                 xuet= [].push(resulf[i].xuet);
+    //                 jsym= [].push(resulf[i].jsym);
+    //                 alert(jsje);
+    //                 alert("wewe"+jsym);
+    //
+    //             }
+    //
+    //
+    //
+    //             document.getElementById("yuez").innerHTML=parseInt(yuez);
+    //             document.getElementById("esum").innerHTML= (parseInt(esum[0]));
+    //             document.getElementById("gsum").innerHTML=(parseInt(gsum[0]));
+    //
+    //             $("#wsum").numberRock({
+    //                 lastNumber:$("#wsum").text(),		//终止数字
+    //                 duration:800,
+    //                 easing:'swing',  	//慢快慢
+    //             });
+    //             $("#esum").numberRock({
+    //                 lastNumber:$("#esum").text(),		//终止数字
+    //                 duration:800,
+    //                 easing:'swing',  	//慢快慢
+    //             });
+    //             $("#gsum").numberRock({
+    //                 lastNumber:$("#gsum").text(),		//终止数字
+    //                 duration:800,
+    //                 easing:'swing',  	//慢快慢
+    //             });
+    //         },
+    //         error: function (errorMsg) {
+    //             alert("获取后台数据失败！");
+    //         }
+    //     })
+    // });
+
     //用能汇总,水电气总
     $(function () {
         //水
@@ -242,24 +441,24 @@
                     gsum.push(result[i].gsum);
 
                 }
-                document.getElementById("wsum").innerHTML=parseInt(wsum[0]);
-                document.getElementById("esum").innerHTML= (parseInt(esum[0]));
-                document.getElementById("gsum").innerHTML=(parseInt(gsum[0]));
+                document.getElementById("wsum").innerHTML = parseInt(wsum[0]);
+                document.getElementById("esum").innerHTML = (parseInt(esum[0]));
+                document.getElementById("gsum").innerHTML = (parseInt(gsum[0]));
 
                 $("#wsum").numberRock({
-                    lastNumber:$("#wsum").text(),		//终止数字
-                    duration:800,
-                    easing:'swing',  	//慢快慢
+                    lastNumber: $("#wsum").text(),		//终止数字
+                    duration: 800,
+                    easing: 'swing',  	//慢快慢
                 });
                 $("#esum").numberRock({
-                    lastNumber:$("#esum").text(),		//终止数字
-                    duration:800,
-                    easing:'swing',  	//慢快慢
+                    lastNumber: $("#esum").text(),		//终止数字
+                    duration: 800,
+                    easing: 'swing',  	//慢快慢
                 });
                 $("#gsum").numberRock({
-                    lastNumber:$("#gsum").text(),		//终止数字
-                    duration:800,
-                    easing:'swing',  	//慢快慢
+                    lastNumber: $("#gsum").text(),		//终止数字
+                    duration: 800,
+                    easing: 'swing',  	//慢快慢
                 });
             },
 
@@ -268,9 +467,6 @@
             }
         })
     });
-
-
-
 
 
     //用能排名图表
@@ -339,7 +535,6 @@
                     show: false,
 
                 },
-
 
 
             }],
@@ -534,16 +729,16 @@
                         color: '#57617B'	//显示竖线颜色
                     }
                 },
-                backgroundColor:'#05042C',	//tooltip背景色
-                borderColor:'#2BEDF6',		//tooltip边框颜色
-                borderWidth:2,
+                backgroundColor: '#05042C',	//tooltip背景色
+                borderColor: '#2BEDF6',		//tooltip边框颜色
+                borderWidth: 2,
                 formatter: function (param) {	//自定义tooltip内容
                     var text = '';
-                    text += '<div style="display:flex;flex-direction:row;">'+
-                        '<div style="background-color:#03D16D;height:auto;width:10px;margin-right:5px;"></div>'+
-                        '<div style="display:flex;flex-direction:column;">'+
-                        '<span>'+ param[0].value+'</span>'+
-                        '<span>'+ param[0].axisValue+'</span>'
+                    text += '<div style="display:flex;flex-direction:row;">' +
+                        '<div style="background-color:#03D16D;height:auto;width:10px;margin-right:5px;"></div>' +
+                        '<div style="display:flex;flex-direction:column;">' +
+                        '<span>' + param[0].value + '</span>' +
+                        '<span>' + param[0].axisValue + '</span>'
                     '</div>'
                     '</div>'
                     return text;
@@ -580,13 +775,13 @@
                         barBorderRadius: 30
                     },
                     normal: {
-                        label:{
-                            show:true,
-                            position:'top',
-                            textStyle:{
-                                color:'#ffffff',
-                                fontSize:16,
-                                rotate:30
+                        label: {
+                            show: true,
+                            position: 'top',
+                            textStyle: {
+                                color: '#ffffff',
+                                fontSize: 16,
+                                rotate: 30
                             }
                         },
                         barBorderRadius: 30,
@@ -607,7 +802,7 @@
 
 
     //减少二氧化碳
-    $(function (){
+    $(function () {
         var myChart = echarts.init(document.getElementById('globe'));
         var price = "/system/reduce/lists";
         var xAxisData = [];
@@ -641,8 +836,9 @@
                 avoidLabelOverlap: false,
                 label: {
                     show: true,
-                    formatter:function(val){   //让series 中的文字进行换行
-                        return val.name.split("件").join("\n");},
+                    formatter: function (val) {   //让series 中的文字进行换行
+                        return val.name.split("件").join("\n");
+                    },
                     position: 'center',
                     color: '#FFFFFF',
                     fontSize: 25
@@ -654,7 +850,7 @@
                 data: [{
                     value: yAxisData[0],
                     name: xAxisData[0]
-                }, ]
+                },]
             },
                 {
                     type: 'pie',
@@ -663,8 +859,9 @@
                     avoidLabelOverlap: false,
                     label: {
                         show: true,
-                        formatter:function(val){   //让series 中的文字进行换行
-                            return val.name.split("件").join("\n");},
+                        formatter: function (val) {   //让series 中的文字进行换行
+                            return val.name.split("件").join("\n");
+                        },
                         position: 'center',
                         color: '#FFFFFF',
                         fontSize: 12
@@ -676,7 +873,7 @@
                     data: [{
                         value: yAxisData[4],
                         name: xAxisData[4]
-                    }, ]
+                    },]
                 },
                 {
                     type: 'pie',
@@ -685,8 +882,9 @@
                     avoidLabelOverlap: false,
                     label: {
                         show: true,
-                        formatter:function(val){   //让series 中的文字进行换行
-                            return val.name.split("件").join("\n");},
+                        formatter: function (val) {   //让series 中的文字进行换行
+                            return val.name.split("件").join("\n");
+                        },
                         position: 'center',
                         color: '#FFFFFF',
                         fontSize: 10
@@ -697,7 +895,7 @@
                     data: [{
                         value: yAxisData[5],
                         name: xAxisData[5]
-                    }, ]
+                    },]
                 }, {
                     type: 'pie',
                     radius: ['0%', '35%'],
@@ -705,8 +903,9 @@
                     avoidLabelOverlap: false,
                     label: {
                         show: true,
-                        formatter:function(val){   //让series 中的文字进行换行
-                            return val.name.split("件").join("\n");},
+                        formatter: function (val) {   //让series 中的文字进行换行
+                            return val.name.split("件").join("\n");
+                        },
                         position: 'center',
                         color: '#FFFFFF',
                         fontSize: 15
@@ -717,7 +916,7 @@
                     data: [{
                         value: yAxisData[6],
                         name: xAxisData[6]
-                    }, ]
+                    },]
                 }, {
                     type: 'pie',
                     radius: ['0%', '30%'],
@@ -725,8 +924,9 @@
                     avoidLabelOverlap: false,
                     label: {
                         show: true,
-                        formatter:function(val){   //让series 中的文字进行换行
-                            return val.name.split("件").join("\n");},
+                        formatter: function (val) {   //让series 中的文字进行换行
+                            return val.name.split("件").join("\n");
+                        },
                         position: 'center',
                         color: '#FFFFFF',
                         fontSize: 13
@@ -737,7 +937,7 @@
                     data: [{
                         value: 335,
                         name: '北京综合邮件处理中心'
-                    }, ]
+                    },]
                 }, {
                     type: 'pie',
                     radius: 45,
@@ -745,8 +945,9 @@
                     avoidLabelOverlap: false,
                     label: {
                         show: true,
-                        formatter:function(val){   //让series 中的文字进行换行
-                            return val.name.split("件").join("\n");},
+                        formatter: function (val) {   //让series 中的文字进行换行
+                            return val.name.split("件").join("\n");
+                        },
                         position: 'center',
                         color: '#FFFFFF',
                         fontSize: 15
@@ -757,7 +958,7 @@
                     data: [{
                         value: yAxisData[1],
                         name: xAxisData[1]
-                    }, ]
+                    },]
                 }, {
                     type: 'pie',
                     radius: ['0%', '25%'],
@@ -765,8 +966,9 @@
                     avoidLabelOverlap: false,
                     label: {
                         show: true,
-                        formatter:function(val){   //让series 中的文字进行换行
-                            return val.name.split("件").join("\n");},
+                        formatter: function (val) {   //让series 中的文字进行换行
+                            return val.name.split("件").join("\n");
+                        },
                         position: 'center',
                         color: '#FFFFFF',
                         fontSize: 10
@@ -777,7 +979,7 @@
                     data: [{
                         value: yAxisData[2],
                         name: xAxisData[2]
-                    }, ]
+                    },]
                 }, {
                     type: 'pie',
                     radius: ['0%', '23%'],
@@ -785,8 +987,9 @@
                     avoidLabelOverlap: false,
                     label: {
                         show: true,
-                        formatter:function(val){   //让series 中的文字进行换行
-                            return val.name.split("件").join("\n");},
+                        formatter: function (val) {   //让series 中的文字进行换行
+                            return val.name.split("件").join("\n");
+                        },
                         position: 'center',
                         color: '#FFFFFF',
                         fontSize: 10
@@ -797,14 +1000,13 @@
                     data: [{
                         value: yAxisData[3],
                         name: xAxisData[3]
-                    }, ]
+                    },]
                 }
             ],
-            color: ['rgb(153, 93, 129)','rgb(248, 171, 157)','rgb(235, 130, 88)','rgb(216, 220, 106)','rgb(102, 137, 161)','rgb(92, 175, 178)','rgb(246, 0, 22)','rgb(38, 206, 214)']
+            color: ['rgb(153, 93, 129)', 'rgb(248, 171, 157)', 'rgb(235, 130, 88)', 'rgb(216, 220, 106)', 'rgb(102, 137, 161)', 'rgb(92, 175, 178)', 'rgb(246, 0, 22)', 'rgb(38, 206, 214)']
         };
         myChart.setOption(option);
     })
-
 
 
     //用能占比图表
@@ -994,7 +1196,7 @@
         echarts.registerMap(name, geoJson);
 
         myChart.setOption(option = {
-            backgroundColor:'RGB(14,44,129)',
+            backgroundColor: 'RGB(14,44,129)',
             //地图配置
             tooltip: {
                 trigger: 'item',
@@ -1007,7 +1209,7 @@
                 //formatter: '{b}<br/>{c}'
             },
             geo: {
-                center:[116.32025,39.902506],
+                center: [116.32025, 39.902506],
                 type: 'map',
                 scaleLimit: {  //缩放级别限制
                     min: 1,
@@ -1086,28 +1288,28 @@
     })
 
 
-    $(function(){
+    $(function () {
 
     });
 
-    (function($){
-        $.fn.numberRock=function(options){
-            var defaults={
-                lastNumber:100,
-                duration:2000,
-                easing:'swing'  //swing(默认 : 缓冲 : 慢快慢)  linear(匀速的)
+    (function ($) {
+        $.fn.numberRock = function (options) {
+            var defaults = {
+                lastNumber: 100,
+                duration: 2000,
+                easing: 'swing'  //swing(默认 : 缓冲 : 慢快慢)  linear(匀速的)
             };
-            var opts=$.extend({}, defaults, options);
+            var opts = $.extend({}, defaults, options);
 
             $(this).animate({
-                num : "numberRock",
-            },{
-                duration : opts.duration,
-                easing : opts.easing,
-                complete : function(){
+                num: "numberRock",
+            }, {
+                duration: opts.duration,
+                easing: opts.easing,
+                complete: function () {
                     console.log("success");
                 },
-                step : function(a,b){  //可以检测我们定时器的每一次变化
+                step: function (a, b) {  //可以检测我们定时器的每一次变化
                     $(this).html(parseInt(b.pos * opts.lastNumber));
                 }
             });
