@@ -12,6 +12,7 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"
             th:src="@{/js/jquery.min.js}"></script>
     <link rel="stylesheet" href="../static/css/bigdata/left_bigdata.css" th:href="@{/css/bigdata/left_bigdata.css}"/>
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
 
 </head>
 <body onload="utr(),proprotion()">
@@ -29,21 +30,34 @@
                 <div>
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-5" style=" height: 110px; background-color: #c3b722fa;margin-left: 25px;">
-                            <h4>总耗能</h4>
-                            <div><i class="glyphicon-facetime-video"></i></div>
+                            <div class="row">
+                                <i class="glyphicon glyphicon-leaf col-md-4" style="font-size: 33px;margin-top: 20px"></i>
+                                <h4 class="col-md-8" style="margin-top: 30px;padding-left: 55px">总耗能</h4>
+                            </div>
+                            <div style="text-align: right;font-family: 'Antique Olive';"><h3>178036 tce</h3></div>
                         </div>
                         <div class="col-sm-5" style=" height: 110px;background-color: #de2406fa;margin-left: 30px;">
-                            <h4>用电</h4>
+                            <div class="row">
+                                <i class="glyphicon glyphicon-flash col-md-4" style="font-size: 33px;margin-top: 20px"></i>
+                                <h4 class="col-md-8" style="margin-top: 30px;padding-left: 55px">用电</h4>
+                            </div>
+                            <div style="text-align: right;font-family: 'Antique Olive';"><h3>10958427 kWh</h3></div>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 15px">
                         <div class="col-sm-5" style="height: 110px;background-color: #b844e8fa;margin-left: 25px;">
-                            <h4>用水</h4>
-
+                            <div class="row">
+                                <i class="glyphicon glyphicon-tint col-md-4" style="font-size: 33px;margin-top: 20px"></i>
+                                <h4 class="col-md-8" style="margin-top: 30px;padding-left: 55px">用水</h4>
+                            </div>
+                            <div style="text-align: right;font-family: 'Antique Olive';"><h3>133996 t</h3></div>
                         </div>
                         <div class="col-sm-5" style="height: 110px;background-color: #16d1effa;margin-left: 30px;">
-                            <h4>用燃气</h4>
-
+                            <div class="row">
+                                <i class="glyphicon glyphicon-fire col-md-4" style="font-size: 33px;margin-top: 20px"></i>
+                                <h4 class="col-md-8" style="margin-top: 30px;padding-left: 55px">用燃气</h4>
+                            </div>
+                            <div style="text-align: right;font-family: 'Antique Olive';"><h3>178036 m³</h3></div>
                         </div>
                     </div>
                 </div>
@@ -122,7 +136,24 @@
             </div>
 
             <!--减少排放污染物-->
-            <div style="border:solid 2px #FFFFFF; height: 274px; margin-bottom: 10px">减少排放污染物</div>
+            <div  style="border:solid 2px #FFFFFF; height: 274px; margin-bottom: 10px">
+
+                <h4>减少排放污染物</h4>
+                <div class="row" style=" margin: 0px;padding-bottom: 8px">
+                    <div class="col-sm-5" style=" height: 50px;">
+                        <div style="background-color: RGB(196,136,28);height: 100%;width: 210px;border-radius: 10px;">co2267吨</div></div>
+                    <div class="col-sm-5" style="height: 50px;margin-left: 31px">
+                        <div style="background-color: RGB(19,121,224);height: 100%;width: 210px;border-radius: 10px;">co2267吨</div></div>
+                </div>
+                <div class="row"style=" margin: 0px;padding-bottom: 8px">
+                    <div class="col-sm-5" style="height: 50px;">
+                        <div style="background-color: RGB(19,197,146);height: 100%;width: 210px; border-radius: 10px;">co2267吨</div></div>
+                    <div class="col-sm-5" style="height: 50px; margin-left: 31px">
+                        <div style="background-color: RGB(8,171,204);height: 100%;width: 210px;border-radius: 10px;">co2267吨</div></div>
+                </div>
+                <div style="background-color: RGB(16,163,146);height: 50px;width: 434px;margin-left: 15px; border-radius: 10px;margin-bottom: 8px;">累计用电9863万</div>
+                <div style="background-color: RGB(14,122,156);height: 50px;width: 434px;margin-left: 15px; border-radius: 10px;margin-bottom: 8px;">减少永梅3985吨</div>
+            </div>
 
             <!--减少二氧化碳排放-->
             <div style="border:solid 2px #FFFFFF; height: 275px">
