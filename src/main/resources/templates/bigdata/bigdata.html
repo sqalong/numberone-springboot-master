@@ -1266,7 +1266,8 @@
     // 地图点击
     myChart.on('click', function (e) {
         console.log(e)
-        window.open("/system/bigdata/areabigdata");
+        var largeareaname1=e.name;
+        window.open("/system/bigdata/areabigdata?largeareaname="+largeareaname1);
     })
 
 

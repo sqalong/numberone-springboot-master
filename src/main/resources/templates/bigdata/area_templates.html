@@ -97,14 +97,8 @@
             <div style="border:solid 1px #FFFFFF;margin-bottom: 10px;">
                                 <div class="box" style="height: 595px;position: relative;margin: 0px">
                                     <ul class="image" style="margin: 0px">
-                                        <li><img src="../static/img/img2.jpg" th:src="@{/img/img2.jpg}"/></li>
-                                        <li><img src="../static/img/img1.jpg" th:src="@{/img/img1.jpg}"/></li>
-                                        <li><img src="../static/img/img3.jpg" th:src="@{/img/img3.jpg}"/></li>
                                     </ul>
                                     <ul class="num">
-                                        <li class='current'>1</li>
-                                        <li>2</li>
-                                        <li>3</li>
                                     </ul>
                                     <div class="left arrow"><</div>
                                     <div class="right arrow">></div>
@@ -834,9 +828,32 @@
 
 
     //地图轮播事件
+
     var i=0,timer;
     var sum = $(".image li").length;
     $(function(){
+        //循环遍历li
+        var arrFir = [{
+            "id": 1,
+            "name": "dalou.png"
+        }, {
+            "id": 2,
+            "name": "kongtiao1.png"
+        }, {
+            "id": 3,
+            "name": "kongtiao2.png"
+        }, {
+            "id": 4,
+            "name": "xizhan.png"
+        }, {
+            "id": 5,
+            "name": "zhaoming.png"
+        }];
+        for(var a = 0; a < arrFir.length; a++) {
+            $(".image").append('<li><img src="../staticimg/' + arrFir[a].name + '" th:"@{/img/'+arrFir[a].name+'}" /></li>');
+            $(".num").append('<li>' + arrFir[a].id + '</li>')
+        }
+        $(".num li").eq(0).addClass("current"); //默认第一个加样式
         $(".image li").eq(0).show();//图片li显示
         $(".box").hover(function(){//鼠标在按钮上事件
             $(".arrow").show();//切换按钮显示
