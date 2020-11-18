@@ -9,4 +9,14 @@
         SELECT SUM(`value`) as gsum,wsum,esum FROM gas g INNER JOIN
         (SELECT SUM(`value`) as wsum,esum FROM water w INNER JOIN (SELECT SUM(`value`) as esum FROM electric) e) q
     </select>
-  </mapper>
+
+    <select id="areagross" resultType="Zsum">
+       SELECT SUM(`value`) as gsum,wsum,esum FROM gas g INNER JOIN (SELECT SUM(`value`) as wsum,esum FROM water w INNER JOIN (SELECT SUM(`value`) as esum FROM electric WHERE name = #{largeareaname}) e WHERE name = #{largeareaname}) q WHERE name = #{largeareaname}
+    </select>
+
+    <select id="arearatio" resultType="AreaRatio">
+        SELECT smallareaname,`value` FROM ${table} WHERE largeareaname= #{largeareaname}
+    </select>
+
+
+</mapper>
