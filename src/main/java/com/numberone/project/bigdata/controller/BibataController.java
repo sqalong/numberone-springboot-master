@@ -1,20 +1,10 @@
 package com.numberone.project.bigdata.controller;
 
-import com.numberone.common.constant.UserConstants;
-import com.numberone.common.utils.poi.ExcelUtil;
-import com.numberone.framework.aspectj.lang.annotation.Log;
-import com.numberone.framework.aspectj.lang.enums.BusinessType;
 import com.numberone.framework.web.controller.BaseController;
-import com.numberone.framework.web.domain.AjaxResult;
-import com.numberone.framework.web.page.TableDataInfo;
 import com.numberone.project.bigdata.domain.Zsum;
 import com.numberone.project.bigdata.service.IBigdataService;
-import com.numberone.project.system.water.domain.Water;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,7 +25,7 @@ public class BibataController extends BaseController
     @RequestMapping("bigdata")
     public String bigdata()
     {
-        return "bigdata";
+        return "/bigdata/bigdata";
     }
 
     @RequestMapping("/zongsum")
@@ -44,5 +34,8 @@ public class BibataController extends BaseController
         return bs.zsum();
     }
 
-
+    @RequestMapping("areabigdata")
+    public String areabigdata(){
+        return "/bigdata/area_templates";
+    }
 }
