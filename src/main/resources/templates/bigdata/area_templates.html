@@ -2,7 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>能源管控大数据平台</title>
     <link href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts.min.js"
             th:src="@{/js/echarts.min.js}"></script>
@@ -18,7 +18,7 @@
      th:src="@{/back.jpg}">
     <!--整个页面布局-->
     <div class="row" style="border: 1px solid #000000;height: 100%;margin: 0px;">
-        <!--左,,,用能汇总,用能占比、用能排名-->
+        <!--左,,,用能汇总,用能占比,用能排名-->
         <div class="col-sm-3" style="height: 100% ;">
             <!--用能汇总-->
             <div style="border:solid 1px #FFFFFF;margin: 10px 0;">
@@ -86,14 +86,14 @@
                         <button type="button" class="btn btn-link" style="color: #fff;" onclick="utr('gas')">气</button>
                     </div>
                 </div>
-                <div id="xzuo"></div>
+                <div id="xzuo" style="height: 350px"></div>
             </div>
         </div>
-        <!--中,,,标题,地图，用能对比曲线-->
+        <!--中,,,标题,轮播,用能对比曲线-->
         <div class="col-sm-6" style=" height: 100%;">
             <!--标题-->
             <div style="height: 80px;line-height: 95px;text-align: center;font-size: 32px">北京邮政能源管理数据大平台</div>
-            <!--地图-->
+            <!--轮播-->
             <div style="border:solid 1px #FFFFFF;margin-bottom: 10px;">
                                 <div class="box" style="height: 595px;position: relative;margin: 0px">
                                     <ul class="image" style="margin: 0px">
@@ -129,8 +129,10 @@
             <!--基本情况-->
             <div style="border:solid 1px #FFFFFF; height: 136px;margin: 10px 0;">
                 <div>
-                    <h4>基本情况</h4></div>
-                <div class="row" style="margin: 0px;padding: 0px">
+                    <h4 style="display: inline;">基本情况</h4>
+                    <button type="button" style="width: 100px;height: 30px;border-radius: 10px;background-color: #00000059;margin-left: 240px;margin-top: 3px;border: none"><a href="/system/bigdata/bigdata" style="color: #FFFFFF;list-style: none">返回</a></button>
+                </div>
+                <div class="row" style="margin: 0px;padding: 0px;margin-top: 10px; margin-right: 18px;">
                     <div class="col-md-4">
                         <div style="background-color: #867e70; height: 85px;border-radius: 10px;width: 130px;text-align: center;">
                             <p><span id="wwsum" style="font-size: 37px;">4566</span></p>
@@ -157,7 +159,7 @@
             <!--减少排饭污染物-->
             <div style="border:solid 1px #FFFFFF;">
                 <!--减少排饭污染物-->
-                <div>
+                <div >
                     <h4>减少排放污染物</h4>
                     <div class="row" style=" margin: 0px;padding-bottom: 10px;text-align: center">
                         <div class="col-sm-5" style=" height: 50px;">
@@ -194,38 +196,109 @@
                 <div style="height: 150px;margin-bottom: 9px;">
                     <h4>照明节能概况</h4>
                     <div style="margin: 0px;padding: 0px 10px;">
-                        <div style="background-color: #00F7DE;float: left; width: 135px;height: 125px;border-radius: 10px;">
+                        <div style="background-color: #00F7DE;float: left; width: 135px;height: 120px;border-radius: 10px;">
                             <div style="margin: 10px 5px">
                                 <img src="../../static/img/bigdata/jienenglv.png" th:src="@{/img/bigdata/jienenglv.png}" style="width: 48px;height: 48px"/>
                                 <span style="float: right"><h4>节能率</h4></span>
                             </div>
-                            <div><span>60</span><span>%</span></div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">60</span><span style="font-size: 20px;float: right;">%</span></div>
                         </div>
-                        <div style="background-color: #00F7DE;margin-left: 10px;float: left; width: 135px;height: 125px;border-radius: 10px;">
+                        <div style="background-color: #00F7DE;margin-left: 10px;float: left; width: 135px;height: 120px;border-radius: 10px;">
                             <div style="margin: 10px 5px">
                                 <img src="../../static/img/bigdata/jienengliang.png" th:src="@{/img/bigdata/jienengliang.png}" style="width: 48px;height: 48px"/>
                                 <span style="float: right"><h4>节能量</h4></span>
                             </div>
-                            <div><span>138.3</span><span>tce</span></div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">138.3</span><span style="font-size: 20px;float: right;">tce</span></div>
                         </div>
-                        <div style="background-color: #00F7DE;margin-left: 10px;float: left; width: 135px;height: 125px;border-radius: 10px;">
+                        <div style="background-color: #00F7DE;margin-left: 10px;float: left; width: 135px;height: 120px;border-radius: 10px;">
                             <div style="margin: 10px 5px">
                                 <img src="../../static/img/bigdata/jienengjine.png" th:src="@{/img/bigdata/jienengjine.png}" style="width: 48px;height: 48px"/>
                                 <span style="float: right"><h4>节能金额</h4></span>
                             </div>
-                            <div><span>130</span><span>万元</span></div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">130</span><span style="font-size: 20px;float: right;">万元</span></div>
                         </div>
                     </div>
                 </div>
+                <!--系统群控节能概括-->
                 <div style="height: 150px;margin-bottom: 9px;">
-                    <h4>动力设备节能概况（预计）</h4>
+                    <h4>系统群控节能概括（预计）</h4>
+                    <div style="margin: 0px;padding: 0px 10px;">
+                        <div style="background-color: #00F7DE;float: left; width: 135px;height: 120px;border-radius: 10px;">
+                            <div style="margin: 10px 5px">
+                                <img src="../../static/img/bigdata/jienenglv.png" th:src="@{/img/bigdata/jienenglv.png}" style="width: 48px;height: 48px"/>
+                                <span style="float: right"><h4>节能率</h4></span>
+                            </div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">60</span><span style="font-size: 20px;float: right;">%</span></div>
+                        </div>
+                        <div style="background-color: #00F7DE;margin-left: 10px;float: left; width: 135px;height: 120px;border-radius: 10px;">
+                            <div style="margin: 10px 5px">
+                                <img src="../../static/img/bigdata/jienengliang.png" th:src="@{/img/bigdata/jienengliang.png}" style="width: 48px;height: 48px"/>
+                                <span style="float: right"><h4>节能量</h4></span>
+                            </div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">138.3</span><span style="font-size: 20px;float: right;">tce</span></div>
+                        </div>
+                        <div style="background-color: #00F7DE;margin-left: 10px;float: left; width: 135px;height: 120px;border-radius: 10px;">
+                            <div style="margin: 10px 5px">
+                                <img src="../../static/img/bigdata/jienengjine.png" th:src="@{/img/bigdata/jienengjine.png}" style="width: 48px;height: 48px"/>
+                                <span style="float: right"><h4>节能金额</h4></span>
+                            </div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">130</span><span style="font-size: 20px;float: right;">万元</span></div>
+                        </div>
+                    </div>
                 </div>
+                <!--动力设备节能概括-->
                 <div style="height: 150px;margin-bottom: 9px;">
                     <h4>动力设备节能概况（预计）</h4>
+                    <div style="margin: 0px;padding: 0px 10px;">
+                        <div style="background-color: #00F7DE;float: left; width: 135px;height: 120px;border-radius: 10px;">
+                            <div style="margin: 10px 5px">
+                                <img src="../../static/img/bigdata/jienenglv.png" th:src="@{/img/bigdata/jienenglv.png}" style="width: 48px;height: 48px"/>
+                                <span style="float: right"><h4>节能率</h4></span>
+                            </div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">60</span><span style="font-size: 20px;float: right;">%</span></div>
+                        </div>
+                        <div style="background-color: #00F7DE;margin-left: 10px;float: left; width: 135px;height: 120px;border-radius: 10px;">
+                            <div style="margin: 10px 5px">
+                                <img src="../../static/img/bigdata/jienengliang.png" th:src="@{/img/bigdata/jienengliang.png}" style="width: 48px;height: 48px"/>
+                                <span style="float: right"><h4>节能量</h4></span>
+                            </div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">138.3</span><span style="font-size: 20px;float: right;">tce</span></div>
+                        </div>
+                        <div style="background-color: #00F7DE;margin-left: 10px;float: left; width: 135px;height: 120px;border-radius: 10px;">
+                            <div style="margin: 10px 5px">
+                                <img src="../../static/img/bigdata/jienengjine.png" th:src="@{/img/bigdata/jienengjine.png}" style="width: 48px;height: 48px"/>
+                                <span style="float: right"><h4>节能金额</h4></span>
+                            </div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">130</span><span style="font-size: 20px;float: right;">万元</span></div>
+                        </div>
+                    </div>
                 </div>
                 <!--优化电网环境节能概况（预计）-->
                 <div style="height: 150px;">
                     <h4>优化电网环境节能概况（预计）</h4>
+                    <div style="margin: 0px;padding: 0px 10px;">
+                        <div style="background-color: #00F7DE;float: left; width: 135px;height: 120px;border-radius: 10px;">
+                            <div style="margin: 10px 5px">
+                                <img src="../../static/img/bigdata/jienenglv.png" th:src="@{/img/bigdata/jienenglv.png}" style="width: 48px;height: 48px"/>
+                                <span style="float: right"><h4>节能率</h4></span>
+                            </div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">60</span><span style="font-size: 20px;float: right;">%</span></div>
+                        </div>
+                        <div style="background-color: #00F7DE;margin-left: 10px;float: left; width: 135px;height: 120px;border-radius: 10px;">
+                            <div style="margin: 10px 5px">
+                                <img src="../../static/img/bigdata/jienengliang.png" th:src="@{/img/bigdata/jienengliang.png}" style="width: 48px;height: 48px"/>
+                                <span style="float: right"><h4>节能量</h4></span>
+                            </div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">138.3</span><span style="font-size: 20px;float: right;">tce</span></div>
+                        </div>
+                        <div style="background-color: #00F7DE;margin-left: 10px;float: left; width: 135px;height: 120px;border-radius: 10px;">
+                            <div style="margin: 10px 5px">
+                                <img src="../../static/img/bigdata/jienengjine.png" th:src="@{/img/bigdata/jienengjine.png}" style="width: 48px;height: 48px"/>
+                                <span style="float: right"><h4>节能金额</h4></span>
+                            </div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">130</span><span style="font-size: 20px;float: right;">万元</span></div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
