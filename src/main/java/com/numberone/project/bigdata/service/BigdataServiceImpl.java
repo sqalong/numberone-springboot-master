@@ -1,9 +1,6 @@
 package com.numberone.project.bigdata.service;
 
-import com.numberone.common.constant.UserConstants;
-import com.numberone.common.utils.StringUtils;
-import com.numberone.common.utils.security.ShiroUtils;
-import com.numberone.common.utils.text.Convert;
+import com.numberone.project.bigdata.domain.AreaRatio;
 import com.numberone.project.bigdata.domain.Zsum;
 import com.numberone.project.bigdata.mapper.BigdataMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +22,15 @@ public class BigdataServiceImpl implements IBigdataService
     @Override
     public List<Zsum> zsum() {
         return configMapper.zsum();
+    }
+
+    @Override
+    public Zsum areagross(String largeareaname) {
+        return configMapper.areagross(largeareaname);
+    }
+
+    @Override
+    public List<AreaRatio> arearatio(String table, String largeareaname) {
+        return configMapper.arearatio(table,largeareaname);
     }
 }
