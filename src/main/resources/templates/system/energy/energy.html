@@ -1,183 +1,203 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('单位用能Manager列表')"/>
-    <script src="../../../static/js/echarts.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts.min.js"
-            th:src="@{/js/echarts.min.js}"></script>
+    <th:block th:include="include :: header('单位用能Manager列表')" />
 </head>
-
 <body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <p>用能单位：</p>
+                                <input type="text" name="energyUnits"/>
+                            </li>
+                            <li>
+                                <p>产品名称：</p>
+                                <input type="text" name="productName"/>
+                            </li>
+                            <li>
+                                <p>能源分类：</p>
+                                <select name="energyConsumptionType" th:with="type=${@dict.getType('')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <p>能耗分项：</p>
+                                <input type="text" name="energyConsumptionItemized"/>
+                            </li>
+                            <li class="select-time">
+                                <p>时间：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endTime]"/>
+                            </li>
+                            <li>
+                                <p>本月值：</p>
+                                <input type="text" name="theMonthPrice"/>
+                            </li>
+                            <li>
+                                <p>产量：</p>
+                                <input type="text" name="capacity"/>
+                            </li>
+                            <li>
+                                <p>单位产品能耗：</p>
+                                <input type="text" name="unitProductEnergy"/>
+                            </li>
+                            <li>
+                                <p>上年同期产量：</p>
+                                <input type="text" name="yAgoProduction"/>
+                            </li>
+                            <li>
+                                <p>产品能耗费用：</p>
+                                <input type="text" name="producEnergyCost"/>
+                            </li>
+                            <li>
+                                <p>单位产品能耗费用：</p>
+                                <input type="text" name="unitProductEnergyCost"/>
+                            </li>
+                            <li>
+                                <p>上年同期值：</p>
+                                <input type="text" name="yAgoValue"/>
+                            </li>
+                            <li>
+                                <p>单位产品能耗上年同期：</p>
+                                <input type="text" name="unitProductEnergyYAgo"/>
+                            </li>
+                            <li>
+                                <p>产品能耗费用上年同期：</p>
+                                <input type="text" name="producEnergyCostYAgo"/>
+                            </li>
+                            <li>
+                                <p>单位产品能耗费用上年同期：</p>
+                                <input type="text" name="unitProductEnergyCostYAgo"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
 
-<div class="container-div">
-    <div class="row">
-        <div class="col-sm-12 search-collapse">
-            <form id="formId">
-                <div class="select-list">
-
-                </div>
-            </form>
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:energy:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:energy:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:energy:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:energy:export">
+                    <i class="fa fa-download"></i> 导出
+                 </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
         </div>
-        <div class="col-sm-12 select-table table-striped">
-            <table id="bootstrap-table" style="table-layout:fixed;"></table>
-        </div>
-        <div id="totalFlowRate" style="height:300px;"></div>
-
     </div>
-</div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('system:energy:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:energy:remove')}]];
+        var prefix = ctx + "system/energy";
 
-<th:block th:include="include :: footer"/>
-<script th:inline="javascript">
-
-    var prefix = ctx + "system/energy";
-
-    $(function () {
-        var options = {
-            url: prefix + "/list",
-
-            modalName: "单位用能Manager",
-            striped: true,
-            search: true,
-            showRefresh: true,
-
-            columns: [{
-                checkbox: true
-            },
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "单位用能Manager",
+                columns: [{
+                    checkbox: true
+                },
                 {
-                    field: 'productId',
-                    title: '序号',
+                    field : 'productId', 
+                    title : '序号',
                     visible: false
                 },
                 {
-                    field: 'energyUnits',
-                    title: '用能单位'
+                    field : 'energyUnits', 
+                    title : '用能单位'
                 },
                 {
-                    field: 'productName',
-                    title: '产品名称'
+                    field : 'productName', 
+                    title : '产品名称'
                 },
                 {
-                    field: 'energyConsumptionType',
-                    title: '能源分类'
+                    field : 'energyConsumptionType', 
+                    title : '能源分类'
                 },
                 {
-                    field: 'energyConsumptionItemized',
-                    title: '能耗分项'
+                    field : 'energyConsumptionItemized', 
+                    title : '能耗分项'
                 },
                 {
-                    field: 'time',
-                    title: '时间'
+                    field : 'time', 
+                    title : '时间'
                 },
                 {
-                    field: 'theMonthPrice',
-                    title: '本月值'
+                    field : 'theMonthPrice', 
+                    title : '本月值'
                 },
                 {
-                    field: 'capacity',
-                    title: '产量'
+                    field : 'capacity', 
+                    title : '产量'
                 },
                 {
-                    field: 'unitProductEnergy',
-                    title: '单位产品能耗'
+                    field : 'unitProductEnergy', 
+                    title : '单位产品能耗'
                 },
                 {
-                    field: 'yAgoProduction',
-                    title: '上年同期产量'
+                    field : 'yAgoProduction', 
+                    title : '上年同期产量'
                 },
                 {
-                    field: 'producEnergyCost',
-                    title: '产品能耗费用'
+                    field : 'producEnergyCost', 
+                    title : '产品能耗费用'
                 },
                 {
-                    field: 'unitProductEnergyCost',
-                    title: '单位产品能耗费用'
+                    field : 'unitProductEnergyCost', 
+                    title : '单位产品能耗费用'
                 },
                 {
-                    field: 'yAgoValue',
-                    title: '上年同期值'
+                    field : 'yAgoValue', 
+                    title : '上年同期值'
                 },
                 {
-                    field: 'unitProductEnergyYAgo',
-                    title: '单位产品能耗上年同期'
+                    field : 'unitProductEnergyYAgo', 
+                    title : '单位产品能耗上年同期'
                 },
                 {
-                    field: 'producEnergyCostYAgo',
-                    title: '产品能耗费用上年同期'
+                    field : 'producEnergyCostYAgo', 
+                    title : '产品能耗费用上年同期'
                 },
                 {
-                    field: 'unitProductEnergyCostYAgo',
-                    title: '单位产品能耗费用上年同期'
+                    field : 'unitProductEnergyCostYAgo', 
+                    title : '单位产品能耗费用上年同期'
                 },
-            ]
-        };
-        $.table.init(options);
-    });
-    var myChart = echarts.init(document.getElementById('main'));
-
-    // 指定图表的配置项和数据
-    myChart.setOption(option = {
-        title: {
-            text: ''
-        },
-        tooltip: {
-            trigger: 'axis'
-        },
-        legend: {
-            data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        toolbox: {
-            feature: {
-                saveAsImage: {}
-            }
-        },
-        xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [{
-            name: '邮件营销',
-            type: 'line',
-            stack: '总量',
-            data: [120, 132, 101, 134, 90, 230, 210]
-        },
-            {
-                name: '联盟广告',
-                type: 'line',
-                stack: '总量',
-                data: [220, 182, 191, 234, 290, 330, 310]
-            },
-            {
-                name: '视频广告',
-                type: 'line',
-                stack: '总量',
-                data: [150, 232, 201, 154, 190, 330, 410]
-            },
-            {
-                name: '直接访问',
-                type: 'line',
-                stack: '总量',
-                data: [320, 332, 301, 334, 390, 330, 320]
-            },
-            {
-                name: '搜索引擎',
-                type: 'line',
-                stack: '总量',
-                data: [820, 932, 901, 934, 1290, 1330, 1320]
-            }
-        ]
-    });
-
-    myChart.setOption(option);
-</script>
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.productId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.productId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
 </body>
 </html>

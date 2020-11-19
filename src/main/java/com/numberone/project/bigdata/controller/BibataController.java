@@ -24,10 +24,10 @@ public class BibataController extends BaseController
     private IBigdataService bs;
     private String prefix = "system/bigdata";
 
-    @RequestMapping("bigdata")
-    public String bigdata()
+    @RequestMapping("/bigdata")
+    public String bigdatas()
     {
-        return "/bigdata/bigdata";
+        return "bigdata/bigdata";
     }
 
     @RequestMapping("/zongsum")
@@ -41,7 +41,7 @@ public class BibataController extends BaseController
 
         model.addAttribute("largeareaname",largeareaname);
 
-        return "/bigdata/area_templates";
+        return "bigdata/area_templates";
     }
 
     @GetMapping("/areagross")

@@ -7,7 +7,7 @@ import com.numberone.project.system.energy.domain.ProductEnergy;
  * 单位用能ManagerService接口
  * 
  * @author numberone
- * @date 2020-10-23
+ * @date 2020-11-19
  */
 public interface IProductEnergyService 
 {

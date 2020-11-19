@@ -9,6 +9,10 @@
     <script src="${pageContext.request.contextPath}/ajax/libs/layui/layui.all.js"  th:src="@{/ajax/libs/layui/layui.all.js}"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/ajax/libs/layui/css/layui.mobile.css" th:href="@{/ajax/libs/layui/css/layui.mobile.css}">
 
+
+
+
+
    <script type="text/javascript" src="${pageContext.request.contextPath}/ajax/libs/layui/layui.js"
            th:src="@{/ajax/libs/layui/layui.js}"></script>
     <script src="${pageContext.request.contextPath}/ajax/libs/layui/lay/modules/tree.js" th:src="@{/ajax/libs/layui/lay/modules/tree.js}"></script>
@@ -90,7 +94,7 @@
 
         }
     </style>
-
+    <script src="../../../static/layui/layui.all.js"></script>
 
 
 </head>
@@ -337,15 +341,18 @@
                 },
                 {
                     field: 'meanehiletime',
-                    title: '同步时间'
+                    title: '同步时间',
+                    sortable: true
                 },
                 {
                     field: 'insidevalue',
-                    title: '内部限值'
+                    title: '内部限值',
+                    sortable: true
                 },
                 {
                     field: 'regulationvalue',
-                    title: '法规限值'
+                    title: '法规限值',
+                    sortable: true
                 },
                 {
                     field: 'indication',
