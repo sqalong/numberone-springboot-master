@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     
-    <title>登录NumberOne系统</title>
+    <title>登录能源管控大平台</title>
     <meta name="description" content="NumberOne后台管理框架">
     <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
     <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
@@ -24,29 +24,28 @@
 
 <body class="signin">
 
-    <div class="signinpanel">
+    <div class="signinpanel" style="width: 400px;">
         <div class="row">
-            <div class="col-sm-7">
-                <div class="signin-info">
-                    <div class="logopanel m-b">
-                        <h1><img alt="[ NumberOne ]" src="../static/numberone.png" th:src="@{/numberone.png}"></h1>
-                    </div>
-                    <div class="m-b"></div>
-                    <h4>欢迎使用&nbsp;&nbsp;<strong>神奇阿龙&nbsp;&nbsp;神奇的系统</strong></h4>
-                    <ul class="m-b">
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 成功的事业</li>
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 幸福的家庭</li>
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 理想的女人</li>
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 诱人的金钱</li>
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 美好的爱情</li>
-                    </ul>
-                    <strong>还没有账号？ <a href="#">立即注册&raquo;</a></strong>
-                </div>
-            </div>
-            <div class="col-sm-5" >
+
+<!--                <div class="signin-info">-->
+<!--                    <div class="logopanel m-b">-->
+<!--                        <h1><img alt="[ NumberOne ]" src="../static/numberone.png" th:src="@{/numberone.png}"></h1>-->
+<!--                    </div>-->
+<!--                    <div class="m-b"></div>-->
+<!--                    <h4>欢迎使用&nbsp;&nbsp;<strong>神奇阿龙&nbsp;&nbsp;神奇的系统</strong></h4>-->
+<!--                    <ul class="m-b">-->
+<!--                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 成功的事业</li>-->
+<!--                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 幸福的家庭</li>-->
+<!--                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 理想的女人</li>-->
+<!--                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 诱人的金钱</li>-->
+<!--                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 美好的爱情</li>-->
+<!--                    </ul>-->
+<!--                    <strong>还没有账号？ <a href="#">立即注册&raquo;</a></strong>-->
+<!--                </div>-->
+
+            <div class="col-sm-12" >
                 <form id="signupForm">
                     <h4 class="no-margins">登录：</h4>
-                    <p class="m-t-md">悲欢自渡,他人难悟</p>
                     <input type="text"     name="username" class="form-control uname"     placeholder="用户名" value="admin"    />
                     <input type="password" name="password" class="form-control pword"     placeholder="密码"   value="admin123" />
 					<div class="row m-t" th:if="${captchaEnabled==true}">
@@ -66,7 +65,7 @@
                 </form>
             </div>
         </div>
-        <div class="signup-footer" style="margin: -14px 3px 0px 0px;">
+        <div class="signup-footer" style="margin: 15px 0px 0px 0px;">
             <div class="pull-left">
                 &copy; 2020 神奇阿龙 保留所有权利 <br>
             </div>
