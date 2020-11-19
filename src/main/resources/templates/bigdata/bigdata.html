@@ -1142,7 +1142,8 @@
         'name': '北京西站邮件处理中心',
         'color': '#ff69fc',
         'latitude': 39.902506,
-        'longitude': 116.32025
+        'longitude': 116.32025,
+        'url':'/system/bigdata/areabigdata'
 
     },
         {
@@ -1150,28 +1151,32 @@
             'longitude': 116.541167,
             'name': '北京综合邮件处理中心',
             'value': 41558260,
-            'color': '#24d251'
+            'color': '#24d251',
+            'url':'/system/bigdata/areabigdata'
         },
         {
             'latitude': 39.911907,
             'longitude': 116.431918,
             'name': '北京站邮件处理中心',
             'value': 26458260,
-            'color': '#f80404'
+            'color': '#f80404',
+            'url':'/system/bigdata/areabigdata'
         },
         {
             'latitude': 39.923751,
             'longitude': 116.431528,
             'name': '天桥大院',
             'value': 15258260,
-            'color': '#eafa04'
+            'color': '#eafa04',
+            'url':'/system/bigdata/'
         },
         {
             'latitude': 39.959530,
             'longitude': 116.417991,
             'name': '永安路大院',
             'value': 49858260,
-            'color': '#890fe0'
+            'color': '#890fe0',
+            'url':'/system/bigdata/areabigdata'
         }
     ]
 
@@ -1245,6 +1250,7 @@
                             itemOpt.latitude,
                             itemOpt.value
                         ],
+                        url:itemOpt.url,
 
                         label: {
                             emphasis: {
@@ -1266,8 +1272,9 @@
     // 地图点击
     myChart.on('click', function (e) {
         console.log(e)
+        alert(e.);
         var largeareaname1=e.name;
-        window.open("/system/bigdata/areabigdata?largeareaname="+largeareaname1);
+        window.open(e.data.url+"?largeareaname"+largeareaname1);
     })
 
 
