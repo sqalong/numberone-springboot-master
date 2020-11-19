@@ -6,8 +6,8 @@ import com.numberone.project.bigdata.domain.Zsum;
 import com.numberone.project.bigdata.service.IBigdataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -37,11 +37,11 @@ public class BibataController extends BaseController
     }
 
     @RequestMapping("areabigdata")
-    public ModelAndView areabigdata(@RequestParam("largeareaname") String largeareaname){
-        ModelAndView model = new ModelAndView();
-        model.addObject("largeareaname", largeareaname);
-        model.setViewName("/bigdata/area_templates");
-        return model;
+    public String areabigdata(@RequestParam("largeareaname") String largeareaname, Model model){
+
+        model.addAttribute("largeareaname",largeareaname);
+
+        return "/bigdata/area_templates";
     }
 
     @GetMapping("/areagross")

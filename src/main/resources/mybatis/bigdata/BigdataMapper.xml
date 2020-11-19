@@ -15,7 +15,7 @@
     </select>
 
     <select id="arearatio" resultType="AreaRatio">
-        SELECT smallareaname,`value` FROM ${table} WHERE largeareaname= #{largeareaname}
+        SELECT smallareaname,`value` FROM ${table} WHERE largeareaname= #{largeareaname} ORDER BY `value` DESC
     </select>
 
 

@@ -1168,7 +1168,7 @@
             'name': '天桥大院',
             'value': 15258260,
             'color': '#eafa04',
-            'url':'/system/bigdata/'
+            'url':'/system/bigdata/areabigdata'
         },
         {
             'latitude': 39.959530,
@@ -1248,8 +1248,8 @@
                         value: [
                             itemOpt.longitude,
                             itemOpt.latitude,
-                            itemOpt.value
                         ],
+                        test:itemOpt.value,
                         url:itemOpt.url,
 
                         label: {
@@ -1272,9 +1272,8 @@
     // 地图点击
     myChart.on('click', function (e) {
         console.log(e)
-        alert(e.);
         var largeareaname1=e.name;
-        window.open(e.data.url+"?largeareaname"+largeareaname1);
+        window.open(e.data.url+"?largeareaname="+largeareaname1);
     })
 
 
