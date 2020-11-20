@@ -11,7 +11,7 @@ import java.util.Date;
  * 单位用能Manager对象 product_energy
  * 
  * @author numberone
- * @date 2020-10-23
+ * @date 2020-11-19
  */
 public class ProductEnergy extends BaseEntity
 {

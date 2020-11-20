@@ -2,14 +2,112 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <th:block th:include="include :: header('修改单位用能Manager')" />
+    <th:block th:include="include :: datetimepicker-css" />
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
         <form class="form-horizontal m" id="form-energy-edit" th:object="${productEnergy}">
             <input name="productId" th:field="*{productId}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">用能单位：</label>
+                <div class="col-sm-8">
+                    <input name="energyUnits" th:field="*{energyUnits}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">产品名称：</label>
+                <div class="col-sm-8">
+                    <input name="productName" th:field="*{productName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">能源分类：</label>
+                <div class="col-sm-8">
+                    <select name="energyConsumptionType" class="form-control m-b">
+                        <option value="">所有</option>
+                    </select>
+                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">能耗分项：</label>
+                <div class="col-sm-8">
+                    <input name="energyConsumptionItemized" th:field="*{energyConsumptionItemized}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="time" th:value="${#dates.format(productEnergy.time, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">本月值：</label>
+                <div class="col-sm-8">
+                    <input name="theMonthPrice" th:field="*{theMonthPrice}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">产量：</label>
+                <div class="col-sm-8">
+                    <input name="capacity" th:field="*{capacity}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">单位产品能耗：</label>
+                <div class="col-sm-8">
+                    <input name="unitProductEnergy" th:field="*{unitProductEnergy}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">上年同期产量：</label>
+                <div class="col-sm-8">
+                    <input name="yAgoProduction" th:field="*{yAgoProduction}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">产品能耗费用：</label>
+                <div class="col-sm-8">
+                    <input name="producEnergyCost" th:field="*{producEnergyCost}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">单位产品能耗费用：</label>
+                <div class="col-sm-8">
+                    <input name="unitProductEnergyCost" th:field="*{unitProductEnergyCost}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">上年同期值：</label>
+                <div class="col-sm-8">
+                    <input name="yAgoValue" th:field="*{yAgoValue}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">单位产品能耗上年同期：</label>
+                <div class="col-sm-8">
+                    <input name="unitProductEnergyYAgo" th:field="*{unitProductEnergyYAgo}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">产品能耗费用上年同期：</label>
+                <div class="col-sm-8">
+                    <input name="producEnergyCostYAgo" th:field="*{producEnergyCostYAgo}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">单位产品能耗费用上年同期：</label>
+                <div class="col-sm-8">
+                    <input name="unitProductEnergyCostYAgo" th:field="*{unitProductEnergyCostYAgo}" class="form-control" type="text">
+                </div>
+            </div>
         </form>
     </div>
     <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
     <script type="text/javascript">
         var prefix = ctx + "system/energy";
         $("#form-energy-edit").validate({
@@ -21,6 +119,12 @@
                 $.operate.save(prefix + "/edit", $('#form-energy-edit').serialize());
             }
         }
+
+        $("input[name='time']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
     </script>
 </body>
 </html>

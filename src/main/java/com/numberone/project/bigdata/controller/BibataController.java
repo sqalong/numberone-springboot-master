@@ -24,8 +24,8 @@ public class BibataController extends BaseController
     private IBigdataService bs;
     private String prefix = "system/bigdata";
 
-    @RequestMapping("bigdata")
-    public String bigdata()
+    @RequestMapping("/bigdata")
+    public String bigdatas()
     {
         return "bigdata/bigdata";
     }

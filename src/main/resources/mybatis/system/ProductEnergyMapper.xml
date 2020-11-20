@@ -5,8 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.numberone.project.system.energy.mapper.ProductEnergyMapper">
     
     <resultMap type="ProductEnergy" id="ProductEnergyResult">
-        <result property="productId"    column="
-product_id"    />
+        <result property="productId"    column="product_id"    />
         <result property="energyUnits"    column="energy_units"    />
         <result property="productName"    column="product_name"    />
         <result property="energyConsumptionType"    column="energy_consumption_type"    />
@@ -25,20 +24,33 @@ product_id"    />
     </resultMap>
 
     <sql id="selectProductEnergyVo">
-        select 
-product_id, energy_units, product_name, energy_consumption_type, energy_consumption_itemized, time, the_month_price, capacity, unit_product_energy, y_ago_production, produc_energy_cost, unit_product_energy_cost, y_ago_value, unit_product_energy_y_ago, produc_energy_cost_y_ago, unit_product_energy_cost_y_ago from product_energy
+        select product_id, energy_units, product_name, energy_consumption_type, energy_consumption_itemized, time, the_month_price, capacity, unit_product_energy, y_ago_production, produc_energy_cost, unit_product_energy_cost, y_ago_value, unit_product_energy_y_ago, produc_energy_cost_y_ago, unit_product_energy_cost_y_ago from product_energy
     </sql>
 
     <select id="selectProductEnergyList" parameterType="ProductEnergy" resultMap="ProductEnergyResult">
         <include refid="selectProductEnergyVo"/>
         <where>  
+            <if test="energyUnits != null  and energyUnits != ''"> and energy_units = #{energyUnits}</if>
+            <if test="productName != null  and productName != ''"> and product_name like concat('%', #{productName}, '%')</if>
+            <if test="energyConsumptionType != null  and energyConsumptionType != ''"> and energy_consumption_type = #{energyConsumptionType}</if>
+            <if test="energyConsumptionItemized != null  and energyConsumptionItemized != ''"> and energy_consumption_itemized = #{energyConsumptionItemized}</if>
+            <if test="time != null "> and time = #{time}</if>
+            <if test="theMonthPrice != null  and theMonthPrice != ''"> and the_month_price = #{theMonthPrice}</if>
+            <if test="capacity != null  and capacity != ''"> and capacity = #{capacity}</if>
+            <if test="unitProductEnergy != null  and unitProductEnergy != ''"> and unit_product_energy = #{unitProductEnergy}</if>
+            <if test="yAgoProduction != null  and yAgoProduction != ''"> and y_ago_production = #{yAgoProduction}</if>
+            <if test="producEnergyCost != null  and producEnergyCost != ''"> and produc_energy_cost = #{producEnergyCost}</if>
+            <if test="unitProductEnergyCost != null  and unitProductEnergyCost != ''"> and unit_product_energy_cost = #{unitProductEnergyCost}</if>
+            <if test="yAgoValue != null  and yAgoValue != ''"> and y_ago_value = #{yAgoValue}</if>
+            <if test="unitProductEnergyYAgo != null  and unitProductEnergyYAgo != ''"> and unit_product_energy_y_ago = #{unitProductEnergyYAgo}</if>
+            <if test="producEnergyCostYAgo != null  and producEnergyCostYAgo != ''"> and produc_energy_cost_y_ago = #{producEnergyCostYAgo}</if>
+            <if test="unitProductEnergyCostYAgo != null  and unitProductEnergyCostYAgo != ''"> and unit_product_energy_cost_y_ago = #{unitProductEnergyCostYAgo}</if>
         </where>
     </select>
     
     <select id="selectProductEnergyById" parameterType="Long" resultMap="ProductEnergyResult">
         <include refid="selectProductEnergyVo"/>
-        where 
-product_id = #{productId}
+        where product_id = #{productId}
     </select>
         
     <insert id="insertProductEnergy" parameterType="ProductEnergy" useGeneratedKeys="true" keyProperty="productId">
@@ -98,18 +110,15 @@ product_id = #{productId}
             <if test="producEnergyCostYAgo != null  and producEnergyCostYAgo != ''">produc_energy_cost_y_ago = #{producEnergyCostYAgo},</if>
             <if test="unitProductEnergyCostYAgo != null  and unitProductEnergyCostYAgo != ''">unit_product_energy_cost_y_ago = #{unitProductEnergyCostYAgo},</if>
         </trim>
-        where 
-product_id = #{productId}
+        where product_id = #{productId}
     </update>
 
     <delete id="deleteProductEnergyById" parameterType="Long">
-        delete from product_energy where 
-product_id = #{productId}
+        delete from product_energy where product_id = #{productId}
     </delete>
 
     <delete id="deleteProductEnergyByIds" parameterType="String">
-        delete from product_energy where 
-product_id in 
+        delete from product_energy where product_id in 
         <foreach item="productId" collection="array" open="(" separator="," close=")">
             #{productId}
         </foreach>
