@@ -2,6 +2,7 @@ package com.numberone.project.system.real.mapper;
 
 import java.util.List;
 import com.numberone.project.system.real.domain.Real;
+import com.numberone.project.system.real.domain.Treee;
 
 /**
  * 实时遥测曲线Mapper接口
@@ -58,4 +59,6 @@ public interface RealMapper
      * @return 结果
      */
     public int deleteRealByIds(String[] ids);
+
+    List<Treee> treelist();
 }

@@ -2,6 +2,7 @@ package com.numberone.project.system.real.service;
 
 import java.util.List;
 import com.numberone.project.system.real.domain.Real;
+import com.numberone.project.system.real.domain.Treee;
 
 /**
  * 实时遥测曲线Service接口
@@ -58,4 +59,6 @@ public interface IRealService
      * @return 结果
      */
     public int deleteRealById(Long id);
+
+    List<Treee> treelist();
 }
