@@ -1,68 +1,218 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
- <script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts.min.js" th:src="@{/js/echarts.min.js}"></script>
- <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
- 
-            
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <th:block th:include="include :: header('用户列表')" />
+    <th:block th:include="include :: layout-latest-css" />
+    <th:block th:include="include :: ztree-css" />
 </head>
-<body>
-<div id="main" style="width: 100%; height: 600px"></div>
+<body class="gray-bg row">
+<div class="ui-layout-west col-sm-2" style="padding: 0px;">
+    <div class="box box-main">
+        <div class="box-header">
+            <div class="box-title">
+                <i class="fa icon-grid"></i> 组织机构
+            </div>
+            <div class="box-tools pull-right">
+                <a type="button" class="btn btn-box-tool" href="#" onclick="dept()" title="管理部门"><i class="fa fa-edit"></i></a>
+                <button type="button" class="btn btn-box-tool" id="btnExpand" title="展开" style="display:none;"><i class="fa fa-chevron-up"></i></button>
+                <button type="button" class="btn btn-box-tool" id="btnCollapse" title="折叠"><i class="fa fa-chevron-down"></i></button>
+                <button type="button" class="btn btn-box-tool" id="btnRefresh" title="刷新部门"><i class="fa fa-refresh"></i></button>
+            </div>
+        </div>
+        <div class="ui-layout-content" style="height: 785px;">
+            <div id="tree" class="ztree"></div>
+        </div>
+    </div>
+</div>
 
-	<script th:inline="javascript">
-		var myChart = echarts.init(document.getElementById('main'));
-	
-		// 新建productName与nums数组来接受数据，因为我们
-	    var productName = [];
-	    var nums = [];
-	
-		//AJAX接收数据主体
-	    $.ajax({
-	        type:"GET",
-	        url:"/system/energy/l",
-	        dataType:"json",
-	        async:false,
-	        success:function (result) {
-	
-	            for (var i = 0; i < result.length; i++){
-	                productName.push(result[i].theMonthPrice);
-	                nums.push(result[i].capacity);
-	            }
-	
-	        },
-	        error :function(errorMsg) {
-	            alert("获取后台数据失败！");
-	        }
-	    });
-	
-	    // 指定图表的配置项和数据
-	    var option = {
-	        title: {
-	            text: 'ECharts 入门示例'
-	        },
-	        tooltip: {},
-	        legend: {
-	            data:['销量']
-	        },
-	        xAxis: {
-	        	//结合
-	            data: productName
-	        },
-	
-	        yAxis: {},
-	        series: [{
-	            name: '销量',
-	            type: 'bar',
-	            //结合
-	            data: nums
-	        }]
-	    };
-	
-	    // 使用刚指定的配置项和数据显示图表。
-	    myChart.setOption(option);
-	</script>
+<div class="ui-layout-center col-sm-10" style="padding: 0px;">
+    <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12" id="totalFlowRate" style="height:300px; top: 16px; left: -18px"></div>
 
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table" style="border: 1px solid #3a4459"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:include="include :: footer" />
+<th:block th:include="include :: layout-latest-js" />
+<th:block th:include="include :: ztree-js" />
+<script th:inline="javascript">
+    var editFlag = [[${@permission.hasPermi('system:real:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('system:real:remove')}]];
+    var prefix = ctx + "system/real";
+
+
+    $(function() {
+        var panehHidden = false;
+        if ($(this).width() < 769) {
+            panehHidden = true;
+        }
+        //$('body').layout({ initClosed: panehHidden, west__size: 185 });
+        queryUserList();
+        queryDeptTree();
+    });
+
+    function queryUserList() {
+        var options = {
+            url: prefix + "/list",
+            modalName: "实时遥测曲线",
+            striped: true,
+            search: true,
+            showRefresh: true,
+            columns: [{
+                checkbox: true
+            },
+                {
+                    field: 'id',
+                    title: '序号',
+                    visible: false
+
+                },
+                {
+                    field: 'groupsname',
+                    title: '分组名称'
+                },
+                {
+                    field: 'measurename',
+                    title: '测量点名称'
+                },
+                {
+                    field: 'signname',
+                    title: '信号名称'
+                },
+                {
+                    field: 'meanehiletime',
+                    title: '同步时间',
+                    sortable: true
+                },
+                {
+                    field: 'insidevalue',
+                    title: '内部限值',
+                    sortable: true
+                },
+                {
+                    field: 'regulationvalue',
+                    title: '法规限值',
+                    sortable: true
+                },
+                {
+                    field: 'indication',
+                    title: '示值'
+                },
+                {
+                    field: 'unit',
+                    title: '单位'
+                }]
+
+        };
+        $.table.init(options);
+    }
+
+    function queryDeptTree()
+    {
+        var url = ctx + "system/real/treelist";
+        var options = {
+            url: url,
+            expandLevel: 2,
+            onClick : zOnClick
+        };
+        $.tree.init(options);
+
+        function zOnClick(event, treeId, treeNode) {
+            $("#deptId").val(treeNode.id);
+            $("#parentId").val(treeNode.pId);
+            $.table.search();
+        }
+    }
+
+    $('#btnExpand').click(function() {
+        $._tree.expandAll(true);
+        $(this).hide();
+        $('#btnCollapse').show();
+    });
+
+    $('#btnCollapse').click(function() {
+        $._tree.expandAll(false);
+        $(this).hide();
+        $('#btnExpand').show();
+    });
+
+    $('#btnRefresh').click(function() {
+        queryDeptTree();
+    });
+
+    var totalFlowRate = echarts.init(document.getElementById('totalFlowRate'));
+    var xAxisData = [];
+    var yAxisData = [];
+    $.ajax({
+        type: "post",
+        url: "/system/real/lists",
+        dataType: "json",
+        async: false,
+        success: function (result) {
+
+            for (var i = 0; i < result.length; i++) {
+                xAxisData.push(result[i].meanehiletime);
+                yAxisData.push(result[i].indication);
+            }
+
+        },
+        error: function (errorMsg) {
+            alert("获取后台数据失败！");
+        }
+    })
+
+    var totalFlowRateOption = {
+        animation: false,
+        title: {
+            text: '总功率因数实时曲线',
+            x: 'center'
+
+
+            /*,
+                    left:"110px"*/
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross'
+            }
+        },
+        grid: {
+            left: 50 /*"50px"*/,
+            right: 15 /*"15px"*/
+        },
+        legend: {
+            data: ['总功率因数'],
+            x: 'left'
+        },
+        xAxis: {
+            boundaryGap: false,
+            data: xAxisData,
+            axisLabel: {
+                //X轴刻度配置
+                interval: 1 //0：表示全部显示不间隔；auto:表示自动根据刻度个数和宽度自动设置间隔个数
+            }
+        },
+        yAxis: {
+            boundaryGap: false
+        },
+        series: {
+            //symbol: "none",
+            /*去掉小圆点*/
+            name: '总功率因数',
+            type: 'line',
+            data: yAxisData,
+            //smooth: true   //显示为平滑的曲线
+        }
+    };
+    totalFlowRate.setOption(totalFlowRateOption);
+
+
+</script>
 </body>
 </html>

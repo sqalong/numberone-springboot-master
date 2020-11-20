@@ -1185,8 +1185,8 @@ var table = {
             	var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
                 return $("#" + currentId).validate().resetForm();
             }
+			// 树插件封装处理
         },
-        // 树插件封装处理
         tree: {
         	_option: {},
         	_lastValue: {},

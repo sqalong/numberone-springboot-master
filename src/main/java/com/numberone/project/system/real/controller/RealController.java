@@ -141,4 +141,10 @@ public class RealController extends BaseController
     public List<Treee> treeList(){
         return realService.treelist();
     }
+
+
+    @RequestMapping("/t")
+    public String tr(){
+        return "dd";
+    }
 }

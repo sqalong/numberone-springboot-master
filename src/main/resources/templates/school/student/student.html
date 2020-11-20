@@ -93,6 +93,8 @@
                     field : 'sex', 
                     title : '性别',
                     align: 'left',
+
+
                     formatter: function(value, row, index) {
                         return $.table.selectDictLabel(sexDatas, value);
                     }

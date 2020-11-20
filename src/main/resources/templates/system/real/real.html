@@ -1,51 +1,62 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('实时遥测曲线列表')"/>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts.min.js"
-            th:src="@{/js/echarts.min.js}"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"
-            th:src="@{/js/jquery.min.js}"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.ztree.all.min.js"
-            th:src="@{/js/jquery.ztree.all.min.js}"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/zTreeStyle/zTreeStyle.css"
-            th:href="@{/css/zTreeStyle/zTreeStyle.css}">
-
-
-    <style>
-
-    </style>
-
-
-
+    <th:block th:include="include :: header('用户列表')" />
+    <th:block th:include="include :: layout-latest-css" />
+    <th:block th:include="include :: ztree-css" />
 </head>
-<body class="gray-bg">
-
-<div class="container-div">
-    <div class="row">
-        <div class="col-sm-2" style="color: #000;font-size: 16px;">
-            <h3 style="    margin-bottom: 9px;margin-top: 18px;font-weight: bold;/*加粗*/text-align:center;   /* 水平居中 */color: #000;font-size: 24px;">
-                表计名称</h3>
-            <div class="zTreeDemoBackground left">
-                <ul id="ztree" class="ztree"></ul>
+<body class="gray-bg row">
+<div class="ui-layout-west col-sm-2" style="padding: 0px;">
+    <div class="box box-main">
+        <div class="box-header">
+            <div class="box-title">
+                <i class="fa icon-grid"></i> 组织机构
+            </div>
+            <div class="box-tools pull-right">
+                <a type="button" class="btn btn-box-tool" href="#" onclick="dept()" title="管理部门"><i class="fa fa-edit"></i></a>
+                <button type="button" class="btn btn-box-tool" id="btnExpand" title="展开" style="display:none;"><i class="fa fa-chevron-up"></i></button>
+                <button type="button" class="btn btn-box-tool" id="btnCollapse" title="折叠"><i class="fa fa-chevron-down"></i></button>
+                <button type="button" class="btn btn-box-tool" id="btnRefresh" title="刷新部门"><i class="fa fa-refresh"></i></button>
             </div>
         </div>
-        <div class="col-sm-10  table-striped" style="box-shadow: #666 0px 0px 20px; background: #eee;">
-            <div class="col-sm-12" id="totalFlowRate" style="height:300px; top: 16px; left: -18px"></div>
-            <table id="bootstrap-table" style="border: 1px solid #3a4459"></table>
+        <div class="ui-layout-content" style="height: 785px;">
+            <div id="tree" class="ztree"></div>
         </div>
     </div>
 </div>
-<th:block th:include="include :: footer"/>
+
+<div class="ui-layout-center col-sm-10" style="padding: 0px;">
+    <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12" id="totalFlowRate" style="height:300px; top: 16px; left: -18px"></div>
+
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table" style="border: 1px solid #3a4459"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:include="include :: footer" />
+<th:block th:include="include :: layout-latest-js" />
+<th:block th:include="include :: ztree-js" />
 <script th:inline="javascript">
-    //目录数
-
-
-
     var editFlag = [[${@permission.hasPermi('system:real:edit')}]];
     var removeFlag = [[${@permission.hasPermi('system:real:remove')}]];
     var prefix = ctx + "system/real";
-    $(function () {
+
+
+    $(function() {
+        var panehHidden = false;
+        if ($(this).width() < 769) {
+            panehHidden = true;
+        }
+        //$('body').layout({ initClosed: panehHidden, west__size: 185 });
+        queryUserList();
+        queryDeptTree();
+    });
+
+    function queryUserList() {
         var options = {
             url: prefix + "/list",
             modalName: "实时遥测曲线",
@@ -99,8 +110,41 @@
 
         };
         $.table.init(options);
-        $.fn.zTree.init($("#ztree"), setting, zNodes);
+    }
+
+    function queryDeptTree()
+    {
+        var url = ctx + "system/real/treelist";
+        var options = {
+            url: url,
+            expandLevel: 2,
+            onClick : zOnClick
+        };
+        $.tree.init(options);
+
+        function zOnClick(event, treeId, treeNode) {
+            $("#deptId").val(treeNode.id);
+            $("#parentId").val(treeNode.pId);
+            $.table.search();
+        }
+    }
+
+    $('#btnExpand').click(function() {
+        $._tree.expandAll(true);
+        $(this).hide();
+        $('#btnCollapse').show();
     });
+
+    $('#btnCollapse').click(function() {
+        $._tree.expandAll(false);
+        $(this).hide();
+        $('#btnExpand').show();
+    });
+
+    $('#btnRefresh').click(function() {
+        queryDeptTree();
+    });
+
     var totalFlowRate = echarts.init(document.getElementById('totalFlowRate'));
     var xAxisData = [];
     var yAxisData = [];
@@ -168,109 +212,7 @@
     };
     totalFlowRate.setOption(totalFlowRateOption);
 
-    //设置setting属性
-    var setting = {
-
-        data: {
-            simpleData: {
-                enable: true
-            }
-        },
-        view:{
-            showIcon:false,
-            showLine:false
-
-        },
-        callback:{
-            onClick:function(event, treeId, treeNode) { //第二步
-                var treeObj = $.fn.zTree.getZTreeObj("ztree"),
-                    nodes = treeObj.getCheckedNodes(true),
-                    v = "";
-                for(var i = 0; i < nodes.length; i++) {
-                    v = nodes[i].name;
-                    alert("节点id:" + nodes[i].id + "节点名称" + v); //获取选中节点的值
-                }
-            }
-        }
-    };
-    //设置节点数组
-    var zNodes = [{
-        id: 1,
-        pId: 0,
-        name: "随意勾选 1",
-        open: true
-    },
-        {
-            id: 11,
-            pId: 1,
-            name: "随意勾选 1-1",
-            open: true
-        },
-        {
-            id: 111,
-            pId: 11,
-            name: "无 checkbox 1-1-1"
-        },
-        {
-            id: 112,
-            pId: 11,
-            name: "随意勾选 1-1-2"
-        },
-        {
-            id: 12,
-            pId: 1,
-            name: "无 checkbox 1-2",
-            nocheck: true,
-            open: true
-        },
-        {
-            id: 121,
-            pId: 12,
-            name: "无 checkbox 1-2-1"
-        },
-        {
-            id: 122,
-            pId: 12,
-            name: "无 checkbox 1-2-2"
-        },
-        {
-            id: 2,
-            pId: 0,
-            name: "随意勾选 2",
-            checked: true,
-            open: true
-        },
-        {
-            id: 21,
-            pId: 2,
-            name: "随意勾选 2-1"
-        },
-        {
-            id: 22,
-            pId: 2,
-            name: "随意勾选 2-2",
-            open: true
-        },
-        {
-            id: 221,
-            pId: 22,
-            name: "随意勾选 2-2-1",
-            checked: true
-        },
-        {
-            id: 222,
-            pId: 22,
-            name: "随意勾选 2-2-2"
-        },
-        {
-            id: 23,
-            pId: 2,
-            name: "随意勾选 2-3"
-        }
-    ];
-
 
 </script>
-
 </body>
 </html>
