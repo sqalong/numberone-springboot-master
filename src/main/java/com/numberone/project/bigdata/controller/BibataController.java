@@ -27,7 +27,7 @@ public class BibataController extends BaseController
     @RequestMapping("bigdata")
     public String bigdata()
     {
-        return "/bigdata/bigdata";
+        return "bigdata/bigdata";
     }
 
     @RequestMapping("/zongsum")
@@ -41,7 +41,7 @@ public class BibataController extends BaseController
 
         model.addAttribute("largeareaname",largeareaname);
 
-        return "/bigdata/area_templates";
+        return "bigdata/area_templates";
     }
 
     @GetMapping("/areagross")
