@@ -81,5 +81,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+
+    <select id="treelist" resultType="Treee">
+      SELECT tree_id as id, tree_parent_id as pId,tree_name AS `name` FROM tree_simulate
+    </select>
     
 </mapper>

@@ -46,7 +46,7 @@ var table = {
         		    pageSize: 10,
         		    pageList: [10, 25, 50],
         		    toolbar: "toolbar",
-        		    striped: false,
+        		    striped: true,
         		    escape: false,
         		    firstLoad: true,
         		    showFooter: false,
@@ -81,7 +81,7 @@ var table = {
                     height: options.height,                             // 表格的高度
                     striped: options.striped,                           // 是否显示行间隔色
                     sortable: true,                                     // 是否启用排序
-                    sortStable: true,                                   // 设置为 true 将获得稳定的排序
+                    sortStable: false,                                   // 设置为 true 将获得稳定的排序
                     sortName: options.sortName,                         // 排序列名称
                     sortOrder: options.sortOrder,                       // 排序方式  asc 或者 desc
                     pagination: options.pagination,                     // 是否显示分页（*）
@@ -511,7 +511,7 @@ var table = {
         		    rootIdValue: null,
         		    ajaxParams: {},
         		    toolbar: "toolbar",
-        		    striped: false,
+        		    striped: true,
         		    expandColumn: 1,
         		    showSearch: true,
         		    showRefresh: true,

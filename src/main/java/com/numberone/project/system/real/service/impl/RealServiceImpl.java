@@ -1,6 +1,8 @@
 package com.numberone.project.system.real.service.impl;
 
 import java.util.List;
+
+import com.numberone.project.system.real.domain.Treee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.numberone.project.system.real.mapper.RealMapper;
@@ -90,5 +92,10 @@ public class RealServiceImpl implements IRealService
     public int deleteRealById(Long id)
     {
         return realMapper.deleteRealById(id);
+    }
+
+    @Override
+    public List<Treee> treelist() {
+        return realMapper.treelist();
     }
 }
