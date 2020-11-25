@@ -11,7 +11,7 @@ import java.util.Date;
  * 实时遥测曲线对象 real
  * 
  * @author numberone
- * @date 2020-10-26
+ * @date 2020-11-24
  */
 public class Real extends BaseEntity
 {

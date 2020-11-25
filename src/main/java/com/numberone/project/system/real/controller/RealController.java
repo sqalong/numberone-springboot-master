@@ -25,7 +25,7 @@ import com.numberone.framework.web.page.TableDataInfo;
  * 实时遥测曲线Controller
  * 
  * @author numberone
- * @date 2020-10-26
+ * @date 2020-11-24
  */
 @Controller
 @RequestMapping("/system/real")
@@ -35,15 +35,6 @@ public class RealController extends BaseController
 
     @Autowired
     private IRealService realService;
-
-
-    @RequestMapping("lists")
-    @ResponseBody
-    public List<Real> lists(){
-        Real r = new Real();
-        List<Real> list = realService.selectRealList(r);
-        return list;
-    }
 
     @RequiresPermissions("system:real:view")
     @GetMapping()
@@ -147,4 +138,24 @@ public class RealController extends BaseController
     public String tr(){
         return "dd";
     }
+
+    @RequestMapping("lists")
+    @ResponseBody
+    public List<Real> lists(){
+        Real r = new Real();
+        List<Real> list = realService.selectRealList(r);
+        return list;
+    }
+
+    @PostMapping("/lists")
+    @ResponseBody
+    public List<Real> lists(Real real)
+    {
+        startPage();
+        List<Real> list = realService.selectRealList(real);
+        return list;
+    }
+
+
+
 }
