@@ -10,7 +10,7 @@
     <div class="box box-main">
         <div class="box-header">
             <div class="box-title">
-                <i class="fa icon-grid"></i> 组织机构
+                <i class="fa icon-grid"></i> 表记名称
             </div>
             <div class="box-tools pull-right">
                 <a type="button" class="btn btn-box-tool" href="#" onclick="dept()" title="管理电表"><i class="fa fa-edit"></i></a>
@@ -30,8 +30,51 @@
         <div class="row">
             <div class="col-sm-12" id="totalFlowRate" style="height:300px; top: 16px; left: -18px"></div>
 
-            <div class="col-sm-12 select-table table-striped">
-                <table id="bootstrap-table" style="border: 1px solid #3a4459"></table>
+            <div class="container-div">
+                <div class="row">
+                    <div class="col-sm-12 search-collapse">
+                        <form id="formId">
+                            <div class="select-list">
+                                <ul>
+                                    <li>
+                                        <p>分组名称：</p>
+                                        <input type="hidden" id="groupsname" name="groupsname"/>
+                                    </li>
+                                    <li>
+                                        <p>测量点名称：</p>
+                                        <input type="hidden" id="measurename" name="measurename"/>
+                                    </li>
+                                    <li>
+                                        <p>信号名称：</p>
+                                        <input type="hidden" id="signname" name="signname"/>
+                                    </li>
+                                    <li>
+                                        <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                        <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="btn-group-sm" id="toolbar" role="group">
+                        <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:real:add">
+                            <i class="fa fa-plus"></i> 添加
+                        </a>
+                        <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:real:edit">
+                            <i class="fa fa-edit"></i> 修改
+                        </a>
+                        <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:real:remove">
+                            <i class="fa fa-remove"></i> 删除
+                        </a>
+                        <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:real:export">
+                            <i class="fa fa-download"></i> 导出
+                        </a>
+                    </div>
+                    <div class="col-sm-12 select-table table-striped">
+                        <table id="bootstrap-table"></table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -123,9 +166,19 @@
         $.tree.init(options);
 
         function zOnClick(event, treeId, treeNode) {
-            $("#deptId").val(treeNode.id);
-            $("#parentId").val(treeNode.pId);
-            $.table.search();
+            alert(treeNode.pId);
+            if (treeNode.pId == 0){
+                $("#groupsname").val(treeNode.name);
+                $.table.search();
+            }else if (treeNode.pId = 1 || 2 || 3 ||4 ){
+                $("#measurename").val(treeNode.name);
+                $.table.search();
+            }else {
+                $("#signname").val(treeNode.name);
+                $.table.search();
+            };
+
+
         }
     }
 

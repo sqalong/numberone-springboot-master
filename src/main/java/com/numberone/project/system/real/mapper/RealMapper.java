@@ -8,7 +8,7 @@ import com.numberone.project.system.real.domain.Treee;
  * 实时遥测曲线Mapper接口
  * 
  * @author numberone
- * @date 2020-10-26
+ * @date 2020-11-24
  */
 public interface RealMapper 
 {

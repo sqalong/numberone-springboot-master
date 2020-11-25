@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.numberone.project.system.real.mapper.RealMapper">
-    
+
     <resultMap type="Real" id="RealResult">
         <result property="id"    column="id"    />
         <result property="groupsname"    column="groupsName"    />
@@ -18,20 +18,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <sql id="selectRealVo">
         select id, groupsName, measureName, signName, meanehileTime, insideValue, regulationValue, indication, unit from `real`
-
     </sql>
 
     <select id="selectRealList" parameterType="Real" resultMap="RealResult">
         <include refid="selectRealVo"/>
-        <where>  
+        <where>
+            <if test="groupsname != null  and groupsname != ''"> and groupsName like concat('%', #{groupsname}, '%')</if>
+            <if test="measurename != null  and measurename != ''"> and measureName like concat('%', #{measurename}, '%')</if>
+            <if test="signname != null  and signname != ''"> and signName like concat('%', #{signname}, '%')</if>
         </where>
     </select>
-    
+
     <select id="selectRealById" parameterType="Long" resultMap="RealResult">
         <include refid="selectRealVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertReal" parameterType="Real" useGeneratedKeys="true" keyProperty="id">
         insert into real
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -76,15 +78,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteRealByIds" parameterType="String">
-        delete from real where id in 
+        delete from real where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
 
-
     <select id="treelist" resultType="Treee">
       SELECT tree_id as id, tree_parent_id as pId,tree_name AS `name` FROM tree_simulate
     </select>
-    
+
 </mapper>

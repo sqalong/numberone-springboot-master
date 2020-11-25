@@ -14,7 +14,7 @@ import com.numberone.common.utils.text.Convert;
  * 实时遥测曲线Service业务层处理
  * 
  * @author numberone
- * @date 2020-10-26
+ * @date 2020-11-24
  */
 @Service
 public class RealServiceImpl implements IRealService 

@@ -46,7 +46,7 @@ var table = {
         		    pageSize: 10,
         		    pageList: [10, 25, 50],
         		    toolbar: "toolbar",
-        		    striped: true,
+        		    striped: true,  //隔行换色
         		    escape: false,
         		    firstLoad: true,
         		    showFooter: false,
