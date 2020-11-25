@@ -53,6 +53,13 @@ public class IndexController extends BaseController
         return "skin";
     }
 
+    // 告警提示
+    @GetMapping("/system/laytable")
+    public String switchtable(ModelMap mmap)
+    {
+        return "layertable";
+    }
+
     // 系统介绍
     @GetMapping("/system/main")
     public String main(ModelMap mmap)

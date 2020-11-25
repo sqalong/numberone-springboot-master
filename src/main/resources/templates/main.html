@@ -10,202 +10,105 @@
     <link href="../static/css/main/animate.min.css" th:href="@{/css/main/animate.min.css}" rel="stylesheet"/>
     <link href="../static/css/main/style.min862f.css" th:href="@{/css/main/style.min862f.css}" rel="stylesheet"/>
 </head>
+<style>
+    .top_text{
+        margin: 50px;
+        background-color: #FFFFFF;
+        border-radius: 10px;
+    }
+    .top_text_title1{
+        margin: 20px;
+        color: #FFFFFF;
+        border-radius: 30px;
+        text-align: center;
+    }
+    .top_h3{
+        padding-top: 20px;
+    }
+    .top_h1{
+        display: inline-block;
+        font-size: 50px;
+    }
+    .top_span{
+        font-size: 30px;
+    }
+</style>
 
-<body class="gray-bg">
+<body style="background-color: #EFEFF3;">
 <div class="wrapper wrapper-content">
 
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <span class="label label-success pull-right">月</span>
-                    <h5>收入</h5>
+    <div class="row top_text">
+        <div class="col-sm-4">
+            <div class="top_text_title1" style="background-color:#40B1EE;">
+                <div>
+                    <!--<span class="label label-success pull-right">月</span>-->
+                    <h3 class="top_h3">本月总耗能</h3>
                 </div>
-                <div class="ibox-content">
-                    <h1 class="no-margins">40 886,200</h1>
-                    <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i>
-                    </div>
-                    <small>总收入</small>
+                <div>
+                    <h1 class="top_h1">40 886,200</h1><span class="top_span">tec</span>
+                    <!--<div class="text-success" style="font-size: 20px;"><span>相比上月</span><i class="fa fa-arrow-up"></i>98% </div>-->
                 </div>
             </div>
         </div>
-        <div class="col-sm-3">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <span class="label label-info pull-right">全年</span>
-                    <h5>订单</h5>
+        <div class="col-sm-4">
+            <div class="top_text_title1"style="background-color:#55B965;">
+                <div>
+                    <!--<span class="label label-success pull-right">月</span>-->
+                    <h3 class="top_h3">环比总耗能</h3>
                 </div>
-                <div class="ibox-content">
-                    <h1 class="no-margins">275,800</h1>
-                    <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i>
-                    </div>
-                    <small>新订单</small>
+                <div>
+                    <h1 class="top_h1">40 886,200</h1><span class="top_span">tec</span>
+                    <!--<div class="text-success" style="font-size: 20px;"><span>相比上月</span><i class="fa fa-arrow-up"></i>98% </div>-->
                 </div>
             </div>
         </div>
-        <div class="col-sm-3">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <span class="label label-primary pull-right">今天</span>
-                    <h5>访客</h5>
+        <div class="col-sm-4">
+            <div class="top_text_title1"style="background-color:#0C8DCD;">
+                <div>
+                    <!--<span class="label label-success pull-right">月</span>-->
+                    <h3 class="top_h3">同比总耗能</h3>
                 </div>
-                <div class="ibox-content">
-                    <h1 class="no-margins">106,120</h1>
-                    <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i>
-                    </div>
-                    <small>新访客</small>
+                <div>
+                    <h1 class="top_h1">40 886,200</h1><span class="top_span">tec</span>
+                    <!--<div class="text-success" style="font-size: 20px;"><span>相比上月</span><i class="fa fa-arrow-up"></i>98% </div>-->
                 </div>
             </div>
         </div>
-        <div class="col-sm-3">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <span class="label label-danger pull-right">最近一个月</span>
-                    <h5>活跃用户</h5>
+
+    </div>
+
+
+    <div class="row" style="margin: 30px;">
+        <div class="col-sm-6">
+            <div  style="border-radius: 5px; border: 1px solid #678FD9 ;">
+                <div style="background-color: #678FD9;border-radius: 5px 5px 0px 0px;color: #FFFFFF;line-height: 50px;height: 50px;padding-left: 20px;padding: 0px;">
+                    <span style="margin-left: 20px; font-size: 15px;">2020年11月用能概括 </span>
                 </div>
-                <div class="ibox-content">
-                    <h1 class="no-margins">80,600</h1>
-                    <div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i>
-                    </div>
-                    <small>12月</small>
+                <div style="height: 130px;">
+                    表格
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div  style="border-radius: 5px; border: 1px solid #678FD9 ;">
+                <div style="background-color: #678FD9;border-radius: 5px 5px 0px 0px;color: #FFFFFF;line-height: 50px;height: 50px;padding-left: 20px;padding: 0px;">
+                    <span style="margin-left: 20px; font-size: 15px;">2020年11月用能占比 </span>
+                </div>
+                <div style="height: 130px;">
+
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>订单</h5>
-                    <div class="pull-right">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-xs btn-white active">天</button>
-                            <button type="button" class="btn btn-xs btn-white">月</button>
-                            <button type="button" class="btn btn-xs btn-white">年</button>
-                        </div>
-                    </div>
+    <div class="row" style="margin: 30px;">
+        <div class="col-sm-12" >
+            <div  style="border-radius: 5px; border: 1px solid #678FD9 ;">
+                <div style="background-color: #678FD9;border-radius: 5px 5px 0px 0px;color: #FFFFFF;line-height: 50px;height: 50px;padding-left: 20px;padding: 0px;">
+                    <span style="margin-left: 20px; font-size: 15px;">2020年11月用能趋势</span>
                 </div>
-                <div class="ibox-content">
-                    <div class="row">
-                        <div class="col-sm-9">
-                            <div class="flot-chart">
-                                <div class="flot-chart-content" id="flot-dashboard-chart"></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <ul class="stat-list">
-                                <li>
-                                    <h2 class="no-margins">2,346</h2>
-                                    <small>订单总数</small>
-                                    <div class="stat-percent">48% <i class="fa fa-level-up text-navy"></i>
-                                    </div>
-                                    <div class="progress progress-mini">
-                                        <div style="width: 48%;" class="progress-bar"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <h2 class="no-margins ">4,422</h2>
-                                    <small>最近一个月订单</small>
-                                    <div class="stat-percent">60% <i class="fa fa-level-down text-navy"></i>
-                                    </div>
-                                    <div class="progress progress-mini">
-                                        <div style="width: 60%;" class="progress-bar"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <h2 class="no-margins ">9,180</h2>
-                                    <small>最近一个月销售额</small>
-                                    <div class="stat-percent">22% <i class="fa fa-bolt text-navy"></i>
-                                    </div>
-                                    <div class="progress progress-mini">
-                                        <div style="width: 22%;" class="progress-bar"></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>用户项目列表</h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                        <a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="ibox-content">
-                    <table class="table table-hover no-margins">
-                        <thead>
-                        <tr>
-                            <th>状态</th>
-                            <th>日期</th>
-                            <th>用户</th>
-                            <th>值</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td><small>进行中...</small>
-                            </td>
-                            <td><i class="fa fa-clock-o"></i> 11:20</td>
-                            <td>青衣5858</td>
-                            <td class="text-navy"> <i class="fa fa-level-up"></i> 24%</td>
-                        </tr>
-                        <tr>
-                            <td><span class="label label-warning">已取消</span>
-                            </td>
-                            <td><i class="fa fa-clock-o"></i> 10:40</td>
-                            <td>徐子崴</td>
-                            <td class="text-navy"> <i class="fa fa-level-up"></i> 66%</td>
-                        </tr>
-                        <tr>
-                            <td><small>进行中...</small>
-                            </td>
-                            <td><i class="fa fa-clock-o"></i> 01:30</td>
-                            <td>姜岚昕</td>
-                            <td class="text-navy"> <i class="fa fa-level-up"></i> 54%</td>
-                        </tr>
-                        <tr>
-                            <td><small>进行中...</small>
-                            </td>
-                            <td><i class="fa fa-clock-o"></i> 02:20</td>
-                            <td>武汉大兵哥</td>
-                            <td class="text-navy"> <i class="fa fa-level-up"></i> 12%</td>
-                        </tr>
-                        <tr>
-                            <td><small>进行中...</small>
-                            </td>
-                            <td><i class="fa fa-clock-o"></i> 09:40</td>
-                            <td>荆莹儿</td>
-                            <td class="text-navy"> <i class="fa fa-level-up"></i> 22%</td>
-                        </tr>
-                        <tr>
-                            <td><span class="label label-primary">已完成</span>
-                            </td>
-                            <td><i class="fa fa-clock-o"></i> 04:10</td>
-                            <td>栾某某</td>
-                            <td class="text-navy"> <i class="fa fa-level-up"></i> 66%</td>
-                        </tr>
-                        <tr>
-                            <td><small>进行中...</small>
-                            </td>
-                            <td><i class="fa fa-clock-o"></i> 12:08</td>
-                            <td>范范范二妮</td>
-                            <td class="text-navy"> <i class="fa fa-level-up"></i> 23%</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div style="height: 130px;">
+                    表格
                 </div>
             </div>
         </div>
