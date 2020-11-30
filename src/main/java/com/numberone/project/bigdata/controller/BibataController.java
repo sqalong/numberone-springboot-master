@@ -36,6 +36,11 @@ public class BibataController extends BaseController
         return bs.zsum();
     }
 
+    /**
+     * 查询数据库展示指定数据
+     *
+     * 参数地区名称
+     * */
     @RequestMapping("areabigdata")
     public String areabigdata(@RequestParam("largeareaname") String largeareaname, Model model){
 
@@ -44,6 +49,8 @@ public class BibataController extends BaseController
         return "bigdata/area_templates";
     }
 
+    /**
+    * 总耗能查询*/
     @GetMapping("/areagross")
     @ResponseBody
     public Zsum areagross(@RequestParam("largeareaname") String largeareaname){
@@ -51,6 +58,9 @@ public class BibataController extends BaseController
     }
 
 
+    /*
+    * 点击查询指定表格
+    * */
     @GetMapping("/arearatio")
     @ResponseBody
     public List<AreaRatio> arearatio(@RequestParam("table") String table,@RequestParam("largeareaname") String largeareaname){

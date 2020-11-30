@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.numberone.project.system.tree_simulate.simulate.mapper.TreeSimulateMapper">
+    
+    <resultMap type="TreeSimulate" id="TreeSimulateResult">
+        <result property="tid"    column="tid"    />
+        <result property="treeId"    column="tree_id"    />
+        <result property="treeParentId"    column="tree_parent_id"    />
+        <result property="treeName"    column="tree_name"    />
+        <result property="parentName" column="parent_name" />
+    </resultMap>
+
+    <sql id="selectTreeSimulateVo">
+        select tid, tree_id, tree_parent_id, tree_name from tree_simulate
+    </sql>
+
+    <select id="selectTreeSimulateList" parameterType="TreeSimulate" resultMap="TreeSimulateResult">
+        <include refid="selectTreeSimulateVo"/>
+        <where>  
+            <if test="treeId != null "> and tree_id = #{treeId}</if>
+            <if test="treeParentId != null "> and tree_parent_id = #{treeParentId}</if>
+            <if test="treeName != null  and treeName != ''"> and tree_name like concat('%', #{treeName}, '%')</if>
+        </where>
+        order by tree_parent_id
+    </select>
+    
+    <select id="selectTreeSimulateById" parameterType="Long" resultMap="TreeSimulateResult">
+        select t.tid, t.tree_id, t.tree_parent_id, t.tree_name, p.tree_name as parent_name
+        from tree_simulate t
+        left join tree_simulate p on p.tid = t.tree_parent_id
+        where t.tid = #{tid}
+    </select>
+        
+    <insert id="insertTreeSimulate" parameterType="TreeSimulate" useGeneratedKeys="true" keyProperty="tid">
+        insert into tree_simulate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="treeId != null ">tree_id,</if>
+            <if test="treeParentId != null ">tree_parent_id,</if>
+            <if test="treeName != null  and treeName != ''">tree_name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="treeId != null ">#{treeId},</if>
+            <if test="treeParentId != null ">#{treeParentId},</if>
+            <if test="treeName != null  and treeName != ''">#{treeName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTreeSimulate" parameterType="TreeSimulate">
+        update tree_simulate
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="treeId != null ">tree_id = #{treeId},</if>
+            <if test="treeParentId != null ">tree_parent_id = #{treeParentId},</if>
+            <if test="treeName != null  and treeName != ''">tree_name = #{treeName},</if>
+        </trim>
+        where tid = #{tid}
+    </update>
+
+    <delete id="deleteTreeSimulateById" parameterType="Long">
+        delete from tree_simulate where tid = #{tid}
+    </delete>
+
+    <delete id="deleteTreeSimulateByIds" parameterType="String">
+        delete from tree_simulate where tid in 
+        <foreach item="tid" collection="array" open="(" separator="," close=")">
+            #{tid}
+        </foreach>
+    </delete>
+    
+</mapper>
