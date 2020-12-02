@@ -203,7 +203,7 @@
                         <button type="button" class="btn btn-link" style="color: #fff;" onclick="utr('gas')">气</button>
                     </div>
                 </div>
-                <div id="xzuo" style=" height: 300px"></div>
+                <div id="xzuo" style=" height: 300px;width: 465px"></div>
             </div>
         </div>
         <div class="col-sm-6">
@@ -405,6 +405,7 @@
     // });
 
     //用能汇总,水电气总
+
     $(function () {
         //水
         var wsum = [];
@@ -495,12 +496,14 @@
             grid: {
                 //设置图标距离
                 top: "-0",
-                left: "200",
-                right: "20",
-                bottom: "20"
+                left: "10",
+                right: "200",
+                bottom: "0"
             },
             yAxis: [{
                 type: 'category',
+                position: 'right',
+
                 data: xAxisData,
                 inverse: true,
                 axisTick: {
@@ -524,6 +527,7 @@
             }],
             xAxis: [{
                 type: 'value',
+                position: 'right',
                 axisLabel: {     //值的显示
                     show: false
                 },
@@ -557,7 +561,7 @@
                             color: '#0590eb' // 0% 处的颜色
                         }, {
                             offset: 1,
-                            color: '#08e3f1' // 100% 处的颜色
+                            color: '#67b642' // 100% 处的颜色
                         }], false),
                         barBorderRadius: [15, 15, 15, 15],
                         shadowColor: 'rgba(0,0,0,0.1)',

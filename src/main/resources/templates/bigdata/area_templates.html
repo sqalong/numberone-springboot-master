@@ -314,178 +314,7 @@
 <script type="text/javascript">
     largeareaname=$("#largeareaname").val();
 
-    // $(function () {
-    //     //总耗能
-    //     var yuez = [];
-    //     //累计节能量
-    //     var ljjnl = [];
-    //     //节省金额
-    //     var jsje = [];
-    //     //节能率
-    //     var jnl = [];
-    //     //co
-    //     var cot = [];
-    //     //so
-    //     var sot = [];
-    //     //累计用电
-    //     var ljyd = [];
-    //     //no
-    //     var not = [];
-    //     //xue
-    //     var xuet = [];
-    //     //减少用煤
-    //     var jsym = [];
-    //     $.ajax({
-    //         type: "post",
-    //         url: "/system/za/list",
-    //         dataType: "json",
-    //         async: false,
-    //         success: function (result) {
-    //             for (var i = 0; i < result.length; i++) {
-    //                 yuez.push(result[i].yuez);
-    //                 ljjnl.push(result[i].ljjnl);
-    //                 jsje.push(result[i].jsje);
-    //                 jnl.push(result[i].jnl);
-    //                 cot.push(result[i].cot);
-    //                 sot.push(result[i].sot);
-    //                 ljyd.push(result[i].ljyd);
-    //                 not.push(result[i].not);
-    //                 xuet.push(result[i].xuet);
-    //                 jsym.push(result[i].jsym);
-    //             }
-    //             document.getElementById("yuez").innerHTML = (parseInt(yuez[0]));
-    //             document.getElementById("ljjnl").innerHTML = (parseInt(ljjnl[0]));
-    //             document.getElementById("jsje").innerHTML = (parseInt(jsje[0]));
-    //             document.getElementById("jnl").innerHTML = (parseInt(jnl[0]));
-    //             document.getElementById("cot").innerHTML = (parseInt(cot[0]));
-    //             document.getElementById("sot").innerHTML = (parseInt(sot[0]));
-    //             document.getElementById("ljyd").innerHTML = (parseInt(ljyd[0]));
-    //             document.getElementById("not").innerHTML = (parseInt(not[0]));
-    //             document.getElementById("xuet").innerHTML = (parseInt(xuet[0]));
-    //             document.getElementById("jsym").innerHTML = (parseInt(jsym[0]));
-    //
-    //
-    //             $("#yuez").numberRock({
-    //                 lastNumber: $("#yuez").text(),		//终止数字
-    //                 duration: 800,
-    //                 easing: 'swing',  	//慢快慢
-    //             });
-    //             $("#ljjnl").numberRock({
-    //                 lastNumber: $("#ljjnl").text(),		//终止数字
-    //                 duration: 800,
-    //                 easing: 'swing',  	//慢快慢
-    //             });
-    //             $("#jsje").numberRock({
-    //                 lastNumber: $("#jsje").text(),		//终止数字
-    //                 duration: 800,
-    //                 easing: 'swing',  	//慢快慢
-    //             });
-    //             $("#jnl").numberRock({
-    //                 lastNumber: $("#jnl").text(),		//终止数字
-    //                 duration: 800,
-    //                 easing: 'swing',  	//慢快慢
-    //             });
-    //             $("#cot").numberRock({
-    //                 lastNumber: $("#cot").text(),		//终止数字
-    //                 duration: 800,
-    //                 easing: 'swing',  	//慢快慢
-    //             });
-    //             $("#sot").numberRock({
-    //                 lastNumber: $("#sot").text(),		//终止数字
-    //                 duration: 800,
-    //                 easing: 'swing',  	//慢快慢
-    //             });
-    //             $("#ljyd").numberRock({
-    //                 lastNumber: $("#ljyd").text(),		//终止数字
-    //                 duration: 800,
-    //                 easing: 'swing',  	//慢快慢
-    //             });
-    //             $("#not").numberRock({
-    //                 lastNumber: $("#not").text(),		//终止数字
-    //                 duration: 800,
-    //                 easing: 'swing',  	//慢快慢
-    //             });
-    //             $("#xuet").numberRock({
-    //                 lastNumber: $("#xuet").text(),		//终止数字
-    //                 duration: 800,
-    //                 easing: 'swing',  	//慢快慢
-    //             });
-    //             $("#jsym").numberRock({
-    //                 lastNumber: $("#jsym").text(),		//终止数字
-    //                 duration: 800,
-    //                 easing: 'swing',  	//慢快慢
-    //             });
-    //
-    //         },
-    //         error: function (errorMsg) {
-    //             alert("获取后台数据失败！");
-    //         }
-    //     })
-    // });
 
-
-    // //磨磨唧唧
-    // $(function(){
-    //     var yuez = [];
-    //     var ljjnl = [];
-    //     var jsje = [];
-    //     var jnl = [];
-    //     var cot = [];
-    //     var sot = [];
-    //     var ljyd = [];
-    //     var not = [];
-    //     var xuet = [];
-    //     var jsym = [];
-    //     $.ajax({
-    //         type: "post",
-    //         url: "/system/za/list",
-    //         dataType: "json",
-    //         async: false,
-    //         success: function(resulf){
-    //
-    //             for (var i = 0; i < resulf.length; i++) {
-    //                 yuez.push(resulf[i].yuez);
-    //                  ljjnl = [].push(resulf[i].ljjnl);
-    //                 jsje = [].push(resulf[i].jsje);
-    //                 jnl = [].push(resulf[i].jnl);
-    //                 cot = [].push(resulf[i].cot);
-    //                 sot = [].push(resulf[i].sot);
-    //                 ljyd= [].push(resulf[i].ljyd);
-    //                 not = [].push(resulf[i].not);
-    //                 xuet= [].push(resulf[i].xuet);
-    //                 jsym= [].push(resulf[i].jsym);
-    //                 alert(jsje);
-    //                 alert("wewe"+jsym);
-    //
-    //             }
-    //
-    //
-    //
-    //             document.getElementById("yuez").innerHTML=parseInt(yuez);
-    //             document.getElementById("esum").innerHTML= (parseInt(esum[0]));
-    //             document.getElementById("gsum").innerHTML=(parseInt(gsum[0]));
-    //
-    //             $("#wsum").numberRock({
-    //                 lastNumber:$("#wsum").text(),		//终止数字
-    //                 duration:800,
-    //                 easing:'swing',  	//慢快慢
-    //             });
-    //             $("#esum").numberRock({
-    //                 lastNumber:$("#esum").text(),		//终止数字
-    //                 duration:800,
-    //                 easing:'swing',  	//慢快慢
-    //             });
-    //             $("#gsum").numberRock({
-    //                 lastNumber:$("#gsum").text(),		//终止数字
-    //                 duration:800,
-    //                 easing:'swing',  	//慢快慢
-    //             });
-    //         },
-    //         error: function (errorMsg) {
-    //             alert("获取后台数据失败！");
-    //         }
-    //     })
-    // });
 
     //用能汇总,水电气总
     $(function () {
@@ -583,12 +412,13 @@
             grid: {
                 //设置图标距离
                 top: "-0",
-                left: "200",
-                right: "20",
+                left: "10",
+                right: "200",
                 bottom: "20"
             },
             yAxis: [{
                 type: 'category',
+                position: 'right',
                 data: xAxisData,
                 inverse: true,
                 axisTick: {
