@@ -1,32 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
 </head>
-<body>
-<table class="layui-table">
-    <colgroup>
-        <col width="150">
-        <col width="200">
-        <col width="200">
-    </colgroup>
-    <thead>
-    <tr>
-        <th>序号</th>
-        <th>警告内容</th>
-        <th>警告类型</th>
-        <th>发生时间</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
+<body class="gray-bg">
+<div class="container-div">
+    <div class="row">
 
-    </tr>
-    <tr>
+        <div class="btn-group-sm" id="toolbar" role="group">
+<!--            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:warning:add">-->
+<!--                <i class="fa fa-plus"></i> 添加-->
+<!--            </a>-->
+<!--            <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:warning:edit">-->
+<!--                <i class="fa fa-edit"></i> 修改-->
+<!--            </a>-->
+<!--            <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:warning:remove">-->
+<!--                <i class="fa fa-remove"></i> 删除-->
+<!--            </a>-->
+            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:warning:export">
+                <i class="fa fa-download"></i> 导出
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table"></table>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer" />
+<script th:inline="javascript">
+    var editFlag = [[${@permission.hasPermi('system:warning:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('system:warning:remove')}]];
+    var prefix = ctx + "system/warning";
 
-    </tr>
-    </tbody>
-</table>
+    $(function() {
+        var options = {
+            url: prefix + "/list",
+            createUrl: prefix + "/add",
+            updateUrl: prefix + "/edit/{id}",
+            removeUrl: prefix + "/remove",
+            exportUrl: prefix + "/export",
+            modalName: "告警通知",
+            columns: [{
+                checkbox: true
+            },
+                {
+                    field : 'id',
+                    title : '序号',
+
+                },
+                {
+                    field : 'content',
+                    title : '警告内容'
+                },
+                {
+                    field : 'type',
+                    title : '警告类型'
+                },
+                {
+                    field : 'time',
+                    title : '发生时间'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+        };
+        $.table.init(options);
+    });
+</script>
 </body>
 </html>
