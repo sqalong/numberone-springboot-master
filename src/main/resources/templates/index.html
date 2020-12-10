@@ -190,7 +190,7 @@
 					<li><a title="大屏展示"  onclick="switchtable()" ><i class="fa fa-bell"></i> 告警通知</a></li>
                     <li class="dropdown user-menu">
 						<a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
-							<img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{${user.avatar}}" class="user-image">
+							<img th:src="(${user.avatar} != '') ? @{/img/profile.jpg} : @{${user.avatar}}" class="user-image">
 							<span class="hidden-xs">[[${user.userName}]]</span>
 						</a>
 						<ul class="dropdown-menu">
