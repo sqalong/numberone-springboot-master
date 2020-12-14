@@ -41,8 +41,6 @@
 <th:block th:include="include :: layout-latest-js" />
 <th:block th:include="include :: ztree-js" />
 <script th:inline="javascript">
-    var editFlag = [[${@permission.hasPermi('system:real:edit')}]];
-    var removeFlag = [[${@permission.hasPermi('system:real:remove')}]];
     var prefix = ctx + "system/real";
 
 

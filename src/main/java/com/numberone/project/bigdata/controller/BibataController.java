@@ -66,4 +66,13 @@ public class BibataController extends BaseController
     public List<AreaRatio> arearatio(@RequestParam("table") String table,@RequestParam("largeareaname") String largeareaname){
         return bs.arearatio(table,largeareaname);
     }
+
+    @RequestMapping("/dd")
+    public String dd()
+    {
+        return "/bigdata/dd";
+    }
+
+
+
 }
