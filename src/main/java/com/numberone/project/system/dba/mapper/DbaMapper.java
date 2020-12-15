@@ -2,6 +2,7 @@ package com.numberone.project.system.dba.mapper;
 
 
 import com.numberone.project.system.dba.domain.Dba;
+import com.numberone.project.system.dba.domain.Type;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ public interface DbaMapper
 {
     List<Dba> DbaList();
 
+    List<Type> typetreelist();
 
 
 //    /**

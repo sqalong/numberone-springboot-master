@@ -28,7 +28,7 @@
 <div class="ui-layout-center col-sm-10" style="padding: 0px;">
     <div class="container-div">
         <div class="row">
-            <div class="col-sm-12" id="totalFlowRate" style="height:300px; top: 16px; left: -18px"></div>
+
 
             <div class="col-sm-12 select-table table-striped">
                 <table id="bootstrap-table" style="border: 1px solid #3a4459"></table>
@@ -41,7 +41,7 @@
 <th:block th:include="include :: layout-latest-js" />
 <th:block th:include="include :: ztree-js" />
 <script th:inline="javascript">
-    var prefix = ctx + "dba";
+    var prefix = ctx + "system/real";
 
 
     $(function() {
@@ -49,8 +49,9 @@
         if ($(this).width() < 769) {
             panehHidden = true;
         }
+        //$('body').layout({ initClosed: panehHidden, west__size: 185 });
         queryUserList();
-        // queryDeptTree();
+        queryDeptTree();
     });
 
     function queryUserList() {
@@ -63,51 +64,86 @@
             columns: [{
                 checkbox: true
             },
-
                 {
-                    field: 'yname',
-                    title: '名称'
+                    field: 'id',
+                    title: '序号',
+                    visible: false
+
                 },
                 {
-                    field: 'zname',
+                    field: 'groupsname',
+                    title: '分组名称'
+                },
+                {
+                    field: 'measurename',
                     title: '测量点名称'
+                },
+                {
+                    field: 'signname',
+                    title: '信号名称'
+                },
+                {
+                    field: 'meanehiletime',
+                    title: '同步时间',
+                    sortable: true
+                },
+                {
+                    field: 'insidevalue',
+                    title: '内部限值',
+                    sortable: true
+                },
+                {
+                    field: 'regulationvalue',
+                    title: '法规限值',
+                    sortable: true
+                },
+                {
+                    field: 'indication',
+                    title: '示值'
+                },
+                {
+                    field: 'unit',
+                    title: '单位'
                 }]
 
         };
         $.table.init(options);
     }
 
-    // function queryDeptTree()
-    // {
-    //     var url = prefix + "/list";
-    //     var options = {
-    //         url: url,
-    //         expandLevel: 2,
-    //         onClick : zOnClick
-    //     };
-    //     $.tree.init(options);
-    //
-    //     function zOnClick(event, treeId, treeNode) {
-    //         $("#parentId").val(treeNode.yname);
-    //         $.table.search();
-    //     }
-    // }
-    //
-    // $('#btnExpand').click(function() {
-    //     $._tree.expandAll(true);
-    //     $(this).hide();
-    //     $('#btnCollapse').show();
-    // });
-    //
-    // $('#btnCollapse').click(function() {
-    //     $._tree.expandAll(false);
-    //     $(this).hide();
-    //     $('#btnExpand').show();
-    // });
-    //
-    // $('#btnRefresh').click(function() {
-    //     queryDeptTree();
-    // });
+    function queryDeptTree()
+    {
+        var url = "/dba/typetree";
+        var options = {
+            url: url,
+            expandLevel: 2,
+            onClick : zOnClick
+        };
+        $.tree.init(options);
+
+        function zOnClick(event, treeId, treeNode) {
+            $("#deptId").val(treeNode.id);
+            $("#parentId").val(treeNode.pId);
+            $.table.search();
+        }
+    }
+
+    $('#btnExpand').click(function() {
+        $._tree.expandAll(true);
+        $(this).hide();
+        $('#btnCollapse').show();
+    });
+
+    $('#btnCollapse').click(function() {
+        $._tree.expandAll(false);
+        $(this).hide();
+        $('#btnExpand').show();
+    });
+
+    $('#btnRefresh').click(function() {
+        queryDeptTree();
+    });
+
+
 
 
 </script>

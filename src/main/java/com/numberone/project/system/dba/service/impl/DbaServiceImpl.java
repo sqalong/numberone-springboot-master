@@ -2,6 +2,7 @@ package com.numberone.project.system.dba.service.impl;
 
 import com.numberone.common.utils.text.Convert;
 import com.numberone.project.system.dba.domain.Dba;
+import com.numberone.project.system.dba.domain.Type;
 import com.numberone.project.system.dba.mapper.DbaMapper;
 import com.numberone.project.system.dba.service.DbaService;
 import com.numberone.project.system.energy.service.IProductEnergyService;
@@ -30,6 +31,11 @@ public class DbaServiceImpl implements DbaService
     @Override
     public List<Dba> DbaList() {
         return dbamapper.DbaList();
+    }
+
+    @Override
+    public List<Type> typetreelist() {
+        return dbamapper.typetreelist();
     }
 //    @Autowired
 //    private RealMapper realMapper;

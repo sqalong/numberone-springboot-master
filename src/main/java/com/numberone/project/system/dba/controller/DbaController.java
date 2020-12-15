@@ -5,6 +5,7 @@ import com.numberone.project.bigdata.domain.AreaRatio;
 import com.numberone.project.bigdata.domain.Zsum;
 import com.numberone.project.bigdata.service.IBigdataService;
 import com.numberone.project.system.dba.domain.Dba;
+import com.numberone.project.system.dba.domain.Type;
 import com.numberone.project.system.dba.service.DbaService;
 import com.numberone.project.system.energy.service.IProductEnergyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,11 @@ public class DbaController extends BaseController
     @ResponseBody
     public List<Dba> Dbalist(){
         return  dbaservice.DbaList();
+    }
+    @GetMapping("/typetree")
+    @ResponseBody
+    public  List<Type> treelist(){
+        return dbaservice.typetreelist();
     }
 
 

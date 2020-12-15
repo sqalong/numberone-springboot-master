@@ -10,6 +10,9 @@
       select table_name AS 'yname',table_comment AS 'zname' from information_schema.tables where table_schema='number_noe'
 
     </select>
+    <select id="typetreelist" resultType="Treee">
+        SELECT typeid as id,pId AS pid, type_name as 'name' FROM sys_dict_typename
+    </select>
 
 
 </mapper>
