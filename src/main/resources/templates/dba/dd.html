@@ -41,7 +41,7 @@
 <th:block th:include="include :: layout-latest-js" />
 <th:block th:include="include :: ztree-js" />
 <script th:inline="javascript">
-    var prefix = ctx + "system/real";
+    var prefix = ctx + "dba";
 
 
     $(function() {
@@ -49,9 +49,8 @@
         if ($(this).width() < 769) {
             panehHidden = true;
         }
-        //$('body').layout({ initClosed: panehHidden, west__size: 185 });
         queryUserList();
-        queryDeptTree();
+        // queryDeptTree();
     });
 
     function queryUserList() {
@@ -64,151 +63,51 @@
             columns: [{
                 checkbox: true
             },
-                {
-                    field: 'id',
-                    title: '序号',
-                    visible: false
 
+                {
+                    field: 'yname',
+                    title: '名称'
                 },
                 {
-                    field: 'groupsname',
-                    title: '分组名称'
-                },
-                {
-                    field: 'measurename',
+                    field: 'zname',
                     title: '测量点名称'
-                },
-                {
-                    field: 'signname',
-                    title: '信号名称'
-                },
-                {
-                    field: 'meanehiletime',
-                    title: '同步时间',
-                    sortable: true
-                },
-                {
-                    field: 'insidevalue',
-                    title: '内部限值',
-                    sortable: true
-                },
-                {
-                    field: 'regulationvalue',
-                    title: '法规限值',
-                    sortable: true
-                },
-                {
-                    field: 'indication',
-                    title: '示值'
-                },
-                {
-                    field: 'unit',
-                    title: '单位'
                 }]
 
         };
         $.table.init(options);
     }
 
-    function queryDeptTree()
-    {
-        var url = ctx + "system/real/treelist";
-        var options = {
-            url: url,
-            expandLevel: 2,
-            onClick : zOnClick
-        };
-        $.tree.init(options);
-
-        function zOnClick(event, treeId, treeNode) {
-            $("#deptId").val(treeNode.id);
-            $("#parentId").val(treeNode.pId);
-            $.table.search();
-        }
-    }
-
-    $('#btnExpand').click(function() {
-        $._tree.expandAll(true);
-        $(this).hide();
-        $('#btnCollapse').show();
-    });
-
-    $('#btnCollapse').click(function() {
-        $._tree.expandAll(false);
-        $(this).hide();
-        $('#btnExpand').show();
-    });
-
-    $('#btnRefresh').click(function() {
-        queryDeptTree();
-    });
-
-    var totalFlowRate = echarts.init(document.getElementById('totalFlowRate'));
-    var xAxisData = [];
-    var yAxisData = [];
-    $.ajax({
-        type: "post",
-        url: "/system/real/lists",
-        dataType: "json",
-        async: false,
-        success: function (result) {
-
-            for (var i = 0; i < result.length; i++) {
-                xAxisData.push(result[i].meanehiletime);
-                yAxisData.push(result[i].indication);
-            }
-
-        },
-        error: function (errorMsg) {
-            alert("获取后台数据失败！");
-        }
-    })
-
-    var totalFlowRateOption = {
-        animation: false,
-        title: {
-            text: '总功率因数实时曲线',
-            x: 'center'
-
-
-            /*,
-                    left:"110px"*/
-        },
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'cross'
-            }
-        },
-        grid: {
-            left: 50 /*"50px"*/,
-            right: 15 /*"15px"*/
-        },
-        legend: {
-            data: ['总功率因数'],
-            x: 'left'
-        },
-        xAxis: {
-            boundaryGap: false,
-            data: xAxisData,
-            axisLabel: {
-                //X轴刻度配置
-                interval: 1 //0：表示全部显示不间隔；auto:表示自动根据刻度个数和宽度自动设置间隔个数
-            }
-        },
-        yAxis: {
-            boundaryGap: false
-        },
-        series: {
-            //symbol: "none",
-            /*去掉小圆点*/
-            name: '总功率因数',
-            type: 'line',
-            data: yAxisData,
-            //smooth: true   //显示为平滑的曲线
-        }
-    };
-    totalFlowRate.setOption(totalFlowRateOption);
+    // function queryDeptTree()
+    // {
+    //     var url = prefix + "/list";
+    //     var options = {
+    //         url: url,
+    //         expandLevel: 2,
+    //         onClick : zOnClick
+    //     };
+    //     $.tree.init(options);
+    //
+    //     function zOnClick(event, treeId, treeNode) {
+    //         $("#parentId").val(treeNode.yname);
+    //         $.table.search();
+    //     }
+    // }
+    //
+    // $('#btnExpand').click(function() {
+    //     $._tree.expandAll(true);
+    //     $(this).hide();
+    //     $('#btnCollapse').show();
+    // });
+    //
+    // $('#btnCollapse').click(function() {
+    //     $._tree.expandAll(false);
+    //     $(this).hide();
+    //     $('#btnExpand').show();
+    // });
+    //
+    // $('#btnRefresh').click(function() {
+    //     queryDeptTree();
+    // });
 
 
 </script>
