@@ -1,31 +1,33 @@
 package com.numberone.project.system.dba.domain;
 
 public class Type {
-    public int getpID() {
-        return pID;
+
+
+    private  int id;
+    private String  name;
+    private int pid;
+
+    public int getId() {
+        return id;
     }
 
-    public void setpID(int pID) {
-        this.pID = pID;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getTypeName() {
-        return typeName;
+    public String getName() {
+        return name;
     }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getTypeid() {
-        return typeid;
+    public int getPid() {
+        return pid;
     }
 
-    public void setTypeid(int typeid) {
-        this.typeid = typeid;
+    public void setPid(int pid) {
+        this.pid = pid;
     }
-
-    private  int pID;
-    private String  typeName;
-    private int typeid;
 }

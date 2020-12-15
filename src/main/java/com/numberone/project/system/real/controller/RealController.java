@@ -147,7 +147,7 @@ public class RealController extends BaseController
         return list;
     }
 
-    @PostMapping("/lists")
+    @GetMapping("/lists")
     @ResponseBody
     public List<Real> lists(Real real)
     {

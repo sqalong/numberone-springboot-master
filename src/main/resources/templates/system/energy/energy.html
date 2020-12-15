@@ -98,8 +98,8 @@
                     <i class="fa fa-download"></i> 导出
                  </a>
             </div>
-            <div class="col-sm-12 select-table table-striped">
-                <table id="bootstrap-table"></table>
+            <div class="col-sm-12 select-table table-striped " style="white-space: nowrap;">
+                <table id="bootstrap-table" data-mobile-responsive="true" style="table-layout:fixed"></table>
             </div>
         </div>
     </div>
@@ -117,33 +117,43 @@
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
                 modalName: "单位用能Manager",
+                showExport: true,
                 columns: [{
                     checkbox: true
                 },
                 {
                     field : 'productId',
                     title : '序号',
-                    visible: false
+                    align: 'center',
+                    visible: true
                 },
                 {
                     field : 'energyUnits',
-                    title : '用能单位'
+                    title : '用能单位',
+                    align: 'center',
+                    width:190
                 },
                 {
                     field : 'productName',
-                    title : '产品名称'
+                    title : '产品名称',
+                    align: 'center',
                 },
                 {
                     field : 'energyConsumptionType', 
-                    title : '能源分类'
+                    title : '能源分类',
+                    align: 'center'
                 },
                 {
                     field : 'energyConsumptionItemized', 
-                    title : '能耗分项'
+                    title : '能耗分项',
+                    align: 'center'
+
                 },
                 {
                     field : 'time', 
-                    title : '时间'
+                    title : '时间',
+                    align: 'center',
+                    width:180
                 },
                 {
                     field : 'theMonthPrice', 
@@ -155,35 +165,52 @@
                 },
                 {
                     field : 'unitProductEnergy', 
-                    title : '单位产品能耗'
+                    title : '单位产品能耗',
+                    align: 'center',
+                    width:100
+
                 },
                 {
                     field : 'yAgoProduction', 
-                    title : '上年同期产量'
+                    title : '上年同期产量',
+                    align: 'center',
+                    width:100
                 },
                 {
                     field : 'producEnergyCost', 
-                    title : '产品能耗费用'
+                    title : '产品能耗费用',
+                    align: 'center',
+                    width:100
                 },
                 {
                     field : 'unitProductEnergyCost', 
-                    title : '单位产品能耗费用'
+                    title : '单位产品能耗费用',
+                    align: 'center',
+                    width:100
                 },
                 {
                     field : 'yAgoValue', 
-                    title : '上年同期值'
+                    title : '上年同期值',
+                    align: 'center',
+                    width:100
                 },
                 {
                     field : 'unitProductEnergyYAgo', 
-                    title : '单位产品能耗上年同期'
+                    title : '单位产品能耗上年同期',
+                    align: 'center',
+                    width:100
                 },
                 {
                     field : 'producEnergyCostYAgo', 
-                    title : '产品能耗费用上年同期'
+                    title : '产品能耗费用上年同期',
+                    align: 'center',
+                    width:100
                 },
                 {
                     field : 'unitProductEnergyCostYAgo', 
-                    title : '单位产品能耗费用上年同期'
+                    title : '单位产品能耗费用上年同期',
+                    align: 'center',
+                    width:100
                 },
                 {
                     title: '操作',

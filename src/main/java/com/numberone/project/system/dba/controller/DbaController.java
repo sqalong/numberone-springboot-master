@@ -41,7 +41,8 @@ public class DbaController extends BaseController
     @GetMapping("/typetree")
     @ResponseBody
     public  List<Type> treelist(){
-        return dbaservice.typetreelist();
+        List<Type> list = dbaservice.typetreelist();
+        return list;
     }
 
 
