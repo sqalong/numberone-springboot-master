@@ -30,7 +30,7 @@ public class DbaController extends BaseController
     @RequestMapping("/dd")
     public String dd()
     {
-        return "/dba/dd";
+        return "dba/dd";
     }
     @PostMapping("list")
 //    @GetMapping("/list")
