@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.numberone.framework.config.NumberOneConfig;
@@ -65,6 +66,16 @@ public class IndexController extends BaseController
     public String main(ModelMap mmap)
     {
         mmap.put("version", numberOneConfig.getVersion());
+        mmap.put("msg","二月");
+        mmap.put("msg1","三月");
+        mmap.put("msg2","四月");
         return "main";
     }
+    @GetMapping("/system/main_v1")
+    public String test(ModelMap mmap)
+    {
+
+        return "main";
+    }
+
 }
