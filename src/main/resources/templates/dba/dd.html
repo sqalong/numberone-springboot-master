@@ -34,22 +34,7 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                字典名称：<input type="text" id="zzname" name="dictName"/>
-                            </li>
-                            <li>
-                                字典类型：<input type="text" name="dictType"/>
-                            </li>
-                            <li>
-                                字典状态：<select name="status" th:with="type=${@dict.getType('sys_normal_disable')}">
-                                <option value="">所有</option>
-                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                            </select>
-                            </li>
-                            <li class="select-time">
-                                <label>创建时间： </label>
-                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTime]"/>
-                                <span>-</span>
-                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endTime]"/>
+                                <input type="hidden" id="zzname" name="dictName"/>
                             </li>
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -187,20 +172,32 @@
         $.tree.init(options);
 
         function zOnClick(event, treeId, treeNode) {
-            alert(treeNode.pId);
 
-            if (treeNode.name != null) {
-                $("#zzname").val(treeNode.name);
-                $.table.search();
-
+            switch(treeNode.id) {
+                case 1:
+                    $("#zzname").val('"客户来源" or dict_name LIKE "客户状态" or  dict_name LIKE "客户类型" or dict_name LIKE "客户级别"');
+                    $.table.search();
+                    break;
+                case 2:
+                    $("#zzname").val('"判断异常" or dict_name LIKE "告警通知类型"');
+                    $.table.search();
+                    break;
+                case 3:
+                    $("#zzname").val('"操作类型" or dict_name LIKE "用户性别" or  dict_name LIKE "系统开关" or dict_name LIKE "系统是否" or dict_name LIKE "系统状态" or dict_name LIKE "菜单状态" or dict_name LIKE "通知类型" or dict_name LIKE "通知状态"');
+                    $.table.search();
+                    break;
+                case 4:
+                    $("#zzname").val('"任务分组" or dict_name LIKE "任务状态" or  dict_name LIKE "订单状态" or dict_name LIKE "贷款方式" or dict_name LIKE "还款方式"');
+                    $.table.search();
+                    break;
+                case 5:
+                    $("#zzname").val('"常见疾病种类"');
+                    $.table.search();
+                    break;
+                default:
+                    $("#zzname").val('"'+treeNode.name+'"');
+                    $.table.search()
             };
-            // if (treeNode.name != null) {
-            //     $("#zzname").val(treeNode.name);
-            //     $.table.search();
-            //
-            // };
-
-
 
 
         }
@@ -221,7 +218,6 @@
     $('#btnRefresh').click(function() {
         queryDeptTree();
     });
-
 
 
 
