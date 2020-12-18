@@ -173,19 +173,19 @@
 
             switch(treeNode.id) {
                 case 1:
-                    $("#zzname").val('"客户来源" or dict_name LIKE "客户状态" or  dict_name LIKE "客户类型" or dict_name LIKE "客户级别"');
-                    $.table.search();
-                    break;
-                case 2:
-                    $("#zzname").val('"判断异常" or dict_name LIKE "告警通知类型"');
-                    $.table.search();
-                    break;
-                case 3:
                     $("#zzname").val('"操作类型" or dict_name LIKE "用户性别" or  dict_name LIKE "系统开关" or dict_name LIKE "系统是否" or dict_name LIKE "系统状态" or dict_name LIKE "菜单状态" or dict_name LIKE "通知类型" or dict_name LIKE "通知状态"');
                     $.table.search();
                     break;
-                case 4:
+                case 2:
+                    $("#zzname").val('"客户来源" or dict_name LIKE "客户状态" or  dict_name LIKE "客户类型" or dict_name LIKE "客户级别"');
+                    $.table.search();
+                    break;
+                case 3:
                     $("#zzname").val('"任务分组" or dict_name LIKE "任务状态" or  dict_name LIKE "订单状态" or dict_name LIKE "贷款方式" or dict_name LIKE "还款方式"');
+                    $.table.search();
+                    break;
+                case 4:
+                    $("#zzname").val('"判断异常" or dict_name LIKE "告警通知类型"');
                     $.table.search();
                     break;
                 case 5:
