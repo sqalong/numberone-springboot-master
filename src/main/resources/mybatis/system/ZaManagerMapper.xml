@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.numberone.project.system.zamanager.mapper.ZaManagerMapper">
+    
+    <resultMap type="ZaManager" id="ZaManagerResult">
+        <result property="id"    column="id"    />
+        <result property="yuez"    column="yuez"    />
+        <result property="ljjnl"    column="ljjnl"    />
+        <result property="jsje"    column="jsje"    />
+        <result property="jnl"    column="jnl"    />
+        <result property="cot"    column="cot"    />
+        <result property="sot"    column="sot"    />
+        <result property="nott"    column="nott"    />
+        <result property="xuet"    column="xuet"    />
+        <result property="ljyd"    column="ljyd"    />
+        <result property="jsym"    column="jsym"    />
+    </resultMap>
+
+    <sql id="selectZaManagerVo">
+        select id, yuez, ljjnl, jsje, jnl, cot, sot, nott, xuet, ljyd, jsym from za
+    </sql>
+
+    <select id="selectZaManagerList" parameterType="ZaManager" resultMap="ZaManagerResult">
+        <include refid="selectZaManagerVo"/>
+        <where>  
+            <if test="yuez != null  and yuez != ''"> and yuez = #{yuez}</if>
+            <if test="ljjnl != null  and ljjnl != ''"> and ljjnl = #{ljjnl}</if>
+            <if test="jsje != null  and jsje != ''"> and jsje = #{jsje}</if>
+            <if test="jnl != null  and jnl != ''"> and jnl = #{jnl}</if>
+            <if test="cot != null  and cot != ''"> and cot = #{cot}</if>
+            <if test="sot != null  and sot != ''"> and sot = #{sot}</if>
+            <if test="nott != null  and nott != ''"> and nott = #{nott}</if>
+            <if test="xuet != null  and xuet != ''"> and xuet = #{xuet}</if>
+            <if test="ljyd != null  and ljyd != ''"> and ljyd = #{ljyd}</if>
+            <if test="jsym != null  and jsym != ''"> and jsym = #{jsym}</if>
+        </where>
+    </select>
+    
+    <select id="selectZaManagerById" parameterType="Long" resultMap="ZaManagerResult">
+        <include refid="selectZaManagerVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZaManager" parameterType="ZaManager" useGeneratedKeys="true" keyProperty="id">
+        insert into za
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="yuez != null  and yuez != ''">yuez,</if>
+            <if test="ljjnl != null  and ljjnl != ''">ljjnl,</if>
+            <if test="jsje != null  and jsje != ''">jsje,</if>
+            <if test="jnl != null  and jnl != ''">jnl,</if>
+            <if test="cot != null  and cot != ''">cot,</if>
+            <if test="sot != null  and sot != ''">sot,</if>
+            <if test="nott != null  and nott != ''">nott,</if>
+            <if test="xuet != null  and xuet != ''">xuet,</if>
+            <if test="ljyd != null  and ljyd != ''">ljyd,</if>
+            <if test="jsym != null  and jsym != ''">jsym,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="yuez != null  and yuez != ''">#{yuez},</if>
+            <if test="ljjnl != null  and ljjnl != ''">#{ljjnl},</if>
+            <if test="jsje != null  and jsje != ''">#{jsje},</if>
+            <if test="jnl != null  and jnl != ''">#{jnl},</if>
+            <if test="cot != null  and cot != ''">#{cot},</if>
+            <if test="sot != null  and sot != ''">#{sot},</if>
+            <if test="nott != null  and nott != ''">#{nott},</if>
+            <if test="xuet != null  and xuet != ''">#{xuet},</if>
+            <if test="ljyd != null  and ljyd != ''">#{ljyd},</if>
+            <if test="jsym != null  and jsym != ''">#{jsym},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZaManager" parameterType="ZaManager">
+        update za
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="yuez != null  and yuez != ''">yuez = #{yuez},</if>
+            <if test="ljjnl != null  and ljjnl != ''">ljjnl = #{ljjnl},</if>
+            <if test="jsje != null  and jsje != ''">jsje = #{jsje},</if>
+            <if test="jnl != null  and jnl != ''">jnl = #{jnl},</if>
+            <if test="cot != null  and cot != ''">cot = #{cot},</if>
+            <if test="sot != null  and sot != ''">sot = #{sot},</if>
+            <if test="nott != null  and nott != ''">nott = #{nott},</if>
+            <if test="xuet != null  and xuet != ''">xuet = #{xuet},</if>
+            <if test="ljyd != null  and ljyd != ''">ljyd = #{ljyd},</if>
+            <if test="jsym != null  and jsym != ''">jsym = #{jsym},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZaManagerById" parameterType="Long">
+        delete from za where id = #{id}
+    </delete>
+
+    <delete id="deleteZaManagerByIds" parameterType="String">
+        delete from za where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

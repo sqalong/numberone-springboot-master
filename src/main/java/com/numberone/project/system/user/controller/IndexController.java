@@ -75,7 +75,7 @@ public class IndexController extends BaseController
     public String test(ModelMap mmap)
     {
 
-        return "main";
+        return "main_v1";
     }
 
 }
