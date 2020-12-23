@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.numberone.project.system.gasmanager.mapper.GasManagerMapper">
+    
+    <resultMap type="GasManager" id="GasManagerResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="value"    column="value"    />
+    </resultMap>
+
+    <sql id="selectGasManagerVo">
+        select id, name, value from gas
+    </sql>
+
+    <select id="selectGasManagerList" parameterType="GasManager" resultMap="GasManagerResult">
+        <include refid="selectGasManagerVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="value != null  and value != ''"> and value = #{value}</if>
+        </where>
+    </select>
+    
+    <select id="selectGasManagerById" parameterType="Long" resultMap="GasManagerResult">
+        <include refid="selectGasManagerVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertGasManager" parameterType="GasManager" useGeneratedKeys="true" keyProperty="id">
+        insert into gas
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">name,</if>
+            <if test="value != null  and value != ''">value,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="value != null  and value != ''">#{value},</if>
+         </trim>
+    </insert>
+
+    <update id="updateGasManager" parameterType="GasManager">
+        update gas
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="value != null  and value != ''">value = #{value},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteGasManagerById" parameterType="Long">
+        delete from gas where id = #{id}
+    </delete>
+
+    <delete id="deleteGasManagerByIds" parameterType="String">
+        delete from gas where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
