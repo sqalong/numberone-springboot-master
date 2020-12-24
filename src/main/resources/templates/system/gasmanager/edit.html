@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <th:block th:include="include :: header('修改electricmanager')" />
+    <th:block th:include="include :: header('修改gasmanager')" />
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-        <form class="form-horizontal m" id="form-electricmanager-edit" th:object="${electricManager}">
+        <form class="form-horizontal m" id="form-gasmanager-edit" th:object="${gasManager}">
             <input name="id" th:field="*{id}" type="hidden">
             <div class="form-group">    
                 <label class="col-sm-3 control-label">场院名称：</label>
@@ -17,21 +17,20 @@
                 <label class="col-sm-3 control-label">数值：</label>
                 <div class="col-sm-8">
                     <input name="value" th:field="*{value}" class="form-control" type="text">
-                    <span style="position: absolute; top: 0; right: 0; display: table-cell; white-space: nowrap; padding: 7px 25px;">kwh</span>
                 </div>
             </div>
         </form>
     </div>
     <th:block th:include="include :: footer" />
     <script type="text/javascript">
-        var prefix = ctx + "system/electricmanager";
-        $("#form-electricmanager-edit").validate({
+        var prefix = ctx + "system/gasmanager";
+        $("#form-gasmanager-edit").validate({
             focusCleanup: true
         });
 
         function submitHandler() {
             if ($.validate.form()) {
-                $.operate.save(prefix + "/edit", $('#form-electricmanager-edit').serialize());
+                $.operate.save(prefix + "/edit", $('#form-gasmanager-edit').serialize());
             }
         }
     </script>
