@@ -47,7 +47,6 @@ public class MessageController extends BaseController
     {
         return prefix + "/message";
     }
-
     /**
      * 查询VIEW列表
      */
@@ -122,8 +121,6 @@ public class MessageController extends BaseController
     /**
      * 删除VIEW
      */
-//    @RequiresPermissions("system:message:remove")
-//    @Log(title = "VIEW", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public int remove(String ids)
@@ -132,11 +129,7 @@ public class MessageController extends BaseController
         User user = getSysUser();
         String username = user.getLoginName();
         User name = userService.getNameId(username);
-//        User name = messageService.getNameId(username);
         Long nameids = name.getUserId();
-
-//        System.out.print(nameids);
-
         return messageService.upMessage(ids,nameids);
 
     }

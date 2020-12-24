@@ -17,6 +17,22 @@
                 <i class="fa fa-download"></i> 导出
             </a>
         </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">测量值:</h4>
+                    </div>
+                    <div class="modal-body">
+                        <textarea class="form-control" id="message-text">"+value+"</textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-sm-12 select-table table-striped">
             <table id="bootstrap-table"></table>
         </div>
@@ -71,6 +87,17 @@
                 }]
         };
         $.table.intt(options);
+    });
+    var  rows= JSON.stringify($('#bootstrap-table').bootstrapTable('getData'))
+    $('#table').bootstrapTable({
+        columns: options,
+        data: rows,
+        onDblClickRow: function(row,field) {
+            //var one=row.ProductName;
+            //$("#message-text").text(one);
+            //alert(row)
+            alert(JSON.stringify(row));
+        }
     });
 </script>
 </body>

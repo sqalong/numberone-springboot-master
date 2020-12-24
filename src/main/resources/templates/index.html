@@ -16,6 +16,22 @@
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
     <link th:href="@{/css/skins.css}" rel="stylesheet"/>
     <link th:href="@{/numberone/css/numberone-ui.css?v=4.1.0}" rel="stylesheet"/>
+	<style type="text/css">
+		@-webkit-keyframes myAnimation {
+			0% {
+				opacity: 0;
+				filter: alpha(opacity=0)
+			}
+			100% {
+				opacity: 1;
+				filter: alpha(opacity=100)
+			}
+		}
+		#flicker{
+			animation: myAnimation 1s infinite
+		}
+
+	</style>
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden">
 <div id="wrapper">
@@ -172,7 +188,7 @@
 <!--							</th:block>-->
 <!--						</a>-->
 						<a title="消息" class="fa fa-bell"  onclick="switchtable()">
-							<label class="label label-danger" style="right:0px">12</label> 告警通知
+							<label id="flicker" class="label label-danger" style="right:0px">12</label> 告警通知
 						</a>
 					</li>
                     <li class="dropdown user-menu">
