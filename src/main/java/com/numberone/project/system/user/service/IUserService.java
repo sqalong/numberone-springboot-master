@@ -187,4 +187,8 @@ public interface IUserService
      * @return 所有用户信息
      */
     public List<Ztree> selectUserTree(User user);
+
+
+    User  getNameId(String username);
+
 }

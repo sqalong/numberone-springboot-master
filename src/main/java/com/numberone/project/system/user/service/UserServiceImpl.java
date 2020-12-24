@@ -497,6 +497,11 @@ public class UserServiceImpl implements IUserService
         return ztrees;
     }
 
+    @Override
+    public User getNameId(String username) {
+        return userMapper.getNameId(username);
+    }
+
     /**
      * 对象转用户树
      *

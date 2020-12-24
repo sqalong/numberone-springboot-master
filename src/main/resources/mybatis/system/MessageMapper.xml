@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.numberone.project.system.message.mapper.MessageMapper">
+    
+    <resultMap type="Message" id="MessageResult">
+        <result property="id"    column="id"    />
+        <result property="content"    column="content"    />
+        <result property="type"    column="type"    />
+        <result property="time"    column="time"    />
+        <result property="state"    column="state"    />
+        <result property="userId"    column="user_id"    />
+        <result property="changeTime"    column="change_time"    />
+    </resultMap>
+
+    <sql id="selectMessageVo">
+        select id, content, type, time, state, user_id, change_time from message
+    </sql>
+
+    <select id="selectMessageList" parameterType="Message" resultMap="MessageResult">
+        <include refid="selectMessageVo"/>
+        <where>  
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="time != null "> and time = #{time}</if>
+            <if test="state != null  and state != ''"> and state = #{state}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="changeTime != null "> and change_time = #{changeTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectMessageById" parameterType="Long" resultMap="MessageResult">
+        <include refid="selectMessageVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertMessage" parameterType="Message">
+        insert into message
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null ">id,</if>
+            <if test="content != null  and content != ''">content,</if>
+            <if test="type != null  and type != ''">type,</if>
+            <if test="time != null ">time,</if>
+            <if test="state != null  and state != ''">state,</if>
+            <if test="userId != null ">user_id,</if>
+            <if test="changeTime != null ">change_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null ">#{id},</if>
+            <if test="content != null  and content != ''">#{content},</if>
+            <if test="type != null  and type != ''">#{type},</if>
+            <if test="time != null ">#{time},</if>
+            <if test="state != null  and state != ''">#{state},</if>
+            <if test="userId != null ">#{userId},</if>
+            <if test="changeTime != null ">#{changeTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMessage" parameterType="Message">
+        update message
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="content != null  and content != ''">content = #{content},</if>
+            <if test="type != null  and type != ''">type = #{type},</if>
+            <if test="time != null ">time = #{time},</if>
+            <if test="state != null  and state != ''">state = #{state},</if>
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="changeTime != null ">change_time = #{changeTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteMessageById" parameterType="Long">
+        delete from message where id = #{id}
+    </delete>
+
+    <delete id="deleteMessageByIds" parameterType="String">
+        delete from message where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="upMessage">
+        UPDATE message set state=0,change_time=CURRENT_TIMESTAMP where user_id=#{nameids} and id=#{ids}
+    </update>
+
+    <select id="getNameId"  resultType="User">
+        SELECT user_id FROM sys_user where login_name = #{username}
+
+    </select>
+    
+</mapper>
