@@ -1034,6 +1034,20 @@ var table = {
             	});
             	
             },
+			// 修改信息状态
+			updates: function(id) {
+				table.set();
+				$.modal.confirm("确定修改该条" + table.options.modalName + "信息吗？", function() {
+					 var url = $.common.isEmpty(id) ? table.options.removeUrl : table.options.removeUrl.replace("{id}", id);
+					if(table.options.type == table_type.bootstrapTreeTable) {
+						$.operate.get(url);
+					} else {
+						var data = { "ids": id };
+						$.operate.submit(url, "post", "json", data);
+					}
+				});
+
+			},
             // 批量删除信息
             removeAll: function() {
             	table.set();

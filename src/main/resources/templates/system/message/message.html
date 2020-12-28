@@ -53,6 +53,7 @@
                     align: 'center',
                     formatter: function(value, row, index) {
                         var actions = [];
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="switchtable()"><i class="fa fa-remove"></i>弹框</a>');
                         actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>改为已读</a>');
                         return actions.join('');
                     }
@@ -60,13 +61,24 @@
             };
             $.table.init(options);
         });
-        var rows=$('#xqjhDetails_table').bootstrapTable('getData')
-        var selected = $("#puBmxqjh_table").bootstrapTable('getSelections');
-        alert(selected)
+        /* 弹出表格 */
+        function switchtable() {
+            layer.open({
+                type : 2,
+                shadeClose : true,
+                title : "告警通知",
+                area : ["600px", "300px"],
+                content :[ctx + "system/message", 'no']
+            })
+        }
+        // var rows=$('#xqjhDetails_table').bootstrapTable('getData')
+        // var selected = $("#puBmxqjh_table").bootstrapTable('getSelections');
+        // alert(selected)
         $('#table').bootstrapTable({
             columns: options,
             data: "system/message/lists",
             onDblClickRow: function(row,field) {
+
                 //var one=row.ProductName;
                 //$("#message-text").text(one);
                 //alert(row)
@@ -75,38 +87,7 @@
             }
         });
 
-        // $.ajax({
-        //     type: "post",
-        //     url: "system/message/lists",
-        //     data: {
-        //         classId: lists
-        //     },
-        //     success: function (rs) {
-        //         var studentArray = []; //前台创建个数组对象保存数据
-        //         $.each(rs, function (i, item) {
-        //             var student;
-        //             student.name = item.name;
-        //             student.id = item.id;
-        //             student.age = item.age;
-        //             studentArray.push(student); //将student 对象信息保存到数组对象中
-        //         });
-        //     },
-        //     error:function(){
-        //         alert("获取数据时发生错误");
-        //     }
-        // });
 
-        //alert(options.url)
-        // var  rows= $('#bootstrap-table').bootstrapTable('getData')
-        // var data = { instrumentId: instrumentId,timeSetList: []};
-        // for (var i = 0; i < info.length; i++) {
-        //     var timeSet = new Object();
-        //     timeSet.stTime = info[i].stTime;
-        //     timeSet.edTime = info[i].edTime;
-        //     data.timeSetList.push(timeSet);
-        // }
-        // var jsonString = JSON.stringify(data);
-        // alert(jsonString)
     </script>
 </body>
 </html>

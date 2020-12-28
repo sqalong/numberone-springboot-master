@@ -108,9 +108,6 @@ public class MessageServiceImpl implements IMessageService
     @Override
     public User  getNameId(String username) {
         System.out.print(username);
-
-
-
         return messageMapper.getNameId(username);
     }
 

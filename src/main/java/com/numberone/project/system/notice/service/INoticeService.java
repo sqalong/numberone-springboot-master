@@ -1,6 +1,8 @@
 package com.numberone.project.system.notice.service;
 
 import com.numberone.project.system.notice.domain.Notice;
+import com.numberone.project.system.user.domain.User;
+
 import java.util.List;
 
 /**
@@ -49,4 +51,11 @@ public interface INoticeService
      * @return 结果
      */
     public int deleteNoticeByIds(String ids);
+
+    List<Notice> getnoticeids();
+
+    int addmessage(List<User> list);
+
+//    User getNameId(String username);
+
 }

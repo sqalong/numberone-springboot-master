@@ -191,4 +191,8 @@ public interface IUserService
 
     User  getNameId(String username);
 
+
+    List<User>  getAllUser();
+
+
 }

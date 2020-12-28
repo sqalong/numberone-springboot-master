@@ -124,6 +124,8 @@ public interface UserMapper
 
     User getNameId(String username);
 
+    List<User> getAllUser();
+
 
 
 

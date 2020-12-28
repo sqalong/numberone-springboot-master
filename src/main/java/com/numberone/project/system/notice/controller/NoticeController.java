@@ -1,6 +1,10 @@
 package com.numberone.project.system.notice.controller;
 
+import java.util.HashMap;
 import java.util.List;
+
+import com.numberone.project.system.user.domain.User;
+import com.numberone.project.system.user.service.IUserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +35,10 @@ public class NoticeController extends BaseController
 
     @Autowired
     private INoticeService noticeService;
+
+
+    @Autowired
+    private IUserService userservice;
 
     @RequiresPermissions("system:notice:view")
     @GetMapping()
@@ -70,7 +78,32 @@ public class NoticeController extends BaseController
     @ResponseBody
     public AjaxResult addSave(Notice notice)
     {
-        return toAjax(noticeService.insertNotice(notice));
+        AjaxResult ll =  toAjax(noticeService.insertNotice(notice));
+
+        /**
+         * 给所有用户添加消息
+         */
+        //查询所有用户对应的ID
+        List<User> list = userservice.getAllUser();
+        //查询插入公告表里最后一条公告的ID
+        List<Notice> no = noticeService.getnoticeids();
+
+        Long noid =23L;
+        for(Notice t : no){
+            noid = t.getNoticeId();
+        }
+
+
+        for(User u : list){
+            u.setDeptId(noid);
+        }
+
+
+        int nos = noid.intValue();
+        int rs = noticeService.addmessage(list);
+//        System.out.println(noticeid);
+
+        return ll;
     }
 
     /**
@@ -106,4 +139,27 @@ public class NoticeController extends BaseController
     {
         return toAjax(noticeService.deleteNoticeByIds(ids));
     }
+
+    /**
+     * 给所有用户添加消息
+     */
+
+
+
+
+//    /**
+//     * 添加
+//     */
+//    @PostMapping( "/remove")
+//    @ResponseBody
+//    public int remove(String ids)
+//    {
+//        // 取身份信息
+//        User user = getSysUser();
+//        String username = user.getLoginName();
+//        User name = noticeService.getNameId(username);
+//        Long nameids = name.getUserId();
+//        return messageService.upMessage(ids,nameids);
+//
+//    }
 }

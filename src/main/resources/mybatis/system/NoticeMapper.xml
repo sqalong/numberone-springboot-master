@@ -81,5 +81,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{noticeId}
         </foreach>
     </delete>
+
+    <select id="getnoticeids" parameterType="Long" resultMap="NoticeResult">
+        SELECT notice_id from sys_notice order by notice_id DESC limit 1
+    </select>
+
+
+    <insert id="addmessage" parameterType="Notice">
+        INSERT into message_logging (userid, noticeid) value
+           <foreach item="item" index="index" collection="list"  separator="," >
+               (#{item.userId},#{item.deptId})
+            </foreach>
+
+
+    </insert>
     
 </mapper>

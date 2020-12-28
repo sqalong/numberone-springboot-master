@@ -134,7 +134,7 @@ public class MessageController extends BaseController
     }
 
     /**
-     * 删除VIEW
+     * 修改信息状态
      */
     @PostMapping( "/remove")
     @ResponseBody

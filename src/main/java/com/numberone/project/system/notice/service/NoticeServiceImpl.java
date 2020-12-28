@@ -1,6 +1,8 @@
 package com.numberone.project.system.notice.service;
 
 import java.util.List;
+
+import com.numberone.project.system.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.numberone.common.utils.security.ShiroUtils;
@@ -81,4 +83,20 @@ public class NoticeServiceImpl implements INoticeService
     {
         return noticeMapper.deleteNoticeByIds(Convert.toStrArray(ids));
     }
+
+    @Override
+    public List<Notice> getnoticeids() {
+        return noticeMapper.getnoticeids();
+    }
+
+    @Override
+    public int addmessage(List<User> list) {
+        return noticeMapper.addmessage(list);
+    }
+
+
+//    @Override
+//    public User getNameId(String username) {
+//        return noticeMapper.upMessage(ids,nameids);
+//    }
 }

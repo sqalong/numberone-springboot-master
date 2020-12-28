@@ -219,5 +219,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getNameId"   parameterType="User" resultMap="UserResult">
 		SELECT user_id FROM sys_user where login_name = #{username}
 	</select>
+
+	<select id="getAllUser"   parameterType="User" resultMap="UserResult">
+		select user_id from sys_user
+	</select>
+
 	
 </mapper> 

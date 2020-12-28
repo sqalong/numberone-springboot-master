@@ -526,4 +526,10 @@ public class UserServiceImpl implements IUserService
         }
         return ztrees;
     }
+
+
+    @Override
+    public List<User> getAllUser() {
+        return userMapper.getAllUser();
+    }
 }

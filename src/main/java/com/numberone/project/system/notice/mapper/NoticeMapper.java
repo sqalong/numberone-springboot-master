@@ -1,6 +1,8 @@
 package com.numberone.project.system.notice.mapper;
 
 import com.numberone.project.system.notice.domain.Notice;
+import com.numberone.project.system.user.domain.User;
+
 import java.util.List;
 
 /**
@@ -49,4 +51,8 @@ public interface NoticeMapper
      * @return 结果
      */
     public int deleteNoticeByIds(String[] noticeIds);
+
+    List<Notice> getnoticeids();
+
+    int addmessage(List<User> list);
 }
