@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.numberone.project.system.areawater.mapper.AreawaterMapper">
+    
+    <resultMap type="Areawater" id="AreawaterResult">
+        <result property="id"    column="id"    />
+        <result property="smallareaname"    column="smallareaname"    />
+        <result property="largeareaname"    column="largeareaname"    />
+        <result property="value"    column="value"    />
+    </resultMap>
+
+    <sql id="selectAreawaterVo">
+        select id, smallareaname, largeareaname, value from areawater
+    </sql>
+
+    <select id="selectAreawaterList" parameterType="Areawater" resultMap="AreawaterResult">
+        <include refid="selectAreawaterVo"/>
+        <where>  
+            <if test="smallareaname != null  and smallareaname != ''"> and smallareaname like concat('%', #{smallareaname}, '%')</if>
+            <if test="largeareaname != null  and largeareaname != ''"> and largeareaname like concat('%', #{largeareaname}, '%')</if>
+            <if test="value != null "> and value = #{value}</if>
+        </where>
+    </select>
+    
+    <select id="selectAreawaterById" parameterType="Long" resultMap="AreawaterResult">
+        <include refid="selectAreawaterVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAreawater" parameterType="Areawater" useGeneratedKeys="true" keyProperty="id">
+        insert into areawater
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="smallareaname != null  and smallareaname != ''">smallareaname,</if>
+            <if test="largeareaname != null  and largeareaname != ''">largeareaname,</if>
+            <if test="value != null ">value,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="smallareaname != null  and smallareaname != ''">#{smallareaname},</if>
+            <if test="largeareaname != null  and largeareaname != ''">#{largeareaname},</if>
+            <if test="value != null ">#{value},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAreawater" parameterType="Areawater">
+        update areawater
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="smallareaname != null  and smallareaname != ''">smallareaname = #{smallareaname},</if>
+            <if test="largeareaname != null  and largeareaname != ''">largeareaname = #{largeareaname},</if>
+            <if test="value != null ">value = #{value},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAreawaterById" parameterType="Long">
+        delete from areawater where id = #{id}
+    </delete>
+
+    <delete id="deleteAreawaterByIds" parameterType="String">
+        delete from areawater where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
