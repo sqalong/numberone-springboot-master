@@ -20,6 +20,14 @@ public interface MessageMapper
      */
     public Message selectMessageById(Long id);
 
+
+    /**
+     * 查询VIEW
+     *
+     * @param user_id VIEWID
+     * @return VIEW
+     */
+    public Message selectMessageByUserId(Long user_id);
     /**
      * 查询VIEW列表
      * 

@@ -57,7 +57,22 @@ public class MessageController extends BaseController
     {
         startPage();
         List<Message> list = messageService.selectMessageList(message);
+        System.out.print(list);
         return getDataTable(list);
+    }
+
+    /**
+     * 返回json数据
+     * */
+    @RequiresPermissions("system:message:lists")
+    @GetMapping("/lists")
+    @ResponseBody
+    public List<Message> lists(Message message)
+    {
+        startPage();
+        List<Message> list = messageService.selectMessageList(message);
+        System.out.print(list);
+        return list;
     }
 
     /**

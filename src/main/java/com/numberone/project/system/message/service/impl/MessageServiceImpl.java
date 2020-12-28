@@ -34,6 +34,19 @@ public class MessageServiceImpl implements IMessageService
         return messageMapper.selectMessageById(id);
     }
 
+
+    /**
+     * 查询VIEW
+     *
+     * @param user_id VIEWID
+     * @return VIEW
+     */
+    @Override
+    public Message selectMessageByUserId(Long user_id)
+    {
+        return messageMapper.selectMessageByUserId(user_id);
+    }
+
     /**
      * 查询VIEW列表
      * 

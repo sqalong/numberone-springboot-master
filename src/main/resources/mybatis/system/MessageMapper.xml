@@ -34,6 +34,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectMessageVo"/>
         where id = #{id}
     </select>
+    <select id="selectMessageByUserId" parameterType="Long" resultMap="MessageResult">
+        <include refid="selectMessageVo"/>
+        where user_id = #{user_id}
+    </select>
         
     <insert id="insertMessage" parameterType="Message">
         insert into message
@@ -87,7 +91,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="getNameId"  resultType="User">
         SELECT user_id FROM sys_user where login_name = #{username}
-
     </select>
     
 </mapper>

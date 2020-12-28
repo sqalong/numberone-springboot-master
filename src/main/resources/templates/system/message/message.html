@@ -60,6 +60,53 @@
             };
             $.table.init(options);
         });
+        var rows=$('#xqjhDetails_table').bootstrapTable('getData')
+        var selected = $("#puBmxqjh_table").bootstrapTable('getSelections');
+        alert(selected)
+        $('#table').bootstrapTable({
+            columns: options,
+            data: "system/message/lists",
+            onDblClickRow: function(row,field) {
+                //var one=row.ProductName;
+                //$("#message-text").text(one);
+                //alert(row)
+                var one =row.title;
+                alert(one);
+            }
+        });
+
+        // $.ajax({
+        //     type: "post",
+        //     url: "system/message/lists",
+        //     data: {
+        //         classId: lists
+        //     },
+        //     success: function (rs) {
+        //         var studentArray = []; //前台创建个数组对象保存数据
+        //         $.each(rs, function (i, item) {
+        //             var student;
+        //             student.name = item.name;
+        //             student.id = item.id;
+        //             student.age = item.age;
+        //             studentArray.push(student); //将student 对象信息保存到数组对象中
+        //         });
+        //     },
+        //     error:function(){
+        //         alert("获取数据时发生错误");
+        //     }
+        // });
+
+        //alert(options.url)
+        // var  rows= $('#bootstrap-table').bootstrapTable('getData')
+        // var data = { instrumentId: instrumentId,timeSetList: []};
+        // for (var i = 0; i < info.length; i++) {
+        //     var timeSet = new Object();
+        //     timeSet.stTime = info[i].stTime;
+        //     timeSet.edTime = info[i].edTime;
+        //     data.timeSetList.push(timeSet);
+        // }
+        // var jsonString = JSON.stringify(data);
+        // alert(jsonString)
     </script>
 </body>
 </html>
