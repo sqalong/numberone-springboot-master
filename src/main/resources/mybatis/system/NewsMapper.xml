@@ -21,7 +21,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectNewsList" parameterType="News" resultMap="NewsResult">
         <include refid="selectNewsVo"/>
-        <where>  
+        <where>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="loginName != null  and loginName != ''"> and login_name = #{loginName}</if>
         </where>
     </select>
     

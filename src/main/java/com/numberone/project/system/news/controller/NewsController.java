@@ -51,14 +51,42 @@ public class NewsController extends BaseController
      * 查询消息提醒列表
      */
     @RequiresPermissions("system:news:list")
-    @PostMapping("/list")
+    @PostMapping("/lists")
     @ResponseBody
     public TableDataInfo list(News news)
+    {
+        startPage();
+
+        User user = getSysUser();
+        String username = user.getLoginName();
+        System.out.println("当前用户名字"+username);
+
+        User name = userService.getNameId(username);
+        System.out.println("用户表当前用户对象"+name);
+
+        Long nameids = name.getUserId();
+        System.out.println("当前用户对应id"+nameids);
+        news.setUserId(nameids);
+        List<News> list = newsService.selectNewsList(news);
+
+        return getDataTable(list);
+    }
+
+
+    /**
+     * 查询用户消息提醒列表
+     */
+    @RequiresPermissions("system:news:list")
+    @PostMapping("/list")
+    @ResponseBody
+    public TableDataInfo lists(News news)
     {
         startPage();
         List<News> list = newsService.selectNewsList(news);
         return getDataTable(list);
     }
+
+
 
     /**
      * 导出消息提醒列表

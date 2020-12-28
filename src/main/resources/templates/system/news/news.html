@@ -13,6 +13,20 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
+        var list;
+        $.ajax({
+            type:"post",
+            url:"/system/news/lists",
+            dataType:"json",
+            async:false,
+            success:function (result) {
+                list=result;
+            },
+            error :function(errorMsg) {
+                alert("获取后台数据失败！");
+            }
+        });
+
         var editFlag = [[${@permission.hasPermi('system:news:edit')}]];
         var removeFlag = [[${@permission.hasPermi('system:news:remove')}]];
         var stateDatas = [[${@dict.getType('type_message')}]];
@@ -20,7 +34,7 @@
 
         $(function() {
             var options = {
-                url: prefix + "/list",
+                url: prefix + "/lists",
                 createUrl: prefix + "/add",
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
@@ -56,7 +70,48 @@
                 }]
             };
             $.table.intt(options);
+
+            $.table.bootstrapTable({
+                columns: columns,
+                data: list,
+                onDblClickRow: function(row) {
+                    switchtable();
+                    var one =row.noticeContent;
+                    alert(one);
+                }
+            });
+            sc();
         });
+        /* 弹出表格 */
+        function switchtable() {
+            layer.open({
+                type : 2,
+                shadeClose : true,
+                title : "告警通知",
+                area : ["600px", "300px"],
+                content :[ctx + "system/news", 'no']
+            })
+        }
+        function sc () {
+            var myTable=document.getElementById("bootstrap-table");
+            //获取表格中的所有行
+            var rows=myTable.rows;
+            //获取第一行的所有列
+            var title=rows[0].cells;
+            var json="";
+            for (var i=1;i<rows.length;i++) {
+                var cells=rows[i].cells;//获取第i行中的所有列
+                json+="{";
+                //拼裝JSON字符串
+                for (var j=0;j<cells.length;j++) {
+                    json+="\""+title[j].innerHTML+"\":\""+cells[j].innerHTML+"\","
+                }
+                //运用substring()方法获取所需要的子串，去掉不需要的逗号
+                json=json.substring(0,json.length-1)+"},"
+            }
+            json="["+json.substring(0,json.length-1)+"]";
+            alert(json);
+        }
     </script>
 </body>
 </html>
