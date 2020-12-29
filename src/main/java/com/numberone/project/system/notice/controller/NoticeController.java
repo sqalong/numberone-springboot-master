@@ -36,6 +36,9 @@ public class NoticeController extends BaseController
     @Autowired
     private INoticeService noticeService;
 
+    @Autowired
+    private IUserService userService;
+
 
     @Autowired
     private IUserService userservice;
@@ -139,6 +142,38 @@ public class NoticeController extends BaseController
     {
         return toAjax(noticeService.deleteNoticeByIds(ids));
     }
+
+
+
+
+    /**
+     * 告警通知返回条数
+     */
+    @GetMapping("/waring/number")
+    @ResponseBody
+    public  Integer waringNumber(){
+
+        User user = getSysUser();
+        String username = user.getLoginName();
+        System.out.println("当前用户名字"+username);
+
+        User name = userService.getNameId(username);
+        System.out.println("用户表当前用户对象"+name);
+
+        Long nameids = name.getUserId();
+        System.out.println("当前用户对应id"+nameids);
+
+
+        Integer rs = noticeService.waringNumber(nameids);
+
+        return rs;
+    }
+
+
+
+
+
+
 
     /**
      * 给所有用户添加消息

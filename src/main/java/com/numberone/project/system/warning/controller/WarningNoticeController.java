@@ -123,4 +123,11 @@ public class WarningNoticeController extends BaseController
     {
         return toAjax(warningNoticeService.deleteWarningNoticeByIds(ids));
     }
+
+
+
+
+
+
+
 }

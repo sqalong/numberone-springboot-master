@@ -58,4 +58,6 @@ public interface WarningNoticeMapper
      * @return 结果
      */
     public int deleteWarningNoticeByIds(String[] ids);
+
+
 }

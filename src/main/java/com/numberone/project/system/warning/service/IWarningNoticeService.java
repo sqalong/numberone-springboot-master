@@ -58,4 +58,6 @@ public interface IWarningNoticeService
      * @return 结果
      */
     public int deleteWarningNoticeById(Long id);
+
+
 }

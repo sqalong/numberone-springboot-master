@@ -38,7 +38,7 @@
 
 	</style>
 </head>
-<body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden">
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden" onload="notsum(),we()">
 <div id="wrapper">
 
     <!--左侧导航开始-->
@@ -193,7 +193,7 @@
 <!--							</th:block>-->
 <!--						</a>-->
 						<a title="消息" class="fa fa-bell"  onclick="switchtable()">
-							<label id="flicker" class="label label-danger paly" style="right:0px">0</label> 告警通知
+							<label id="flicker" class="label label-danger paly" style="right:0px"></label> 告警通知
 						</a>
 					</li>
                     <li class="dropdown user-menu">
@@ -335,8 +335,30 @@ $(function() {
 	}
 });
 
+function notsum() {
+
+	//总条数
+	var sum ;
+	$.ajax({
+		type: "get",
+		url: "/system/notice/waring/number",
+		dataType: "json",
+		async: false,
+		success: function (result) {
+			sum =result;
+
+			document.getElementById("flicker").innerHTML = parseInt(sum);
+
+		},
+
+		error: function (errorMsg) {
+			alert("获取后台数据失败！");
+		}
+	})
+};
+
 /*消息提示闪烁判断*/
-$(function () {
+function we() {
 	var Message_number=$("#flicker").text()
 	if(Message_number!=0 && Message_number!=null){
 		$("#flicker").addClass("play");
@@ -345,7 +367,10 @@ $(function () {
 		$("#flicker").addClass("pause");
 		$("#flicker").removeClass("play");
 	}
-});
+};
+
+
+
 </script>
 </body>
 </html>

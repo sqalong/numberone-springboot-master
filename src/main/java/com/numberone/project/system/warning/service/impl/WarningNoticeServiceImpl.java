@@ -91,4 +91,6 @@ public class WarningNoticeServiceImpl implements IWarningNoticeService
     {
         return warningNoticeMapper.deleteWarningNoticeById(id);
     }
+
+
 }

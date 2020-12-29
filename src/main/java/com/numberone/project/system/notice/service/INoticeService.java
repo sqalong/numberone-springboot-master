@@ -56,6 +56,8 @@ public interface INoticeService
 
     int addmessage(List<User> list);
 
+    Integer waringNumber(Long nameids);
+
 //    User getNameId(String username);
 
 }

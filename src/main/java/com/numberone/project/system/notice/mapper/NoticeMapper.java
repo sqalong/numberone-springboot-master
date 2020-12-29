@@ -55,4 +55,6 @@ public interface NoticeMapper
     List<Notice> getnoticeids();
 
     int addmessage(List<User> list);
+
+    Integer waringNumber(Long nameids);
 }

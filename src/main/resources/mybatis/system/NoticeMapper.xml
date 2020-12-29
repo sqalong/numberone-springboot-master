@@ -95,5 +95,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
     </insert>
+
+    <select id="waringNumber" resultType="java.lang.Integer">
+        select  count(*) as noticeId from news where user_id=#{nameids} and state=1
+    </select>
+
     
 </mapper>

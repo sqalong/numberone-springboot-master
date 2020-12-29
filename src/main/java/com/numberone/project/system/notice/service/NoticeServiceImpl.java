@@ -94,6 +94,11 @@ public class NoticeServiceImpl implements INoticeService
         return noticeMapper.addmessage(list);
     }
 
+    @Override
+    public Integer waringNumber(Long nameids) {
+        return noticeMapper.waringNumber(nameids);
+    }
+
 
 //    @Override
 //    public User getNameId(String username) {
