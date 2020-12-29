@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.numberone.project.system.areaelectric.mapper.AreaelectricMapper">
+    
+    <resultMap type="Areaelectric" id="AreaelectricResult">
+        <result property="id"    column="id"    />
+        <result property="smallareaname"    column="smallareaname"    />
+        <result property="largeareaname"    column="largeareaname"    />
+        <result property="value"    column="value"    />
+        <result property="pid"    column="pid"    />
+        <result property="parentName" column="parent_name" />
+    </resultMap>
+
+    <sql id="selectAreaelectricVo">
+        select id, smallareaname, largeareaname, value, pid from areaelectric
+    </sql>
+
+    <select id="selectAreaelectricList" parameterType="Areaelectric" resultMap="AreaelectricResult">
+        <include refid="selectAreaelectricVo"/>
+        <where>  
+            <if test="smallareaname != null  and smallareaname != ''"> and smallareaname like concat('%', #{smallareaname}, '%')</if>
+            <if test="largeareaname != null  and largeareaname != ''"> and largeareaname = #{largeareaname}</if>
+            <if test="value != null "> and value = #{value}</if>
+            <if test="pid != null "> and pid = #{pid}</if>
+        </where>
+        order by pid
+    </select>
+    
+    <select id="selectAreaelectricById" parameterType="Long" resultMap="AreaelectricResult">
+        select t.id, t.smallareaname, t.largeareaname, t.value, t.pid, p.largeareaname as parent_name
+        from areaelectric t
+        left join areaelectric p on p.id = t.pid
+        where t.id = #{id}
+    </select>
+        
+    <insert id="insertAreaelectric" parameterType="Areaelectric" useGeneratedKeys="true" keyProperty="id">
+        insert into areaelectric
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="smallareaname != null  and smallareaname != ''">smallareaname,</if>
+            <if test="largeareaname != null  and largeareaname != ''">largeareaname,</if>
+            <if test="value != null ">value,</if>
+            <if test="pid != null ">pid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="smallareaname != null  and smallareaname != ''">#{smallareaname},</if>
+            <if test="largeareaname != null  and largeareaname != ''">#{largeareaname},</if>
+            <if test="value != null ">#{value},</if>
+            <if test="pid != null ">#{pid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAreaelectric" parameterType="Areaelectric">
+        update areaelectric
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="smallareaname != null  and smallareaname != ''">smallareaname = #{smallareaname},</if>
+            <if test="largeareaname != null  and largeareaname != ''">largeareaname = #{largeareaname},</if>
+            <if test="value != null ">value = #{value},</if>
+            <if test="pid != null ">pid = #{pid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAreaelectricById" parameterType="Long">
+        delete from areaelectric where id = #{id}
+    </delete>
+
+    <delete id="deleteAreaelectricByIds" parameterType="String">
+        delete from areaelectric where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
