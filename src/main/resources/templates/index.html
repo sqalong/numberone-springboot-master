@@ -27,8 +27,13 @@
 				filter: alpha(opacity=100)
 			}
 		}
-		#flicker{
-			animation: myAnimation 1s infinite
+		/*动画播放*/
+		.play{
+			animation: myAnimation 1s infinite ease;
+		}
+		/*动画暂停*/
+		.pause {
+			animation-play-state: paused;
 		}
 
 	</style>
@@ -188,7 +193,7 @@
 <!--							</th:block>-->
 <!--						</a>-->
 						<a title="消息" class="fa fa-bell"  onclick="switchtable()">
-							<label id="flicker" class="label label-danger" style="right:0px">12</label> 告警通知
+							<label id="flicker" class="label label-danger paly" style="right:0px">0</label> 告警通知
 						</a>
 					</li>
                     <li class="dropdown user-menu">
@@ -327,6 +332,18 @@ $(function() {
 	        var url = hash.substring(1, hash.length);
 	        applyPath(url);
 	    }
+	}
+});
+
+/*消息提示闪烁判断*/
+$(function () {
+	var Message_number=$("#flicker").text()
+	if(Message_number!=0 && Message_number!=null){
+		$("#flicker").addClass("play");
+		$("#flicker").removeClass("pause");
+	}else {
+		$("#flicker").addClass("pause");
+		$("#flicker").removeClass("play");
 	}
 });
 </script>
