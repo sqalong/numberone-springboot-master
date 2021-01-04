@@ -1,6 +1,7 @@
 package com.numberone.project.bigdata.mapper;
 
 import com.numberone.project.bigdata.domain.AreaRatio;
+import com.numberone.project.bigdata.domain.Mapss;
 import com.numberone.project.bigdata.domain.Zsum;
 import org.apache.ibatis.annotations.Param;
 
@@ -19,4 +20,6 @@ public interface BigdataMapper {
     Zsum areagross(@Param("largeareaname") String largeareaname);
 
     List<AreaRatio> arearatio(@Param("table")String table, @Param("largeareaname") String largeareaname);
+
+    List<Mapss> addmappt();
 }

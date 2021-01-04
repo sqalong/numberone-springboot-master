@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.numberone.project.system.punctuation.mapper.MapPunctuationMapper">
+    
+    <resultMap type="MapPunctuation" id="MapPunctuationResult">
+        <result property="name"    column="name"    />
+        <result property="latitude"    column="latitude"    />
+        <result property="longitude"    column="longitude"    />
+        <result property="color"    column="color"    />
+        <result property="value"    column="value"    />
+    </resultMap>
+
+    <sql id="selectMapPunctuationVo">
+        select name, latitude, longitude, color, value from map_punctuation
+    </sql>
+
+    <select id="selectMapPunctuationList" parameterType="MapPunctuation" resultMap="MapPunctuationResult">
+        <include refid="selectMapPunctuationVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectMapPunctuationById" parameterType="String" resultMap="MapPunctuationResult">
+        <include refid="selectMapPunctuationVo"/>
+        where name = #{name}
+    </select>
+        
+    <insert id="insertMapPunctuation" parameterType="MapPunctuation">
+        insert into map_punctuation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">name,</if>
+            <if test="latitude != null ">latitude,</if>
+            <if test="longitude != null ">longitude,</if>
+            <if test="color != null  and color != ''">color,</if>
+            <if test="value != null  and value != ''">value,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="latitude != null ">#{latitude},</if>
+            <if test="longitude != null ">#{longitude},</if>
+            <if test="color != null  and color != ''">#{color},</if>
+            <if test="value != null  and value != ''">#{value},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMapPunctuation" parameterType="MapPunctuation">
+        update map_punctuation
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="latitude != null ">latitude = #{latitude},</if>
+            <if test="longitude != null ">longitude = #{longitude},</if>
+            <if test="color != null  and color != ''">color = #{color},</if>
+            <if test="value != null  and value != ''">value = #{value},</if>
+        </trim>
+        where name = #{name}
+    </update>
+
+    <delete id="deleteMapPunctuationById" parameterType="String">
+        delete from map_punctuation where name = #{name}
+    </delete>
+
+    <delete id="deleteMapPunctuationByIds" parameterType="String">
+        delete from map_punctuation where name in 
+        <foreach item="name" collection="array" open="(" separator="," close=")">
+            #{name}
+        </foreach>
+    </delete>
+    
+</mapper>

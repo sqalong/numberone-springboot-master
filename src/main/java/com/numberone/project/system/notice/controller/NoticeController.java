@@ -155,13 +155,13 @@ public class NoticeController extends BaseController
 
         User user = getSysUser();
         String username = user.getLoginName();
-        System.out.println("当前用户名字"+username);
+//        System.out.println("当前用户名字"+username);
 
         User name = userService.getNameId(username);
-        System.out.println("用户表当前用户对象"+name);
+//        System.out.println("用户表当前用户对象"+name);
 
         Long nameids = name.getUserId();
-        System.out.println("当前用户对应id"+nameids);
+//        System.out.println("当前用户对应id"+nameids);
 
 
         Integer rs = noticeService.waringNumber(nameids);

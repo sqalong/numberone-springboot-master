@@ -264,6 +264,7 @@
 <script th:src="@{/numberone/js/common.js?v=4.1.0}"></script>
 <script th:src="@{/numberone/index.js}"></script>
 <script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
+<script th:src="@{/numberone/js./refresh.js}"></script>
 <script th:inline="javascript">
 var ctx = [[@{/}]];
 // 皮肤缓存
@@ -310,7 +311,7 @@ function switchtable() {
 		area : ["800px", "400px"],
 		content :[ctx + "system/news", 'no'],
 		cancel:function () {
-			top.location.reload()
+
 		}
 	})
 }
@@ -338,28 +339,7 @@ $(function() {
 	}
 });
 
-function notsum() {
 
-	//总条数
-	var sum ;
-	$.ajax({
-		type: "get",
-		url: "/system/notice/waring/number",
-		dataType: "json",
-		async: false,
-		success: function (result) {
-			sum =result;
-
-			document.getElementById("flicker").innerHTML = parseInt(sum);
-
-
-		},
-
-		error: function (errorMsg) {
-			alert("获取后台数据失败！");
-		}
-	})
-};
 
 /*消息提示闪烁判断*/
 function we() {

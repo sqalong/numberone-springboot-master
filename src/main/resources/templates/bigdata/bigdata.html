@@ -1136,48 +1136,65 @@
     var myChart = echarts.init(document.getElementById('map'));
     // 地图数据
     var uploadedDataURL = "/js/bigdata/beijing.json";
+    var mapjson = [];
     // 标注数据
-    var mapData = [{
-        'name': '北京西站邮件处理中心',
-        'color': '#ff69fc',
-        'latitude': 39.902506,
-        'longitude': 116.32025,
-        'url':'/system/bigdata/areabigdata'
+    $.ajax({
+        type: "get",
+        url: "/system/bigdata/addmappt",
+        dataType: "json",
+        async: false,
+        success: function (result) {
 
-    },
-        {
-            'latitude': 39.818668,
-            'longitude': 116.541167,
-            'name': '北京综合邮件处理中心',
-            'value': 41558260,
-            'color': '#24d251',
-            'url':'/system/bigdata/areabigdata'
+                mapjson = result;
+
         },
-        {
-            'latitude': 39.911907,
-            'longitude': 116.431918,
-            'name': '北京站邮件处理中心',
-            'value': 26458260,
-            'color': '#f80404',
-            'url':'/system/bigdata/areabigdata'
-        },
-        {
-            'latitude': 39.923751,
-            'longitude': 116.431528,
-            'name': '天桥大院',
-            'value': 15258260,
-            'color': '#eafa04',
-            'url':'/system/bigdata/areabigdata'
-        },
-        {
-            'latitude': 39.959530,
-            'longitude': 116.417991,
-            'name': '永安路大院',
-            'value': 49858260,
-            'color': '#890fe0',
-            'url':'/system/bigdata/areabigdata'
+
+        error: function (errorMsg) {
+            alert("获取后台数据失败！");
         }
-    ]
+    })
+    var mapData = mapjson;
+    //     [{
+    //     'name': '北京西站邮件处理中心',
+    //     'color': '#ff69fc',
+    //     'latitude': 39.902506,
+    //     'longitude': 116.32025,
+    //     'url':'/system/bigdata/areabigdata'
+    //
+    // },
+    //     {
+    //         'latitude': 39.818668,
+    //         'longitude': 116.541167,
+    //         'name': '北京综合邮件处理中心',
+    //         'value': 41558260,
+    //         'color': '#24d251',
+    //         'url':'/system/bigdata/areabigdata'
+    //     },
+    //     {
+    //         'latitude': 39.911907,
+    //         'longitude': 116.431918,
+    //         'name': '北京站邮件处理中心',
+    //         'value': 26458260,
+    //         'color': '#f80404',
+    //         'url':'/system/bigdata/areabigdata'
+    //     },
+    //     {
+    //         'latitude': 39.923751,
+    //         'longitude': 116.431528,
+    //         'name': '天桥大院',
+    //         'value': 15258260,
+    //         'color': '#eafa04',
+    //         'url':'/system/bigdata/areabigdata'
+    //     },
+    //     {
+    //         'latitude': 39.959530,
+    //         'longitude': 116.417991,
+    //         'name': '永安路大院',
+    //         'value': 49858260,
+    //         'color': '#890fe0',
+    //         'url':'/system/bigdata/areabigdata'
+    //     }
+    // ]
 
     $.get(uploadedDataURL, function (geoJson) {
 
@@ -1272,7 +1289,7 @@
     myChart.on('click', function (e) {
         console.log(e)
         var largeareaname1=e.name;
-        window.location.href=e.data.url+"?largeareaname="+largeareaname1;
+        window.location.href="/system/bigdata/areabigdata?largeareaname="+largeareaname1;
     })
 
 

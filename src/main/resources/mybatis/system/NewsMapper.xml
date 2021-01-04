@@ -86,5 +86,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="upMessage">
         UPDATE news set state=0,change_time=CURRENT_TIMESTAMP where user_id=#{nameids} and id=#{ids}
     </update>
+
+    <delete id="deleteMessage" >
+       DELETE FROM message_logging WHERE userid = #{nameids} AND id = #{ids}
+    </delete>
     
 </mapper>

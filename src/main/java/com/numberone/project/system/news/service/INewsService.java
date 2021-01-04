@@ -63,4 +63,6 @@ public interface INewsService
     User getNameId(String username);
 
     int upMessage(String ids, Long nameids);
+
+    int deleteMessage(String ids, Long nameids);
 }

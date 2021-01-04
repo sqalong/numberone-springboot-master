@@ -106,5 +106,10 @@ public class NewsServiceImpl implements INewsService
         return newsMapper.upMessage(ids,nameids);
     }
 
+    @Override
+    public int deleteMessage(String ids, Long nameids) {
+        return newsMapper.deleteMessage(ids,nameids);
+    }
+
 
 }

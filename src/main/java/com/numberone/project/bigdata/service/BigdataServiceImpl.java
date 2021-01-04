@@ -1,6 +1,7 @@
 package com.numberone.project.bigdata.service;
 
 import com.numberone.project.bigdata.domain.AreaRatio;
+import com.numberone.project.bigdata.domain.Mapss;
 import com.numberone.project.bigdata.domain.Zsum;
 import com.numberone.project.bigdata.mapper.BigdataMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,10 @@ public class BigdataServiceImpl implements IBigdataService
     @Override
     public List<AreaRatio> arearatio(String table, String largeareaname) {
         return configMapper.arearatio(table,largeareaname);
+    }
+
+    @Override
+    public List<Mapss> addmappt() {
+        return configMapper.addmappt();
     }
 }

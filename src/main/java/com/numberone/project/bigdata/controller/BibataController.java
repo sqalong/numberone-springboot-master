@@ -2,6 +2,7 @@ package com.numberone.project.bigdata.controller;
 
 import com.numberone.framework.web.controller.BaseController;
 import com.numberone.project.bigdata.domain.AreaRatio;
+import com.numberone.project.bigdata.domain.Mapss;
 import com.numberone.project.bigdata.domain.Zsum;
 import com.numberone.project.bigdata.service.IBigdataService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,15 @@ public class BibataController extends BaseController
     public String dd()
     {
         return "/bigdata/dd";
+    }
+
+    /*
+     * 地图点位查询
+     * */
+    @GetMapping("/addmappt")
+    @ResponseBody
+    public List<Mapss> addmappt(){
+        return bs.addmappt();
     }
 
 

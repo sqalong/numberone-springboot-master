@@ -17,7 +17,7 @@
                             <div class="form-group">
                                 <label for="txt_statu">消息内容：</label>
                                 <textarea style="resize:none;" rows="7" cols="20" name="txt_statu" class="form-control" id="txt_statu" readonly="readonly" value=" "></textarea>
-                                <button type="button" class="btn btn-default" data-dismiss="modal" ><span class="glyphicon glyphicon-remove" aria-hidden="true">关闭</span></button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal" ><span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="notsum();">关闭</span></button>
 
                             </div>
                         </div>
@@ -27,16 +27,16 @@
         </div>
     </div>
     <th:block th:include="include :: footer" />
-    <script th:inline="javascript">
+     <script th:src="@{/numberone/js./refresh.js}"></script>
+     <script th:inline="javascript">
 
 
 
        $(function () { $('#myModal').on('hide.bs.modal', function () {
            // var a =1;
            var idq=$("#iddd").val();
-
-
            location.href= "news/remove?ids="+idq;
+
             })
        });
 
@@ -79,14 +79,34 @@
                     align: 'center',
                     formatter: function(value, row, index) {
                         var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs btn_cs" onclick="one('+row.id+')" data-toggle="modal"  data-target="#myModal" ><i class="fa fa-edit"></i>查看</a> ');
-                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="'+prefix+'/remove?ids='+row.id+'" ><i class="fa fa-edit"></i>已读</a>');
+                        actions.push('<a class="btn btn-success btn-xs btn_cs" onclick="one('+row.id+')" ><i class="fa fa-edit"></i>查看</ a> ');
+                        var d = new Date();
+                        var str = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+                        var dateTime = new Date(row.createTime);
+                        var hour = dateTime.getHours();
+                        var min = dateTime.getMinutes();
+                        var sec = dateTime.getSeconds();
+                        var yy = dateTime.getFullYear();
+                        var dd = dateTime.getDate();
+                        var mm = dateTime.getMonth()+1;
+                        var time= yy + "-" + mm + "-" + dd ;
+                        if (daysBetween(str,time)>10){
+                            actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="'+prefix+'/removenews?ids='+row.id+'" ><i class="fa fa-edit"></i>删除</ a>');
+                        }else {
+                            actions.push('<a class="btn btn-default btn-xs " href="#" ><i class="fa fa-edit"></i>删除</a>');
+                        }
                         return actions.join('');
                     }
                 }]
             };
             $.table.intt(options);
         });
+       function daysBetween(sDate1,sDate2){
+           var time1 = Date.parse(new Date(sDate1));
+           var time2 = Date.parse(new Date(sDate2));
+           var nDays = Math.abs(parseInt((time2 - time1)/1000/3600/24));
+           return nDays;
+       };
         /*点击事件*/
         function one(id) {
             // $("#iddd").val('0');//赋值
@@ -129,14 +149,16 @@
                         $textarea.val(text);
                         var html = $textarea.val();
                         $textarea.val($(html).text());
+                        $('#myModal').modal();
+
                     },
+
                     error: function (errorMsg) {
                         alert("获取后台数据失败！");
                     }
                 })
             // alert("下面调动模态框");
 
-                // $('#myModal').modal();
 
                 // alert("调用模态框后");
 

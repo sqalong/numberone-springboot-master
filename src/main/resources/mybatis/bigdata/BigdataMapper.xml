@@ -18,5 +18,10 @@
         SELECT smallareaname,`value` FROM ${table} WHERE largeareaname= #{largeareaname} ORDER BY `value` DESC
     </select>
 
+    <select id="addmappt" resultType="Mapss">
+        select * from map_punctuation
+    </select>
+
+
 
 </mapper>
