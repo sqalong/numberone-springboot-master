@@ -308,7 +308,10 @@ function switchtable() {
 		shadeClose : true,
 		title : "告警通知",
 		area : ["800px", "400px"],
-		content :[ctx + "system/news", 'no']
+		content :[ctx + "system/news", 'no'],
+		cancel:function () {
+			top.location.reload()
+		}
 	})
 }
 
@@ -348,6 +351,7 @@ function notsum() {
 			sum =result;
 
 			document.getElementById("flicker").innerHTML = parseInt(sum);
+
 
 		},
 

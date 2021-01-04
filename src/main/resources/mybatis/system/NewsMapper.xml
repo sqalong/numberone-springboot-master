@@ -24,7 +24,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>
             <if test="userId != null "> and user_id = #{userId}</if>
             <if test="loginName != null  and loginName != ''"> and login_name = #{loginName}</if>
+            <if test="id != null  and id != ''"> and id = #{id}</if>
         </where>
+        order by state DESC,create_time DESC
     </select>
     
     <select id="selectNewsById" parameterType="Long" resultMap="NewsResult">

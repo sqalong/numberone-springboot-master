@@ -59,18 +59,23 @@ public class NewsController extends BaseController
 
         User user = getSysUser();
         String username = user.getLoginName();
-        System.out.println("当前用户名字"+username);
+//        System.out.println("当前用户名字"+username);
 
         User name = userService.getNameId(username);
-        System.out.println("用户表当前用户对象"+name);
+//        System.out.println("用户表当前用户对象"+name);
 
         Long nameids = name.getUserId();
-        System.out.println("当前用户对应id"+nameids);
+//        System.out.println("当前用户对应id"+nameids);
         news.setUserId(nameids);
+        Long id = news.getId();
+        System.out.println("消息ID"+id);
         List<News> list = newsService.selectNewsList(news);
 
         return getDataTable(list);
     }
+
+
+
 
 
     /**
@@ -149,22 +154,68 @@ public class NewsController extends BaseController
     /**
      * 修改消息提醒
      */
-     @GetMapping("/remove")
-    @ResponseBody
-    public int remove(String ids) {
+     @GetMapping(value = {"/remove","news/remove","news/news/remove","news/news/news/remove","news/news/news/news/remove","news/news/news/news/news/remove","news/news/news/news/news/news/remove","news/news/news/news/news/news/news/remove"})
+    public String remove(String ids) {
          System.out.println(ids);
 
          // 取身份信息
         User user = getSysUser();
         String username = user.getLoginName();
-        System.out.println("用户名字"+username);
+//        System.out.println("用户名字"+username);
 
         User name = userService.getNameId(username);
-        System.out.println("111111111111111111111111"+name);
+//        System.out.println("111111111111111111111111"+name);
 
         Long nameids = name.getUserId();
-         System.out.println("2222222222222222222"+nameids);
+         System.out.println("消息ID---------------"+nameids);
+         int i = newsService.upMessage(ids, nameids);
 
-        return newsService.upMessage(ids, nameids);
-    }
+         return prefix + "/news";
+     }
+
+
+//    /**
+//     * 修改消息提醒
+//     */
+//    @GetMapping("/remove")
+//    public String removess(String ids) {
+//        System.out.println(ids);
+//
+//        // 取身份信息
+//        User user = getSysUser();
+//        String username = user.getLoginName();
+////        System.out.println("用户名字"+username);
+//
+//        User name = userService.getNameId(username);
+////        System.out.println("111111111111111111111111"+name);
+//
+//        Long nameids = name.getUserId();
+//        System.out.println("消息ID---------------"+nameids);
+//        int i = newsService.upMessage(ids, nameids);
+//
+//        return prefix + "/news";
+//    }
+
+
+//    /**
+//     * 修改消息提醒
+//     */
+//    @GetMapping("news/news/remove")
+//    public String removesss(String ids) {
+//        System.out.println(ids);
+//
+//        // 取身份信息
+//        User user = getSysUser();
+//        String username = user.getLoginName();
+////        System.out.println("用户名字"+username);
+//
+//        User name = userService.getNameId(username);
+////        System.out.println("111111111111111111111111"+name);
+//
+//        Long nameids = name.getUserId();
+//        System.out.println("消息ID---------------"+nameids);
+//        int i = newsService.upMessage(ids, nameids);
+//
+//        return prefix + "/news";
+//    }
 }
