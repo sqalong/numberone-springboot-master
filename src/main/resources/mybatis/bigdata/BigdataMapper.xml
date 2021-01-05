@@ -23,5 +23,10 @@
     </select>
 
 
+    <select id="addcurve" resultType="Contrast">
+SELECT * FROM energy_contrast WHERE DATE_FORMAT( timing, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+    </select>
+
+
 
 </mapper>

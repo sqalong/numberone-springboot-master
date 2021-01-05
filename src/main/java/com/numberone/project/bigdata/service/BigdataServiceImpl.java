@@ -1,6 +1,7 @@
 package com.numberone.project.bigdata.service;
 
 import com.numberone.project.bigdata.domain.AreaRatio;
+import com.numberone.project.bigdata.domain.Contrast;
 import com.numberone.project.bigdata.domain.Mapss;
 import com.numberone.project.bigdata.domain.Zsum;
 import com.numberone.project.bigdata.mapper.BigdataMapper;
@@ -38,5 +39,10 @@ public class BigdataServiceImpl implements IBigdataService
     @Override
     public List<Mapss> addmappt() {
         return configMapper.addmappt();
+    }
+
+    @Override
+    public List<Contrast> addcurve() {
+        return configMapper.addcurve();
     }
 }

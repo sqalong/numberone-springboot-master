@@ -16,8 +16,6 @@ function notsum() {
             sum =result;
 
             document.getElementById("flicker").innerHTML = parseInt(sum);
-
-
         },
 
     })

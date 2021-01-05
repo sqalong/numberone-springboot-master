@@ -2,6 +2,7 @@ package com.numberone.project.bigdata.controller;
 
 import com.numberone.framework.web.controller.BaseController;
 import com.numberone.project.bigdata.domain.AreaRatio;
+import com.numberone.project.bigdata.domain.Contrast;
 import com.numberone.project.bigdata.domain.Mapss;
 import com.numberone.project.bigdata.domain.Zsum;
 import com.numberone.project.bigdata.service.IBigdataService;
@@ -83,6 +84,14 @@ public class BibataController extends BaseController
         return bs.addmappt();
     }
 
+    /*
+     * 大屏展示用能占比曲线json
+     * */
+    @GetMapping("/addcurve")
+    @ResponseBody
+    public List<Contrast> addcurve(){
+        return bs.addcurve();
+    }
 
 
 }

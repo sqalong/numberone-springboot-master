@@ -1,6 +1,7 @@
 package com.numberone.project.bigdata.service;
 
 import com.numberone.project.bigdata.domain.AreaRatio;
+import com.numberone.project.bigdata.domain.Contrast;
 import com.numberone.project.bigdata.domain.Mapss;
 import com.numberone.project.bigdata.domain.Zsum;
 
@@ -20,4 +21,6 @@ public interface IBigdataService
     List<AreaRatio> arearatio(String table, String largeareaname);
 
     List<Mapss> addmappt();
+
+    List<Contrast> addcurve();
 }
