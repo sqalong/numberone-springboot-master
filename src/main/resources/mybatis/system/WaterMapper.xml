@@ -5,16 +5,14 @@
 <mapper namespace="com.numberone.project.system.water.mapper.WaterMapper">
 
     <resultMap type="Water" id="WaterResult">
-        <result property="id"    column="id"    />
-        <result property="name"    column="name"    />
-        <result property="value"    column="value"    />
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="value" column="value"/>
     </resultMap>
 
 
-
     <select id="selectWaterList" parameterType="Water" resultMap="WaterResult">
-       select `name`,SUM(`value`)as value,a.wsum from water b,(select sum(`value`) as wsum from water) a GROUP BY `name` ORDER BY value DESC
-
+        SELECT region as name,SUM(number) as value FROM energy_contrast_water WHERE DATE_FORMAT( timing, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) GROUP BY region ORDER BY SUM(number) DESC
     </select>
 
 

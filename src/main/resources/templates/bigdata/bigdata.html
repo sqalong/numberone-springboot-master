@@ -14,7 +14,7 @@
     <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
 
 </head>
-<body onload="utr(),proprotion()">
+<body onload="utr(),proprotion(),graph('energy_contrast_water')">
 <div style="background-image: url('/back1.png'); color: #ffffff;background-repeat: no-repeat;background-size: 100% 100%; "
      th:src="@{/back.jpg}">
 
@@ -76,9 +76,15 @@
                 <div class="row" style="border:solid 2px #FFFFFF;margin: 0px;padding: 0px; height: 395px">
                     <div class="col-sm-8"><h4>用能占比</h4></div>
                     <div class="btn-group col-sm-4">
-                        <button type="button" class="btn btn-link" name="ranking_button" style="color: #fff;" onclick="proprotion('water')">水</button>
-                        <button type="button" class="btn btn-link" name="ranking_button" style="color: #fff;"onclick="proprotion('electric')">电</button>
-                        <button type="button" class="btn btn-link" name="ranking_button" style="color: #fff;" onclick="proprotion('gas')">气</button>
+                        <button type="button" class="btn btn-link" name="ranking_button" style="color: #fff;"
+                                onclick="proprotion('water')">水
+                        </button>
+                        <button type="button" class="btn btn-link" name="ranking_button" style="color: #fff;"
+                                onclick="proprotion('electric')">电
+                        </button>
+                        <button type="button" class="btn btn-link" name="ranking_button" style="color: #fff;"
+                                onclick="proprotion('gas')">气
+                        </button>
                     </div>
                     <div id="main" style="width: 430px;height: 390px; margin-top: 35px"></div>
                 </div>
@@ -138,13 +144,15 @@
                     <div class="col-sm-5" style=" height: 50px;">
                         <div style="background-color: RGB(196,136,28);height: 100%;width: 210px;border-radius: 10px;">
                             <span class="glyphicon  glyphicon-cloud" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span id="cot" style="font-size: 40px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
+                            <span id="cot" style="font-size: 40px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                style="font-size: 20px">吨</span>
                         </div>
                     </div>
                     <div class="col-sm-5" style="height: 50px;margin-left: 31px">
                         <div style="background-color: RGB(19,121,224);height: 100%;width: 210px;border-radius: 10px;">
                             <span class="glyphicon  glyphicon-asterisk" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-                                id="sot" style="font-size: 40px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
+                                id="sot" style="font-size: 40px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                style="font-size: 20px">吨</span>
                         </div>
                     </div>
                 </div>
@@ -153,26 +161,28 @@
                     <div class="col-sm-5" style="height: 50px;">
                         <div style="background-color: RGB(19,197,146);height: 100%;width: 210px; border-radius: 10px;">
                             <span class="glyphicon glyphicon glyphicon-fire" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-                               id="xuet" style="font-size: 40px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
+                                id="xuet" style="font-size: 40px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                style="font-size: 20px">吨</span>
                         </div>
                     </div>
                     <div class="col-sm-5" style="height: 50px; margin-left: 31px">
                         <div style="background-color: RGB(8,171,204);height: 100%;width: 210px;border-radius: 10px;">
                             <span class="glyphicon glyphicon glyphicon-tint" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-                               id="not" style="font-size: 40px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
+                                id="not" style="font-size: 40px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                style="font-size: 20px">吨</span>
                         </div>
                     </div>
                 </div>
                 <div style="background-color: RGB(16,163,146);height: 50px;width: 434px;margin-left: 15px; border-radius: 10px;margin-bottom: 8px;;text-align: center;line-height: 50px">
                     <span class="glyphicon glyphicon-flash" style="font-size: 40px"></span><span
                         style="font-size: 20px">累计用电</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-                       id="ljyd" style="font-size: 45px;margin-right: 15px"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                        id="ljyd" style="font-size: 45px;margin-right: 15px"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
                         style="font-size: 20px">万千瓦时</span>
                 </div>
                 <div style="background-color: RGB(14,122,156);height: 50px;width: 434px;margin-left: 15px; border-radius: 10px;margin-bottom: 8px;;text-align: center;line-height: 50px">
                     <span class="fa  fa-sitemap" style="font-size: 40px"></span><span
                         style="font-size: 20px">减少用煤</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-                      id="jsym"  style="font-size: 45px;margin-right: 75px "></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                        id="jsym" style="font-size: 45px;margin-right: 75px "></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
                         style="font-size: 20px">吨</span>
                 </div>
             </div>
@@ -206,9 +216,9 @@
                 <div class="row">
                     <div class="col-sm-10"><h4>用能对比曲线</h4></div>
                     <div class="btn-group col-sm-2">
-                        <button type="button" class="btn btn-link" style="color: #fff;">水</button>
-                        <button type="button" class="btn btn-link" style="color: #fff;">电</button>
-                        <button type="button" class="btn btn-link" style="color: #fff;">气</button>
+                        <button type="button" class="btn btn-link" style="color: #fff;" onclick="graph('energy_contrast_water')">水</button>
+                        <button type="button" class="btn btn-link" style="color: #fff;" onclick="graph('energy_contrast')">电</button>
+                        <button type="button" class="btn btn-link" style="color: #fff;" onclick="graph('energy_contrast_gas')">气</button>
                     </div>
                 </div>
                 <div id="xzhong" style="height: 300px"></div>
@@ -572,250 +582,179 @@
 
 
     /*下中间曲线图*/
-    var xz = echarts.init(document.getElementById('xzhong'));
+    function graph(val){
+        var xz = echarts.init(document.getElementById('xzhong'));
 
-    var xname = [];
-    var xtime = [];
-    var zdata = [];
-    $.ajax({
-        type: "get",
-        url: "/system/bigdata/addcurve",
-        dataType: "json",
-        async: false,
-        success: function (result) {
+        var xname = [];
+        var xtime = [];
+        var zdata = [];
+
+        $.ajax({
+            type: "get",
+            url: "/system/bigdata/addcurve?table="+val,
+            dataType: "json",
+            async: false,
+            success: function (result) {
+
+                //场院名称去重
+                var map = result.reduce((all, m) => {
+                    let list = all.get(m.region);
+                    if (!list) {
+                        list = [];
+                        all.set(m.region, list);
+                    }
+                    list.push(m);
+                    return all;
+                }, new Map());
+
+                Array.from(map.entries())
+                    // 这里过滤掉 list 只有一个元素的，剩下的就是有重复的
+                    .filter(([region, list]) => list.length > 0)
+                    .forEach(([region, list]) => {
+                        values = list.map(m => m.region);
+                        // var p = region;
+                        xname.push(region);
+
+                    });
 
 
-            //场院名称去重
+                //按场院名称查询成数组
+                for (var i = 0; i < xname.length; i++) {
+                    var m = {};
+                    m["name"] = xname[i];
+                    m["type"] = "line";
+                    m["smooth"] = "true";
 
+                    //循环场院名称,拿到多个数组
+                    var queryData = result.filter(function (fp) {
+                        return fp.region === xname[i]
+                    })
+                    var v = "array" + i;
+                    var v = new Array();
 
-            var map = result.reduce((all, m) => {
-                let list = all.get(m.region);
-                if(!list) {
-                    list = [];
-                    all.set(m.region, list);
+                    //拿出每个场院数组的数值,保存进一个数组
+                    for (var j = 0; j < queryData.length; j++) {
+                        var numbers = queryData[j].number;
+                        v[j] = numbers;
+                    }
+                    m["data"] = v;
+                    zdata.push(m);
+
                 }
-                list.push(m);
-                return all;
-            }, new Map());
-
-            Array.from(map.entries())
-                // 这里过滤掉 list 只有一个元素的，剩下的就是有重复的
-                .filter(([region, list]) => list.length > 0)
-                .forEach(([region, list]) => {
-                    values = list.map(m => m.region);
-                    // var p = region;
-                    xname.push(region);
-
-                });
-                // alert(xname);
-
-            //时间去重
-
-            var map = result.reduce((all, m) => {
-                let list = all.get(m.timing);
-                if(!list) {
-                    list = [];
-                    all.set(m.timing, list);
-                }
-                list.push(m);
-                return all;
-            }, new Map());
-
-            Array.from(map.entries())
-                // 这里过滤掉 list 只有一个元素的，剩下的就是有重复的
-                .filter(([timing, list]) => list.length > 0)
-                .forEach(([timing, list]) => {
-                    values = list.map(m => m.timing);
-                    // var p = timing;
+                console.log(zdata);
 
 
-                    //日期截取
+                //时间去重
+                var map = result.reduce((all, m) => {
+                    let list = all.get(m.timing);
+                    if (!list) {
+                        list = [];
+                        all.set(m.timing, list);
+                    }
+                    list.push(m);
+                    return all;
+                }, new Map());
+                Array.from(map.entries())
+                    // 这里过滤掉 list 只有一个元素的，剩下的就是有重复的
+                    .filter(([timing, list]) => list.length > 0)
+                    .forEach(([timing, list]) => {
+                        values = list.map(m => m.timing);
+                        // var p = timing;
 
-                    var dateTime = new Date(timing);
-                    var hour = dateTime.getHours();
-                    var min = dateTime.getMinutes();
-                    var sec = dateTime.getSeconds();
-                    var yy = dateTime.getFullYear();
-                    var dd = dateTime.getDate();
-                    var mm = dateTime.getMonth()+1;
-                    var time=  mm + "-" + dd ;
+
+                        //日期截取
+
+                        var dateTime = new Date(timing);
+                        var hour = dateTime.getHours();
+                        var min = dateTime.getMinutes();
+                        var sec = dateTime.getSeconds();
+                        var yy = dateTime.getFullYear();
+                        var dd = dateTime.getDate();
+                        var mm = dateTime.getMonth() + 1;
+                        var time = mm + "-" + dd;
 
 
-                    xtime.push(time);
-                    // alert(xtime);
+                        xtime.push(time);
+                        // alert(xtime);
 
-                });
-
-
-            for (var i = 0; i < result.length; i++) {
-                var m = {};
-                m["name"]   = result[i].region;
-                m["time"]   = result[i].timing;
-                m["type"]   = "line";
-                m["smooth"] = "true";
-                m["data"]   = result[i].number;
-                zdata.push(m);
-                // alert(zdata.toString());
-
-                // alert(result[i].region);
-                // alert("www");
-
+                    });
+            },
+            error: function (errorMsg) {
+                alert("获取后台数据失败！");
             }
-            // alert(m);
-            // alert(zdata);
-            // for(var o in zdata){
-            //     alert("1"+zdata[o].name);
-            // }
-            // alert(zdata.name);
-
-            // for(count=0;zdata<array.length;count++){
-            //
-            //     alert(zdata[name]);
-            //
-            // }
-            // for (var i = 0; i < result.length; i++) {
-            //     xAxisData.push(result[i].name);
-            //     yAxisData.push(result[i].reduceCo2);
-            // }
+        })
 
 
-
-
-            var map = a.reduce((all, m) => {
-                let list = all.get(m.des);
-                if(!list) {
-                    list = [];
-                    all.set(m.des, list);
-                }
-                list.push(m);
-                return all;
-            }, new Map());
-
-            Array.from(map.entries())
-                // 这里过滤掉 list 只有一个元素的，剩下的就是有重复的
-                .filter(([des, list]) => list.length > 0)
-                .forEach(([des, list]) => {
-                    values = list.map(m => m.b);
-                    alert(des, values);
-                });
-
-        },
-
-
-
-
-        error: function (errorMsg) {
-            alert("获取后台数据失败！");
-        }
-    })
-
-
-    option1 = {
-
-        legend: {
-            data: xname,
-            selected:{"天桥大院":true,"北京西站邮件处理中心":true,"航空邮件处理中心":false,"永安路大院":false,"新顺邮件处理中心":false,"北京国际邮件处理中心":false,"北京综合邮件处理中心":true,"北京站邮件处理中心":false},
-            x: 'center',
-            // y 设置垂直安放位置，默认全图顶端，可选值：'top' ¦ 'bottom' ¦ 'center' ¦ {number}（y坐标，单位px）
-            y: 'top',
-            textStyle: {
-                color: '#fff',  // 图例文字颜色
-                fontSize: 14,
+        option1 = {
+            legend: {
+                data: xname,
+                selected: {
+                    "天桥大院": false,
+                    "北京西站邮件处理中心": true,
+                    "航空邮件处理中心": false,
+                    "永安路大院": false,
+                    "新顺邮件处理中心": false,
+                    "北京国际邮件处理中心": false,
+                    "北京综合邮件处理中心": true,
+                    "北京站邮件处理中心": false
+                },
+                x: 'center',
+                // y 设置垂直安放位置，默认全图顶端，可选值：'top' ¦ 'bottom' ¦ 'center' ¦ {number}（y坐标，单位px）
+                y: 'top',
+                textStyle: {
+                    color: '#fff',  // 图例文字颜色
+                    fontSize: 14,
+                },
             },
-        },
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'cross',
-                label: {
-                    backgroundColor: '#6a7985'
-                }
-            }
-        },
-        grid: {
-            top: 25,
-            bottom: 50,
-            left: "40",
-            right: "40",
-        },
-        xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            axisLine: {
-                onZero: false,
-                lineStyle: {
-                    color: "#fff"
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#6a7985'
+                    }
                 }
             },
+            grid: {
+                top: 25,
+                bottom: 50,
+                left: "40",
+                right: "40",
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                axisLine: {
+                    onZero: false,
+                    lineStyle: {
+                        color: "#fff"
+                    }
+                },
 
 
-            data: xtime
-        },
-        yAxis: {
-            type: 'value',
-            axisLine: {
-                onZero: false,
-                lineStyle: {
-                    color: "#fff"
-                }
+                data: xtime
             },
-            splitLine: {
-                show: false
-            },//去除网格线
+            yAxis: {
+                type: 'value',
+                axisLine: {
+                    onZero: false,
+                    lineStyle: {
+                        color: "#fff"
+                    }
+                },
+                splitLine: {
+                    show: false
+                },//去除网格线
 
-        },
-        series: [{
-                name: '北京综合邮件处理中心',
-                type: 'line',
-                smooth: true,
-                data: [20.9, 1.9, 7.0, 22.4, 121.7, 160.7, 75.6, 82.2, 38.7, 12.8, 6.0]
             },
-            {
-                name: '北京西站邮件处理中心',
-                type: 'line',
-                smooth: true,
-                data: [60.9, 1.9, 7.0, 22.4, 21.7, 60.7, 75.6, 82.2, 38.7, 12.8, 6.0]
-            },
-            {
-                name: '北京国际邮件处理中心',
-                type: 'line',
-                smooth: true,
-                data: [90.9, 1.9, 7.0, 122.4, 21.7, 160.7, 75.6, 82.2, 38.7, 12.8, 6.0]
-            },
-            {
-                name: '北京站邮件处理中心',
-                type: 'line',
-                smooth: true,
-                data: [30.9, 100.9, 170.0, 22.4, 121.7, 60.7, 75.6, 92.2, 38.7, 12.8, 130.0]
-            },
-            {
-                name: '新顺邮件处理中心',
-                type: 'line',
-                smooth: true,
-                data: [160.9, 11.9, 125.0, 22.4, 61.7, 90.7, 25.6, 82.2, 38.7, 120.8, 6.0]
-            },
-            {
-                name: '永安路大院',
-                type: 'line',
-                smooth: true,
-                data: [180.9, 1.9, 78.0, 22.4, 123.7, 60.7, 25.6, 82.2, 38.7, 12.8, 89.0]
-            },
-            {
-                name: '天桥大院',
-                type: 'line',
-                smooth: true,
-                data: [100.6, 100.9, 20.0, 76.4, 48.7, 20.7, 75.6, 142.2, 78.7, 180.8, 16.0]
-            },
-            {
-                name: '航空邮件处理中心',
-                type: 'line',
-                smooth: true,
-                data: [0.9, 20.9, 40.1, 10.7, 30.3, 60.2, 90.6, 60.6, 80.4, 70.4, 20.3]
-            },
-        ],
-        color: ['#0379FF', '#FEA501', '#13E1E1']
-    };
-    xz.setOption(option1)
+            series: zdata,
+
+            color: ['#32f3b5', '#FEA501', '#13E1E1', '#cd11ee']
+        };
+        xz.setOption(option1)
+
+
+    }
 
 
     //减少煤使用
@@ -1283,7 +1222,7 @@
         async: false,
         success: function (result) {
 
-                mapjson = result;
+            mapjson = result;
 
         },
 
@@ -1403,8 +1342,8 @@
                             itemOpt.longitude,
                             itemOpt.latitude,
                         ],
-                        test:itemOpt.value,
-                        url:itemOpt.url,
+                        test: itemOpt.value,
+                        url: itemOpt.url,
 
                         label: {
                             emphasis: {
@@ -1426,8 +1365,8 @@
     // 地图点击
     myChart.on('click', function (e) {
         console.log(e)
-        var largeareaname1=e.name;
-        window.location.href="/system/bigdata/areabigdata?largeareaname="+largeareaname1;
+        var largeareaname1 = e.name;
+        window.location.href = "/system/bigdata/areabigdata?largeareaname=" + largeareaname1;
     })
 
 

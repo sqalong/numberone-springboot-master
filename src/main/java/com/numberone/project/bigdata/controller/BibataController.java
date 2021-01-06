@@ -89,8 +89,8 @@ public class BibataController extends BaseController
      * */
     @GetMapping("/addcurve")
     @ResponseBody
-    public List<Contrast> addcurve(){
-        return bs.addcurve();
+    public List<Contrast> addcurve(@RequestParam("table") String table){
+        return bs.addcurve(table);
     }
 
 

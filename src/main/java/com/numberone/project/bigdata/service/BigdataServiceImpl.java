@@ -42,7 +42,7 @@ public class BigdataServiceImpl implements IBigdataService
     }
 
     @Override
-    public List<Contrast> addcurve() {
-        return configMapper.addcurve();
+    public List<Contrast> addcurve(String table) {
+        return configMapper.addcurve(table);
     }
 }

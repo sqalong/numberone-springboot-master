@@ -24,5 +24,5 @@ public interface BigdataMapper {
 
     List<Mapss> addmappt();
 
-    List<Contrast> addcurve();
+    List<Contrast> addcurve(@Param("table")String table);
 }

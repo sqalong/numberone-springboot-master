@@ -22,5 +22,5 @@ public interface IBigdataService
 
     List<Mapss> addmappt();
 
-    List<Contrast> addcurve();
+    List<Contrast> addcurve(String table);
 }

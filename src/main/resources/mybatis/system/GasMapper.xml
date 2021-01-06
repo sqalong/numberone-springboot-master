@@ -13,7 +13,7 @@
 
 
     <select id="selectGasList" parameterType="Gas" resultMap="GasResult">
-       select `name`,SUM(`value`) as value from gas GROUP BY `name` ORDER BY value DESC
+SELECT region as name,SUM(number) as value FROM energy_contrast_gas WHERE DATE_FORMAT( timing, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) GROUP BY region ORDER BY SUM(number) DESC
     </select>
 
 
