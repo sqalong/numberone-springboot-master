@@ -140,6 +140,9 @@ public class NoticeController extends BaseController
     @ResponseBody
     public AjaxResult remove(String ids)
     {
+        System.out.println("894567249867256-78hdfjikghdfgkjhfsdgkjhslkyvn4958yetyvc2mgu894wvygirfhgkjdfsbndkljsghlruisgh"+ids);
+        int a = noticeService.deletemessageByIds(ids);
+
         return toAjax(noticeService.deleteNoticeByIds(ids));
     }
 

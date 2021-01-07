@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createTime"     column="create_time"     />
         <result property="updateBy"       column="update_by"       />
         <result property="updateTime"     column="update_time"     />
-        <result property="remark"         column="remark"          />
+        <result property="remark"         column="redeleteNoticeByIdsmark"          />
     </resultMap>
     
     <sql id="selectNoticeVo">
@@ -74,9 +74,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </set>
         where notice_id = #{noticeId}
     </update>
+
+    <delete id="deletemessageByIds" parameterType="String">
+        delete from message_logging where noticeid  in
+        <foreach item="messages" collection="array" open="(" separator="," close=")">
+            #{messages}
+        </foreach>
+    </delete>
+
+
 	
     <delete id="deleteNoticeByIds" parameterType="String">
-        delete from sys_notice where notice_id in 
+        delete from sys_notice where notice_id in
         <foreach item="noticeId" collection="array" open="(" separator="," close=")">
             #{noticeId}
         </foreach>

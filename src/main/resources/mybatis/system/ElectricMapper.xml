@@ -12,8 +12,13 @@
 
 
 
+<!--    <select id="selectElectricList" parameterType="Electric" resultMap="ElectricResult">-->
+<!--        SELECT region as name,SUM(number) as value FROM energy_contrast WHERE DATE_FORMAT( timing, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) GROUP BY region ORDER BY SUM(number) DESC-->
+<!--    </select>-->
+
+
     <select id="selectElectricList" parameterType="Electric" resultMap="ElectricResult">
-        SELECT region as name,SUM(number) as value FROM energy_contrast WHERE DATE_FORMAT( timing, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) GROUP BY region ORDER BY SUM(number) DESC
+        select `name`,SUM(`value`) as value from electric GROUP BY `name` ORDER BY value DESC
     </select>
 
 

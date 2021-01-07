@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.numberone.project.system.cnelectric.mapper.CnelectricMapper">
+    
+    <resultMap type="Cnelectric" id="CnelectricResult">
+        <result property="region"    column="region"    />
+        <result property="timing"    column="timing"    />
+        <result property="number"    column="number"    />
+    </resultMap>
+
+    <sql id="selectCnelectricVo">
+        select region, timing, number from energy_contrast
+    </sql>
+
+    <select id="selectCnelectricList" parameterType="Cnelectric" resultMap="CnelectricResult">
+        <include refid="selectCnelectricVo"/>
+        <where>  
+            <if test="region != null  and region != ''"> and region = #{region}</if>
+            <if test="timing != null "> and timing = #{timing}</if>
+            <if test="number != null "> and number = #{number}</if>
+        </where>
+    </select>
+    
+    <select id="selectCnelectricById" parameterType="String" resultMap="CnelectricResult">
+        <include refid="selectCnelectricVo"/>
+        where region = #{region}
+    </select>
+        
+    <insert id="insertCnelectric" parameterType="Cnelectric">
+        insert into energy_contrast
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="region != null  and region != ''">region,</if>
+            <if test="timing != null ">timing,</if>
+            <if test="number != null ">number,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="region != null  and region != ''">#{region},</if>
+            <if test="timing != null ">#{timing},</if>
+            <if test="number != null ">#{number},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCnelectric" parameterType="Cnelectric">
+        update energy_contrast
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="timing != null ">timing = #{timing},</if>
+            <if test="number != null ">number = #{number},</if>
+        </trim>
+        where region = #{region}
+    </update>
+
+    <delete id="deleteCnelectricById" parameterType="String">
+        delete from energy_contrast where region = #{region}
+    </delete>
+
+    <delete id="deleteCnelectricByIds" parameterType="String">
+        delete from energy_contrast where region in 
+        <foreach item="region" collection="array" open="(" separator="," close=")">
+            #{region}
+        </foreach>
+    </delete>
+    
+</mapper>

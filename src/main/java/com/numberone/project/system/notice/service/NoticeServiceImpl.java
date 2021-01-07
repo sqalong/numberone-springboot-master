@@ -84,6 +84,14 @@ public class NoticeServiceImpl implements INoticeService
         return noticeMapper.deleteNoticeByIds(Convert.toStrArray(ids));
     }
 
+
+    @Override
+    public int deletemessageByIds(String ids) {
+        return noticeMapper.deletemessageByIds(Convert.toStrArray(ids));
+    }
+
+
+
     @Override
     public List<Notice> getnoticeids() {
         return noticeMapper.getnoticeids();
@@ -98,6 +106,8 @@ public class NoticeServiceImpl implements INoticeService
     public Integer waringNumber(Long nameids) {
         return noticeMapper.waringNumber(nameids);
     }
+
+
 
 
 //    @Override

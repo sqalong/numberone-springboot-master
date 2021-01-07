@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.numberone.project.system.reduces.mapper.ReducesMapper">
+    
+    <resultMap type="Reduces" id="ReducesResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="reduceCoal"    column="reduce_coal"    />
+        <result property="reduceCo2"    column="reduce_co2"    />
+    </resultMap>
+
+    <sql id="selectReducesVo">
+        select id, name, reduce_coal, reduce_co2 from reduce
+    </sql>
+
+    <select id="selectReducesList" parameterType="Reduces" resultMap="ReducesResult">
+        <include refid="selectReducesVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="reduceCoal != null "> and reduce_coal = #{reduceCoal}</if>
+            <if test="reduceCo2 != null "> and reduce_co2 = #{reduceCo2}</if>
+        </where>
+    </select>
+    
+    <select id="selectReducesById" parameterType="Long" resultMap="ReducesResult">
+        <include refid="selectReducesVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertReduces" parameterType="Reduces" useGeneratedKeys="true" keyProperty="id">
+        insert into reduce
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">name,</if>
+            <if test="reduceCoal != null ">reduce_coal,</if>
+            <if test="reduceCo2 != null ">reduce_co2,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="reduceCoal != null ">#{reduceCoal},</if>
+            <if test="reduceCo2 != null ">#{reduceCo2},</if>
+         </trim>
+    </insert>
+
+    <update id="updateReduces" parameterType="Reduces">
+        update reduce
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="reduceCoal != null ">reduce_coal = #{reduceCoal},</if>
+            <if test="reduceCo2 != null ">reduce_co2 = #{reduceCo2},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteReducesById" parameterType="Long">
+        delete from reduce where id = #{id}
+    </delete>
+
+    <delete id="deleteReducesByIds" parameterType="String">
+        delete from reduce where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

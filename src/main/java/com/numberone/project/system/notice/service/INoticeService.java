@@ -58,6 +58,8 @@ public interface INoticeService
 
     Integer waringNumber(Long nameids);
 
+    int deletemessageByIds(String ids);
+
 //    User getNameId(String username);
 
 }

@@ -52,9 +52,19 @@ public interface NoticeMapper
      */
     public int deleteNoticeByIds(String[] noticeIds);
 
+    /**
+     * 批量删除公告
+     *
+     * @param messages 需要删除的数据ID
+     * @return 结果
+     */
+    int deletemessageByIds(String[] messages);
+
     List<Notice> getnoticeids();
 
     int addmessage(List<User> list);
 
     Integer waringNumber(Long nameids);
+
+
 }

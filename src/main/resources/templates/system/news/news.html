@@ -16,7 +16,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="txt_statu">消息内容：</label>
-                                <textarea style="resize:none;" rows="7" cols="20" name="txt_statu" class="form-control" id="txt_statu" readonly="readonly" value=" "></textarea>
+                                <iframe  style="resize:none;  height:165px"   name="txt_statu" class="form-control" id="txt_statu" readonly="readonly" ></iframe>
                                 <button type="button" class="btn btn-default" data-dismiss="modal" ><span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="notsum();">关闭</span></button>
 
                             </div>
@@ -141,14 +141,25 @@
                         for (var i = 0; i < result.length; i++) {
                             text.push(result[i].noticeContent);
 
-                        }
+                        };
                         // alert(text);
+                        // var texts = text.toString();
+                        // texts.replace(/^\"|\"$/g,'');
+
+                        //
+                        // var res = text.replace(text, "$1");
+                        // console.log(texts);
+
+                        document.getElementById("txt_statu").srcdoc = text;
 
 
-                        var $textarea = $('textarea[name=txt_statu]');
-                        $textarea.val(text);
-                        var html = $textarea.val();
-                        $textarea.val($(html).text());
+                        // var $textarea = $('textarea[name=txt_statu]');
+                        // $textarea.val(text);
+                        // var html = $textarea.val();
+                        // $textarea.val($(html).text());
+
+
+
                         $('#myModal').modal();
 
                     },

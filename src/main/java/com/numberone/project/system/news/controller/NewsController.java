@@ -55,7 +55,7 @@ public class NewsController extends BaseController
     @ResponseBody
     public TableDataInfo list(News news)
     {
-        startPage();
+
 
         User user = getSysUser();
         String username = user.getLoginName();
@@ -69,6 +69,9 @@ public class NewsController extends BaseController
         news.setUserId(nameids);
         Long id = news.getId();
 //        System.out.println("消息ID"+id);
+
+        startPage();
+
         List<News> list = newsService.selectNewsList(news);
 
         return getDataTable(list);
