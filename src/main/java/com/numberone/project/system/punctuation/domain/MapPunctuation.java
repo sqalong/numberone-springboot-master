@@ -9,7 +9,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * 地图驻点对象 map_punctuation
  * 
  * @author sqalong
- * @date 2021-01-04
+ * @date 2021-01-11
  */
 public class MapPunctuation extends BaseEntity
 {

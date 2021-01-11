@@ -14,7 +14,7 @@ import com.numberone.common.utils.text.Convert;
  * areaelectricService业务层处理
  * 
  * @author sqalong
- * @date 2020-12-29
+ * @date 2021-01-11
  */
 @Service
 public class AreaelectricServiceImpl implements IAreaelectricService 

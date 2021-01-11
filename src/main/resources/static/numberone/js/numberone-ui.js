@@ -137,7 +137,7 @@ var table = {
 					sidePagination: "server",
 					sortName: "",
 					sortOrder: "asc",
-					pagination: true,
+					pagination: false,
 					pageSize: 4,
 					pageList: [4],
 					toolbar: "toolbar",
@@ -150,7 +150,7 @@ var table = {
 					showPageGo: false,
 					showRefresh: true,
 					showColumns: true,
-					showToggle: true,
+					showToggle: false,
 					showExport: false,
 					clickToSelect: false,
 					singleSelect: false,
@@ -176,7 +176,7 @@ var table = {
 					height: options.height,                             // 表格的高度
 					striped: options.striped,                           // 是否显示行间隔色
 					sortable: true,                                     // 是否启用排序
-					sortStable: false,                                   // 设置为 true 将获得稳定的排序
+					sortStable: true,                                   // 设置为 true 将获得稳定的排序
 					sortName: options.sortName,                         // 排序列名称
 					sortOrder: options.sortOrder,                       // 排序方式  asc 或者 desc
 					pagination: options.pagination,                     // 是否显示分页（*）
@@ -611,8 +611,8 @@ var table = {
         		    showSearch: true,
         		    showRefresh: true,
         			showColumns: true,
-        			expandAll: true,
-        			expandFirst: true
+        			expandAll: false,
+        			expandFirst: false
         		};
             	var options = $.extend(defaults, options);
             	table.options = options;
@@ -628,7 +628,7 @@ var table = {
         	        height: options.height,                             // 表格树的高度
         			expandColumn: options.expandColumn,                 // 在哪一列上面显示展开按钮
         			striped: options.striped,                           // 是否显示行间隔色
-        			bordered: false,                                    // 是否显示边框
+        			bordered: true,                                    // 是否显示边框
         			toolbar: '#' + options.toolbar,                     // 指定工作栏
         			showSearch: options.showSearch,                     // 是否显示检索信息
         			showRefresh: options.showRefresh,                   // 是否显示刷新按钮

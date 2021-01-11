@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('areaelectric列表')" />
+    <th:block th:include="include :: header('子地区小版块数据后台列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -11,15 +11,12 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                <p>子地区单位名称：</p>
-                                <input type="text" name="smallareaname"/>
+                                <p>小版块名称：</p>
+                                <input type="text" name="function"/>
                             </li>
                             <li>
                                 <p>场院名称：</p>
-                                <select name="largeareaname" th:with="type=${@dict.getType('largeareanames')}">
-                                    <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                                </select>
+                                <input type="text" name="name"/>
                             </li>
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.treeTable.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -31,10 +28,10 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:areaelectric:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:plate:add">
                     <i class="fa fa-plus"></i> 新增
                 </a>
-                <a class="btn btn-primary" onclick="$.operate.edit()" shiro:hasPermission="system:areaelectric:edit">
+                <a class="btn btn-primary" onclick="$.operate.edit()" shiro:hasPermission="system:plate:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
                 <a class="btn btn-info" id="expandAllBtn">
@@ -48,11 +45,12 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var addFlag = [[${@permission.hasPermi('system:areaelectric:add')}]];
-        var editFlag = [[${@permission.hasPermi('system:areaelectric:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('system:areaelectric:remove')}]];
-        var largeareanameDatas = [[${@dict.getType('largeareanames')}]];
-        var prefix = ctx + "system/areaelectric";
+        var addFlag = [[${@permission.hasPermi('system:plate:add')}]];
+        var editFlag = [[${@permission.hasPermi('system:plate:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:plate:remove')}]];
+        var functionDatas = [[${@dict.getType('expected_plate')}]];
+        var nameDatas = [[${@dict.getType('largeareaname')}]];
+        var prefix = ctx + "system/plate";
 
         $(function() {
             var options = {
@@ -65,27 +63,40 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove/{id}",
                 exportUrl: prefix + "/export",
-                modalName: "areaelectric",
+                modalName: "子地区小版块数据后台",
                 columns: [{
                     field: 'selectItem', 
                     radio: true
                 },
                 {
-                    field : 'smallareaname', 
-                    title : '子地区单位名称',
-                    align: 'left'
-                },
-                {
-                    field : 'largeareaname', 
-                    title : '场院名称',
+                    field : 'function', 
+                    title : '小版块名称',
                     align: 'left',
                     formatter: function(value, row, index) {
-                        return $.table.selectDictLabel(largeareanameDatas, value);
+                        return $.table.selectDictLabel(functionDatas, value);
                     }
                 },
                 {
-                    field : 'value', 
-                    title : '数值',
+                    field : 'name', 
+                    title : '场院名称',
+                    align: 'left',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(nameDatas, value);
+                    }
+                },
+                {
+                    field : 'energySaving', 
+                    title : '节能率',
+                    align: 'left'
+                },
+                {
+                    field : 'energyQuantity', 
+                    title : '节能量',
+                    align: 'left'
+                },
+                {
+                    field : 'energyMoney', 
+                    title : '节能金额',
                     align: 'left'
                 },
                 {

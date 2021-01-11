@@ -168,32 +168,32 @@
                     <div class="row" style=" margin: 0px;padding-bottom: 10px;text-align: center">
                         <div class="col-sm-5" style=" height: 50px;">
                             <div style="background-color: RGB(196,136,28);height: 100%;width: 210px;border-radius: 10px;margin-left: -5px;">
-                                <span class="glyphicon glyphicon-ok" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 40px">267</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
+                                <span class="glyphicon glyphicon-ok" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 40px" id="reduce_Co2">267</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
                             </div>
                         </div>
                         <div class="col-sm-5" style="height: 50px;">
                             <div style="background-color: RGB(19,121,224);height: 100%;width: 210px;border-radius: 10px;margin-left: 26px;">
-                                <span class="glyphicon glyphicon-ok" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 40px">267</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
+                                <span class="glyphicon glyphicon-ok" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 40px" id="reduce_sulfide">267</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
                             </div>
                         </div>
                     </div>
                     <div class="row" style=" margin: 0px;padding-bottom: 10px;text-align: center">
                         <div class="col-sm-5" style="height: 50px;">
                             <div style="background-color: RGB(19,197,146);height: 100%;width: 210px; border-radius: 10px;margin-left: -5px;">
-                                <span class="glyphicon glyphicon-ok" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 40px">267</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
+                                <span class="glyphicon glyphicon-ok" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 40px" id="reduce_soot">267</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
                             </div>
                         </div>
                         <div class="col-sm-5" style="height: 50px;">
                             <div style="background-color: RGB(8,171,204);height: 100%;width: 210px;border-radius: 10px;margin-left: 26px;">
-                                <span class="glyphicon glyphicon-ok" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 40px">267</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
+                                <span class="glyphicon glyphicon-ok" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 40px" id="reduce_nitride">267</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
                             </div>
                         </div>
                     </div>
                     <div style="background-color: RGB(16,163,146);height: 50px;width: 425px;margin-left: 15px; border-radius: 10px;margin-left: 10px;margin-bottom: 10px;;text-align: center;line-height: 50px">
-                        <span class="glyphicon glyphicon-flash" style="font-size: 40px"></span><span style="font-size: 20px">累计用电</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 45px;margin-right: 15px">9863</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">万千瓦时</span>
+                        <span class="glyphicon glyphicon-flash" style="font-size: 40px"></span><span style="font-size: 20px">累计用电</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 45px;margin-right: 15px" id="save_electricity">9863</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">万千瓦时</span>
                     </div>
                     <div style="background-color: RGB(14,122,156);height: 50px;width: 425px;margin-left: 15px; border-radius: 10px;margin-left: 10px;margin-bottom: 8px;;text-align: center;line-height: 50px">
-                        <span class="glyphicon glyphicon-flash" style="font-size: 40px"></span><span style="font-size: 20px">减少用煤</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 45px;margin-right: 75px ">3985</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
+                        <span class="glyphicon glyphicon-flash" style="font-size: 40px"></span><span style="font-size: 20px">减少用煤</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 45px;margin-right: 75px " id="reduce_coal">3985</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">吨</span>
                     </div>
                 </div>
                 <!--照明节能概况-->
@@ -205,21 +205,21 @@
                                 <img src="../../static/img/bigdata/jienenglv.png" th:src="@{/img/bigdata/jienenglv.png}" style="width: 48px;height: 48px"/>
                                 <span style="float: right"><h4>节能率</h4></span>
                             </div>
-                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">60</span><span style="font-size: 20px;float: right;">%</span></div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;" id="zjnl"></span><span style="font-size: 20px;float: right;">%</span></div>
                         </div>
                         <div style="background-color: #98BADF;margin-left: 10px;float: left; width: 135px;height: 120px;border-radius: 10px;">
                             <div style="margin: 10px 5px">
                                 <img src="../../static/img/bigdata/jienengliang.png" th:src="@{/img/bigdata/jienengliang.png}" style="width: 48px;height: 48px"/>
-                                <span style="float: right"><h4>节能量</h4></span>
+                                <span style="float: right" ><h4>节能量</h4></span>
                             </div>
-                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">138.3</span><span style="font-size: 20px;float: right;">tce</span></div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;" id="zjnli"></span><span style="font-size: 20px;float: right;">tce</span></div>
                         </div>
                         <div style="background-color: #BCB3D4;margin-left: 10px;float: left; width: 135px;height: 120px;border-radius: 10px;">
                             <div style="margin: 10px 5px">
                                 <img src="../../static/img/bigdata/jienengjine.png" th:src="@{/img/bigdata/jienengjine.png}" style="width: 48px;height: 48px"/>
-                                <span style="float: right"><h4>节能金额</h4></span>
+                                <span style="float: right" ><h4>节能金额</h4></span>
                             </div>
-                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">130</span><span style="font-size: 20px;float: right;">万元</span></div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;" ><span style="font-size: 30px;" id="zjsje"></span><span style="font-size: 20px;float: right;">万元</span></div>
                         </div>
                     </div>
                 </div>
@@ -232,21 +232,21 @@
                                 <img src="../../static/img/bigdata/jienenglv.png" th:src="@{/img/bigdata/jienenglv.png}" style="width: 48px;height: 48px"/>
                                 <span style="float: right"><h4>节能率</h4></span>
                             </div>
-                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">60</span><span style="font-size: 20px;float: right;">%</span></div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;" id="xjnl"></span><span style="font-size: 20px;float: right;">%</span></div>
                         </div>
                         <div style="background-color: #98BADF;margin-left: 10px;float: left; width: 135px;height: 120px;border-radius: 10px;">
                             <div style="margin: 10px 5px">
                                 <img src="../../static/img/bigdata/jienengliang.png" th:src="@{/img/bigdata/jienengliang.png}" style="width: 48px;height: 48px"/>
                                 <span style="float: right"><h4>节能量</h4></span>
                             </div>
-                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">138.3</span><span style="font-size: 20px;float: right;">tce</span></div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;" id="xjnli"></span><span style="font-size: 20px;float: right;">tce</span></div>
                         </div>
                         <div style="background-color: #BCB3D4;margin-left: 10px;float: left; width: 135px;height: 120px;border-radius: 10px;">
                             <div style="margin: 10px 5px">
                                 <img src="../../static/img/bigdata/jienengjine.png" th:src="@{/img/bigdata/jienengjine.png}" style="width: 48px;height: 48px"/>
                                 <span style="float: right"><h4>节能金额</h4></span>
                             </div>
-                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">130</span><span style="font-size: 20px;float: right;">万元</span></div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;" id="xjsje"></span><span style="font-size: 20px;float: right;">万元</span></div>
                         </div>
                     </div>
                 </div>
@@ -259,21 +259,21 @@
                                 <img src="../../static/img/bigdata/jienenglv.png" th:src="@{/img/bigdata/jienenglv.png}" style="width: 48px;height: 48px"/>
                                 <span style="float: right"><h4>节能率</h4></span>
                             </div>
-                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">60</span><span style="font-size: 20px;float: right;">%</span></div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;" id="djnl"></span><span style="font-size: 20px;float: right;">%</span></div>
                         </div>
                         <div style="background-color: #98BADF;margin-left: 10px;float: left; width: 135px;height: 120px;border-radius: 10px;">
                             <div style="margin: 10px 5px">
                                 <img src="../../static/img/bigdata/jienengliang.png" th:src="@{/img/bigdata/jienengliang.png}" style="width: 48px;height: 48px"/>
                                 <span style="float: right"><h4>节能量</h4></span>
                             </div>
-                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">138.3</span><span style="font-size: 20px;float: right;">tce</span></div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;" id="djnli"></span><span style="font-size: 20px;float: right;">tce</span></div>
                         </div>
                         <div style="background-color: #BCB3D4;margin-left: 10px;float: left; width: 135px;height: 120px;border-radius: 10px;">
                             <div style="margin: 10px 5px">
                                 <img src="../../static/img/bigdata/jienengjine.png" th:src="@{/img/bigdata/jienengjine.png}" style="width: 48px;height: 48px"/>
                                 <span style="float: right"><h4>节能金额</h4></span>
                             </div>
-                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">130</span><span style="font-size: 20px;float: right;">万元</span></div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;" id="djsje"></span><span style="font-size: 20px;float: right;">万元</span></div>
                         </div>
                     </div>
                 </div>
@@ -286,21 +286,21 @@
                                 <img src="../../static/img/bigdata/jienenglv.png" th:src="@{/img/bigdata/jienenglv.png}" style="width: 48px;height: 48px"/>
                                 <span style="float: right"><h4>节能率</h4></span>
                             </div>
-                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">60</span><span style="font-size: 20px;float: right;">%</span></div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;" id="yjnl"></span><span style="font-size: 20px;float: right;">%</span></div>
                         </div>
                         <div style="background-color: #98BADF;margin-left: 10px;float: left; width: 135px;height: 120px;border-radius: 10px;">
                             <div style="margin: 10px 5px">
                                 <img src="../../static/img/bigdata/jienengliang.png" th:src="@{/img/bigdata/jienengliang.png}" style="width: 48px;height: 48px"/>
                                 <span style="float: right"><h4>节能量</h4></span>
                             </div>
-                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">138.3</span><span style="font-size: 20px;float: right;">tce</span></div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;" id="yjnli"></span><span style="font-size: 20px;float: right;">tce</span></div>
                         </div>
                         <div style="background-color: #BCB3D4;margin-left: 10px;float: left; width: 135px;height: 120px;border-radius: 10px;">
                             <div style="margin: 10px 5px">
                                 <img src="../../static/img/bigdata/jienengjine.png" th:src="@{/img/bigdata/jienengjine.png}" style="width: 48px;height: 48px"/>
                                 <span style="float: right"><h4>节能金额</h4></span>
                             </div>
-                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;">130</span><span style="font-size: 20px;float: right;">万元</span></div>
+                            <div style="margin: 10px 10px;height: 50px;line-height: 50px;"><span style="font-size: 30px;" id="yjsje"></span><span style="font-size: 20px;float: right;">万元</span></div>
                         </div>
                     </div>
                 </div>
@@ -312,6 +312,10 @@
 </div>
 </body>
 <script type="text/javascript">
+
+
+
+
     largeareaname=$("#largeareaname").val();
 
 
@@ -923,6 +927,39 @@
             duration: 800,
             easing: 'swing',  	//慢快慢
         });
+        //减少排放污染物
+        $("#reduce_Co2").numberRock({
+            lastNumber: $("#reduce_Co2").text(),      //终止数字
+            duration: 800,
+            easing: 'swing',   //慢快慢
+        });
+        $("#reduce_sulfide ").numberRock({
+            lastNumber: $("#reduce_sulfide").text(),      //终止数字
+            duration: 800,
+            easing: 'swing',   //慢快慢
+        });
+        $("#reduce_soot ").numberRock({
+            lastNumber: $("#reduce_soot").text(),     //终止数字
+            duration: 800,
+            easing: 'swing',   //慢快慢
+        });
+        $("#reduce_nitride").numberRock({
+            lastNumber: $("#reduce_nitride").text(),      //终止数字
+            duration: 800,
+            easing: 'swing',   //慢快慢
+        });
+        $("#save_electricity ").numberRock({
+            lastNumber: $("#save_electricity").text(),    //终止数字
+            duration: 800,
+            easing: 'swing',   //慢快慢
+        });
+        $("#reduce_coal ").numberRock({
+            lastNumber: $("#reduce_coal").text(),     //终止数字
+            duration: 800,
+            easing: 'swing',   //慢快慢
+        });
+
+
 
     });
 
@@ -950,6 +987,51 @@
         }
 
     })(jQuery);
+
+    /*子地区小模块概括*/
+
+    $(function (){
+        var jnl = [];
+        var jnli = [];
+        var jnje= [];
+        $.ajax({
+            type: "get",
+            url: "/system/plate/lists",
+            dataType: "json",
+            async: false,
+            data : {
+                "largeareaname": largeareaname,
+            },
+            success: function (result) {
+                console.log(result);
+
+                for (var i = 0; i < result.length; i++) {
+                    jnl.push(result[i].energySaving);
+                    jnli.push(result[i].energyQuantity);
+                    jnje.push(result[i].energyMoney);
+                }
+                document.getElementById("zjnl").innerHTML = (parseInt(jnl[0]));
+                document.getElementById("zjnli").innerHTML = (parseInt(jnli[0]));
+                document.getElementById("zjsje").innerHTML = (parseInt(jnje[0]));
+                document.getElementById("xjnl").innerHTML = (parseInt(jnl[1]));
+                document.getElementById("xjnli").innerHTML = (parseInt(jnli[1]));
+                document.getElementById("xjsje").innerHTML = (parseInt(jnje[1]));
+                document.getElementById("djnl").innerHTML = (parseInt(jnl[2]));
+                document.getElementById("djnli").innerHTML = (parseInt(jnli[2]));
+                document.getElementById("djsje").innerHTML = (parseInt(jnje[2]));
+                document.getElementById("yjnl").innerHTML = (parseInt(jnl[3]));
+                document.getElementById("yjnli").innerHTML = (parseInt(jnli[3]));
+                document.getElementById("yjsje").innerHTML = (parseInt(jnje[3]));
+
+            },
+
+            error: function (errorMsg) {
+                alert("获取后台数据失败！");
+            }
+        })
+    })
+
+
 
 </script>
 

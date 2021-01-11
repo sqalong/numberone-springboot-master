@@ -8,7 +8,7 @@ import com.numberone.framework.web.domain.Ztree;
  * areaelectricService接口
  * 
  * @author sqalong
- * @date 2020-12-29
+ * @date 2021-01-11
  */
 public interface IAreaelectricService 
 {

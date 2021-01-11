@@ -15,7 +15,7 @@
             <div class="form-group">    
                 <label class="col-sm-3 control-label">场院名称：</label>
                 <div class="col-sm-8">
-                    <select name="largeareaname" class="form-control m-b" th:with="type=${@dict.getType('largeareaname')}">
+                    <select name="largeareaname" class="form-control m-b" th:with="type=${@dict.getType('largeareanames')}">
                         <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                     </select>
                 </div>

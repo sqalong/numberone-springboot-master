@@ -8,7 +8,7 @@ public class Za {
     private String cot;
     private String sot;
     private String ljyd;
-    private String not;
+    private String nott;
     private String xuet;
     private String jsym;
 
@@ -69,12 +69,12 @@ public class Za {
         this.ljyd = ljyd;
     }
 
-    public String getNot() {
-        return not;
+    public String getNott() {
+        return nott;
     }
 
-    public void setNotq(String notq) {
-        this.not = notq;
+    public void setNott(String nott) {
+        this.nott = nott;
     }
 
     public String getXuet() {

@@ -61,7 +61,7 @@ public class BibataController extends BaseController
 
 
     /*
-    * 点击查询指定表格
+    * 子地区点击查询指定场院的表格
     * */
     @GetMapping("/arearatio")
     @ResponseBody
@@ -92,6 +92,9 @@ public class BibataController extends BaseController
     public List<Contrast> addcurve(@RequestParam("table") String table){
         return bs.addcurve(table);
     }
+
+
+
 
 
 }

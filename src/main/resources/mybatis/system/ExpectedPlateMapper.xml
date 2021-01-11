@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.numberone.project.system.plate.mapper.ExpectedPlateMapper">
+    
+    <resultMap type="ExpectedPlate" id="ExpectedPlateResult">
+        <result property="id"    column="id"    />
+        <result property="function"    column="function"    />
+        <result property="name"    column="name"    />
+        <result property="energySaving"    column="energy_saving"    />
+        <result property="energyQuantity"    column="energy_quantity"    />
+        <result property="energyMoney"    column="energy_money"    />
+        <result property="pid"    column="pid"    />
+        <result property="parentName" column="parent_name" />
+    </resultMap>
+
+    <sql id="selectExpectedPlateVo">
+        select id, function, name, energy_saving, energy_quantity, energy_money, pid from expected_plate
+    </sql>
+
+    <select id="selectExpectedPlateList" parameterType="ExpectedPlate" resultMap="ExpectedPlateResult">
+        <include refid="selectExpectedPlateVo"/>
+        <where>  
+            <if test="function != null  and function != ''"> and function = #{function}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+        </where>
+        order by function
+    </select>
+    
+    <select id="selectExpectedPlateById" parameterType="Long" resultMap="ExpectedPlateResult">
+        select t.id, t.function, t.name, t.energy_saving, t.energy_quantity, t.energy_money, t.pid, p.name as parent_name
+        from expected_plate t
+        left join expected_plate p on p.id = t.pid
+        where t.id = #{id}
+    </select>
+        
+    <insert id="insertExpectedPlate" parameterType="ExpectedPlate" useGeneratedKeys="true" keyProperty="id">
+        insert into expected_plate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="function != null  and function != ''">function,</if>
+            <if test="name != null  and name != ''">name,</if>
+            <if test="energySaving != null ">energy_saving,</if>
+            <if test="energyQuantity != null ">energy_quantity,</if>
+            <if test="energyMoney != null ">energy_money,</if>
+            <if test="pid != null ">pid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="function != null  and function != ''">#{function},</if>
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="energySaving != null ">#{energySaving},</if>
+            <if test="energyQuantity != null ">#{energyQuantity},</if>
+            <if test="energyMoney != null ">#{energyMoney},</if>
+            <if test="pid != null ">#{pid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateExpectedPlate" parameterType="ExpectedPlate">
+        update expected_plate
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="function != null  and function != ''">function = #{function},</if>
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="energySaving != null ">energy_saving = #{energySaving},</if>
+            <if test="energyQuantity != null ">energy_quantity = #{energyQuantity},</if>
+            <if test="energyMoney != null ">energy_money = #{energyMoney},</if>
+            <if test="pid != null ">pid = #{pid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteExpectedPlateById" parameterType="Long">
+        delete from expected_plate where id = #{id}
+    </delete>
+
+    <delete id="deleteExpectedPlateByIds" parameterType="String">
+        delete from expected_plate where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+
+    <select id="selectExpectedPlateListBypid" parameterType="ExpectedPlate" resultMap="ExpectedPlateResult">
+        <include refid="selectExpectedPlateVo"/>
+        where pId=(select id from expected_plate where name =#{name})
+    </select>
+    
+</mapper>

@@ -24,7 +24,7 @@ import com.numberone.framework.web.domain.Ztree;
  * areaelectricController
  * 
  * @author sqalong
- * @date 2020-12-29
+ * @date 2021-01-11
  */
 @Controller
 @RequestMapping("/system/areaelectric")

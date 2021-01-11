@@ -22,8 +22,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>  
             <if test="smallareaname != null  and smallareaname != ''"> and smallareaname like concat('%', #{smallareaname}, '%')</if>
             <if test="largeareaname != null  and largeareaname != ''"> and largeareaname = #{largeareaname}</if>
-            <if test="value != null "> and value = #{value}</if>
-            <if test="pid != null "> and pid = #{pid}</if>
         </where>
         order by pid
     </select>

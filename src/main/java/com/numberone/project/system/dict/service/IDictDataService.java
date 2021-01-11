@@ -74,4 +74,8 @@ public interface IDictDataService
      * @return 结果
      */
     public int updateDictData(DictData dictData);
+
+
+    /*根据字典标签查询字典键值*/
+    public DictData  seleceBylabel(String label);
 }

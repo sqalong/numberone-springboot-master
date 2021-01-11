@@ -271,7 +271,7 @@
                     cot.push(result[i].cot);
                     sot.push(result[i].sot);
                     ljyd.push(result[i].ljyd);
-                    not.push(result[i].not);
+                    not.push(result[i].nott);
                     xuet.push(result[i].xuet);
                     jsym.push(result[i].jsym);
                 }
@@ -550,7 +550,7 @@
                 data: yAxisData,
                 label: {
                     normal: {
-                        show: true,
+                        show: false,
                         position: 'insideRight',
                         textStyle: {
                             color: 'blue', //color of value字体颜色
@@ -624,6 +624,7 @@
                     m["name"] = xname[i];
                     m["type"] = "line";
                     m["smooth"] = "true";
+                    m["url"] = "/system/bigdata"
 
                     //循环场院名称,拿到多个数组
                     var queryData = result.filter(function (fp) {
@@ -1221,8 +1222,13 @@
         dataType: "json",
         async: false,
         success: function (result) {
+            // result = result[url] = "system/bigdata/areabigdata?largeareaname";
+            for(var i =0;i<result.length;i++){
+                mapjson = result;
 
-            mapjson = result;
+            }
+
+            console.log(mapjson);
 
         },
 
@@ -1230,48 +1236,9 @@
             alert("获取后台数据失败！");
         }
     })
+
     var mapData = mapjson;
-    //     [{
-    //     'name': '北京西站邮件处理中心',
-    //     'color': '#ff69fc',
-    //     'latitude': 39.902506,
-    //     'longitude': 116.32025,
-    //     'url':'/system/bigdata/areabigdata'
-    //
-    // },
-    //     {
-    //         'latitude': 39.818668,
-    //         'longitude': 116.541167,
-    //         'name': '北京综合邮件处理中心',
-    //         'value': 41558260,
-    //         'color': '#24d251',
-    //         'url':'/system/bigdata/areabigdata'
-    //     },
-    //     {
-    //         'latitude': 39.911907,
-    //         'longitude': 116.431918,
-    //         'name': '北京站邮件处理中心',
-    //         'value': 26458260,
-    //         'color': '#f80404',
-    //         'url':'/system/bigdata/areabigdata'
-    //     },
-    //     {
-    //         'latitude': 39.923751,
-    //         'longitude': 116.431528,
-    //         'name': '天桥大院',
-    //         'value': 15258260,
-    //         'color': '#eafa04',
-    //         'url':'/system/bigdata/areabigdata'
-    //     },
-    //     {
-    //         'latitude': 39.959530,
-    //         'longitude': 116.417991,
-    //         'name': '永安路大院',
-    //         'value': 49858260,
-    //         'color': '#890fe0',
-    //         'url':'/system/bigdata/areabigdata'
-    //     }
-    // ]
+
 
     $.get(uploadedDataURL, function (geoJson) {
 
@@ -1364,9 +1331,11 @@
     });
     // 地图点击
     myChart.on('click', function (e) {
-        console.log(e)
         var largeareaname1 = e.name;
-        window.location.href = "/system/bigdata/areabigdata?largeareaname=" + largeareaname1;
+        console.log(e)
+        if (e.componentType=="series"){
+            window.location.href =  "/system/bigdata/areabigdata?largeareaname=" + largeareaname1;
+        }
     })
 
 

@@ -264,7 +264,7 @@
 <script th:src="@{/numberone/js/common.js?v=4.1.0}"></script>
 <script th:src="@{/numberone/index.js}"></script>
 <script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
-<script th:src="@{/numberone/js./refresh.js}"></script>
+
 <script th:inline="javascript">
 var ctx = [[@{/}]];
 // 皮肤缓存
@@ -351,6 +351,31 @@ function we() {
 		$("#flicker").addClass("pause");
 		$("#flicker").removeClass("play");
 	}
+};
+
+
+
+//局部刷新
+$(function(){
+	setInterval("notsum()",1000);
+});
+
+function notsum() {
+
+	//总条数
+	var sum ;
+	$.ajax({
+		type: "get",
+		url: "/system/notice/waring/number",
+		dataType: "json",
+		async: false,
+		success: function (result) {
+			sum =result;
+
+			document.getElementById("flicker").innerHTML = parseInt(sum);
+		},
+
+	})
 };
 
 

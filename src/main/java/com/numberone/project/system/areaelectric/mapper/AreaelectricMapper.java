@@ -7,7 +7,7 @@ import com.numberone.project.system.areaelectric.domain.Areaelectric;
  * areaelectricMapper接口
  * 
  * @author sqalong
- * @date 2020-12-29
+ * @date 2021-01-11
  */
 public interface AreaelectricMapper 
 {

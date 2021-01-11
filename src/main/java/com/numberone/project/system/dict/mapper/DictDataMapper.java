@@ -92,4 +92,8 @@ public interface DictDataMapper
      * @return 结果
      */
     public int updateDictDataType(@Param("oldDictType") String oldDictType, @Param("newDictType") String newDictType);
+
+
+    /*根据字典标签查询字典键值*/
+    public DictData seleceBylabel(String label);
 }

@@ -9,7 +9,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * areaelectric对象 areaelectric
  * 
  * @author sqalong
- * @date 2020-12-29
+ * @date 2021-01-11
  */
 public class Areaelectric extends TreeEntity
 {

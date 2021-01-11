@@ -7,7 +7,7 @@ import com.numberone.project.system.punctuation.domain.MapPunctuation;
  * 地图驻点Service接口
  * 
  * @author sqalong
- * @date 2021-01-04
+ * @date 2021-01-11
  */
 public interface IMapPunctuationService 
 {

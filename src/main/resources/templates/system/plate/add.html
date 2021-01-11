@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增子地区小版块数据后台')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-plate-add">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">小版块名称：</label>
+                <div class="col-sm-8">
+                    <input name="function" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">场院名称：</label>
+                <div class="col-sm-8">
+                    <input name="name" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">节能率：</label>
+                <div class="col-sm-8">
+                    <input name="energySaving" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">节能量：</label>
+                <div class="col-sm-8">
+                    <input name="energyQuantity" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">节能金额：</label>
+                <div class="col-sm-8">
+                    <input name="energyMoney" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">父ID：</label>
+                <div class="col-sm-8">
+                    <div class="input-group">
+                        <input id="treeId" name="pid" type="hidden" th:value="${expectedPlate?.id}"/>
+                        <input class="form-control" type="text" onclick="selectPlateTree()" id="treeName" readonly="true" th:value="${expectedPlate?.name}">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script type="text/javascript">
+        var prefix = ctx + "system/plate"
+        $("#form-plate-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-plate-add').serialize());
+            }
+        }
+
+        /*子地区小版块数据后台-新增-选择父部门树*/
+        function selectPlateTree() {
+            var options = {
+                title: '子地区小版块数据后台选择',
+                width: "380",
+                url: prefix + "/selectPlateTree/" + $("#treeId").val(),
+                callBack: doSubmit
+            };
+            $.modal.openOptions(options);
+        }
+
+        function doSubmit(index, layero){
+            var body = layer.getChildFrame('body', index);
+               $("#treeId").val(body.find('#treeId').val());
+               $("#treeName").val(body.find('#treeName').val());
+               layer.close(index);
+        }
+    </script>
+</body>
+</html>
