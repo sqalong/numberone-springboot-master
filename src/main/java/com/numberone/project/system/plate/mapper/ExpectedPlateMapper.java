@@ -7,7 +7,7 @@ import com.numberone.project.system.plate.domain.ExpectedPlate;
  * 子地区小版块数据后台Mapper接口
  * 
  * @author sqalong
- * @date 2021-01-11
+ * @date 2021-01-12
  */
 public interface ExpectedPlateMapper 
 {
@@ -58,6 +58,4 @@ public interface ExpectedPlateMapper
      * @return 结果
      */
     public int deleteExpectedPlateByIds(String[] ids);
-
-    List<ExpectedPlate> selectExpectedPlateListBypid(ExpectedPlate expectedPlate);
 }

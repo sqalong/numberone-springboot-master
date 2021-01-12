@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.numberone.project.system.areawater.mapper.AreawaterMapper">
+<mapper namespace="com.numberone.project.system.areagas.mapper.AreagasMapper">
     
-    <resultMap type="Areawater" id="AreawaterResult">
+    <resultMap type="Areagas" id="AreagasResult">
         <result property="id"    column="id"    />
         <result property="smallareaname"    column="smallareaname"    />
         <result property="largeareaname"    column="largeareaname"    />
@@ -13,28 +13,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="parentName" column="parent_name" />
     </resultMap>
 
-    <sql id="selectAreawaterVo">
-        select id, smallareaname, largeareaname, value, pid from areawater
+    <sql id="selectAreagasVo">
+        select id, smallareaname, largeareaname, value, pid from areagas
     </sql>
 
-    <select id="selectAreawaterList" parameterType="Areawater" resultMap="AreawaterResult">
-        <include refid="selectAreawaterVo"/>
+    <select id="selectAreagasList" parameterType="Areagas" resultMap="AreagasResult">
+        <include refid="selectAreagasVo"/>
         <where>  
             <if test="smallareaname != null  and smallareaname != ''"> and smallareaname like concat('%', #{smallareaname}, '%')</if>
-            <if test="largeareaname != null  and largeareaname != ''"> and largeareaname like concat('%', #{largeareaname}, '%')</if>
         </where>
         order by pid
     </select>
     
-    <select id="selectAreawaterById" parameterType="Long" resultMap="AreawaterResult">
+    <select id="selectAreagasById" parameterType="Long" resultMap="AreagasResult">
         select t.id, t.smallareaname, t.largeareaname, t.value, t.pid, p.largeareaname as parent_name
-        from areawater t
-        left join areawater p on p.id = t.pid
+        from areagas t
+        left join areagas p on p.id = t.pid
         where t.id = #{id}
     </select>
         
-    <insert id="insertAreawater" parameterType="Areawater" useGeneratedKeys="true" keyProperty="id">
-        insert into areawater
+    <insert id="insertAreagas" parameterType="Areagas" useGeneratedKeys="true" keyProperty="id">
+        insert into areagas
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="smallareaname != null  and smallareaname != ''">smallareaname,</if>
             <if test="largeareaname != null  and largeareaname != ''">largeareaname,</if>
@@ -49,8 +48,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateAreawater" parameterType="Areawater">
-        update areawater
+    <update id="updateAreagas" parameterType="Areagas">
+        update areagas
         <trim prefix="SET" suffixOverrides=",">
             <if test="smallareaname != null  and smallareaname != ''">smallareaname = #{smallareaname},</if>
             <if test="largeareaname != null  and largeareaname != ''">largeareaname = #{largeareaname},</if>
@@ -60,12 +59,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
-    <delete id="deleteAreawaterById" parameterType="Long">
-        delete from areawater where id = #{id}
+    <delete id="deleteAreagasById" parameterType="Long">
+        delete from areagas where id = #{id}
     </delete>
 
-    <delete id="deleteAreawaterByIds" parameterType="String">
-        delete from areawater where id in 
+    <delete id="deleteAreagasByIds" parameterType="String">
+        delete from areagas where id in 
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

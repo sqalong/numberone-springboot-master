@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <th:block th:include="include :: header('修改子地区水表数据')" />
+    <th:block th:include="include :: header('修改子地区气表数据')" />
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-        <form class="form-horizontal m" id="form-areawater-edit" th:object="${areawater}">
+        <form class="form-horizontal m" id="form-areagas-edit" th:object="${areagas}">
             <input name="id" th:field="*{id}" type="hidden">
             <div class="form-group">    
                 <label class="col-sm-3 control-label">子地区名称：</label>
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">数值：</label>
+                <label class="col-sm-3 control-label">值：</label>
                 <div class="col-sm-8">
                     <input name="value" th:field="*{value}" class="form-control" type="text">
                 </div>
@@ -32,7 +32,7 @@
                 <div class="col-sm-8">
                     <div class="input-group">
                         <input id="treeId" name="pid" type="hidden" th:field="*{pid}" />
-                        <input class="form-control" type="text" onclick="selectAreawaterTree()" id="treeName" readonly="true" th:field="*{parentName}">
+                        <input class="form-control" type="text" onclick="selectAreagasTree()" id="treeName" readonly="true" th:field="*{parentName}">
                         <span class="input-group-addon"><i class="fa fa-search"></i></span>
                     </div>
                 </div>
@@ -41,23 +41,23 @@
     </div>
     <th:block th:include="include :: footer" />
     <script type="text/javascript">
-        var prefix = ctx + "system/areawater";
-        $("#form-areawater-edit").validate({
+        var prefix = ctx + "system/areagas";
+        $("#form-areagas-edit").validate({
             focusCleanup: true
         });
 
         function submitHandler() {
             if ($.validate.form()) {
-                $.operate.save(prefix + "/edit", $('#form-areawater-edit').serialize());
+                $.operate.save(prefix + "/edit", $('#form-areagas-edit').serialize());
             }
         }
 
-        /*子地区水表数据-新增-选择父部门树*/
-        function selectAreawaterTree() {
+        /*子地区气表数据-新增-选择父部门树*/
+        function selectAreagasTree() {
             var options = {
-                title: '子地区水表数据选择',
+                title: '子地区气表数据选择',
                 width: "380",
-                url: prefix + "/selectAreawaterTree/" + $("#treeId").val(),
+                url: prefix + "/selectAreagasTree/" + $("#treeId").val(),
                 callBack: doSubmit
             };
             $.modal.openOptions(options);

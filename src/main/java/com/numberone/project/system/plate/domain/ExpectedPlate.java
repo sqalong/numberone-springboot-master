@@ -9,7 +9,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * 子地区小版块数据后台对象 expected_plate
  * 
  * @author sqalong
- * @date 2021-01-11
+ * @date 2021-01-12
  */
 public class ExpectedPlate extends TreeEntity
 {

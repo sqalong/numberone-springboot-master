@@ -1,15 +1,15 @@
 package com.numberone.project.system.plate.controller;
 
 import java.util.List;
-
-import com.numberone.project.bigdata.domain.AreaRatio;
-import com.numberone.project.system.dict.domain.DictData;
-import com.numberone.project.system.dict.service.IDictDataService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import com.numberone.framework.aspectj.lang.annotation.Log;
 import com.numberone.framework.aspectj.lang.enums.BusinessType;
 import com.numberone.project.system.plate.domain.ExpectedPlate;
@@ -24,7 +24,7 @@ import com.numberone.framework.web.domain.Ztree;
  * 子地区小版块数据后台Controller
  * 
  * @author sqalong
- * @date 2021-01-11
+ * @date 2021-01-12
  */
 @Controller
 @RequestMapping("/system/plate")
@@ -34,9 +34,6 @@ public class ExpectedPlateController extends BaseController
 
     @Autowired
     private IExpectedPlateService expectedPlateService;
-
-    @Autowired
-    private IDictDataService dictDataService;
 
     @RequiresPermissions("system:plate:view")
     @GetMapping()
@@ -49,7 +46,7 @@ public class ExpectedPlateController extends BaseController
      * 查询子地区小版块数据后台树列表
      */
     @RequiresPermissions("system:plate:list")
-    @GetMapping("/list")
+    @PostMapping("/list")
     @ResponseBody
     public List<ExpectedPlate> list(ExpectedPlate expectedPlate)
     {
@@ -154,26 +151,4 @@ public class ExpectedPlateController extends BaseController
         List<Ztree> ztrees = expectedPlateService.selectExpectedPlateTree();
         return ztrees;
     }
-
-    /**
-     * 查询子地区小版块数据后台树列表
-     */
-    @RequiresPermissions("system:plate:list")
-    @GetMapping("/lists")
-    @ResponseBody
-    public List<ExpectedPlate> lists(ExpectedPlate expectedPlate,String largeareaname)
-    {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+largeareaname);
-        DictData nameid = dictDataService.seleceBylabel(largeareaname);
-        String  name = nameid.getDictValue();
-        System.out.println(name);
-        expectedPlate.setName(name);
-        List<ExpectedPlate> list = expectedPlateService.selectExpectedPlateListBypid(expectedPlate);
-        return list;
-    }
-
-
-
-
-
 }

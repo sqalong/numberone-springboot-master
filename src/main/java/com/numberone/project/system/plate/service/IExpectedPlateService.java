@@ -8,7 +8,7 @@ import com.numberone.framework.web.domain.Ztree;
  * 子地区小版块数据后台Service接口
  * 
  * @author sqalong
- * @date 2021-01-11
+ * @date 2021-01-12
  */
 public interface IExpectedPlateService 
 {
@@ -66,6 +66,4 @@ public interface IExpectedPlateService
      * @return 所有子地区小版块数据后台信息
      */
     public List<Ztree> selectExpectedPlateTree();
-
-    List<ExpectedPlate> selectExpectedPlateListBypid(ExpectedPlate expectedPlate);
 }

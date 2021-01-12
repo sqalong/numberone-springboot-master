@@ -17,13 +17,14 @@ import com.numberone.project.system.areawater.service.IAreawaterService;
 import com.numberone.framework.web.controller.BaseController;
 import com.numberone.framework.web.domain.AjaxResult;
 import com.numberone.common.utils.poi.ExcelUtil;
-import com.numberone.framework.web.page.TableDataInfo;
+import com.numberone.common.utils.StringUtils;
+import com.numberone.framework.web.domain.Ztree;
 
 /**
- * areawaterController
+ * 子地区水表数据Controller
  * 
  * @author sqalong
- * @date 2020-12-28
+ * @date 2021-01-12
  */
 @Controller
 @RequestMapping("/system/areawater")
@@ -42,23 +43,22 @@ public class AreawaterController extends BaseController
     }
 
     /**
-     * 查询areawater列表
+     * 查询子地区水表数据树列表
      */
     @RequiresPermissions("system:areawater:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(Areawater areawater)
+    public List<Areawater> list(Areawater areawater)
     {
-        startPage();
         List<Areawater> list = areawaterService.selectAreawaterList(areawater);
-        return getDataTable(list);
+        return list;
     }
 
     /**
-     * 导出areawater列表
+     * 导出子地区水表数据列表
      */
     @RequiresPermissions("system:areawater:export")
-    @Log(title = "areawater", businessType = BusinessType.EXPORT)
+    @Log(title = "子地区水表数据", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Areawater areawater)
@@ -69,19 +69,23 @@ public class AreawaterController extends BaseController
     }
 
     /**
-     * 新增areawater
+     * 新增子地区水表数据
      */
-    @GetMapping("/add")
-    public String add()
+    @GetMapping(value = { "/add/{id}", "/add/" })
+    public String add(@PathVariable(value = "id", required = false) Long id, ModelMap mmap)
     {
+        if (StringUtils.isNotNull(id))
+        {
+            mmap.put("areawater", areawaterService.selectAreawaterById(id));
+        }
         return prefix + "/add";
     }
 
     /**
-     * 新增保存areawater
+     * 新增保存子地区水表数据
      */
     @RequiresPermissions("system:areawater:add")
-    @Log(title = "areawater", businessType = BusinessType.INSERT)
+    @Log(title = "子地区水表数据", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(Areawater areawater)
@@ -90,7 +94,7 @@ public class AreawaterController extends BaseController
     }
 
     /**
-     * 修改areawater
+     * 修改子地区水表数据
      */
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap)
@@ -101,10 +105,10 @@ public class AreawaterController extends BaseController
     }
 
     /**
-     * 修改保存areawater
+     * 修改保存子地区水表数据
      */
     @RequiresPermissions("system:areawater:edit")
-    @Log(title = "areawater", businessType = BusinessType.UPDATE)
+    @Log(title = "子地区水表数据", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(Areawater areawater)
@@ -113,14 +117,38 @@ public class AreawaterController extends BaseController
     }
 
     /**
-     * 删除areawater
+     * 删除
      */
     @RequiresPermissions("system:areawater:remove")
-    @Log(title = "areawater", businessType = BusinessType.DELETE)
-    @PostMapping( "/remove")
+    @Log(title = "子地区水表数据", businessType = BusinessType.DELETE)
+    @GetMapping("/remove/{id}")
     @ResponseBody
-    public AjaxResult remove(String ids)
+    public AjaxResult remove(@PathVariable("id") Long id)
     {
-        return toAjax(areawaterService.deleteAreawaterByIds(ids));
+        return toAjax(areawaterService.deleteAreawaterById(id));
+    }
+
+    /**
+     * 选择子地区水表数据树
+     */
+    @GetMapping(value = { "/selectAreawaterTree/{id}", "/selectAreawaterTree/" })
+    public String selectAreawaterTree(@PathVariable(value = "id", required = false) Long id, ModelMap mmap)
+    {
+        if (StringUtils.isNotNull(id))
+        {
+            mmap.put("areawater", areawaterService.selectAreawaterById(id));
+        }
+        return prefix + "/tree";
+    }
+
+    /**
+     * 加载子地区水表数据树列表
+     */
+    @GetMapping("/treeData")
+    @ResponseBody
+    public List<Ztree> treeData()
+    {
+        List<Ztree> ztrees = areawaterService.selectAreawaterTree();
+        return ztrees;
     }
 }

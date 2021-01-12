@@ -14,7 +14,7 @@ import com.numberone.common.utils.text.Convert;
  * 子地区小版块数据后台Service业务层处理
  * 
  * @author sqalong
- * @date 2021-01-11
+ * @date 2021-01-12
  */
 @Service
 public class ExpectedPlateServiceImpl implements IExpectedPlateService 
@@ -114,10 +114,5 @@ public class ExpectedPlateServiceImpl implements IExpectedPlateService
             ztrees.add(ztree);
         }
         return ztrees;
-    }
-
-    @Override
-    public List<ExpectedPlate> selectExpectedPlateListBypid(ExpectedPlate expectedPlate) {
-        return expectedPlateMapper.selectExpectedPlateListBypid(expectedPlate);
     }
 }

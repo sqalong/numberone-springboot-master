@@ -1,4 +1,4 @@
-package com.numberone.project.system.areawater.domain;
+package com.numberone.project.system.areagas.domain;
 
 import com.numberone.framework.aspectj.lang.annotation.Excel;
 import com.numberone.framework.web.domain.TreeEntity;
@@ -6,12 +6,12 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
- * 子地区水表数据对象 areawater
+ * 子地区气表数据对象 areagas
  * 
  * @author sqalong
  * @date 2021-01-12
  */
-public class Areawater extends TreeEntity
+public class Areagas extends TreeEntity
 {
     private static final long serialVersionUID = 1L;
 
@@ -26,8 +26,8 @@ public class Areawater extends TreeEntity
     @Excel(name = "场院名称")
     private String largeareaname;
 
-    /** 数值 */
-    @Excel(name = "数值")
+    /** 值 */
+    @Excel(name = "值")
     private Double value;
 
     /** 父ID */

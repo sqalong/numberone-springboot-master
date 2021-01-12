@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="function != null  and function != ''"> and function = #{function}</if>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
         </where>
-        order by function
+        order by pid
     </select>
     
     <select id="selectExpectedPlateById" parameterType="Long" resultMap="ExpectedPlateResult">
@@ -78,11 +78,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
-
-
-    <select id="selectExpectedPlateListBypid" parameterType="ExpectedPlate" resultMap="ExpectedPlateResult">
-        <include refid="selectExpectedPlateVo"/>
-        where pId=(select id from expected_plate where name =#{name})
-    </select>
     
 </mapper>

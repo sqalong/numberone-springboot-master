@@ -1,6 +1,8 @@
 package com.numberone.project.system.areawater.service.impl;
 
 import java.util.List;
+import java.util.ArrayList;
+import com.numberone.framework.web.domain.Ztree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.numberone.project.system.areawater.mapper.AreawaterMapper;
@@ -9,10 +11,10 @@ import com.numberone.project.system.areawater.service.IAreawaterService;
 import com.numberone.common.utils.text.Convert;
 
 /**
- * areawaterService业务层处理
+ * 子地区水表数据Service业务层处理
  * 
  * @author sqalong
- * @date 2020-12-28
+ * @date 2021-01-12
  */
 @Service
 public class AreawaterServiceImpl implements IAreawaterService 
@@ -21,10 +23,10 @@ public class AreawaterServiceImpl implements IAreawaterService
     private AreawaterMapper areawaterMapper;
 
     /**
-     * 查询areawater
+     * 查询子地区水表数据
      * 
-     * @param id areawaterID
-     * @return areawater
+     * @param id 子地区水表数据ID
+     * @return 子地区水表数据
      */
     @Override
     public Areawater selectAreawaterById(Long id)
@@ -33,10 +35,10 @@ public class AreawaterServiceImpl implements IAreawaterService
     }
 
     /**
-     * 查询areawater列表
+     * 查询子地区水表数据列表
      * 
-     * @param areawater areawater
-     * @return areawater
+     * @param areawater 子地区水表数据
+     * @return 子地区水表数据
      */
     @Override
     public List<Areawater> selectAreawaterList(Areawater areawater)
@@ -45,9 +47,9 @@ public class AreawaterServiceImpl implements IAreawaterService
     }
 
     /**
-     * 新增areawater
+     * 新增子地区水表数据
      * 
-     * @param areawater areawater
+     * @param areawater 子地区水表数据
      * @return 结果
      */
     @Override
@@ -57,9 +59,9 @@ public class AreawaterServiceImpl implements IAreawaterService
     }
 
     /**
-     * 修改areawater
+     * 修改子地区水表数据
      * 
-     * @param areawater areawater
+     * @param areawater 子地区水表数据
      * @return 结果
      */
     @Override
@@ -69,7 +71,7 @@ public class AreawaterServiceImpl implements IAreawaterService
     }
 
     /**
-     * 删除areawater对象
+     * 删除子地区水表数据对象
      * 
      * @param ids 需要删除的数据ID
      * @return 结果
@@ -81,14 +83,36 @@ public class AreawaterServiceImpl implements IAreawaterService
     }
 
     /**
-     * 删除areawater信息
+     * 删除子地区水表数据信息
      * 
-     * @param id areawaterID
+     * @param id 子地区水表数据ID
      * @return 结果
      */
     @Override
     public int deleteAreawaterById(Long id)
     {
         return areawaterMapper.deleteAreawaterById(id);
+    }
+
+    /**
+     * 查询子地区水表数据树列表
+     * 
+     * @return 所有子地区水表数据信息
+     */
+    @Override
+    public List<Ztree> selectAreawaterTree()
+    {
+        List<Areawater> areawaterList = areawaterMapper.selectAreawaterList(new Areawater());
+        List<Ztree> ztrees = new ArrayList<Ztree>();
+        for (Areawater areawater : areawaterList)
+        {
+            Ztree ztree = new Ztree();
+            ztree.setId(areawater.getId());
+            ztree.setpId(areawater.getPid());
+            ztree.setName(areawater.getLargeareaname());
+            ztree.setTitle(areawater.getLargeareaname());
+            ztrees.add(ztree);
+        }
+        return ztrees;
     }
 }
