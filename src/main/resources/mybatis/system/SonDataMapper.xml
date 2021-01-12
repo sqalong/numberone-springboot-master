@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.numberone.project.system.sondata.mapper.SonDataMapper">
+    
+    <resultMap type="SonData" id="SonDataResult">
+        <result property="pname"    column="Pname"    />
+        <result property="sonTotalDissipation"    column="son_total_dissipation"    />
+        <result property="saveEnergy"    column="save_energy"    />
+        <result property="saveMoney"    column="save_money"    />
+        <result property="saveRate"    column="save_rate"    />
+        <result property="reduceCo2"    column="reduce_Co2"    />
+        <result property="reduceSulfide"    column="reduce_sulfide"    />
+        <result property="reduceSoot"    column="reduce_soot"    />
+        <result property="reduceNitride"    column="reduce_nitride"    />
+        <result property="saveElectricity"    column="save_electricity"    />
+        <result property="reduceCoal"    column="reduce_coal"    />
+    </resultMap>
+
+    <sql id="selectSonDataVo">
+        select Pname, son_total_dissipation, save_energy, save_money, save_rate, reduce_Co2, reduce_sulfide, reduce_soot, reduce_nitride, save_electricity, reduce_coal from son_data
+    </sql>
+
+    <select id="selectSonDataList" parameterType="SonData" resultMap="SonDataResult">
+        <include refid="selectSonDataVo"/>
+        <where>  
+            <if test="pname != null  and pname != ''"> and Pname like concat('%', #{pname}, '%')</if>
+            <if test="sonTotalDissipation != null "> and son_total_dissipation = #{sonTotalDissipation}</if>
+            <if test="saveEnergy != null "> and save_energy = #{saveEnergy}</if>
+            <if test="saveMoney != null "> and save_money = #{saveMoney}</if>
+            <if test="saveRate != null "> and save_rate = #{saveRate}</if>
+            <if test="reduceCo2 != null "> and reduce_Co2 = #{reduceCo2}</if>
+            <if test="reduceSulfide != null "> and reduce_sulfide = #{reduceSulfide}</if>
+            <if test="reduceSoot != null "> and reduce_soot = #{reduceSoot}</if>
+            <if test="reduceNitride != null "> and reduce_nitride = #{reduceNitride}</if>
+            <if test="saveElectricity != null "> and save_electricity = #{saveElectricity}</if>
+            <if test="reduceCoal != null "> and reduce_coal = #{reduceCoal}</if>
+        </where>
+    </select>
+    
+    <select id="selectSonDataById" parameterType="String" resultMap="SonDataResult">
+        <include refid="selectSonDataVo"/>
+        where Pname = #{pname}
+    </select>
+        
+    <insert id="insertSonData" parameterType="SonData">
+        insert into son_data
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pname != null  and pname != ''">Pname,</if>
+            <if test="sonTotalDissipation != null ">son_total_dissipation,</if>
+            <if test="saveEnergy != null ">save_energy,</if>
+            <if test="saveMoney != null ">save_money,</if>
+            <if test="saveRate != null ">save_rate,</if>
+            <if test="reduceCo2 != null ">reduce_Co2,</if>
+            <if test="reduceSulfide != null ">reduce_sulfide,</if>
+            <if test="reduceSoot != null ">reduce_soot,</if>
+            <if test="reduceNitride != null ">reduce_nitride,</if>
+            <if test="saveElectricity != null ">save_electricity,</if>
+            <if test="reduceCoal != null ">reduce_coal,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pname != null  and pname != ''">#{pname},</if>
+            <if test="sonTotalDissipation != null ">#{sonTotalDissipation},</if>
+            <if test="saveEnergy != null ">#{saveEnergy},</if>
+            <if test="saveMoney != null ">#{saveMoney},</if>
+            <if test="saveRate != null ">#{saveRate},</if>
+            <if test="reduceCo2 != null ">#{reduceCo2},</if>
+            <if test="reduceSulfide != null ">#{reduceSulfide},</if>
+            <if test="reduceSoot != null ">#{reduceSoot},</if>
+            <if test="reduceNitride != null ">#{reduceNitride},</if>
+            <if test="saveElectricity != null ">#{saveElectricity},</if>
+            <if test="reduceCoal != null ">#{reduceCoal},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSonData" parameterType="SonData">
+        update son_data
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sonTotalDissipation != null ">son_total_dissipation = #{sonTotalDissipation},</if>
+            <if test="saveEnergy != null ">save_energy = #{saveEnergy},</if>
+            <if test="saveMoney != null ">save_money = #{saveMoney},</if>
+            <if test="saveRate != null ">save_rate = #{saveRate},</if>
+            <if test="reduceCo2 != null ">reduce_Co2 = #{reduceCo2},</if>
+            <if test="reduceSulfide != null ">reduce_sulfide = #{reduceSulfide},</if>
+            <if test="reduceSoot != null ">reduce_soot = #{reduceSoot},</if>
+            <if test="reduceNitride != null ">reduce_nitride = #{reduceNitride},</if>
+            <if test="saveElectricity != null ">save_electricity = #{saveElectricity},</if>
+            <if test="reduceCoal != null ">reduce_coal = #{reduceCoal},</if>
+        </trim>
+        where Pname = #{pname}
+    </update>
+
+    <delete id="deleteSonDataById" parameterType="String">
+        delete from son_data where Pname = #{pname}
+    </delete>
+
+    <delete id="deleteSonDataByIds" parameterType="String">
+        delete from son_data where Pname in 
+        <foreach item="pname" collection="array" open="(" separator="," close=")">
+            #{pname}
+        </foreach>
+    </delete>
+
+
+    <select id="selectSonDataBypname" parameterType="SonData" resultMap="SonDataResult">
+        select * from son_data where pname=#{pname}
+    </select>
+    
+</mapper>

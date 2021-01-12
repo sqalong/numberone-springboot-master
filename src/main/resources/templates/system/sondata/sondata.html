@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('子地区基本信息列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <p>父地区：</p>
+                                <select name="pname" th:with="type=${@dict.getType('largeareanames')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <p>总耗能：</p>
+                                <input type="text" name="sonTotalDissipation"/>
+                            </li>
+                            <li>
+                                <p>累计节能量：</p>
+                                <input type="text" name="saveEnergy"/>
+                            </li>
+                            <li>
+                                <p>节省金额：</p>
+                                <input type="text" name="saveMoney"/>
+                            </li>
+                            <li>
+                                <p>节能率：</p>
+                                <input type="text" name="saveRate"/>
+                            </li>
+                            <li>
+                                <p>减排二氧化碳：</p>
+                                <input type="text" name="reduceCo2"/>
+                            </li>
+                            <li>
+                                <p>减排硫化物：</p>
+                                <input type="text" name="reduceSulfide"/>
+                            </li>
+                            <li>
+                                <p>减排烟尘：</p>
+                                <input type="text" name="reduceSoot"/>
+                            </li>
+                            <li>
+                                <p>减排氮化物：</p>
+                                <input type="text" name="reduceNitride"/>
+                            </li>
+                            <li>
+                                <p>累计节省电量：</p>
+                                <input type="text" name="saveElectricity"/>
+                            </li>
+                            <li>
+                                <p>减少用煤：</p>
+                                <input type="text" name="reduceCoal"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:sondata:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:sondata:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:sondata:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:sondata:export">
+                    <i class="fa fa-download"></i> 导出
+                 </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('system:sondata:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:sondata:remove')}]];
+        var pnameDatas = [[${@dict.getType('largeareanames')}]];
+        var prefix = ctx + "system/sondata";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "子地区基本信息",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field : 'pname', 
+                    title : '父地区',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(pnameDatas, value);
+                    }
+                },
+                {
+                    field : 'sonTotalDissipation', 
+                    title : '总耗能'
+                },
+                {
+                    field : 'saveEnergy', 
+                    title : '累计节能量'
+                },
+                {
+                    field : 'saveMoney', 
+                    title : '节省金额'
+                },
+                {
+                    field : 'saveRate', 
+                    title : '节能率'
+                },
+                {
+                    field : 'reduceCo2', 
+                    title : '减排二氧化碳'
+                },
+                {
+                    field : 'reduceSulfide', 
+                    title : '减排硫化物'
+                },
+                {
+                    field : 'reduceSoot', 
+                    title : '减排烟尘'
+                },
+                {
+                    field : 'reduceNitride', 
+                    title : '减排氮化物'
+                },
+                {
+                    field : 'saveElectricity', 
+                    title : '累计节省电量'
+                },
+                {
+                    field : 'reduceCoal', 
+                    title : '减少用煤'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.pname + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.pname + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>
