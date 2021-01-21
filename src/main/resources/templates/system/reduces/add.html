@@ -9,7 +9,7 @@
             <div class="form-group">    
                 <label class="col-sm-3 control-label">地区名称：</label>
                 <div class="col-sm-8">
-                    <select name="name" class="form-control m-b" th:with="type=${@dict.getType('largeareaname')}">
+                    <select name="name" class="form-control m-b" th:with="type=${@dict.getType('largeareanames')}">
                         <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                     </select>
                 </div>

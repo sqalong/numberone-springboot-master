@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../../static/css/bigdata/left_bigdata.css" th:href="@{/css/bigdata/left_bigdata.css}"/>
     <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
 </head>
-<body onload="utr(),proprotion()">
+<body onload="utr(),proprotion(),graph('son_energy_water')">
 <div style="width: 1920px;height: 1080px;background-image: url('/back1.png'); color: #ffffff;background-repeat: no-repeat;background-size: 100% 100%; "
      th:src="@{/back.jpg}">
     <!--整个页面布局-->
@@ -118,9 +118,9 @@
                     <div class="col-sm-10">
                         <h4>用能对比曲线</h4></div>
                     <div class="btn-group col-sm-2">
-                        <button type="button" class="btn btn-link" style="color: #fff;">水</button>
-                        <button type="button" class="btn btn-link" style="color: #fff;">电</button>
-                        <button type="button" class="btn btn-link" style="color: #fff;">气</button>
+                        <button type="button" class="btn btn-link" style="color: #fff;" onclick="graph('son_energy_water')">水</button>
+                        <button type="button" class="btn btn-link" style="color: #fff;" onclick="graph('son_energy_electric')">电</button>
+                        <button type="button" class="btn btn-link" style="color: #fff;" onclick="graph('son_energy_gas')">气</button>
                     </div>
                 </div>
                 <div id="xzhong" style="height: 338px"></div>
@@ -490,112 +490,195 @@
 
 
     /*下中间曲线图*/
-    var xz = echarts.init(document.getElementById('xzhong'));
-    option1 = {
+    function graph(val){
+        var xz = echarts.init(document.getElementById('xzhong'));
 
-        legend: {
-            data: ['天桥大院', '航空邮件处理中心', '永安路大院', '新顺邮件处理中心', '北京站邮件处理中心', '北京国际邮件处理中心', '北京西站邮件处理中心', '北京综合邮件处理中心'],
-            x: 'center',
-            // y 设置垂直安放位置，默认全图顶端，可选值：'top' ¦ 'bottom' ¦ 'center' ¦ {number}（y坐标，单位px）
-            y: 'top',
-            textStyle: {
-                color: '#fff',  // 图例文字颜色
-                fontSize: 14,
+        var xname = [];
+        var xtime = [];
+        var zdata = [];
+
+        $.ajax({
+            type: "get",
+            url: "/system/bigdata/areaaddcurve?table="+val,
+            dataType: "json",
+            async: false,
+            data : {
+                "largeareaname": largeareaname,
             },
-        },
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'cross',
-                label: {
-                    backgroundColor: '#6a7985'
+            success: function (result) {
+
+                //场院名称去重
+                var map = result.reduce((all, m) => {
+                    let list = all.get(m.region);
+                    if (!list) {
+                        list = [];
+                        all.set(m.region, list);
+                    }
+                    list.push(m);
+                    return all;
+                }, new Map());
+
+                Array.from(map.entries())
+                    // 这里过滤掉 list 只有一个元素的，剩下的就是有重复的
+                    .filter(([region, list]) => list.length > 0)
+                    .forEach(([region, list]) => {
+                        values = list.map(m => m.region);
+                        // var p = region;
+                        xname.push(region);
+
+                    });
+
+
+                //按场院名称查询成数组
+                for (var i = 0; i < xname.length; i++) {
+                    var m = {};
+                    m["name"] = xname[i];
+                    m["type"] = "line";
+                    m["smooth"] = "true";
+                    m["url"] = "/system/bigdata"
+
+                    //循环场院名称,拿到多个数组
+                    var queryData = result.filter(function (fp) {
+                        return fp.region === xname[i]
+                    })
+                    var v = "array" + i;
+                    var v = new Array();
+
+                    //拿出每个场院数组的数值,保存进一个数组
+                    for (var j = 0; j < queryData.length; j++) {
+                        var numbers = queryData[j].number;
+                        v[j] = numbers;
+                    }
+                    m["data"] = v;
+                    zdata.push(m);
+
                 }
+                console.log(zdata);
+
+
+                //时间去重
+                var map = result.reduce((all, m) => {
+                    let list = all.get(m.timing);
+                    if (!list) {
+                        list = [];
+                        all.set(m.timing, list);
+                    }
+                    list.push(m);
+                    return all;
+                }, new Map());
+                Array.from(map.entries())
+                    // 这里过滤掉 list 只有一个元素的，剩下的就是有重复的
+                    .filter(([timing, list]) => list.length > 0)
+                    .forEach(([timing, list]) => {
+                        values = list.map(m => m.timing);
+
+                        // var p = timing;
+
+
+                        //日期截取
+
+                        var dateTime = new Date(timing);
+                        var hour = dateTime.getHours();
+                        var min = dateTime.getMinutes();
+                        var sec = dateTime.getSeconds();
+                        var yy = dateTime.getFullYear();
+                        var dd = dateTime.getDate();
+                        var mm = dateTime.getMonth() + 1;
+                        var time = mm + "-" + dd;
+
+
+                        xtime.push(time);
+                        // alert(xtime);
+
+                    });
+            },
+            error: function (errorMsg) {
+                alert("获取后台数据失败！");
             }
-        },
-        grid: {
-            top: 25,
-            bottom: 50,
-            left: "40",
-            right: "40",
-        },
-        xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            axisLine: {
-                onZero: false,
-                lineStyle: {
-                    color: "#fff"
+        })
+
+
+        option1 = {
+            legend: {
+                data: xname,
+                selected: {
+                    "实业集团": false,
+                    "中心局": true,
+                    "西城区局": false,
+                    "市公司": false,
+                    "押运人员公寓": false,
+                    "电商局": false,
+                    "集团公司信息技术局": true,
+                    "信息局": false,
+                    "发行局": false,
+                    "机要局": false,
+                    "集邮公司": false,
+                    "集邮公司": false,
+                    "北京邮局中心局": false,
+                    "商函局": false,
+                    "邮中物业": true,
+                    "亦庄数据机房": false,
+                    "中心三组": false,
+                    "器材公司": true,
+
+                },
+                x: 'center',
+                // y 设置垂直安放位置，默认全图顶端，可选值：'top' ¦ 'bottom' ¦ 'center' ¦ {number}（y坐标，单位px）
+                y: 'top',
+                textStyle: {
+                    color: '#fff',  // 图例文字颜色
+                    fontSize: 14,
+                },
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#6a7985'
+                    }
                 }
             },
+            grid: {
+                top: 45,
+                bottom: 50,
+                left: "40",
+                right: "40",
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                axisLine: {
+                    onZero: false,
+                    lineStyle: {
+                        color: "#fff"
+                    }
+                },
 
 
-            data: ['2016-1', '2016-2', '2016-3', '2016-4', '2016-5', '2016-6', '2016-7', '2016-8', '2016-9', '2016-10', '2016-11', '2016-12']
-        },
-        yAxis: {
-            type: 'value',
-            axisLine: {
-                onZero: false,
-                lineStyle: {
-                    color: "#fff"
-                }
+                data: xtime
             },
-            splitLine: {
-                show: false
-            },//去除网格线
+            yAxis: {
+                type: 'value',
+                axisLine: {
+                    onZero: false,
+                    lineStyle: {
+                        color: "#fff"
+                    }
+                },
+                splitLine: {
+                    show: false
+                },//去除网格线
 
-        },
-        series: [{
-            name: '北京综合邮件处理中心',
-            type: 'line',
-            smooth: true,
-            data: [20.9, 1.9, 7.0, 22.4, 121.7, 160.7, 75.6, 82.2, 38.7, 12.8, 6.0, 172.3]
-        },
-            {
-                name: '北京西站邮件处理中心',
-                type: 'line',
-                smooth: true,
-                data: [60.9, 1.9, 7.0, 22.4, 21.7, 60.7, 75.6, 82.2, 38.7, 12.8, 6.0, 72.3]
             },
-            {
-                name: '北京国际邮件处理中心',
-                type: 'line',
-                smooth: true,
-                data: [90.9, 1.9, 7.0, 122.4, 21.7, 160.7, 75.6, 82.2, 38.7, 12.8, 6.0, 72.3]
-            },
-            {
-                name: '北京站邮件处理中心',
-                type: 'line',
-                smooth: true,
-                data: [30.9, 100.9, 170.0, 22.4, 121.7, 60.7, 75.6, 92.2, 38.7, 12.8, 130.0, 72.3]
-            },
-            {
-                name: '新顺邮件处理中心',
-                type: 'line',
-                smooth: true,
-                data: [160.9, 11.9, 125.0, 22.4, 61.7, 90.7, 25.6, 82.2, 38.7, 120.8, 6.0, 72.3]
-            },
-            {
-                name: '永安路大院',
-                type: 'line',
-                smooth: true,
-                data: [180.9, 1.9, 78.0, 22.4, 123.7, 60.7, 25.6, 82.2, 38.7, 12.8, 89.0, 72.3]
-            },
-            {
-                name: '天桥大院',
-                type: 'line',
-                smooth: true,
-                data: [100.6, 100.9, 20.0, 76.4, 48.7, 20.7, 75.6, 142.2, 78.7, 180.8, 16.0, 92.3]
-            },
-            {
-                name: '航空邮件处理中心',
-                type: 'line',
-                smooth: true,
-                data: [0.9, 20.9, 40.1, 10.7, 30.3, 60.2, 90.6, 60.6, 80.4, 70.4, 20.3, 30.7]
-            },
-        ],
-        color: ['#0379FF', '#FEA501', '#13E1E1']
-    };
-    xz.setOption(option1)
+            series: zdata,
+
+            color: ['#32f3b5', '#FEA501', '#13E1E1', '#cd11ee']
+        };
+        xz.setOption(option1)
+
+
+    }
 
 
 

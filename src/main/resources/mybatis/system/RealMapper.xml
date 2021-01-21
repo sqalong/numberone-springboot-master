@@ -88,4 +88,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       SELECT tree_id as id, tree_parent_id as pId,tree_name AS `name` FROM tree_simulate
     </select>
 
+    <select id="selectRtcurveinit" resultType="Real">
+        SELECT indication from `real` WHERE groupsname = #{groupsname} AND measurename = #{measurename} and signname = #{signname} order by id desc limit 0,8;
+    </select>
+
+
+    <select id="selectRtcurve" resultType="int" >
+        SELECT indication from `real` WHERE groupsname = #{groupsname} AND measurename = #{measurename} and signname = #{signname} order by id desc limit 0,1;
+    </select>
+
+
 </mapper>

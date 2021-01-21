@@ -27,6 +27,11 @@
        SELECT region,timing,number FROM ${table} WHERE DATE_FORMAT( timing, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
     </select>
 
+    <select id="areaaddcurve" resultType="Contrast">
+        SELECT name as region,time as timing,son_number as number FROM ${table} WHERE DATE_FORMAT( time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) and pname = #{largeareaname}
+    </select>
+
+
 
 
 </mapper>

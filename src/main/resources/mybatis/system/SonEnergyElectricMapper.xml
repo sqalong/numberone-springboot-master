@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.numberone.project.system.electricbight.mapper.SonEnergyElectricMapper">
+    
+    <resultMap type="SonEnergyElectric" id="SonEnergyElectricResult">
+        <result property="pname"    column="pname"    />
+        <result property="name"    column="name"    />
+        <result property="time"    column="time"    />
+        <result property="sonNumber"    column="son_number"    />
+    </resultMap>
+
+    <sql id="selectSonEnergyElectricVo">
+        select pname, name, time, son_number from son_energy_electric
+    </sql>
+
+    <select id="selectSonEnergyElectricList" parameterType="SonEnergyElectric" resultMap="SonEnergyElectricResult">
+        <include refid="selectSonEnergyElectricVo"/>
+        <where>  
+            <if test="pname != null  and pname != ''"> and pname like concat('%', #{pname}, '%')</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="time != null "> and time = #{time}</if>
+            <if test="sonNumber != null "> and son_number = #{sonNumber}</if>
+        </where>
+    </select>
+    
+    <select id="selectSonEnergyElectricById" parameterType="String" resultMap="SonEnergyElectricResult">
+        <include refid="selectSonEnergyElectricVo"/>
+        where pname = #{pname}
+    </select>
+        
+    <insert id="insertSonEnergyElectric" parameterType="SonEnergyElectric">
+        insert into son_energy_electric
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pname != null  and pname != ''">pname,</if>
+            <if test="name != null  and name != ''">name,</if>
+            <if test="time != null ">time,</if>
+            <if test="sonNumber != null ">son_number,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pname != null  and pname != ''">#{pname},</if>
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="time != null ">#{time},</if>
+            <if test="sonNumber != null ">#{sonNumber},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSonEnergyElectric" parameterType="SonEnergyElectric">
+        update son_energy_electric
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="time != null ">time = #{time},</if>
+            <if test="sonNumber != null ">son_number = #{sonNumber},</if>
+        </trim>
+        where pname = #{pname}
+    </update>
+
+    <delete id="deleteSonEnergyElectricById" parameterType="String">
+        delete from son_energy_electric where pname = #{pname}
+    </delete>
+
+    <delete id="deleteSonEnergyElectricByIds" parameterType="String">
+        delete from son_energy_electric where pname in 
+        <foreach item="pname" collection="array" open="(" separator="," close=")">
+            #{pname}
+        </foreach>
+    </delete>
+    
+</mapper>

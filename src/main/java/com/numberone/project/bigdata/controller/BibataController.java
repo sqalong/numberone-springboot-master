@@ -94,6 +94,16 @@ public class BibataController extends BaseController
     }
 
 
+    /*
+     * 子地区大屏展示用能占比曲线json
+     * */
+    @GetMapping("/areaaddcurve")
+    @ResponseBody
+    public List<Contrast> areaaddcurve(@RequestParam("largeareaname") String largeareaname, @RequestParam("table") String table){
+        return bs.areaaddcurve(largeareaname,table);
+    }
+
+
 
 
 

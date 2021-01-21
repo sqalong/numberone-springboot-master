@@ -58,4 +58,6 @@ public interface ExpectedPlateMapper
      * @return 结果
      */
     public int deleteExpectedPlateByIds(String[] ids);
+
+    List<ExpectedPlate> selectExpectedPlateLists(String largeareaname);
 }

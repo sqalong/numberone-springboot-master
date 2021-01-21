@@ -115,4 +115,9 @@ public class ExpectedPlateServiceImpl implements IExpectedPlateService
         }
         return ztrees;
     }
+
+    @Override
+    public List<ExpectedPlate> selectExpectedPlateLists(String largeareaname) {
+        return expectedPlateMapper.selectExpectedPlateLists(largeareaname);
+    }
 }

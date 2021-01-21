@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.numberone.project.system.cnwater.mapper.EnergyContrastWaterMapper">
+    
+    <resultMap type="EnergyContrastWater" id="EnergyContrastWaterResult">
+        <result property="region"    column="region"    />
+        <result property="timing"    column="timing"    />
+        <result property="number"    column="number"    />
+    </resultMap>
+
+    <sql id="selectEnergyContrastWaterVo">
+        select region, timing, number from energy_contrast_water
+    </sql>
+
+    <select id="selectEnergyContrastWaterList" parameterType="EnergyContrastWater" resultMap="EnergyContrastWaterResult">
+        <include refid="selectEnergyContrastWaterVo"/>
+        <where>  
+            <if test="region != null  and region != ''"> and region = #{region}</if>
+            <if test="timing != null "> and timing = #{timing}</if>
+        </where>
+    </select>
+    
+    <select id="selectEnergyContrastWaterById" parameterType="String" resultMap="EnergyContrastWaterResult">
+        <include refid="selectEnergyContrastWaterVo"/>
+        where region = #{region}
+    </select>
+        
+    <insert id="insertEnergyContrastWater" parameterType="EnergyContrastWater">
+        insert into energy_contrast_water
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="region != null  and region != ''">region,</if>
+            <if test="timing != null ">timing,</if>
+            <if test="number != null ">number,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="region != null  and region != ''">#{region},</if>
+            <if test="timing != null ">#{timing},</if>
+            <if test="number != null ">#{number},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEnergyContrastWater" parameterType="EnergyContrastWater">
+        update energy_contrast_water
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="timing != null ">timing = #{timing},</if>
+            <if test="number != null ">number = #{number},</if>
+        </trim>
+        where region = #{region}
+    </update>
+
+    <delete id="deleteEnergyContrastWaterById" parameterType="String">
+        delete from energy_contrast_water where region = #{region}
+    </delete>
+
+    <delete id="deleteEnergyContrastWaterByIds" parameterType="String">
+        delete from energy_contrast_water where region in 
+        <foreach item="region" collection="array" open="(" separator="," close=")">
+            #{region}
+        </foreach>
+    </delete>
+    
+</mapper>

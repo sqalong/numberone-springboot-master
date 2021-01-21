@@ -12,18 +12,10 @@
                         <ul>
                             <li>
                                 <p>地区名称：</p>
-                                <select name="name" th:with="type=${@dict.getType('largeareaname')}">
+                                <select name="name" th:with="type=${@dict.getType('largeareanames')}">
                                     <option value="">所有</option>
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
-                            </li>
-                            <li>
-                                <p>减少煤：</p>
-                                <input type="text" name="reduceCoal"/>
-                            </li>
-                            <li>
-                                <p>减少Co2：</p>
-                                <input type="text" name="reduceCo2"/>
                             </li>
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -57,7 +49,7 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('system:reduces:edit')}]];
         var removeFlag = [[${@permission.hasPermi('system:reduces:remove')}]];
-        var nameDatas = [[${@dict.getType('largeareaname')}]];
+        var nameDatas = [[${@dict.getType('largeareanames')}]];
         var prefix = ctx + "system/reduces";
 
         $(function() {

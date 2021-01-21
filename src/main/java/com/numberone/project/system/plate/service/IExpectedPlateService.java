@@ -66,4 +66,6 @@ public interface IExpectedPlateService
      * @return 所有子地区小版块数据后台信息
      */
     public List<Ztree> selectExpectedPlateTree();
+
+    List<ExpectedPlate> selectExpectedPlateLists(String largeareaname);
 }

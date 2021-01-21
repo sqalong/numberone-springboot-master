@@ -98,4 +98,14 @@ public class RealServiceImpl implements IRealService
     public List<Treee> treelist() {
         return realMapper.treelist();
     }
+
+    @Override
+    public List<Real> selectRtcurveinit(Real real) {
+        return realMapper.selectRtcurveinit(real);
+    }
+
+    @Override
+    public int selectRtcurve(Real real) {
+        return realMapper.selectRtcurve(real);
+    }
 }

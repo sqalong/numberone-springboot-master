@@ -23,4 +23,6 @@ public interface IBigdataService
     List<Mapss> addmappt();
 
     List<Contrast> addcurve(String table);
+
+    List<Contrast> areaaddcurve(String largeareaname, String table);
 }

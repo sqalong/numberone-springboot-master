@@ -61,4 +61,8 @@ public interface RealMapper
     public int deleteRealByIds(String[] ids);
 
     List<Treee> treelist();
+
+    List<Real> selectRtcurveinit(Real real);
+
+    int selectRtcurve(Real real);
 }

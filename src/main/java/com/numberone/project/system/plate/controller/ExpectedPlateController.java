@@ -5,11 +5,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import com.numberone.framework.aspectj.lang.annotation.Log;
 import com.numberone.framework.aspectj.lang.enums.BusinessType;
 import com.numberone.project.system.plate.domain.ExpectedPlate;
@@ -53,6 +49,10 @@ public class ExpectedPlateController extends BaseController
         List<ExpectedPlate> list = expectedPlateService.selectExpectedPlateList(expectedPlate);
         return list;
     }
+
+
+
+
 
     /**
      * 导出子地区小版块数据后台列表
@@ -150,5 +150,16 @@ public class ExpectedPlateController extends BaseController
     {
         List<Ztree> ztrees = expectedPlateService.selectExpectedPlateTree();
         return ztrees;
+    }
+
+    /**
+     * 查询子地区小版块数据后台树列表
+     */
+    @GetMapping("/lists")
+    @ResponseBody
+    public List<ExpectedPlate> lists(@RequestParam("largeareaname") String largeareaname)
+    {
+        List<ExpectedPlate> list = expectedPlateService.selectExpectedPlateLists(largeareaname);
+        return list;
     }
 }

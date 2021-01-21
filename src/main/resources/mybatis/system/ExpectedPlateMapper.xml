@@ -78,5 +78,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+    <select id="selectExpectedPlateLists" parameterType="ExpectedPlate" resultMap="ExpectedPlateResult">
+       SELECT * FROM expected_plate WHERE name = #{largeareaname}
+    </select>
+
     
 </mapper>

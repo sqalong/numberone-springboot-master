@@ -45,4 +45,9 @@ public class BigdataServiceImpl implements IBigdataService
     public List<Contrast> addcurve(String table) {
         return configMapper.addcurve(table);
     }
+
+    @Override
+    public List<Contrast> areaaddcurve(String largeareaname, String table) {
+        return configMapper.areaaddcurve(largeareaname,table);
+    }
 }

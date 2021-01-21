@@ -1,5 +1,6 @@
 package com.numberone.project.system.real.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.numberone.project.system.real.domain.Treee;
@@ -154,6 +155,31 @@ public class RealController extends BaseController
         startPage();
         List<Real> list = realService.selectRealList(real);
         return list;
+    }
+
+
+
+    @GetMapping("/rtcurveinit")
+    @ResponseBody
+    public List<Real> rtcurveinit(Real real)
+    {
+//        ArrayList arry = new ArrayList();
+        List<Real> list = realService.selectRtcurveinit(real);
+//        for(Real a : list){
+//
+//            int intttt = Integer.parseInt(a.getIndication());
+//            arry.add(intttt) ;
+//        }
+        return list;
+    }
+
+
+    @GetMapping("/rtcurve")
+    @ResponseBody
+    public int rtcurve(Real real)
+    {
+        int i = realService.selectRtcurve(real);
+        return i;
     }
 
 

@@ -19,8 +19,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectReducesVo"/>
         <where>  
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
-            <if test="reduceCoal != null "> and reduce_coal = #{reduceCoal}</if>
-            <if test="reduceCo2 != null "> and reduce_co2 = #{reduceCo2}</if>
         </where>
     </select>
     

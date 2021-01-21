@@ -23,7 +23,7 @@ import com.numberone.framework.web.page.TableDataInfo;
  * 减少排碳Controller
  * 
  * @author sqalong
- * @date 2021-01-07
+ * @date 2021-01-13
  */
 @Controller
 @RequestMapping("/system/reduces")

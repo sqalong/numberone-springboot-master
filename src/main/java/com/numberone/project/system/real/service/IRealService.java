@@ -61,4 +61,8 @@ public interface IRealService
     public int deleteRealById(Long id);
 
     List<Treee> treelist();
+
+    List<Real> selectRtcurveinit(Real real);
+
+    int selectRtcurve(Real real);
 }

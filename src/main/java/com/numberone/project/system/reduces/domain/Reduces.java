@@ -9,7 +9,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * 减少排碳对象 reduce
  * 
  * @author sqalong
- * @date 2021-01-07
+ * @date 2021-01-13
  */
 public class Reduces extends BaseEntity
 {

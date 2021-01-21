@@ -7,7 +7,7 @@ import com.numberone.project.system.reduces.domain.Reduces;
  * 减少排碳Mapper接口
  * 
  * @author sqalong
- * @date 2021-01-07
+ * @date 2021-01-13
  */
 public interface ReducesMapper 
 {
