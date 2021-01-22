@@ -27,6 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="measurename != null  and measurename != ''"> and measureName like concat('%', #{measurename}, '%')</if>
             <if test="signname != null  and signname != ''"> and signName like concat('%', #{signname}, '%')</if>
         </where>
+        order by meanehileTime desc
     </select>
 
     <select id="selectRealById" parameterType="Long" resultMap="RealResult">
