@@ -110,6 +110,7 @@
 			<optional>true</optional> <!-- 表示依赖不会传递 -->
 		</dependency>
 
+
 		<!-- Mysql驱动包 -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -132,10 +133,10 @@
 
 		<!--阿里数据库连接池 -->
 		<dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>${druid.version}</version>
-        </dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>${druid.version}</version>
+		</dependency>
 
 		<!--常用工具类 -->
 		<dependency>
@@ -243,49 +244,49 @@
 			<artifactId>springfox-swagger2</artifactId>
 			<version>${swagger.version}</version>
 			<exclusions>
-			    <exclusion>
-			        <groupId>io.swagger</groupId>
-			        <artifactId>swagger-annotations</artifactId>
-			    </exclusion>
-			    <exclusion>
-			        <groupId>io.swagger</groupId>
-			        <artifactId>swagger-models</artifactId>
-			    </exclusion>
+				<exclusion>
+					<groupId>io.swagger</groupId>
+					<artifactId>swagger-annotations</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>io.swagger</groupId>
+					<artifactId>swagger-models</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<!--防止进入swagger页面报类型转换错误，排除2.9.2中的引用，手动增加1.5.21版本-->
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>1.5.21</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-models</artifactId>
-            <version>1.5.21</version>
-        </dependency>
-        
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>1.5.21</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-models</artifactId>
+			<version>1.5.21</version>
+		</dependency>
+
 		<!-- swagger2-UI-->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>${swagger.version}</version>
 		</dependency>
-		
+
 		<!-- 获取系统信息 -->
 		<dependency>
 			<groupId>com.github.oshi</groupId>
 			<artifactId>oshi-core</artifactId>
 			<version>${oshi.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>net.java.dev.jna</groupId>
 			<artifactId>jna</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>net.java.dev.jna</groupId>
 			<artifactId>jna-platform</artifactId>
@@ -297,6 +298,59 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>${poi.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>com.bstek.ureport</groupId>
+			<artifactId>ureport2-console</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+
+		<!--		报表依赖-->
+		<!--		<dependency>-->
+		<!--			<groupId>commons-net</groupId>-->
+		<!--			<artifactId>commons-net</artifactId>-->
+		<!--			<version>3.3</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>commons-pool</groupId>-->
+		<!--			<artifactId>commons-pool</artifactId>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.flywaydb</groupId>-->
+		<!--			<artifactId>flyway-core</artifactId>-->
+		<!--			<version>5.2.3</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.springframework.boot</groupId>-->
+		<!--			<artifactId>spring-boot-configuration-processor</artifactId>-->
+		<!--			<optional>true</optional>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.aspectj</groupId>-->
+		<!--			<artifactId>aspectjweaver</artifactId>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.springframework.boot</groupId>-->
+		<!--			<artifactId>spring-boot-starter-jdbc</artifactId>-->
+		<!--		</dependency>-->
+
+		<!--		<dependency>-->
+		<!--			<groupId>com.alibaba</groupId>-->
+		<!--			<artifactId>druid</artifactId>-->
+		<!--			<version>1.1.10</version>-->
+		<!--		</dependency>-->
+
+		<!--		<dependency>-->
+		<!--			<groupId>com.bstek.ureport</groupId>-->
+		<!--			<artifactId>ureport2-console</artifactId>-->
+		<!--			<version>2.2.9</version>-->
+		<!--		</dependency>-->
 
 	</dependencies>
 

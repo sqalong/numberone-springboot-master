@@ -60,9 +60,8 @@ public class BibataController extends BaseController
     }
 
 
-    /*
-    * 子地区点击查询指定场院的表格
-    * */
+    /**
+     * 子地区点击查询指定场院的表格 */
     @GetMapping("/arearatio")
     @ResponseBody
     public List<AreaRatio> arearatio(@RequestParam("table") String table,@RequestParam("largeareaname") String largeareaname){
