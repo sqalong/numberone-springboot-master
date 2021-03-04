@@ -597,6 +597,26 @@
             }
         })
 
+        //X轴
+        var date=new Date();
+        var myArray=new Array();
+        function getDuration(date) {
+            // how many days of this month
+            let dt = new Date(date)
+            var month = dt.getMonth()
+            dt.setMonth(dt.getMonth() + 1)
+            dt.setDate(0);
+            return dt.getDate()
+        }
+        //当前日期年
+        var year=date.getFullYear();
+        //当前日期月
+        var month=date.getMonth()+1;
+        console.log(getDuration('2021-3-1')) //31
+        for (var i=1;i<=getDuration(date);i++) {
+            var sl=month+"-"+i;
+            myArray.push(sl);
+        }
 
         option1 = {
             legend: {
@@ -656,7 +676,7 @@
                 },
 
 
-                data: xtime
+                data: myArray
             },
             yAxis: {
                 type: 'value',

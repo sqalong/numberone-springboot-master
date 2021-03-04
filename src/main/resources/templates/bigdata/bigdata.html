@@ -595,7 +595,6 @@
             dataType: "json",
             async: false,
             success: function (result) {
-
                 //场院名称去重
                 var map = result.reduce((all, m) => {
                     let list = all.get(m.region);
@@ -624,7 +623,6 @@
                     m["name"] = xname[i];
                     m["type"] = "line";
                     m["smooth"] = "true";
-
                     //循环场院名称,拿到多个数组
                     var queryData = result.filter(function (fp) {
                         return fp.region === xname[i]
@@ -674,7 +672,7 @@
 
 
                         xtime.push(time);
-                        // alert(xtime);
+                         alert(xtime);
 
                     });
             },
@@ -682,6 +680,28 @@
                 alert("获取后台数据失败！");
             }
         })
+
+
+        //X轴数组
+        var date=new Date();
+        var myArray=new Array();
+        function getDuration(date) {
+            // how many days of this month
+            let dt = new Date(date)
+            var month = dt.getMonth()
+            dt.setMonth(dt.getMonth() + 1)
+            dt.setDate(0);
+            return dt.getDate()
+        }
+        //当前日期年
+        var year=date.getFullYear();
+        //当前日期月
+        var month=date.getMonth()+1;
+        console.log(getDuration('2021-3-1')) //31
+        for (var i=1;i<=getDuration(date);i++) {
+            var sl=month+"-"+i;
+            myArray.push(sl);
+        }
 
 
         option1 = {
@@ -729,9 +749,7 @@
                         color: "#fff"
                     }
                 },
-
-
-                data: xtime
+                data: myArray
             },
             yAxis: {
                 type: 'value',
@@ -744,18 +762,12 @@
                 splitLine: {
                     show: false
                 },//去除网格线
-
             },
             series: zdata,
-
             color: ['#32f3b5', '#FEA501', '#13E1E1', '#cd11ee']
         };
         xz.setOption(option1)
-
-
     }
-
-
     //减少煤使用
     $(function () {
         //减少煤使用图表
@@ -774,7 +786,6 @@
                     xAxisData.push(result[i].name);
                     yAxisData.push(result[i].reduceCoal);
                 }
-
             },
             error: function (errorMsg) {
                 alert("获取后台数据失败！");
@@ -824,7 +835,6 @@
             yAxis: {
                 show: false
             },
-
             series: [{
                 data: yAxisData,
                 type: 'bar',
@@ -858,8 +868,6 @@
         };
         myChart.setOption(option);
     });
-
-
     //减少二氧化碳
     $(function () {
         var myChart = echarts.init(document.getElementById('globe'));
@@ -872,12 +880,10 @@
             dataType: "json",
             async: false,
             success: function (result) {
-
                 for (var i = 0; i < result.length; i++) {
                     xAxisData.push(result[i].name);
                     yAxisData.push(result[i].reduceCo2);
                 }
-
             },
             error: function (errorMsg) {
                 alert("获取后台数据失败！");
@@ -895,13 +901,13 @@
                 avoidLabelOverlap: false,
                 label: {
                     show: true,
-                    formatter: function (val) {   //让series 中的文字进行换行
+                    formatter: function (val) {
+                        //让series 中的文字进行换行
                         return val.name.split("件").join("\n");
                     },
                     position: 'center',
                     color: '#FFFFFF',
                     fontSize: 25
-
                 },
                 labelLine: {
                     show: false
@@ -918,7 +924,8 @@
                     avoidLabelOverlap: false,
                     label: {
                         show: true,
-                        formatter: function (val) {   //让series 中的文字进行换行
+                        formatter: function (val) {
+                            //让series 中的文字进行换行
                             return val.name.split("件").join("\n");
                         },
                         position: 'center',
@@ -962,7 +969,8 @@
                     avoidLabelOverlap: false,
                     label: {
                         show: true,
-                        formatter: function (val) {   //让series 中的文字进行换行
+                        formatter: function (val) {
+                            //让series 中的文字进行换行
                             return val.name.split("件").join("\n");
                         },
                         position: 'center',
@@ -983,7 +991,8 @@
                     avoidLabelOverlap: false,
                     label: {
                         show: true,
-                        formatter: function (val) {   //让series 中的文字进行换行
+                        formatter: function (val) {
+                            //让series 中的文字进行换行
                             return val.name.split("件").join("\n");
                         },
                         position: 'center',
@@ -1004,7 +1013,8 @@
                     avoidLabelOverlap: false,
                     label: {
                         show: true,
-                        formatter: function (val) {   //让series 中的文字进行换行
+                        formatter: function (val) {
+                            //让series 中的文字进行换行
                             return val.name.split("件").join("\n");
                         },
                         position: 'center',

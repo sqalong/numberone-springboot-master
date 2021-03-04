@@ -5,7 +5,7 @@
     <th:block th:include="include :: layout-latest-css" />
     <th:block th:include="include :: ztree-css" />
 </head>
-<body class="gray-bg row">
+<body class="gray-bg row" onload="qu('B1电箱','B1电箱1','A相电流')">
 <div class="ui-layout-west col-sm-2" style="padding: 0px;">
     <div class="box box-main">
         <div class="box-header">
@@ -28,7 +28,7 @@
 <div class="ui-layout-center col-sm-10" style="padding: 0px;">
     <div class="container-div">
         <div class="row">
-<!--            <div class="col-sm-12" id="totalFlowRate" style="height:300px; top: 16px; left: -18px"></div>-->
+            <!--            <div class="col-sm-12" id="totalFlowRate" style="height:300px; top: 16px; left: -18px"></div>-->
 
             <div class="container-div">
                 <div class="row">
@@ -124,8 +124,8 @@
         $.table.init(options);
     }
 
-    function queryDeptTree()
-    {
+    function queryDeptTree() {
+
         var url = ctx + "system/real/treelist";
         var options = {
             url: url,
@@ -167,72 +167,203 @@
         queryDeptTree();
     });
 
-    var totalFlowRate = echarts.init(document.getElementById('totalFlowRate'));
-    var xAxisData = [];
-    var yAxisData = [];
-    $.ajax({
-        type: "post",
-        url: "/system/real/lists",
-        dataType: "json",
-        async: false,
-        success: function (result) {
 
-            for (var i = 0; i < result.length; i++) {
-                xAxisData.push(result[i].meanehiletime);
-                yAxisData.push(result[i].indication);
+    var ydate = [];
+
+    function intd(val,vall,valll){
+        $.ajax({
+            type: "get",
+            url: "/system/real/rtcurve",
+            dataType: "json",
+            async: false,
+            data : {
+                "groupsname" : val,
+                "measurename": vall,
+                "signname"   : valll,
+            },
+            success: function (result) {
+
+                ydate.push(result);
+
+                // console.log(result);
+
+            },
+
+            error: function (errorMsg) {
+                alert("获取后台数据失败！");
             }
+        })
 
-        },
-        error: function (errorMsg) {
-            alert("获取后台数据失败！");
-        }
-    })
-
-    var totalFlowRateOption = {
-        animation: false,
-        title: {
-            text: '总功率因数实时曲线',
-            x: 'center'
-
-
-            /*,
-                    left:"110px"*/
-        },
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'cross'
-            }
-        },
-        grid: {
-            left: 50 /*"50px"*/,
-            right: 15 /*"15px"*/
-        },
-        legend: {
-            data: ['总功率因数'],
-            x: 'left'
-        },
-        xAxis: {
-            boundaryGap: false,
-            data: xAxisData,
-            axisLabel: {
-                //X轴刻度配置
-                interval: 5 //0：表示全部显示不间隔；auto:表示自动根据刻度个数和宽度自动设置间隔个数
-            }
-        },
-        yAxis: {
-            boundaryGap: false
-        },
-        series: {
-            //symbol: "none",
-            /*去掉小圆点*/
-            name: '总功率因数',
-            type: 'line',
-            data: yAxisData,
-            //smooth: true   //显示为平滑的曲线
-        }
     };
-    totalFlowRate.setOption(totalFlowRateOption);
+
+    function qu(val,vall,valll){
+
+
+        $.ajax({
+            type: "get",
+            url: "/system/real/rtcurveinit",
+            dataType: "json",
+            async: false,
+            data : {
+                "groupsname" : val,
+                "measurename": vall,
+                "signname"   : valll,
+            },
+            success: function (result) {
+
+                for (var i = 0; i < result.length; i++) {
+                    ydate.push(result[i].indication);
+                }
+
+            },
+
+            error: function (errorMsg) {
+                alert("获取后台数据失败！");
+            }
+        })
+
+
+
+
+        console.log(ydate);
+
+        //实时曲线
+        var myChart = echarts.init(document.getElementById('totalFlowRate'));
+        var xdata = new Array();
+        var now = new Date();
+        xdata.push(now.getHours() + ":" + now.getMinutes());
+        for (i=0;i<1;i++) {
+            var addMinute= "addMinute"+i;
+            for (j=1;j<8;j++) {
+                var addMinute = new Date(now.setMinutes(now.getMinutes() - 2));
+                xdata.push(addMinute.getHours() + ":" + addMinute.getMinutes() );
+                // alert(xdata)
+            }
+        }
+        xdata.reverse();
+        var option;
+        option = {
+            tooltip:{
+                trigger:'axis'
+            },
+            xAxis: {
+                type: 'category',
+                data: xdata
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: ydate,
+                type: 'line',
+                smooth: true
+            }]
+        };
+        myChart.setOption(option);
+        function tops() {
+            setInterval(function() {
+                ydate.shift();
+                xdata.shift();
+            }, 120000)
+        }
+        //3分钟后开始执行
+        setTimeout(tops, 120000)
+        setInterval(function() {
+            var now1= new Date()
+            xdata.push(now1.getHours() + ":" + now1.getMinutes());
+            //传入前面xdata,ydata的赋值
+            intd('B1电箱','B1电箱1','A相电流');
+            // ydate.push(Math.round(Math.random() * 100));
+            myChart.setOption({
+                xAxis: [{
+                    type: 'category',
+                    boundaryGap: false,
+                    data: xdata
+                }],
+                series: [{
+                    data: ydate
+                }]
+            });
+        }, 120000); //3分钟一刷新
+
+    };
+
+
+
+
+
+
+
+
+
+
+
+    // var totalFlowRate = echarts.init(document.getElementById('totalFlowRate'));
+    // var xAxisData = [];
+    // var yAxisData = [];
+    // $.ajax({
+    //     type: "post",
+    //     url: "/system/real/lists",
+    //     dataType: "json",
+    //     async: false,
+    //     success: function (result) {
+    //
+    //         for (var i = 0; i < result.length; i++) {
+    //             xAxisData.push(result[i].meanehiletime);
+    //             yAxisData.push(result[i].indication);
+    //         }
+    //
+    //     },
+    //     error: function (errorMsg) {
+    //         alert("获取后台数据失败！");
+    //     }
+    // })
+    //
+    // var totalFlowRateOption = {
+    //     animation: false,
+    //     title: {
+    //         text: '总功率因数实时曲线',
+    //         x: 'center'
+    //
+    //
+    //         /*,
+    //                 left:"110px"*/
+    //     },
+    //     tooltip: {
+    //         trigger: 'axis',
+    //         axisPointer: {
+    //             type: 'cross'
+    //         }
+    //     },
+    //     grid: {
+    //         left: 50 /*"50px"*/,
+    //         right: 15 /*"15px"*/
+    //     },
+    //     legend: {
+    //         data: ['总功率因数'],
+    //         x: 'left'
+    //     },
+    //     xAxis: {
+    //         boundaryGap: false,
+    //         data: xAxisData,
+    //         axisLabel: {
+    //             //X轴刻度配置
+    //             interval: 5 //0：表示全部显示不间隔；auto:表示自动根据刻度个数和宽度自动设置间隔个数
+    //         }
+    //     },
+    //     yAxis: {
+    //         boundaryGap: false
+    //     },
+    //     series: {
+    //         //symbol: "none",
+    //         /*去掉小圆点*/
+    //         name: '总功率因数',
+    //         type: 'line',
+    //         data: yAxisData,
+    //         //smooth: true   //显示为平滑的曲线
+    //     }
+    // };
+    // totalFlowRate.setOption(totalFlowRateOption);
 
 
 </script>
