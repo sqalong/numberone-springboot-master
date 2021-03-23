@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" style="
+    height: 1080px;
+">
 <head>
     <meta charset="utf-8">
     <title>能源数据大屏展示</title>
@@ -19,52 +21,52 @@
      th:src="@{/back.jpg}">
 
     <!--整个页面布局-->
-    <div class="row" style="margin: 0px;padding: 10px 0px 5px 0px; ">
+    <div class="row" style="margin: 0px;padding: 0px 0px 0px 0px; ">
 
         <!--上左,,,用能汇总,用能占比-->
-        <div class="col-sm-3" style="height: 700px ;padding-right: 0px">
+        <div class="col-sm-3" style="height: 696px ;padding-right: 0px">
 
             <!--用能汇总-->
-            <div style="border:solid 2px #FFFFFF;height: 300px ;margin-bottom: 10px">
-                <div><h4>用能汇总</h4></div>
+            <div style="height: 310px ;margin-bottom: 10px">
+                <div style="height: 55px"></div>
                 <div>
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-5" style=" height: 110px; background-color: #c3b722fa;margin-left: 25px;">
+                    <div class="row" style="margin-top: 40px;">
+                        <div class="col-sm-5" style="height: 100px;width: 176px;background-color: #c1acac1c;margin-left: 47px;border: 1px solid white;box-shadow: 0px 0px 20px 1px #fc7930 inset,0px 0px 20px 1px #fc7930;">
                             <div class="row">
                                 <i class="glyphicon glyphicon-leaf col-md-4"
                                    style="font-size: 33px;margin-top: 20px"></i>
-                                <h4 class="col-md-8" style="margin-top: 30px;padding-left: 55px">总耗能</h4>
+                                <h4 class="col-md-8" style="margin-top: 24px;padding-left: 33px;">总耗能</h4>
                             </div>
-                            <div style="text-align: right;font-family: 'Antique Olive';"><h3><span id="yuez"></span>
+                            <div style="text-align: right;font-family: 'Antique Olive';"><h3 style=" margin: 10px;"><span id="yuez"></span>
                                 <span>tce</span></h3></div>
                         </div>
-                        <div class="col-sm-5" style=" height: 110px;background-color: #de2406fa;margin-left: 30px;">
+                        <div class="col-sm-5" style="height: 100px;width: 176px;background-color: #c1acac1c;margin-left: 47px;border: 1px solid white;box-shadow: 0px 0px 20px 1px #4fd038 inset, 0px 0px 20px 1px #3fb594;">
                             <div class="row">
                                 <i class="glyphicon glyphicon-flash col-md-4"
                                    style="font-size: 33px;margin-top: 20px"></i>
-                                <h4 class="col-md-8" style="margin-top: 30px;padding-left: 55px">用电</h4>
+                                <h4 class="col-md-8" style="margin-top: 24px;padding-left: 33px;">用电</h4>
                             </div>
-                            <div style="text-align: right;font-family: 'Antique Olive';"><h3><span id="esum"></span>
+                            <div style="text-align: right;font-family: 'Antique Olive';"><h3 style=" margin: 10px;"><span id="esum"></span>
                                 <span>kWh</span></h3></div>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 15px">
-                        <div class="col-sm-5" style="height: 110px;background-color: #b844e8fa;margin-left: 25px;">
+                        <div class="col-sm-5" style="height: 100px;width: 176px;background-color: #c1acac1c;margin-left: 47px;border: 1px solid white;box-shadow: 0px 0px 20px 1px #85d2ff inset, 0px 0px 22px 1px #eff4ff;">
                             <div class="row">
                                 <i class="glyphicon glyphicon-tint col-md-4"
                                    style="font-size: 33px;margin-top: 20px"></i>
-                                <h4 class="col-md-8" style="margin-top: 30px;padding-left: 55px">用水</h4>
+                                <h4 class="col-md-8" style="margin-top: 24px;padding-left: 33px;">用水</h4>
                             </div>
-                            <div style="text-align: right;font-family: 'Antique Olive';"><h3><span id="wsum"></span>
+                            <div style="text-align: right;font-family: 'Antique Olive';"><h3 style="margin: 10px;"><span id="wsum"></span>
                                 <span>t</span></h3></div>
                         </div>
-                        <div class="col-sm-5" style="height: 110px;background-color: #16d1effa;margin-left: 30px;">
+                        <div class="col-sm-5" style="height: 100px;width: 176px;background-color: #c1acac1c;margin-left: 47px;border: 1px solid white;box-shadow: 0px 0px 20px 1px #ff2d2d inset, 0px 0px 16px 1px #ffffff;">
                             <div class="row">
                                 <i class="glyphicon glyphicon-fire col-md-4"
                                    style="font-size: 33px;margin-top: 20px"></i>
-                                <h4 class="col-md-8" style="margin-top: 30px;padding-left: 55px">用燃气</h4>
+                                <h4 class="col-md-8" style="margin-top: 24px;padding-left: 33px;">用燃气</h4>
                             </div>
-                            <div style="text-align: right;font-family: 'Antique Olive';"><h3><span id="gsum"></span>
+                            <div style="text-align: right;font-family: 'Antique Olive';"><h3 style="margin: 10px;"><span id="gsum"></span>
                                 <span>m³</span></h3></div>
                         </div>
                     </div>
@@ -73,9 +75,9 @@
 
             <!--用能占比-->
             <div style="height: 348px">
-                <div class="row" style="border:solid 2px #FFFFFF;margin: 0px;padding: 0px; height: 395px">
-                    <div class="col-sm-8"><h4>用能占比</h4></div>
-                    <div class="btn-group col-sm-4">
+                <div class="row" style="margin: 8px;padding: 0px;height: 392px;margin-top: 34px;">
+                    <div class="col-sm-8" style="height: 55px"></div>
+                    <div class="btn-group col-sm-4" style="top: 8px;">
                         <button type="button" class="btn btn-link" name="ranking_button" style="color: #fff;"
                                 onclick="proprotion('water')">水
                         </button>
@@ -96,12 +98,12 @@
         <div class="col-sm-6" style=" height: 700px">
 
             <!--标题-->
-            <div style="height: 80px;line-height: 95px;text-align: center;font-size: 32px">北京邮政能源管理数据大平台</div>
+            <div style="height: 80px;line-height: 95px;text-align: center;font-size: 32px"></div>
 
             <!--地图-->
-            <div style="border:solid 2px #FFFFFF; height: 615px;margin-top: 10px">
+            <div style=" height: 560px;width:830;position:relative;top:32px;left:40px;margin-top: 10px">
 
-                <div id="map" style="width: 100%;height:610px;"></div>
+                <div id="map" style="width: 830px;height:530px;"></div>
             </div>
         </div>
 
@@ -109,25 +111,25 @@
         <div class="col-sm-3" style="padding-left: 0px">
 
             <!--基本情况-->
-            <div style="border:solid 2px #ffffff; height: 136px; margin-bottom: 10px">
-                <div><h4>基本情况</h4></div>
-                <div class="row" style="margin: 0px;padding: 0px">
+            <div style="height: 103px; margin-bottom: 10px">
+                <div style="height: 79px"></div>
+                <div class="row" style="margin: 0px;padding: 0px;margin-right: 25px">
                     <div class="col-md-4">
-                        <div style="background-color: #867e70; height: 85px;border-radius: 10px;width: 130px;text-align: center;">
+                        <div style="height: 85px;border-radius: 10px;width: 130px;text-align: center;border: 1px solid white;box-shadow: 0px 0px 10px 1px #30e9fc inset, 0px 0px 10px 1px #30fcf3;">
                             <p><span id="ljjnl" style="font-size: 37px;"></span></p>
                             <span>累计节能量（tce）</span>
 
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div style="background-color: #10e7ca; height: 85px;border-radius: 10px;width: 130px;text-align: center;">
+                        <div style="height: 85px;border-radius: 10px;width: 130px;text-align: center;border: 1px solid white;box-shadow: 0px 0px 10px 1px #30e9fc inset, 0px 0px 10px 1px #30fcf3;">
                             <p><span id="jsje" style="font-size: 37px;"></span></p>
                             <span>节省金额（万元）</span>
                         </div>
 
                     </div>
                     <div class="col-md-4">
-                        <div style="background-color: #25f18b; height: 85px;border-radius: 10px;width: 130px;text-align: center;">
+                        <div style="height: 85px;border-radius: 10px;width: 130px;text-align: center;border: 1px solid white;box-shadow: 0px 0px 10px 1px #30e9fc inset, 0px 0px 10px 1px #30fcf3;">
                             <p><span id="jnl" style="font-size: 37px;"></span></p>
                             <span>节能率（%）</span>
                         </div>
@@ -137,70 +139,70 @@
             </div>
 
             <!--减少排放污染物-->
-            <div style="border:solid 2px #FFFFFF; height: 274px; margin-bottom: 10px">
-
-                <h4>减少排放污染物</h4>
-                <div class="row" style=" margin: 0px;padding-bottom: 8px;text-align: center">
+            <div style=" height: 300px;margin-bottom: 10px;position: relative;top: 40px;">
+                <div style="height: 65px"></div>
+                <div class="row" style="padding-bottom: 5px;text-align: center">
                     <div class="col-sm-5" style=" height: 50px;">
-                        <div style="background-color: RGB(196,136,28);height: 100%;width: 210px;border-radius: 10px;">
+                        <div style="height: 88%;width: 210px;border-radius: 5px;border: 1px solid white;box-shadow: 0px 0px 10px 1px #ec6515 inset, 0px 0px 10px 1px #ff6262;">
                             <span class="glyphicon  glyphicon-cloud" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span id="cot" style="font-size: 40px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+                            <span id="cot" style="font-size: 34px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
                                 style="font-size: 20px">吨</span>
                         </div>
                     </div>
-                    <div class="col-sm-5" style="height: 50px;margin-left: 31px">
-                        <div style="background-color: RGB(19,121,224);height: 100%;width: 210px;border-radius: 10px;">
+                    <div class="col-sm-5" style="height: 50px;margin-left: 18px">
+                        <div style="height: 88%;width: 210px;border-radius: 5px;border: 1px solid white;box-shadow: 0px 0px 10px 1px #ec6515 inset, 0px 0px 10px 1px #ff6262;">
                             <span class="glyphicon  glyphicon-asterisk" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-                                id="sot" style="font-size: 40px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                id="sot" style="font-size: 34px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
                                 style="font-size: 20px">吨</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="row" style=" margin: 0px;padding-bottom: 8px;text-align: center">
+                <div class="row" style="padding-bottom: 5px;text-align: center">
                     <div class="col-sm-5" style="height: 50px;">
-                        <div style="background-color: RGB(19,197,146);height: 100%;width: 210px; border-radius: 10px;">
+                        <div style="height: 88%;width: 210px;border-radius: 7px;border: 1px solid white;box-shadow: 0px 0px 10px 1px #ccff4f inset, 0px 0px 10px 1px #4c5034;">
                             <span class="glyphicon glyphicon glyphicon-fire" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-                                id="xuet" style="font-size: 40px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                id="xuet" style="font-size: 34px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
                                 style="font-size: 20px">吨</span>
                         </div>
                     </div>
-                    <div class="col-sm-5" style="height: 50px; margin-left: 31px">
-                        <div style="background-color: RGB(8,171,204);height: 100%;width: 210px;border-radius: 10px;">
+                    <div class="col-sm-5" style="height: 50px; margin-left: 18px">
+                        <div style="height: 88%;width: 210px;border-radius: 7px;border: 1px solid white;box-shadow: 0px 0px 10px 1px #ccff4f inset, 0px 0px 10px 1px #4c5034;">
                             <span class="glyphicon glyphicon glyphicon-tint" style="font-size: 30px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-                                id="not" style="font-size: 40px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                id="not" style="font-size: 34px"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
                                 style="font-size: 20px">吨</span>
                         </div>
                     </div>
                 </div>
-                <div style="background-color: RGB(16,163,146);height: 50px;width: 434px;margin-left: 15px; border-radius: 10px;margin-bottom: 8px;;text-align: center;line-height: 50px">
-                    <span class="glyphicon glyphicon-flash" style="font-size: 40px"></span><span
+                <div style="height: 45px;width: 434px;border-radius: 10px;margin-bottom: 5px;text-align: center;line-height: 50px;border: 1px solid white;box-shadow: 0px 0px 35px 1px #131b1a inset, 0px 0px 18px 1px #737568;">
+                    <span class="glyphicon glyphicon-flash" style="font-size: 35px"></span><span
                         style="font-size: 20px">累计用电</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-                        id="ljyd" style="font-size: 45px;margin-right: 15px"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                        id="ljyd" style="font-size: 35px;margin-right: 52px"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
                         style="font-size: 20px">万千瓦时</span>
                 </div>
-                <div style="background-color: RGB(14,122,156);height: 50px;width: 434px;margin-left: 15px; border-radius: 10px;margin-bottom: 8px;;text-align: center;line-height: 50px">
-                    <span class="fa  fa-sitemap" style="font-size: 40px"></span><span
+                <div style="height: 45px;width: 434px;border-radius: 10px;margin-bottom: 5px;text-align: center;line-height: 50px;border: 1px solid white;box-shadow: 0px 0px 35px 1px #131b1a inset, 0px 0px 18px 1px #737568;">
+                    <span class="fa  fa-sitemap" style="font-size: 35px"></span><span
                         style="font-size: 20px">减少用煤</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-                        id="jsym" style="font-size: 45px;margin-right: 75px "></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                        id="jsym" style="font-size: 35px;margin-right: 75px "></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
                         style="font-size: 20px">吨</span>
                 </div>
             </div>
 
             <!--减少二氧化碳排放-->
-            <div style="border:solid 2px #FFFFFF; height: 275px">
-                减少二氧化碳排放
+            <div style=" height: 275px; position: relative;
+    top: 28px;">
+                <div style="height: 10px"></div>
                 <div id="globe" style="width: 430px;height: 250px;"></div>
             </div>
         </div>
     </div>
 
-    <div class="row" style="margin: 10px 0px 10px 0px;padding-bottom: 15px;">
-        <div class="col-sm-3" style="padding-right: 0px">
-            <div style="border:solid 2px #FFFFFF;">
-                <div class="row">
-                    <div class="col-sm-8"><h4>用能排名</h4></div>
-                    <div class="btn-group col-sm-4">
+    <div class="row" style="margin: 10px 0px 10px 0px;padding-bottom: 15px;position: relative;top:-30px;">
+        <div class="col-sm-3" style="padding-right: 21px">
+            <div >
+                <div class="row" style="margin-top: 15px">
+                    <div class="col-sm-8"></div>
+                    <div class="btn-group col-sm-4" style=" top: 15px;">
                         <button type="button" class="btn btn-link" style="color: #fff;" onclick="utr('water')">水
                         </button>
                         <button type="button" class="btn btn-link" style="color: #fff;" onclick="utr('electric')">电
@@ -208,26 +210,27 @@
                         <button type="button" class="btn btn-link" style="color: #fff;" onclick="utr('gas')">气</button>
                     </div>
                 </div>
-                <div id="xzuo" style=" height: 300px;width: 465px"></div>
+                <div id="xzuo" style=" height: 300px;width: 450px"></div>
             </div>
         </div>
         <div class="col-sm-6">
-            <div style="border:solid 2px #FFFFFF;">
-                <div class="row">
-                    <div class="col-sm-10"><h4>用能对比曲线</h4></div>
-                    <div class="btn-group col-sm-2">
+            <div >
+                <div class="row" style="margin-top: 15px;margin-right: 20px">
+                    <div class="col-sm-10" ></div>
+                    <div class="btn-group col-sm-2" style="top: 14px;">
                         <button type="button" class="btn btn-link" style="color: #fff;" onclick="graph('energy_contrast_water')">水</button>
                         <button type="button" class="btn btn-link" style="color: #fff;" onclick="graph('energy_contrast')">电</button>
                         <button type="button" class="btn btn-link" style="color: #fff;" onclick="graph('energy_contrast_gas')">气</button>
                     </div>
                 </div>
-                <div id="xzhong" style="height: 300px"></div>
+                <div id="xzhong" style="height: 300px; top: 29px"></div>
             </div>
         </div>
         <div class="col-sm-3" style="padding-left: 0px">
-            <div style="border:solid 2px #FFFFFF; ">
-                <div><h4>减少煤使用（吨）</h4></div>
-                <div id="one" style="height: 300px;"></div>
+            <div >
+                <div></div>
+                <div id="one" style="height: 355px; position: relative;
+    top: 15px;"></div>
             </div>
 
         </div>
@@ -500,10 +503,10 @@
             },
             grid: {
                 //设置图标距离
-                top: "-0",
-                left: "10",
+                top: "45",
+                left: "40",
                 right: "200",
-                bottom: "0"
+                bottom: "15"
             },
             yAxis: [{
                 type: 'category',
@@ -672,7 +675,7 @@
 
 
                         xtime.push(time);
-                         alert(xtime);
+                         // alert(xtime);
 
                     });
             },
@@ -735,10 +738,10 @@
                 }
             },
             grid: {
-                top: 25,
+                top: 75,
                 bottom: 50,
-                left: "40",
-                right: "40",
+                left: "50",
+                right: "50",
             },
             xAxis: {
                 type: 'category',
@@ -815,9 +818,9 @@
                 }
             },
             grid: {
-                left: '0%',
-                right: '5%',
-                bottom: '1%',
+                left: '2%',
+                right: '20px',
+                bottom: '25px',
                 containLabel: true
             },
             xAxis: {
@@ -829,7 +832,7 @@
                 },
                 data: xAxisData,
                 axisLabel: {
-                    rotate: 20 // 角度
+                    rotate: 25 // 角度
                 }
             },
             yAxis: {
@@ -1119,15 +1122,15 @@
                 {
 
                     type: 'pie',
-                    radius: ['35%', '50%'],
-                    center: [215, 180],
+                    radius: ['25%', '40%'],
+                    center: [240, 170],
                     data: datas,
                     itemStyle: {
                         normal: {
                             label: {
                                 textStyle: {
                                     color: '#FFFFFF',
-                                    fontSize: 14,
+                                    fontSize: 12,
                                     fontWeight: 'bolder'
                                 }
                             },
@@ -1240,54 +1243,13 @@
         }
     })
     var mapData = mapjson;
-    //     [{
-    //     'name': '北京西站邮件处理中心',
-    //     'color': '#ff69fc',
-    //     'latitude': 39.902506,
-    //     'longitude': 116.32025,
-    //     'url':'/system/bigdata/areabigdata'
-    //
-    // },
-    //     {
-    //         'latitude': 39.818668,
-    //         'longitude': 116.541167,
-    //         'name': '北京综合邮件处理中心',
-    //         'value': 41558260,
-    //         'color': '#24d251',
-    //         'url':'/system/bigdata/areabigdata'
-    //     },
-    //     {
-    //         'latitude': 39.911907,
-    //         'longitude': 116.431918,
-    //         'name': '北京站邮件处理中心',
-    //         'value': 26458260,
-    //         'color': '#f80404',
-    //         'url':'/system/bigdata/areabigdata'
-    //     },
-    //     {
-    //         'latitude': 39.923751,
-    //         'longitude': 116.431528,
-    //         'name': '天桥大院',
-    //         'value': 15258260,
-    //         'color': '#eafa04',
-    //         'url':'/system/bigdata/areabigdata'
-    //     },
-    //     {
-    //         'latitude': 39.959530,
-    //         'longitude': 116.417991,
-    //         'name': '永安路大院',
-    //         'value': 49858260,
-    //         'color': '#890fe0',
-    //         'url':'/system/bigdata/areabigdata'
-    //     }
-    // ]
+
 
     $.get(uploadedDataURL, function (geoJson) {
 
         echarts.registerMap(name, geoJson);
 
         myChart.setOption(option = {
-            backgroundColor: 'RGB(14,44,129)',
             //地图配置
             tooltip: {
                 trigger: 'item',
@@ -1318,12 +1280,12 @@
                         }
                     },
                     emphasis: { //动态展示的样式
-                        color: '#ffffff',
+                        color: '#fff',
                     },
                 },
                 itemStyle: {
                     normal: {
-                        borderColor: '#ffffff', //区域边框颜色
+                        borderColor: '#fff', //区域边框颜色
                         areaColor: 'RGB(3,49,177)', //区域背景颜色
                     },
                     emphasis: {

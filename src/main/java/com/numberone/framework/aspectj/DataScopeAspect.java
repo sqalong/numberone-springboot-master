@@ -24,6 +24,10 @@ import com.numberone.project.system.user.domain.User;
 @Component
 public class DataScopeAspect
 {
+
+
+
+
     /**
      * 全部数据权限
      */
